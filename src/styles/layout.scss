@@ -1,8 +1,17 @@
 //layout.scss-->
 
+body {
+  font-family: $serif;
+}
+
 header {
-  background-color: $infoColor;
+  background: linear-gradient(45deg, $infoColor 12%, $infoColor 31%, $infoColor 90%);
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
   height: 70px;
+}
+
+.wrapper {
+  width: 85%;
 }
 
 .navbar {
@@ -10,13 +19,23 @@ header {
   align-items: center;
   justify-content: center;
   height: 100%;
-  width: 80%;
   margin: auto;
 }
 
 .navbar ul {
   display: flex;
   padding: 0;
+}
+
+.active-link {
+  border-bottom: 1px solid white;
+}
+
+.navbar a {
+  color: white;
+  &:hover{
+    color: white;
+  }
 }
 
 header .navbar {
@@ -33,12 +52,10 @@ header .navbar ul li {
 }
 
 main {
-  max-width: 80%;
   margin: auto;
 }
 
 footer {
-  max-width: 80%;
   margin: auto;
   text-align: center;
 }
@@ -49,6 +66,10 @@ footer {
 // mobile first
   header {
     height: 100%;
+  }
+
+  .wrapper {
+    width: 94%;
   }
 
   header .navbar {

@@ -1,18 +1,35 @@
+"use client"
+
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from "next/navigation";
+
+interface NavLinkProps {
+  readonly href: string;
+  readonly children: React.ReactNode;
+}
+
+function NavLink({ href, children }: NavLinkProps) {
+  const pathname = usePathname()
+  const isActive = pathname === href;
+
+  return (
+    <Link href={href} className={isActive ? "active-link" : ""}>{children}</Link>
+  )
+}
 
 const Header = () => {
   return (
     <header role="banner">
-      <div className="navbar">
+      <div className="navbar wrapper">
       <h2>
         <Link href="/">BrandName</Link>
       </h2>
       <nav>
         <ul>
-          <li><Link href="/">Home</Link></li>
-          <li><Link href="/about">About</Link></li>
-          <li><Link href="/blog">Blog</Link></li>
+          <li><NavLink href="/">Home</NavLink></li>
+          <li><NavLink href="/about">About</NavLink></li>
+          <li><NavLink href="/blog">Blog</NavLink></li>
         </ul>
       </nav>
       </div>

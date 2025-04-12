@@ -1,0 +1,62 @@
+//layout.scss-->
+
+header {
+  background-color: $infoColor;
+  height: 70px;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 80%;
+  margin: auto;
+}
+
+.navbar ul {
+  display: flex;
+  padding: 0;
+}
+
+header .navbar {
+  justify-content: space-between;
+}
+
+.navbar ul li {
+  list-style-type: none;
+}
+
+header .navbar ul li {
+  padding: 10px;
+  margin: 0 10px;
+}
+
+main {
+  max-width: 80%;
+  margin: auto;
+}
+
+footer {
+  max-width: 80%;
+  margin: auto;
+  text-align: center;
+}
+
+
+
+@media screen and (max-width: 767px){
+// mobile first
+  header {
+    height: 100%;
+  }
+
+  header .navbar {
+    flex-direction: column;
+  }
+}
+
+
+
+
+

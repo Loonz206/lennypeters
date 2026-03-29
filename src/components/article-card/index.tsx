@@ -16,10 +16,19 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
 
   return (
     <article className={styles.card}>
-      <div className={styles.meta}>
+      <div className={styles.topBar}>
+        <span className={styles.slug}>{article.slug.replace(/-/g, '_').toUpperCase()}</span>
         <time dateTime={article.date} className={styles.date}>
           {formattedDate}
         </time>
+      </div>
+      <div className={styles.body}>
+        <h2 className={styles.title}>
+          <Link href={`/articles/${article.slug}`} className={styles.titleLink}>
+            {article.title}
+          </Link>
+        </h2>
+        <p className={styles.excerpt}>{article.excerpt}</p>
         <ul className={styles.tags} aria-label="Tags">
           {article.tags.map(tag => (
             <li key={tag} className={styles.tag}>
@@ -27,16 +36,10 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
             </li>
           ))}
         </ul>
-      </div>
-      <h2 className={styles.title}>
-        <Link href={`/articles/${article.slug}`} className={styles.titleLink}>
-          {article.title}
+        <Link href={`/articles/${article.slug}`} className={styles.btn} aria-label={`Read ${article.title}`}>
+          Read Article
         </Link>
-      </h2>
-      <p className={styles.excerpt}>{article.excerpt}</p>
-      <Link href={`/articles/${article.slug}`} className={styles.readMore} aria-label={`Read ${article.title}`}>
-        Read article &rarr;
-      </Link>
+      </div>
     </article>
   );
 };

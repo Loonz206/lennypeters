@@ -3,25 +3,30 @@
 
 .article {
   max-width: 720px;
-  padding: $space-5 0 $space-9;  // 32px 0 64px
+  margin: 0 auto;
+  padding: $space-9 0;
 }
 
 .header {
-  margin-bottom: $space-6;  // 40px
-  padding-bottom: $space-5; // 32px
+  margin-bottom: $space-7;
+  padding-bottom: $space-5;
   border-bottom: 1px solid rgba($primaryColor, 0.2);
+  text-align: center;
 }
 
 .meta {
   display: flex;
   align-items: center;
-  gap: $space-3;        // 16px
+  justify-content: center;
+  gap: $space-3;
   flex-wrap: wrap;
-  margin-bottom: $space-3;  // 16px
+  margin-bottom: $space-4;
 }
 
 .date {
-  font-size: 0.875rem;
+  font-family: $monoSpaced;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
   color: $secondaryText;
 }
 
@@ -30,39 +35,44 @@
   padding: 0;
   margin: 0;
   display: flex;
-  gap: $space-2;  // 8px
+  gap: $space-2;
   flex-wrap: wrap;
 }
 
 .tag {
-  font-size: 0.75rem;
-  background-color: rgba($primaryColor, 0.08);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background-color: rgba($primaryColor, 0.06);
   color: $primaryColor;
-  padding: $space-1 $space-2;  // 4px 8px
-  border-radius: 3px;
+  padding: $space-1 $space-2;
   font-weight: 600;
-  border: 1px solid rgba($primaryColor, 0.2);
+  border: 1px solid rgba($primaryColor, 0.25);
   font-family: $monoSpaced;
-  letter-spacing: 0.04em;
 }
 
 .title {
-  font-size: 2.25rem;
-  color: $primaryText;
-  margin: 0 0 $space-3;  // 16px
-  line-height: 1.2;
+  font-family: $monoSpaced;
+  font-size: clamp(1.8rem, 5vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: $primaryColor;
+  margin: 0 0 $space-4;
+  line-height: 1.15;
+  @include neon-glow($primaryColor);
   @include glitch-hover;
-
-  @include responsive(tablet) {
-    font-size: 2.75rem;
-  }
 }
 
 .excerpt {
-  font-size: 1.1rem;
+  font-family: $monoSpaced;
+  font-size: 0.9rem;
   color: $secondaryText;
   line-height: 1.65;
   margin: 0;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .body {
@@ -70,29 +80,37 @@
   color: $primaryText;
 
   p {
-    margin-bottom: $space-4;  // 24px
+    margin-bottom: $space-4;
+    font-size: 1rem;
   }
 }
 
 .h2 {
-  font-size: 1.4rem;
-  margin: $space-5 0 $space-3;  // 32px 0 16px
-  color: $primaryText;
+  font-family: $monoSpaced;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: $primaryColor;
+  margin: $space-7 0 $space-3;
+  @include neon-glow($primaryColor);
 }
 
 .pre {
   background-color: $inverseColor;
-  color: $white;
-  padding: $space-4 $space-4;  // 24px
-  border-radius: 6px;
+  color: $accentColor;
+  padding: $space-4;
   overflow-x: auto;
-  font-size: 0.875rem;
+  font-size: 0.85rem;
   line-height: 1.6;
-  margin: $space-4 0;  // 24px
-  border: 1px solid rgba($primaryColor, 0.15);
-  box-shadow: 0 0 8px rgba($primaryColor, 0.1);
+  margin: $space-5 0;
+  border: 1px solid rgba($primaryColor, 0.2);
+  @include hud-corners(12px, $primaryColor, 1px);
+  @include scanlines(0.03);
+  position: relative;
 
   code {
-    font-family: Monaco, Consolas, 'Courier New', monospace;
+    font-family: $monoSpaced;
+    color: $accentColor;
   }
 }

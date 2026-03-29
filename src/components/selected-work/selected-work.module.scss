@@ -3,7 +3,9 @@
 
 .section {
   padding: $space-9 0;  // 64px
-  border-bottom: 1px solid rgba($primaryColor, 0.25);
+  background-color: $darker;
+  border-top: 1px solid $dividerColor;
+  border-bottom: 1px solid $dividerColor;
 }
 
 .sectionHeader {
@@ -30,42 +32,31 @@
   font-size: 0.7rem;
   letter-spacing: 0.15em;
   color: $secondaryText;
+  white-space: nowrap;
+}
+
+.line {
+  flex: 1;
+  height: 1px;
+  background-color: $dividerColor;
+  align-self: center;
+  min-width: $space-3;
 }
 
 .grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 0;
+  gap: $space-4;
 
   @include responsive(tablet) {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $space-4;
   }
 }
 
-.card {
-  padding: $space-5 0;  // 32px
-  border-top: 1px solid $dividerColor;
-  display: flex;
-  flex-direction: column;
-
+.grid > *:last-child:nth-child(odd) {
   @include responsive(tablet) {
-    padding: $space-5 $space-5 $space-5 0;  // 32px
-    border-top: 1px solid $dividerColor;
-    border-right: 1px solid $dividerColor;
-
-    &:last-child {
-      border-right: none;
-      padding-right: 0;
-    }
-
-    &:nth-child(n+2) {
-      padding-left: $space-5;  // 32px
-    }
-
-    &:first-child {
-      padding-left: 0;
-    }
+    grid-column: 1 / -1;
   }
 }
 

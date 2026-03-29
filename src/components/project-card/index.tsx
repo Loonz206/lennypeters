@@ -16,8 +16,8 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
         <span className={styles.dot} aria-hidden="true" />
       </div>
 
-      <div className={styles.imageWrapper}>
-        {project.image ? (
+      {project.image && (
+        <div className={styles.imageWrapper}>
           <Image
             src={project.image}
             alt={project.title}
@@ -25,10 +25,8 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
             className={styles.image}
             sizes="(max-width: 768px) 100vw, 33vw"
           />
-        ) : (
-          <div className={styles.imagePlaceholder} aria-hidden="true" />
-        )}
-      </div>
+        </div>
+      )}
 
       <div className={styles.body}>
         <h3 className={styles.title}>{project.title}</h3>

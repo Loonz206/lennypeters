@@ -5,6 +5,7 @@ export interface Project {
   tags: string[];
   buttonLabel: string;
   href: string;
+  image?: string;
 }
 
 export const projects: Project[] = [

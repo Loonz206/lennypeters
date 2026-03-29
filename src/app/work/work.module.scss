@@ -2,9 +2,9 @@
 @import '@/styles/mixins';
 
 .pageHeader {
-  padding: 3rem 0 2.5rem;
+  padding: $space-7 0 $space-6;  // 48px 0 40px
   border-bottom: 1px solid rgba($primaryColor, 0.25);
-  margin-bottom: 2rem;
+  margin-bottom: $space-5;       // 32px
 }
 
 .label {
@@ -13,14 +13,14 @@
   letter-spacing: 0.2em;
   color: $primaryColor;
   text-transform: uppercase;
-  margin-bottom: 0.5rem;
+  margin-bottom: $space-2;  // 8px
 }
 
 .title {
   font-size: 2.5rem;
   font-weight: 900;
   color: $primaryText;
-  margin: 0 0 1rem;
+  margin: 0 0 $space-3;  // 16px
 }
 
 .sub {
@@ -34,27 +34,27 @@
 .list {
   display: flex;
   flex-direction: column;
-  padding-bottom: 4rem;
+  padding-bottom: $space-9;  // 64px
 }
 
 .entry {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1rem;
-  padding: 2.5rem 0;
+  gap: $space-3;         // 16px
+  padding: $space-6 0;   // 40px
   border-bottom: 1px solid $dividerColor;
 
   @include responsive(tablet) {
     grid-template-columns: 140px 1fr;
-    gap: 2rem;
+    gap: $space-5;  // 32px
   }
 }
 
 .entryMeta {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
-  padding-top: 0.2rem;
+  gap: $space-1;         // 4px
+  padding-top: $space-1; // 4px
 }
 
 .projectId {
@@ -76,14 +76,14 @@
   font-size: 1.3rem;
   font-weight: 700;
   color: $primaryText;
-  margin-bottom: 0.75rem;
+  margin-bottom: $space-3;  // 16px
 }
 
 .entryDesc {
   font-size: 0.95rem;
   color: $secondaryText;
   line-height: 1.7;
-  margin-bottom: 1rem;
+  margin-bottom: $space-3;  // 16px
 }
 
 .tags {
@@ -91,7 +91,7 @@
   padding: 0;
   margin: 0;
   display: flex;
-  gap: 0.5rem;
+  gap: $space-2;  // 8px
   flex-wrap: wrap;
 }
 
@@ -101,6 +101,6 @@
   letter-spacing: 0.06em;
   color: $secondaryText;
   border: 1px solid $dividerColor;
-  padding: 0.15rem 0.5rem;
+  padding: $space-1 $space-2;  // 4px 8px
   border-radius: 2px;
 }

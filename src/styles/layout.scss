@@ -2,12 +2,15 @@
 
 body {
   font-family: $serif;
+  background-color: $darkest;
+  color: $primaryText;
 }
 
 header {
-  background: linear-gradient(45deg, $infoColor 12%, $infoColor 31%, $infoColor 90%);
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
-  height: 70px;
+  background: $darker;
+  border-bottom: 1px solid $dark;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.4);
+  height: $header-height; // 72px — 9 × 8pt units
 }
 
 .wrapper {
@@ -32,9 +35,9 @@ header {
 }
 
 .navbar a {
-  color: white;
+  color: $primaryText;
   &:hover{
-    color: white;
+    color: $primaryColor;
   }
 }
 
@@ -47,8 +50,8 @@ header .navbar {
 }
 
 header .navbar ul li {
-  padding: 10px;
-  margin: 0 10px;
+  padding: $space-2;      // 8px (was 10px)
+  margin: 0 $space-2;    // 8px (was 10px)
 }
 
 main {

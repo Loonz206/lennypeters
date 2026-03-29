@@ -2,11 +2,11 @@
 @import '@/styles/mixins';
 
 .section {
-  padding: 4rem 0;
+  padding: $space-9 0;  // 64px
 }
 
 .sectionHeader {
-  margin-bottom: 3rem;
+  margin-bottom: $space-7;  // 48px
 }
 
 .sectionTitle {
@@ -15,7 +15,7 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   color: $primaryText;
-  margin-bottom: 0.75rem;
+  margin-bottom: $space-3;  // 16px
 }
 
 .intro {
@@ -32,7 +32,7 @@
 }
 
 .post {
-  padding: 2rem 0;
+  padding: $space-5 0;  // 32px
   border-top: 1px solid $dividerColor;
 
   &:last-child {
@@ -45,10 +45,10 @@
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   color: $secondaryText;
-  margin-bottom: 0.6rem;
+  margin-bottom: $space-2;  // 8px
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: $space-2;            // 8px
 }
 
 .dateCaret {
@@ -59,7 +59,7 @@
 .title {
   font-size: 1.05rem;
   font-weight: 700;
-  margin-bottom: 0.6rem;
+  margin-bottom: $space-2;  // 8px
   line-height: 1.35;
 }
 
@@ -77,7 +77,7 @@
   font-size: 0.9rem;
   color: $secondaryText;
   line-height: 1.65;
-  margin-bottom: 1rem;
+  margin-bottom: $space-3;  // 16px
 }
 
 .tags {
@@ -85,7 +85,7 @@
   padding: 0;
   margin: 0;
   display: flex;
-  gap: 0.5rem;
+  gap: $space-2;  // 8px
   flex-wrap: wrap;
 }
 
@@ -95,7 +95,7 @@
   letter-spacing: 0.06em;
   color: $secondaryText;
   border: 1px solid $dividerColor;
-  padding: 0.15rem 0.5rem;
+  padding: $space-1 $space-2;  // 4px 8px
   border-radius: 2px;
 }
 
@@ -103,9 +103,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 1.5rem;
+  padding-top: $space-4;  // 24px
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: $space-3;           // 16px
 }
 
 .scroll {

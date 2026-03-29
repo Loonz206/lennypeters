@@ -2,14 +2,14 @@
 @import '@/styles/mixins';
 
 .section {
-  padding: 3rem 0 4rem;
+  padding: $space-7 0 $space-9;  // 48px 0 64px
 }
 
 .sectionTitle {
   font-size: 1.75rem;
   color: $primaryText;
-  margin-bottom: 1rem;
-  padding-bottom: 0.75rem;
+  margin-bottom: $space-3;    // 16px
+  padding-bottom: $space-3;   // 16px
   border-bottom: 2px solid $primaryColor;
   display: inline-block;
 }
@@ -18,7 +18,7 @@
   color: $secondaryText;
   line-height: 1.65;
   max-width: 540px;
-  margin-bottom: 2rem;
+  margin-bottom: $space-5;  // 32px
 }
 
 .links {
@@ -27,13 +27,13 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: $space-3;  // 16px
 }
 
 .link {
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: $space-3;  // 16px
   color: $primaryText;
   text-decoration: none;
   font-size: 1rem;
@@ -51,8 +51,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2rem;
-  height: 2rem;
+  width: $space-5;   // 32px
+  height: $space-5;  // 32px
   border-radius: 4px;
   background-color: $primaryColor;
   color: $white;

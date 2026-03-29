@@ -2,7 +2,7 @@
 @import '@/styles/mixins';
 
 .section {
-  padding: 4rem 0;
+  padding: $space-9 0;  // 64px
   border-bottom: 1px solid rgba($primaryColor, 0.25);
 }
 
@@ -12,7 +12,7 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   color: $secondaryText;
-  margin-bottom: 2rem;
+  margin-bottom: $space-5;  // 32px
   text-transform: lowercase;
 }
 
@@ -21,7 +21,7 @@
   padding: 0;
   margin: 0;
   columns: 2;
-  column-gap: 2rem;
+  column-gap: $space-5;  // 32px
 
   @include responsive(tablet) {
     columns: 4;
@@ -31,8 +31,8 @@
 .item {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.5rem 0;
+  gap: $space-2;     // 8px
+  padding: $space-2 0;  // 8px
   border-bottom: 1px solid rgba($dividerColor, 0.5);
   break-inside: avoid;
 }

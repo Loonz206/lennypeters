@@ -2,7 +2,7 @@
 @import '@/styles/mixins';
 
 .section {
-  padding: 4rem 0;
+  padding: $space-9 0;  // 64px
   border-bottom: 1px solid rgba($primaryColor, 0.25);
 }
 
@@ -10,8 +10,8 @@
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 2.5rem;
+  gap: $space-3;         // 16px
+  margin-bottom: $space-6;  // 40px
   flex-wrap: wrap;
 }
 
@@ -44,13 +44,13 @@
 }
 
 .card {
-  padding: 2rem 0;
+  padding: $space-5 0;  // 32px
   border-top: 1px solid $dividerColor;
   display: flex;
   flex-direction: column;
 
   @include responsive(tablet) {
-    padding: 2rem 2rem 2rem 0;
+    padding: $space-5 $space-5 $space-5 0;  // 32px
     border-top: 1px solid $dividerColor;
     border-right: 1px solid $dividerColor;
 
@@ -60,7 +60,7 @@
     }
 
     &:nth-child(n+2) {
-      padding-left: 2rem;
+      padding-left: $space-5;  // 32px
     }
 
     &:first-child {
@@ -75,14 +75,14 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: $primaryColor;
-  margin-bottom: 0.75rem;
+  margin-bottom: $space-3;  // 16px
 }
 
 .title {
   font-size: 1.1rem;
   font-weight: 700;
   color: $primaryText;
-  margin-bottom: 0.875rem;
+  margin-bottom: $space-3;  // 16px
   line-height: 1.3;
 }
 
@@ -90,16 +90,16 @@
   font-size: 0.9rem;
   color: $secondaryText;
   line-height: 1.65;
-  margin-bottom: 1.25rem;
+  margin-bottom: $space-4;  // 24px
   flex: 1;
 }
 
 .tags {
   list-style: none;
   padding: 0;
-  margin: 0 0 1.5rem;
+  margin: 0 0 $space-4;  // 24px
   display: flex;
-  gap: 0.5rem;
+  gap: $space-2;         // 8px
   flex-wrap: wrap;
 }
 
@@ -109,7 +109,7 @@
   letter-spacing: 0.06em;
   color: $secondaryText;
   border: 1px solid $dividerColor;
-  padding: 0.15rem 0.5rem;
+  padding: $space-1 $space-2;  // 4px 8px
   border-radius: 2px;
 }
 
@@ -121,7 +121,7 @@
   color: $primaryColor;
   text-decoration: none;
   border-bottom: 1px solid $primaryColor;
-  padding-bottom: 2px;
+  padding-bottom: $space-1;  // 4px
   align-self: flex-start;
   transition: color 0.2s ease, border-color 0.2s ease;
 

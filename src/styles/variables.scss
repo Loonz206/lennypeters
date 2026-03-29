@@ -1,22 +1,67 @@
 //variables.scss-->
 
-$primaryColor: #2980b9;
-$lightPrimaryColor: lighten($primaryColor, 20%);
-$darkPrimaryColor: darken($primaryColor, 20%);
-$accentColor: adjust_hue($primaryColor, 180);
-$primaryText: #212121;
-$secondaryText: #757575;
-$dividerColor: #bdbdbd;
-$textIcons: #ffffff;
+// ── 8-Point Grid System ──────────────────────────────────────────────────────
+// Base unit: 8px. All spacing uses multiples of 8px.
+// A half-step of 4px ($space-1) is permitted for micro-spacing in dense UI.
+//
+//  $space-1   0.25rem =   4px  (half-step, dense UI only)
+//  $space-2   0.50rem =   8px  (1 unit)
+//  $space-3   1.00rem =  16px  (2 units)
+//  $space-4   1.50rem =  24px  (3 units)
+//  $space-5   2.00rem =  32px  (4 units)
+//  $space-6   2.50rem =  40px  (5 units)
+//  $space-7   3.00rem =  48px  (6 units)
+//  $space-8   3.50rem =  56px  (7 units)
+//  $space-9   4.00rem =  64px  (8 units)
+//  $space-10  4.50rem =  72px  (9 units)
+//  $space-11  5.00rem =  80px  (10 units)
+//  $space-12  6.00rem =  96px  (12 units)
+//  $space-14  7.00rem = 112px  (14 units)
+//  $space-16  8.00rem = 128px  (16 units)
 
-$white: $textIcons;
-$black: #000000;
+$space-1:  0.25rem;
+$space-2:  0.5rem;
+$space-3:  1rem;
+$space-4:  1.5rem;
+$space-5:  2rem;
+$space-6:  2.5rem;
+$space-7:  3rem;
+$space-8:  3.5rem;
+$space-9:  4rem;
+$space-10: 4.5rem;
+$space-11: 5rem;
+$space-12: 6rem;
+$space-14: 7rem;
+$space-16: 8rem;
 
-$dangerColor:#e74c3c;
+$header-height: $space-10; // 72px
+
+// Brand palette
+$cyberTeal: #00F0FF;
+$neonGreen: #30F802;
+$waveBlue: #3057F8;
+$darkest: #0E0E0E;
+$darker: #1C1B1B;
+$dark: #333232;
+$light: #F6F6F6;
+
+$primaryColor: $cyberTeal;
+$lightPrimaryColor: lighten($primaryColor, 10%);
+$darkPrimaryColor: darken($primaryColor, 10%);
+$accentColor: $neonGreen;
+$primaryText: $light;
+$secondaryText: darken($light, 20%);
+$dividerColor: $dark;
+$textIcons: $light;
+
+$white: $light;
+$black: $darkest;
+
+$dangerColor: #e74c3c;
 $warningColor: #f1c40f;
-$successColor:#2ecc71;
-$infoColor:#5dade2;
-$inverseColor:#34495e;
+$successColor: $neonGreen;
+$infoColor: $waveBlue;
+$inverseColor: $darker;
 
 // Font stacks
 $serif: Georgia, Times, "Times New Roman", serif;

@@ -2,14 +2,14 @@
 @import '@/styles/mixins';
 
 .section {
-  padding: 3rem 0;
+  padding: $space-7 0;  // 48px
 }
 
 .sectionTitle {
   font-size: 1.75rem;
   color: $primaryText;
-  margin-bottom: 2.5rem;
-  padding-bottom: 0.75rem;
+  margin-bottom: $space-6;   // 40px
+  padding-bottom: $space-3;  // 16px
   border-bottom: 2px solid $primaryColor;
   display: inline-block;
 }
@@ -23,8 +23,8 @@
   &::before {
     content: '';
     position: absolute;
-    left: 10px;
-    top: 6px;
+    left: 8px;   // 1 unit
+    top: 8px;    // 1 unit
     bottom: 0;
     width: 2px;
     background-color: $dividerColor;
@@ -37,8 +37,8 @@
 
 .entry {
   display: flex;
-  gap: 1.75rem;
-  padding-bottom: 2.5rem;
+  gap: $space-5;          // 32px
+  padding-bottom: $space-6;  // 40px
   position: relative;
 
   &:last-child {
@@ -48,12 +48,12 @@
 
 .marker {
   flex-shrink: 0;
-  width: 22px;
-  height: 22px;
+  width: 24px;   // 3 units
+  height: 24px;  // 3 units
   border-radius: 50%;
   background-color: $primaryColor;
   border: 3px solid lighten($primaryColor, 42%);
-  margin-top: 2px;
+  margin-top: 0;
   position: relative;
   z-index: 1;
 }
@@ -65,8 +65,8 @@
 .header {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
-  margin-bottom: 0.75rem;
+  gap: $space-1;           // 4px
+  margin-bottom: $space-3; // 16px
 
   @include responsive(tablet) {
     flex-direction: row;
@@ -79,7 +79,7 @@
   font-size: 1.1rem;
   font-weight: 700;
   color: $primaryText;
-  margin: 0 0 0.15rem;
+  margin: 0 0 $space-1;  // 4px
 }
 
 .company {
@@ -100,7 +100,7 @@
 .description {
   color: $secondaryText;
   line-height: 1.65;
-  margin-bottom: 0.875rem;
+  margin-bottom: $space-3;  // 16px
 }
 
 .highlights {
@@ -112,7 +112,7 @@
 .highlight {
   font-size: 0.9rem;
   color: $primaryText;
-  padding: 0.2rem 0 0.2rem 1.1rem;
+  padding: $space-1 0 $space-1 $space-3;  // 4px 0 4px 16px
   position: relative;
 
   &::before {

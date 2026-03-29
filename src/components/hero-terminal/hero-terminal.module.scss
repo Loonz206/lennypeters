@@ -2,7 +2,7 @@
 @import '@/styles/mixins';
 
 .hero {
-  padding: 3.5rem 0 4rem;
+  padding: $space-8 0 $space-9;  // 56px 0 64px
   font-family: $monoSpaced;
   border-bottom: 1px solid rgba($primaryColor, 0.25);
 }
@@ -12,8 +12,8 @@
 .topMeta {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 2.5rem;
+  gap: $space-2;           // 8px
+  margin-bottom: $space-6; // 40px
   font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -30,8 +30,8 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 2rem;
-  margin-bottom: 1.5rem;
+  gap: $space-5;           // 32px
+  margin-bottom: $space-4; // 24px
 }
 
 .titleBlock { flex: 1; }
@@ -41,7 +41,7 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: $dividerColor;
-  margin-bottom: 0.5rem;
+  margin-bottom: $space-2;  // 8px
   font-style: italic;
 }
 
@@ -63,8 +63,8 @@
   display: none;
   flex-direction: column;
   align-items: flex-end;
-  gap: 0.5rem;
-  padding-top: 0.5rem;
+  gap: $space-2;        // 8px
+  padding-top: $space-2; // 8px
 
   @include responsive(tablet) {
     display: flex;
@@ -79,7 +79,7 @@
 }
 
 .coordKey { color: $primaryColor; }
-.coordSep { color: $dividerColor; margin: 0 0.2rem; }
+.coordSep { color: $dividerColor; margin: 0 $space-1; }  // 4px
 .coordVal { color: $primaryText; }
 
 .seq {
@@ -97,7 +97,7 @@
   color: $secondaryText;
   line-height: 1.6;
   max-width: 560px;
-  margin-bottom: 2rem;
+  margin-bottom: $space-5;  // 32px
 
   @include responsive(tablet) {
     font-size: 1.25rem;
@@ -108,9 +108,9 @@
 
 .actions {
   display: flex;
-  gap: 1rem;
+  gap: $space-3;           // 16px
   flex-wrap: wrap;
-  margin-bottom: 3rem;
+  margin-bottom: $space-7; // 48px
 }
 
 .btnPrimary,
@@ -118,7 +118,7 @@
   font-family: $monoSpaced;
   font-size: 0.875rem;
   letter-spacing: 0.08em;
-  padding: 0.65rem 1.5rem;
+  padding: $space-2 $space-4;  // 8px 24px
   text-decoration: none;
   border-radius: 2px;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
@@ -154,7 +154,7 @@
 .bottomMeta {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: $space-4;  // 24px
   flex-wrap: wrap;
   font-size: 0.7rem;
   letter-spacing: 0.1em;
@@ -163,7 +163,7 @@
 
 .version {
   display: flex;
-  gap: 0.2rem;
+  gap: $space-1;  // 4px
 }
 
 .vKey { color: $dividerColor; }
@@ -173,14 +173,14 @@
 .statusBadge {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: $space-2;  // 8px
   color: $successColor;
   font-weight: 700;
 }
 
 .statusDot {
-  width: 6px;
-  height: 6px;
+  width: 8px;   // 1 unit
+  height: 8px;  // 1 unit
   border-radius: 50%;
   background-color: $successColor;
   display: inline-block;

@@ -3,22 +3,48 @@
 
 .section {
   padding: $space-9 0;
+  border-top: 1px solid rgba($primaryColor, 0.2);
+  border-bottom: 1px solid rgba($primaryColor, 0.2);
   position: relative;
+  overflow: hidden;
+  @include scanlines(0.02);
 }
 
 .sectionHeader {
-  margin-bottom: $space-7;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: $space-3;
+  margin-bottom: $space-6;
+  flex-wrap: wrap;
 }
 
 .sectionTitle {
   font-family: $monoSpaced;
   font-size: 1rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: $primaryColor;
-  margin-bottom: $space-3;
+  margin: 0;
   @include neon-glow($primaryColor);
   @include glitch-hover;
+}
+
+.count {
+  font-family: $monoSpaced;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: $secondaryText;
+  white-space: nowrap;
+}
+
+.line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba($primaryColor, 0.4), transparent);
+  align-self: center;
+  min-width: $space-3;
 }
 
 // ── Card grid ─────────────────────────────────────────────────────────────────
@@ -127,8 +153,8 @@
   font-size: 0.65rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: $primaryColor;
-  border: 1px solid rgba($primaryColor, 0.3);
+  color: $secondaryText;
+  border: 1px solid $dividerColor;
   padding: $space-1 $space-2;
 }
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Profile from '@/components/profile';
 import styles from './hero-terminal.module.scss';
 
 const HeroTerminal = () => {
@@ -18,12 +19,7 @@ const HeroTerminal = () => {
         </div>
 
         <div className={styles.sidebar}>
-          <p className={styles.coord}>
-            <span className={styles.coordKey}>COORD_X</span>
-            <span className={styles.coordSep}>:</span>
-            <span className={styles.coordVal}>42.99</span>
-          </p>
-          <p className={styles.seq}>SEQ_01</p>
+          <Profile />
         </div>
       </div>
 

@@ -15,7 +15,9 @@ const CodeThinking = () => {
   return (
     <section className={styles.section} aria-labelledby="blog-heading">
       <div className={styles.sectionHeader}>
-        <h2 id="blog-heading" className={styles.sectionTitle}>&gt; code thinking</h2>
+        <h2 id="blog-heading" className={styles.sectionTitle}>ARTICLES</h2>
+        <span className={styles.line} aria-hidden="true" />
+        <span className={styles.count}>[{String(articles.length).padStart(2, '0')}_TOTAL_ENTRIES]</span>
       </div>
 
       <div className={styles.grid}>

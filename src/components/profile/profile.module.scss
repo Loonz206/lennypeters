@@ -1,0 +1,133 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.card {
+  background-color: $darker;
+  border: 1px solid rgba($primaryColor, 0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 100%;
+  max-width: 320px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  @include hud-corners(14px, $primaryColor, 1px);
+
+  &:hover {
+    border-color: rgba($primaryColor, 0.4);
+    @include neon-border($primaryColor);
+  }
+}
+
+// ── Top bar ───────────────────────────────────────────────────────────────────
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-2 $space-3;
+  background-color: rgba($darkest, 0.5);
+  border-bottom: 1px solid rgba($primaryColor, 0.15);
+}
+
+.userId {
+  font-family: $monoSpaced;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: $primaryColor;
+  @include neon-glow($primaryColor);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: $successColor;
+  opacity: 0.8;
+  box-shadow: 0 0 4px rgba($successColor, 0.5);
+}
+
+// ── Body ──────────────────────────────────────────────────────────────────────
+
+.body {
+  padding: $space-4;
+}
+
+.name {
+  font-family: $monoSpaced;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: $primaryColor;
+  margin: 0 0 $space-1;
+  @include neon-glow($primaryColor);
+}
+
+.role {
+  font-family: $monoSpaced;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: $secondaryText;
+  margin: 0 0 $space-4;
+}
+
+// ── Stats ─────────────────────────────────────────────────────────────────────
+
+.stats {
+  margin: 0 0 $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.row {
+  display: flex;
+  align-items: baseline;
+  gap: $space-2;
+  font-family: $monoSpaced;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+
+.key {
+  color: $primaryColor;
+  font-weight: 700;
+  min-width: 40px;
+}
+
+.sep {
+  color: $dividerColor;
+  margin: 0;
+}
+
+.val {
+  color: $secondaryText;
+  margin: 0;
+}
+
+// ── Links ─────────────────────────────────────────────────────────────────────
+
+.links {
+  display: flex;
+  gap: $space-2;
+}
+
+.link {
+  font-family: $monoSpaced;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $primaryColor;
+  border: 1px solid rgba($primaryColor, 0.3);
+  padding: $space-1 $space-2;
+  text-decoration: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    background-color: rgba($primaryColor, 0.1);
+    border-color: $primaryColor;
+    @include neon-border($primaryColor);
+    outline: none;
+  }
+}

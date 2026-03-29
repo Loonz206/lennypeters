@@ -1,0 +1,62 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.section {
+  padding: 3rem 0;
+}
+
+.sectionTitle {
+  font-size: 1.75rem;
+  color: $primaryText;
+  margin-bottom: 2rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid $primaryColor;
+  display: inline-block;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+
+  @include responsive(tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include responsive(laptop) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.group {
+  background-color: lighten($primaryColor, 46%);
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  border-top: 3px solid $primaryColor;
+}
+
+.groupLabel {
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: $primaryColor;
+  margin-bottom: 0.875rem;
+}
+
+.skillList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.skill {
+  font-size: 0.9rem;
+  color: $primaryText;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid $dividerColor;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}

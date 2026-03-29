@@ -1,0 +1,125 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.section {
+  padding: 3rem 0;
+}
+
+.sectionTitle {
+  font-size: 1.75rem;
+  color: $primaryText;
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid $primaryColor;
+  display: inline-block;
+}
+
+.timeline {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 6px;
+    bottom: 0;
+    width: 2px;
+    background-color: $dividerColor;
+
+    @include responsive(tablet) {
+      left: 12px;
+    }
+  }
+}
+
+.entry {
+  display: flex;
+  gap: 1.75rem;
+  padding-bottom: 2.5rem;
+  position: relative;
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+}
+
+.marker {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: $primaryColor;
+  border: 3px solid lighten($primaryColor, 42%);
+  margin-top: 2px;
+  position: relative;
+  z-index: 1;
+}
+
+.content {
+  flex: 1;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+
+  @include responsive(tablet) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+}
+
+.role {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: $primaryText;
+  margin: 0 0 0.15rem;
+}
+
+.company {
+  font-size: 0.9rem;
+  color: $secondaryText;
+  margin: 0;
+}
+
+.dates {
+  font-size: 0.85rem;
+  color: $primaryColor;
+  font-weight: 600;
+  white-space: nowrap;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.description {
+  color: $secondaryText;
+  line-height: 1.65;
+  margin-bottom: 0.875rem;
+}
+
+.highlights {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.highlight {
+  font-size: 0.9rem;
+  color: $primaryText;
+  padding: 0.2rem 0 0.2rem 1.1rem;
+  position: relative;
+
+  &::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: $primaryColor;
+    font-weight: 700;
+  }
+}

@@ -23,13 +23,13 @@ const Header = () => {
     <header role="banner">
       <div className="navbar wrapper">
       <h2>
-        <Link href="/">BrandName</Link>
+        <Link href="/">Lenny Peters</Link>
       </h2>
       <nav>
         <ul>
           <li><NavLink href="/">Home</NavLink></li>
           <li><NavLink href="/about">About</NavLink></li>
-          <li><NavLink href="/blog">Blog</NavLink></li>
+          <li><NavLink href="/articles">Articles</NavLink></li>
         </ul>
       </nav>
       </div>

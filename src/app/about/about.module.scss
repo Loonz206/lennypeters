@@ -1,0 +1,24 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.bio {
+  padding: 2.5rem 0 1rem;
+
+  h1 {
+    margin-bottom: 1.5rem;
+  }
+}
+
+.bioContent {
+  max-width: 680px;
+
+  p {
+    color: $secondaryText;
+    line-height: 1.75;
+    margin-bottom: 1.25rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

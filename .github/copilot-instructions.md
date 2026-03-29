@@ -86,6 +86,64 @@ Or edit `~/.copilot/mcp-config.json` directly:
 
 Context7 tools available after setup: `resolve-library-id`, `get-library-docs`.
 
+## Figma Design
+
+**Figma agent** (`.github/agents/figma-design.agent.md`) — full 7-step design-to-code workflow:
+```
+/agent figma-design
+# or
+copilot --agent figma-design --prompt "Implement https://figma.com/design/..."
+```
+
+**Figma skill** — inline in any prompt:
+```
+Use /figma-design to implement https://figma.com/design/abc123/MyApp?node-id=42-15
+```
+
+The agent/skill will: parse the URL → fetch design context → capture a screenshot → map design tokens to project SCSS variables → implement as CSS Module components → validate against the screenshot.
+
+### Setting up Figma MCP (one-time, per machine)
+
+**Option 1 — Remote server (preferred, broadest features):**
+```bash
+# In a Copilot CLI session:
+/mcp add
+
+# Fill in:
+#   Name: figma
+#   Type: http
+#   URL:  https://mcp.figma.com/mcp
+```
+Authentication is handled via OAuth when you first use a Figma tool.
+
+**Option 2 — npm package (API key auth):**
+```bash
+/mcp add
+
+# Fill in:
+#   Name:    figma
+#   Command: npx
+#   Args:    -y figma-developer-mcp --stdio
+#   Env:     FIGMA_API_KEY=<your-personal-access-token>
+```
+
+Or edit `~/.copilot/mcp-config.json` directly:
+```json
+{
+  "mcpServers": {
+    "figma": {
+      "command": "npx",
+      "args": ["-y", "figma-developer-mcp", "--stdio"],
+      "env": { "FIGMA_API_KEY": "your-token-here" }
+    }
+  }
+}
+```
+
+Get a Figma personal access token at: **Figma → Account Settings → Security → Personal access tokens**
+
+Figma MCP tools available after setup: `get_design_context`, `get_screenshot`, `get_metadata`.
+
 
 ## Conventions
 

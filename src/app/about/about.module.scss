@@ -1,15 +1,47 @@
 @import '@/styles/variables';
 @import '@/styles/mixins';
 
-.bio {
-  padding: $space-6 0 $space-3;  // 40px 0 16px
-  position: relative;
+.page {
+  padding: $space-9 0;
+}
 
-  h1 {
-    margin-bottom: $space-4;  // 24px
-    color: $primaryColor;
-    @include neon-glow($primaryColor);
-  }
+.pageHeader {
+  padding: $space-7 $space-3 $space-6;
+  border-bottom: 1px solid rgba($primaryColor, 0.2);
+  margin-bottom: $space-5;
+  position: relative;
+  @include hud-corners(16px, $primaryColor, 1px);
+}
+
+.label {
+  font-family: $monoSpaced;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: $primaryColor;
+  text-transform: uppercase;
+  margin-bottom: $space-2;
+  @include neon-glow($primaryColor);
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: $primaryText;
+  margin: 0 0 $space-3;
+  @include glitch-hover;
+}
+
+.sub {
+  font-size: 1rem;
+  color: $secondaryText;
+  max-width: 520px;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.bio {
+  padding: $space-6 0 $space-3;
+  position: relative;
 }
 
 .bioContent {

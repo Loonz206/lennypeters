@@ -12,9 +12,16 @@ export const metadata: Metadata = {
 
 const AboutPage = () => {
   return (
-    <>
+    <div className={styles.page}>
+      <div className={styles.pageHeader}>
+        <p className={styles.label}>PROFILE</p>
+        <h1 id="about-heading" className={styles.title}>About Me</h1>
+        <p className={styles.sub}>
+          Web Engineer with 8+ years of experience building fast, accessible web products.
+        </p>
+      </div>
+
       <section className={styles.bio} aria-labelledby="about-heading">
-        <h1 id="about-heading">About Me</h1>
         <div className={styles.bioContent}>
           <p>
             I&rsquo;m a Web Engineer with over 8 years of experience designing and building
@@ -39,7 +46,7 @@ const AboutPage = () => {
       <ExperienceTimeline />
 
       <ContactSection />
-    </>
+    </div>
   );
 };
 

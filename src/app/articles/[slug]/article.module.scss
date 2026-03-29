@@ -83,34 +83,93 @@
     margin-bottom: $space-4;
     font-size: 1rem;
   }
-}
 
-.h2 {
-  font-family: $monoSpaced;
-  font-size: 1.25rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: $primaryColor;
-  margin: $space-7 0 $space-3;
-  @include neon-glow($primaryColor);
-}
-
-.pre {
-  background-color: $inverseColor;
-  color: $accentColor;
-  padding: $space-4;
-  overflow-x: auto;
-  font-size: 0.85rem;
-  line-height: 1.6;
-  margin: $space-5 0;
-  border: 1px solid rgba($primaryColor, 0.2);
-  @include hud-corners(12px, $primaryColor, 1px);
-  @include scanlines(0.03);
-  position: relative;
-
-  code {
+  h2 {
     font-family: $monoSpaced;
-    color: $accentColor;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: $primaryColor;
+    margin: $space-7 0 $space-3;
+    @include neon-glow($primaryColor);
+  }
+
+  h3 {
+    font-family: $monoSpaced;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: $primaryColor;
+    margin: $space-6 0 $space-3;
+  }
+
+  pre {
+    background-color: $inverseColor;
+    padding: $space-4;
+    overflow-x: auto;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin: $space-5 0;
+    border: 1px solid rgba($primaryColor, 0.2);
+    @include hud-corners(12px, $primaryColor, 1px);
+    @include scanlines(0.03);
+    position: relative;
+
+    code {
+      font-family: $monoSpaced;
+    }
+  }
+
+  :not(pre) > code {
+    font-family: $monoSpaced;
+    font-size: 0.85em;
+    background-color: rgba($primaryColor, 0.08);
+    color: $primaryColor;
+    padding: 0.15em 0.4em;
+    border: 1px solid rgba($primaryColor, 0.15);
+  }
+
+  blockquote {
+    border-left: 3px solid $primaryColor;
+    margin: $space-5 0;
+    padding: $space-3 $space-5;
+    color: $secondaryText;
+    font-style: italic;
+    background-color: rgba($primaryColor, 0.03);
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  ul, ol {
+    margin: $space-4 0;
+    padding-left: $space-5;
+  }
+
+  li {
+    margin-bottom: $space-2;
+  }
+
+  a {
+    color: $primaryColor;
+    text-decoration: none;
+
+    &:hover {
+      @include neon-glow($primaryColor);
+    }
+  }
+
+  strong {
+    color: $light;
+    font-weight: 700;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid rgba($primaryColor, 0.15);
+    margin: $space-7 0;
   }
 }

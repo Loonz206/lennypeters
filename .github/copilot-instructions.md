@@ -53,6 +53,20 @@ Specialized instruction files live in `.github/instructions/`. Each can be activ
 copilot --agent research --prompt "How does useOptimistic work in React 19?"
 ```
 
+**Write-article agent** (`.github/agents/write-article.agent.md`) researches a topic and writes a markdown article:
+```
+/agent write-article
+# or
+copilot --agent write-article --prompt "Write about React Server Components streaming patterns"
+```
+
+**Write-article skill** can be used inline in any prompt:
+```
+Use /write-article to write an article about TypeScript discriminated unions.
+```
+
+A GitHub Action (`.github/workflows/write-article.yml`) also auto-generates articles when a GitHub Issue is labeled `article`. Use the issue template at `.github/ISSUE_TEMPLATE/article-request.yml`.
+
 **Research skill** can be used inline in any prompt:
 ```
 Use /internet-research to look up the Next.js 15 caching API, then implement server-side caching for the blog page.

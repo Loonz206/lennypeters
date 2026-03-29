@@ -1,10 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
-import { Article } from '@/data/articles';
+import type { ArticleMeta } from '@/lib/articles';
 import styles from './article-card.module.scss';
 
 interface ArticleCardProps {
-  article: Article;
+  article: ArticleMeta;
 }
 
 const ArticleCard = ({ article }: ArticleCardProps) => {

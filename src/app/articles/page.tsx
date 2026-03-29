@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import ArticleCard from '@/components/article-card';
-import { articles } from '@/data/articles';
+import { getAllArticleMetas } from '@/lib/articles';
 import styles from './articles.module.scss';
 
 export const metadata: Metadata = {
@@ -10,6 +10,8 @@ export const metadata: Metadata = {
 };
 
 const ArticlesPage = () => {
+  const articles = getAllArticleMetas();
+
   return (
     <div className={styles.page}>
       <div className={styles.pageHeader}>

@@ -2,12 +2,16 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { articles } from '@/data/articles';
+import type { ArticleMeta } from '@/lib/articles';
 import styles from './code-thinking.module.scss';
 
 const ITEMS_PER_PAGE = 4;
 
-const CodeThinking = () => {
+interface CodeThinkingProps {
+  articles: ArticleMeta[];
+}
+
+const CodeThinking = ({ articles }: CodeThinkingProps) => {
   const [page, setPage] = useState(0);
   const totalPages = Math.ceil(articles.length / ITEMS_PER_PAGE);
   const visible = articles.slice(page * ITEMS_PER_PAGE, (page + 1) * ITEMS_PER_PAGE);

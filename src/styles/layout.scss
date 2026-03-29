@@ -64,16 +64,8 @@ footer {
 
 @media screen and (max-width: 767px){
 // mobile first
-  header {
-    height: 100%;
-  }
-
   .wrapper {
     width: 94%;
-  }
-
-  header .navbar {
-    flex-direction: column;
   }
 }
 

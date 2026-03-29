@@ -1,0 +1,162 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+// ── Hamburger button (mobile only) ──────────────────────────────────────────
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+
+  @include responsive(tablet) {
+    display: none;
+  }
+}
+
+.bar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: $white;
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  transform-origin: center;
+}
+
+.hamburgerOpen .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+.hamburgerOpen .bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburgerOpen .bar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+// ── Backdrop overlay ─────────────────────────────────────────────────────────
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.45);
+  z-index: 99;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+
+  @include responsive(tablet) {
+    display: none;
+  }
+}
+
+.backdropVisible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+// ── Drawer panel ─────────────────────────────────────────────────────────────
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(320px, 85vw);
+  background-color: $inverseColor;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+
+  @include responsive(tablet) {
+    display: none;
+  }
+}
+
+.drawerOpen {
+  transform: translateX(0);
+}
+
+// ── Drawer header row ─────────────────────────────────────────────────────────
+
+.drawerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.drawerBrand {
+  color: $white;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  color: $white;
+  cursor: pointer;
+  font-size: 1.5rem;
+  line-height: 1;
+  padding: 0.25rem 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    background-color: rgba(255, 255, 255, 0.12);
+    outline: none;
+  }
+}
+
+// ── Drawer nav links ──────────────────────────────────────────────────────────
+
+.drawerNav {
+  flex: 1;
+  padding: 1rem 0;
+}
+
+.drawerNavList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.drawerNavItem {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.drawerNavLink {
+  display: block;
+  padding: 1rem 1.5rem;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 1.05rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: $white;
+    text-decoration: none;
+    outline: none;
+  }
+}
+
+.drawerNavLinkActive {
+  color: $white;
+  border-left: 3px solid $primaryColor;
+  padding-left: calc(1.5rem - 3px);
+  background-color: rgba(255, 255, 255, 0.06);
+}

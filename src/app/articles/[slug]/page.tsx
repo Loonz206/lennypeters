@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { getAllArticleMetas, getArticleBySlug } from '@/lib/articles';
+import Breadcrumbs from '@/components/breadcrumbs';
 import styles from './article.module.scss';
 
 interface Props {
@@ -37,21 +38,25 @@ const ArticlePage = async ({ params }: Props) => {
 
   return (
     <article className={styles.article}>
+      <Breadcrumbs
+        items={[
+          { label: 'Articles', href: '/articles' },
+          { label: article.meta.title },
+        ]}
+      />
       <header className={styles.header}>
-        <div className={styles.meta}>
-          <time dateTime={article.meta.date} className={styles.date}>
-            {formattedDate}
-          </time>
-          <ul className={styles.tags} aria-label="Tags">
-            {article.meta.tags.map(tag => (
-              <li key={tag} className={styles.tag}>
-                {tag}
-              </li>
-            ))}
-          </ul>
-        </div>
+        <p className={styles.label}>
+          <time dateTime={article.meta.date}>{formattedDate}</time>
+        </p>
         <h1 className={styles.title}>{article.meta.title}</h1>
-        <p className={styles.excerpt}>{article.meta.excerpt}</p>
+        <p className={styles.sub}>{article.meta.excerpt}</p>
+        <ul className={styles.tags} aria-label="Tags">
+          {article.meta.tags.map(tag => (
+            <li key={tag} className={styles.tag}>
+              {tag}
+            </li>
+          ))}
+        </ul>
       </header>
       <div
         className={styles.body}

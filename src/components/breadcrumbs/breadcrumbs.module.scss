@@ -1,0 +1,38 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.nav {
+  margin-bottom: $space-4;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: $space-1;
+  font-family: $monoSpaced;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.link {
+  color: $primaryColor;
+  text-decoration: none;
+  transition: text-shadow 0.2s ease;
+
+  &:hover {
+    @include neon-glow($primaryColor);
+  }
+}
+
+.separator {
+  color: rgba($primaryColor, 0.35);
+  user-select: none;
+}
+
+.current {
+  color: $secondaryText;
+}

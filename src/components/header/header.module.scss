@@ -1,6 +1,18 @@
 @import '@/styles/variables';
 @import '@/styles/mixins';
 
+// ── Brand link ──────────────────────────────────────────────────────────────
+
+.brand {
+  color: $successColor;
+  @include neon-glow($successColor);
+
+  &:hover {
+    color: $successColor;
+    @include neon-glow($successColor);
+  }
+}
+
 // ── Hamburger button (mobile only) ──────────────────────────────────────────
 
 .hamburger {
@@ -24,10 +36,11 @@
   display: block;
   width: 100%;
   height: 2px;
-  background-color: $white;
+  background-color: $primaryColor;
   border-radius: 2px;
-  transition: transform 0.25s ease, opacity 0.25s ease;
+  transition: transform 0.25s ease, opacity 0.25s ease, box-shadow 0.2s ease;
   transform-origin: center;
+  box-shadow: 0 0 4px rgba($primaryColor, 0.4);
 }
 
 .hamburgerOpen .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
@@ -71,6 +84,8 @@
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  border-left: 1px solid rgba($primaryColor, 0.3);
+  @include hud-corners(16px, $primaryColor, 2px);
 
   @include responsive(tablet) {
     display: none;
@@ -88,14 +103,17 @@
   align-items: center;
   justify-content: space-between;
   padding: $space-3 $space-4;  // 16px 24px
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid rgba($primaryColor, 0.2);
 }
 
 .drawerBrand {
-  color: $white;
+  color: $primaryColor;
   font-size: 1.1rem;
   font-weight: 700;
   text-decoration: none;
+  font-family: $monoSpaced;
+  letter-spacing: 0.08em;
+  @include neon-glow($primaryColor);
 }
 
 .closeBtn {
@@ -114,8 +132,9 @@
 
   &:hover,
   &:focus-visible {
-    background-color: rgba(255, 255, 255, 0.12);
+    background-color: rgba($primaryColor, 0.1);
     outline: none;
+    color: $primaryColor;
   }
 }
 
@@ -133,7 +152,7 @@
 }
 
 .drawerNavItem {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba($primaryColor, 0.08);
 }
 
 .drawerNavLink {
@@ -143,20 +162,24 @@
   text-decoration: none;
   font-size: 1.05rem;
   font-weight: 500;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  font-family: $monoSpaced;
+  letter-spacing: 0.04em;
+  transition: background-color 0.2s ease, color 0.2s ease, text-shadow 0.2s ease;
 
   &:hover,
   &:focus-visible {
-    background-color: rgba(255, 255, 255, 0.08);
-    color: $white;
+    background-color: rgba($primaryColor, 0.06);
+    color: $primaryColor;
+    @include neon-glow($primaryColor);
     text-decoration: none;
     outline: none;
   }
 }
 
 .drawerNavLinkActive {
-  color: $white;
+  color: $primaryColor;
   border-left: 4px solid $primaryColor;
-  padding-left: calc(#{$space-4} - 4px);  // maintain flush alignment with border
-  background-color: rgba(255, 255, 255, 0.06);
+  padding-left: calc(#{$space-4} - 4px);
+  background-color: rgba($primaryColor, 0.06);
+  @include neon-glow($primaryColor);
 }

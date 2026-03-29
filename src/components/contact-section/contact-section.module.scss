@@ -7,11 +7,12 @@
 
 .sectionTitle {
   font-size: 1.75rem;
-  color: $primaryText;
+  color: $primaryColor;
   margin-bottom: $space-3;    // 16px
   padding-bottom: $space-3;   // 16px
   border-bottom: 2px solid $primaryColor;
   display: inline-block;
+  @include neon-glow($primaryColor);
 }
 
 .intro {
@@ -38,12 +39,15 @@
   text-decoration: none;
   font-size: 1rem;
   font-weight: 500;
-  transition: color 0.2s ease;
+  font-family: $monoSpaced;
+  letter-spacing: 0.02em;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
 
   &:hover,
   &:focus-visible {
     color: $primaryColor;
-    text-decoration: underline;
+    @include neon-glow($primaryColor);
+    text-decoration: none;
   }
 }
 
@@ -54,9 +58,18 @@
   width: $space-5;   // 32px
   height: $space-5;  // 32px
   border-radius: 4px;
-  background-color: $primaryColor;
-  color: $white;
+  background-color: rgba($primaryColor, 0.15);
+  color: $primaryColor;
   font-size: 0.875rem;
   font-weight: 700;
   flex-shrink: 0;
+  border: 1px solid rgba($primaryColor, 0.3);
+  box-shadow: 0 0 6px rgba($primaryColor, 0.2);
+  transition: box-shadow 0.2s ease, background-color 0.2s ease;
+
+  .link:hover &,
+  .link:focus-visible & {
+    box-shadow: 0 0 10px rgba($primaryColor, 0.4), 0 0 24px rgba($primaryColor, 0.2);
+    background-color: rgba($primaryColor, 0.2);
+  }
 }

@@ -1,24 +1,23 @@
 import React from 'react';
-import { skillGroups } from '@/data/skills';
 import styles from './expertise-list.module.scss';
 
-const ExpertiseList = () => {
-  const allSkills = skillGroups
-    .filter(g => ['Languages', 'Frameworks & Libraries'].includes(g.label))
-    .flatMap(g => g.skills)
-    .slice(0, 8);
+const FEATURED_SKILLS = ['TypeScript', 'Next.js', 'React', 'Python'];
 
+const ExpertiseList = () => {
   return (
     <section className={styles.section} aria-labelledby="expertise-heading">
-      <h2 id="expertise-heading" className={styles.sectionTitle}>expertise</h2>
-      <ul className={styles.list}>
-        {allSkills.map(skill => (
-          <li key={skill} className={styles.item}>
-            <span className={styles.chevron} aria-hidden="true">&gt;</span>
-            <span className={styles.label}>{skill.toLowerCase()}</span>
-          </li>
-        ))}
-      </ul>
+      <div className={styles.row}>
+        <h2 id="expertise-heading" className={styles.sectionTitle}>Expertise</h2>
+        <ul className={styles.list}>
+          {FEATURED_SKILLS.map(skill => (
+            <li key={skill} className={styles.item}>
+              <span className={styles.chevron} aria-hidden="true">&gt;</span>
+              <span className={styles.label}>{skill.toUpperCase()}</span>
+            </li>
+          ))}
+        </ul>
+        <span className={styles.line} aria-hidden="true" />
+      </div>
     </section>
   );
 };

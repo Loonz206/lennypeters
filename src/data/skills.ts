@@ -6,7 +6,7 @@ export interface SkillGroup {
 export const skillGroups: SkillGroup[] = [
   {
     label: 'Languages',
-    skills: ['TypeScript', 'JavaScript', 'HTML', 'CSS / SCSS', 'SQL'],
+    skills: ['TypeScript', 'JavaScript', 'Python', 'HTML', 'CSS / SCSS', 'SQL'],
   },
   {
     label: 'Frameworks & Libraries',

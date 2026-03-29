@@ -2,39 +2,52 @@
 @import '@/styles/mixins';
 
 .section {
-  padding: $space-9 0;  // 64px
-  border-bottom: 1px solid rgba($primaryColor, 0.25);
+  padding: $space-6 0;
+  border-top: 1px solid rgba($primaryColor, 0.2);
+  border-bottom: 1px solid rgba($primaryColor, 0.2);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  flex-wrap: wrap;
+
+  @include responsive(tablet) {
+    flex-wrap: nowrap;
+  }
 }
 
 .sectionTitle {
   font-family: $monoSpaced;
-  font-size: 0.875rem;
+  font-size: clamp(1.4rem, 3vw, 2rem);
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: $secondaryText;
-  margin-bottom: $space-5;  // 32px
-  text-transform: lowercase;
+  color: $primaryText;
+  text-transform: uppercase;
+  white-space: nowrap;
+  margin: 0;
+  flex-shrink: 0;
 }
 
 .list {
   list-style: none;
   padding: 0;
   margin: 0;
-  columns: 2;
-  column-gap: $space-5;  // 32px
-
-  @include responsive(tablet) {
-    columns: 4;
-  }
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  flex-shrink: 0;
 }
 
 .item {
   display: flex;
   align-items: center;
-  gap: $space-2;     // 8px
-  padding: $space-2 0;  // 8px
-  border-bottom: 1px solid rgba($dividerColor, 0.5);
-  break-inside: avoid;
+  padding: $space-1 $space-3;
+  background-color: rgba($primaryColor, 0.06);
+  border: 1px solid rgba($primaryColor, 0.25);
+  border-radius: 2px;
+  white-space: nowrap;
 }
 
 .chevron {
@@ -46,7 +59,18 @@
 
 .label {
   font-family: $monoSpaced;
-  font-size: 0.875rem;
-  letter-spacing: 0.04em;
-  color: $primaryText;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: $primaryColor;
+}
+
+.line {
+  display: none;
+
+  @include responsive(tablet) {
+    display: block;
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, rgba($primaryColor, 0.5), rgba($primaryColor, 0));
+  }
 }

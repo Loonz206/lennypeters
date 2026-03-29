@@ -3,9 +3,12 @@
 
 .bio {
   padding: $space-6 0 $space-3;  // 40px 0 16px
+  position: relative;
 
   h1 {
     margin-bottom: $space-4;  // 24px
+    color: $primaryColor;
+    @include neon-glow($primaryColor);
   }
 }
 

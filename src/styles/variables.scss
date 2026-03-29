@@ -39,6 +39,7 @@ $header-height: $space-10; // 72px
 // Brand palette
 $cyberTeal: #00F0FF;
 $neonGreen: #30F802;
+$neonMagenta: #FF00FF;
 $waveBlue: #3057F8;
 $darkest: #0E0E0E;
 $darker: #1C1B1B;
@@ -66,4 +67,9 @@ $inverseColor: $darker;
 // Font stacks
 $serif: Georgia, Times, "Times New Roman", serif;
 $sansSerif: "Helvetica Neue", Helvetica, Arial, sans-serif;
-$monoSpaced: Monaco, "Courier New", Courier, monospace;
+$monoSpaced: "SF Mono", "Fira Code", "JetBrains Mono", Monaco, "Cascadia Code", "Courier New", Courier, monospace;
+
+// ── Cyberpunk Glow Tokens ──────────────────────────────────────────────────
+$glow-cyan:    0 0 8px rgba($primaryColor, 0.6), 0 0 20px rgba($primaryColor, 0.3);
+$glow-magenta: 0 0 8px rgba($neonMagenta, 0.6), 0 0 20px rgba($neonMagenta, 0.3);
+$glow-green:   0 0 8px rgba($accentColor, 0.6), 0 0 20px rgba($accentColor, 0.3);

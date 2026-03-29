@@ -3,10 +3,10 @@
 
 .card {
   padding: $space-5 0;  // 32px
-  border-bottom: 1px solid $dividerColor;
+  border-bottom: 1px solid rgba($primaryColor, 0.15);
 
   &:first-child {
-    border-top: 1px solid $dividerColor;
+    border-top: 1px solid rgba($primaryColor, 0.15);
   }
 }
 
@@ -34,11 +34,14 @@
 
 .tag {
   font-size: 0.75rem;
-  background-color: lighten($primaryColor, 42%);
+  background-color: rgba($primaryColor, 0.08);
   color: $primaryColor;
   padding: $space-1 $space-2;  // 4px 8px
   border-radius: 3px;
   font-weight: 600;
+  border: 1px solid rgba($primaryColor, 0.2);
+  font-family: $monoSpaced;
+  letter-spacing: 0.04em;
 }
 
 .title {
@@ -50,11 +53,13 @@
 .titleLink {
   color: $primaryText;
   text-decoration: none;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
 
   &:hover,
   &:focus-visible {
     color: $primaryColor;
-    text-decoration: underline;
+    @include neon-glow($primaryColor);
+    text-decoration: none;
   }
 }
 
@@ -69,9 +74,13 @@
   font-weight: 600;
   color: $primaryColor;
   text-decoration: none;
+  font-family: $monoSpaced;
+  letter-spacing: 0.06em;
+  transition: text-shadow 0.2s ease;
 
   &:hover,
   &:focus-visible {
-    text-decoration: underline;
+    @include neon-glow($primaryColor);
+    text-decoration: none;
   }
 }

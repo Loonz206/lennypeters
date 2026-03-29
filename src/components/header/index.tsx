@@ -83,7 +83,7 @@ const Header = () => {
       <header role="banner">
         <div className="navbar wrapper">
           <h2>
-            <Link href="/">Lenny Peters</Link>
+            <Link href="/" className={styles.brand}>Lenny Peters</Link>
           </h2>
 
           {/* Desktop nav */}

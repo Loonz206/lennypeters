@@ -4,13 +4,35 @@ body {
   font-family: $serif;
   background-color: $darkest;
   color: $primaryText;
+  background-image:
+    linear-gradient(rgba($primaryColor, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba($primaryColor, 0.03) 1px, transparent 1px);
+  background-size: 8px 8px;
 }
 
 header {
   background: $darker;
-  border-bottom: 1px solid $dark;
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,.4);
-  height: $header-height; // 72px — 9 × 8pt units
+  border-bottom: 1px solid rgba($primaryColor, 0.3);
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,.5), 0 1px 0 rgba($primaryColor, 0.15);
+  height: $header-height;
+  position: relative;
+  overflow: hidden;
+
+  // Scanline overlay
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.03) 2px,
+      rgba(0, 0, 0, 0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
 }
 
 .wrapper {
@@ -31,13 +53,22 @@ header {
 }
 
 .active-link {
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid $primaryColor;
+  color: $primaryColor;
+  @include neon-glow($primaryColor);
 }
 
 .navbar a {
   color: $primaryText;
-  &:hover{
+  font-family: $monoSpaced;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+
+  &:hover {
     color: $primaryColor;
+    @include neon-glow($primaryColor);
   }
 }
 

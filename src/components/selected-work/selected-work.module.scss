@@ -3,9 +3,11 @@
 
 .section {
   padding: $space-9 0;  // 64px
-  background-color: $darker;
-  border-top: 1px solid $dividerColor;
-  border-bottom: 1px solid $dividerColor;
+  border-top: 1px solid rgba($primaryColor, 0.2);
+  border-bottom: 1px solid rgba($primaryColor, 0.2);
+  position: relative;
+  overflow: hidden;
+  @include scanlines(0.02);
 }
 
 .sectionHeader {
@@ -23,8 +25,10 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: $primaryText;
+  color: $primaryColor;
   margin: 0;
+  @include neon-glow($primaryColor);
+  @include glitch-hover;
 }
 
 .count {
@@ -38,7 +42,7 @@
 .line {
   flex: 1;
   height: 1px;
-  background-color: $dividerColor;
+  background: linear-gradient(90deg, rgba($primaryColor, 0.4), transparent);
   align-self: center;
   min-width: $space-3;
 }
@@ -46,17 +50,11 @@
 .grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: $space-4;
+  gap: $space-5;  // 32px
 
   @include responsive(tablet) {
     grid-template-columns: repeat(2, 1fr);
-    gap: $space-4;
-  }
-}
-
-.grid > *:last-child:nth-child(odd) {
-  @include responsive(tablet) {
-    grid-column: 1 / -1;
+    gap: $space-5;  // 32px
   }
 }
 
@@ -114,11 +112,12 @@
   border-bottom: 1px solid $primaryColor;
   padding-bottom: $space-1;  // 4px
   align-self: flex-start;
-  transition: color 0.2s ease, border-color 0.2s ease;
+  transition: color 0.2s ease, border-color 0.2s ease, text-shadow 0.2s ease;
 
   &:hover, &:focus-visible {
-    color: $darkPrimaryColor;
-    border-color: $darkPrimaryColor;
+    color: $primaryColor;
+    border-color: $primaryColor;
+    @include neon-glow($primaryColor);
     text-decoration: none;
   }
 }

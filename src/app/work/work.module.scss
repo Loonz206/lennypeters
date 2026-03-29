@@ -3,8 +3,11 @@
 
 .pageHeader {
   padding: $space-7 0 $space-6;  // 48px 0 40px
-  border-bottom: 1px solid rgba($primaryColor, 0.25);
+  border-bottom: 1px solid rgba($primaryColor, 0.2);
   margin-bottom: $space-5;       // 32px
+  position: relative;
+  @include hud-corners(16px, $primaryColor, 1px);
+  padding: $space-7 $space-3 $space-6;
 }
 
 .label {
@@ -14,6 +17,7 @@
   color: $primaryColor;
   text-transform: uppercase;
   margin-bottom: $space-2;  // 8px
+  @include neon-glow($primaryColor);
 }
 
 .title {
@@ -21,6 +25,7 @@
   font-weight: 900;
   color: $primaryText;
   margin: 0 0 $space-3;  // 16px
+  @include glitch-hover;
 }
 
 .sub {
@@ -42,7 +47,7 @@
   grid-template-columns: 1fr;
   gap: $space-3;         // 16px
   padding: $space-6 0;   // 40px
-  border-bottom: 1px solid $dividerColor;
+  border-bottom: 1px solid rgba($primaryColor, 0.12);
 
   @include responsive(tablet) {
     grid-template-columns: 140px 1fr;
@@ -63,6 +68,7 @@
   letter-spacing: 0.15em;
   color: $primaryColor;
   font-weight: 700;
+  @include neon-glow($primaryColor);
 }
 
 .index {
@@ -99,8 +105,9 @@
   font-family: $monoSpaced;
   font-size: 0.7rem;
   letter-spacing: 0.06em;
-  color: $secondaryText;
-  border: 1px solid $dividerColor;
+  color: $primaryColor;
+  border: 1px solid rgba($primaryColor, 0.25);
   padding: $space-1 $space-2;  // 4px 8px
   border-radius: 2px;
+  background-color: rgba($primaryColor, 0.05);
 }

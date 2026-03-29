@@ -13,7 +13,7 @@ const SelectedWork = () => {
       </div>
 
       <div className={styles.grid}>
-        {projects.map((project) => (
+        {projects.slice(0, 2).map((project) => (
           <ProjectCard key={project.id} project={project} />
         ))}
       </div>

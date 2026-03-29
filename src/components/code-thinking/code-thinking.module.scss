@@ -2,11 +2,12 @@
 @import '@/styles/mixins';
 
 .section {
-  padding: $space-9 0;  // 64px
+  padding: $space-9 0;
+  position: relative;
 }
 
 .sectionHeader {
-  margin-bottom: $space-7;  // 48px
+  margin-bottom: $space-7;
 }
 
 .sectionTitle {
@@ -14,117 +15,187 @@
   font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: $primaryText;
-  margin-bottom: $space-3;  // 16px
+  color: $primaryColor;
+  margin-bottom: $space-3;
+  @include neon-glow($primaryColor);
+  @include glitch-hover;
 }
 
-.intro {
-  font-size: 0.9rem;
-  color: $secondaryText;
-  line-height: 1.65;
-  max-width: 540px;
-}
+// ── Card grid ─────────────────────────────────────────────────────────────────
 
-.posts {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-5;
 
-.post {
-  padding: $space-5 0;  // 32px
-  border-top: 1px solid $dividerColor;
-
-  &:last-child {
-    border-bottom: 1px solid $dividerColor;
+  @include responsive(tablet) {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-.date {
-  font-family: $monoSpaced;
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  color: $secondaryText;
-  margin-bottom: $space-2;  // 8px
+.card {
+  background-color: $darker;
+  border: 1px solid rgba($primaryColor, 0.15);
   display: flex;
-  align-items: center;
-  gap: $space-2;            // 8px
+  flex-direction: column;
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  @include hud-corners(14px, $primaryColor, 1px);
+
+  &:hover {
+    border-color: rgba($primaryColor, 0.4);
+    @include neon-border($primaryColor);
+  }
 }
 
-.dateCaret {
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-2 $space-3;
+  background-color: rgba($darkest, 0.5);
+  border-bottom: 1px solid rgba($primaryColor, 0.15);
+}
+
+.cardId {
+  font-family: $monoSpaced;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
   color: $primaryColor;
-  font-weight: 700;
+  @include neon-glow($primaryColor);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 90%;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: $primaryColor;
+  opacity: 0.8;
+  box-shadow: 0 0 4px rgba($primaryColor, 0.5);
+  flex-shrink: 0;
+}
+
+.imagePlaceholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: $dark;
+  @include scanlines(0.05);
+}
+
+.body {
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .title {
-  font-size: 1.05rem;
+  font-family: $monoSpaced;
+  font-size: 1.1rem;
   font-weight: 700;
-  margin-bottom: $space-2;  // 8px
-  line-height: 1.35;
-}
-
-.titleLink {
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   color: $primaryText;
-  text-decoration: none;
-
-  &:hover, &:focus-visible {
-    color: $primaryColor;
-    text-decoration: underline;
-  }
+  margin: 0 0 $space-3;
 }
 
 .excerpt {
-  font-size: 0.9rem;
+  font-family: $monoSpaced;
+  font-size: 0.85rem;
+  line-height: 1.6;
   color: $secondaryText;
-  line-height: 1.65;
-  margin-bottom: $space-3;  // 16px
+  margin: 0 0 $space-4;
+  flex: 1;
 }
 
 .tags {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 0 $space-4;
   display: flex;
-  gap: $space-2;  // 8px
+  gap: $space-2;
   flex-wrap: wrap;
 }
 
 .tag {
   font-family: $monoSpaced;
-  font-size: 0.7rem;
-  letter-spacing: 0.06em;
-  color: $secondaryText;
-  border: 1px solid $dividerColor;
-  padding: $space-1 $space-2;  // 4px 8px
-  border-radius: 2px;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $primaryColor;
+  border: 1px solid rgba($primaryColor, 0.3);
+  padding: $space-1 $space-2;
 }
 
-.footer {
+.btn {
+  display: inline-block;
+  align-self: flex-start;
+  font-family: $monoSpaced;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: $primaryColor;
+  border: 2px solid rgba($primaryColor, 0.5);
+  padding: $space-2 $space-4;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    background-color: rgba($primaryColor, 0.1);
+    color: $primaryColor;
+    border-color: $primaryColor;
+    @include neon-border($primaryColor);
+    outline: none;
+  }
+}
+
+// ── Pagination ────────────────────────────────────────────────────────────────
+
+.pagination {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding-top: $space-4;  // 24px
-  flex-wrap: wrap;
-  gap: $space-3;           // 16px
+  justify-content: center;
+  gap: $space-4;
+  padding-top: $space-7;
 }
 
-.scroll {
+.pageBtn {
   font-family: $monoSpaced;
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
-  color: $dividerColor;
-  text-transform: uppercase;
-}
-
-.more {
-  font-family: $monoSpaced;
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  color: $primaryColor;
-  text-decoration: none;
+  font-size: 0.7rem;
   font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: $primaryColor;
+  background: none;
+  border: 2px solid rgba($primaryColor, 0.5);
+  padding: $space-2 $space-4;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 
-  &:hover, &:focus-visible {
-    text-decoration: underline;
+  &:hover:not(:disabled),
+  &:focus-visible:not(:disabled) {
+    background-color: rgba($primaryColor, 0.1);
+    border-color: $primaryColor;
+    @include neon-border($primaryColor);
+    outline: none;
   }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+
+.pageInfo {
+  font-family: $monoSpaced;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: $secondaryText;
 }

@@ -1,0 +1,55 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.footer {
+  position: relative;
+  border-top: 1px solid rgba($primaryColor, 0.2);
+  padding: $space-5 0;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.03) 2px,
+      rgba(0, 0, 0, 0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+.footerInner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-3;
+  flex-wrap: wrap;
+  font-family: $monoSpaced;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.dataLabel {
+  color: $primaryColor;
+  @include neon-glow($primaryColor);
+}
+
+.divider {
+  color: $dividerColor;
+}
+
+.copyright {
+  color: $secondaryText;
+  margin: 0;
+}
+
+.status {
+  color: $successColor;
+  @include neon-glow($successColor);
+}

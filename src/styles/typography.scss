@@ -8,7 +8,11 @@ $sansSerif: "Helvetica Neue",
 Helvetica,
 Arial,
 sans-serif;
-$monoSpaced: Monaco,
+$monoSpaced: "SF Mono",
+"Fira Code",
+"JetBrains Mono",
+Monaco,
+"Cascadia Code",
 "Courier New",
 Courier,
 monospace;
@@ -27,6 +31,12 @@ body {
   @include responsive(tablet) {
     font-size: 110%;
   }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $monoSpaced;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
 }
 
 h1 {

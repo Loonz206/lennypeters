@@ -9,7 +9,7 @@
 .header {
   margin-bottom: $space-6;  // 40px
   padding-bottom: $space-5; // 32px
-  border-bottom: 1px solid $dividerColor;
+  border-bottom: 1px solid rgba($primaryColor, 0.2);
 }
 
 .meta {
@@ -36,11 +36,14 @@
 
 .tag {
   font-size: 0.75rem;
-  background-color: lighten($primaryColor, 42%);
+  background-color: rgba($primaryColor, 0.08);
   color: $primaryColor;
   padding: $space-1 $space-2;  // 4px 8px
   border-radius: 3px;
   font-weight: 600;
+  border: 1px solid rgba($primaryColor, 0.2);
+  font-family: $monoSpaced;
+  letter-spacing: 0.04em;
 }
 
 .title {
@@ -48,6 +51,7 @@
   color: $primaryText;
   margin: 0 0 $space-3;  // 16px
   line-height: 1.2;
+  @include glitch-hover;
 
   @include responsive(tablet) {
     font-size: 2.75rem;
@@ -85,6 +89,8 @@
   font-size: 0.875rem;
   line-height: 1.6;
   margin: $space-4 0;  // 24px
+  border: 1px solid rgba($primaryColor, 0.15);
+  box-shadow: 0 0 8px rgba($primaryColor, 0.1);
 
   code {
     font-family: Monaco, Consolas, 'Courier New', monospace;

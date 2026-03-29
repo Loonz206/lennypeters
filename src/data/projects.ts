@@ -26,14 +26,5 @@ export const projects: Project[] = [
     tags: ['Python', 'FastAPI', 'Redis', 'Docker'],
     buttonLabel: 'View Project',
     href: '#',
-  },
-  {
-    id: 'PRJ_003',
-    title: 'Design System Core',
-    description:
-      'Token-driven design system spanning 200+ components across web and native platforms. Automated accessibility auditing baked into the build pipeline.',
-    tags: ['Next.js', 'SCSS', 'Storybook', 'Figma'],
-    buttonLabel: 'View Project',
-    href: '#',
-  },
+  }
 ];

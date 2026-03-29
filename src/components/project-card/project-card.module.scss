@@ -3,10 +3,17 @@
 
 .card {
   background-color: $darker;
-  border: 1px solid $dark;
+  border: 1px solid rgba($primaryColor, 0.15);
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  @include hud-corners(14px, $primaryColor, 1px);
+
+  &:hover {
+    border-color: rgba($primaryColor, 0.4);
+    @include neon-border($primaryColor);
+  }
 }
 
 .topBar {
@@ -14,8 +21,8 @@
   align-items: center;
   justify-content: space-between;
   padding: $space-2 $space-3;  // 8px 16px
-  background-color: $darker;
-  border-bottom: 1px solid $dark;
+  background-color: rgba($darkest, 0.5);
+  border-bottom: 1px solid rgba($primaryColor, 0.15);
 }
 
 .projectId {
@@ -23,22 +30,25 @@
   font-size: 0.65rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: $primaryText;
+  color: $primaryColor;
+  @include neon-glow($primaryColor);
 }
 
 .dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: $primaryText;
-  opacity: 0.6;
+  background-color: $primaryColor;
+  opacity: 0.8;
+  box-shadow: 0 0 4px rgba($primaryColor, 0.5);
 }
 
 .imageWrapper {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
-  background-color: $light;
+  background-color: $dark;
+  @include scanlines(0.05);
 }
 
 .image {
@@ -48,11 +58,11 @@
 .imagePlaceholder {
   width: 100%;
   height: 100%;
-  background-color: $light;
+  background-color: $dark;
 }
 
 .body {
-  padding: $space-3 $space-3 $space-4;  // 16px 16px 24px
+  padding: $space-4;  // 24px consistent on all sides
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -91,8 +101,8 @@
   font-size: 0.65rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: $primaryText;
-  border: 1px solid $primaryText;
+  color: $primaryColor;
+  border: 1px solid rgba($primaryColor, 0.3);
   padding: $space-1 $space-2;  // 4px 8px
 }
 
@@ -105,15 +115,17 @@
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: $primaryColor;
-  border: 2px solid $primaryColor;
+  border: 2px solid rgba($primaryColor, 0.5);
   padding: $space-2 $space-4;  // 8px 24px
   text-decoration: none;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 
   &:hover,
   &:focus-visible {
-    background-color: $primaryColor;
-    color: $darkest;
+    background-color: rgba($primaryColor, 0.1);
+    color: $primaryColor;
+    border-color: $primaryColor;
+    @include neon-border($primaryColor);
     outline: none;
   }
 }

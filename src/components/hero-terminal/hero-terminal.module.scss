@@ -4,7 +4,10 @@
 .hero {
   padding: $space-8 0 $space-9;  // 56px 0 64px
   font-family: $monoSpaced;
-  border-bottom: 1px solid rgba($primaryColor, 0.25);
+  border-bottom: 1px solid rgba($primaryColor, 0.3);
+  position: relative;
+  overflow: hidden;
+  @include scanlines(0.03);
 }
 
 // ── Top meta bar ─────────────────────────────────────────────────────────────
@@ -20,7 +23,7 @@
   color: $secondaryText;
 }
 
-.metaLabel { color: $primaryColor; font-weight: 700; }
+.metaLabel { color: $primaryColor; font-weight: 700; @include neon-glow($primaryColor); }
 .metaSep   { color: $dividerColor; }
 .metaValue { color: $secondaryText; }
 
@@ -32,6 +35,8 @@
   align-items: flex-start;
   gap: $space-5;           // 32px
   margin-bottom: $space-4; // 24px
+  @include hud-corners(20px, $primaryColor, 2px);
+  padding: $space-3;
 }
 
 .titleBlock { flex: 1; }
@@ -53,9 +58,17 @@
   line-height: 1;
   margin: 0;
   font-family: $monoSpaced;
+  animation: flicker 8s infinite;
+
+  &:hover {
+    animation: glitch 3s infinite;
+  }
 }
 
-.dot { color: $primaryColor; }
+.dot {
+  color: $primaryColor;
+  @include neon-glow($primaryColor);
+}
 
 // ── Sidebar metadata ──────────────────────────────────────────────────────────
 
@@ -78,7 +91,7 @@
   color: $secondaryText;
 }
 
-.coordKey { color: $primaryColor; }
+.coordKey { color: $primaryColor; @include neon-glow($primaryColor); }
 .coordSep { color: $dividerColor; margin: 0 $space-1; }  // 4px
 .coordVal { color: $primaryText; }
 
@@ -121,30 +134,35 @@
   padding: $space-2 $space-4;  // 8px 24px
   text-decoration: none;
   border-radius: 2px;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, text-shadow 0.2s ease;
+  text-transform: uppercase;
 }
 
 .btnPrimary {
   background-color: $primaryColor;
-  color: $white;
+  color: $darkest;
   border: 1px solid $primaryColor;
+  @include neon-border($primaryColor);
 
   &:hover, &:focus-visible {
-    background-color: $darkPrimaryColor;
-    border-color: $darkPrimaryColor;
-    color: $white;
+    background-color: lighten($primaryColor, 10%);
+    border-color: lighten($primaryColor, 10%);
+    color: $darkest;
     text-decoration: none;
+    box-shadow: 0 0 12px rgba($primaryColor, 0.6), 0 0 30px rgba($primaryColor, 0.3), 0 0 60px rgba($primaryColor, 0.15);
   }
 }
 
 .btnSecondary {
   background-color: transparent;
   color: $primaryText;
-  border: 1px solid $dividerColor;
+  border: 1px solid rgba($primaryColor, 0.3);
 
   &:hover, &:focus-visible {
     border-color: $primaryColor;
     color: $primaryColor;
+    @include neon-border($primaryColor);
+    @include neon-glow($primaryColor);
     text-decoration: none;
   }
 }
@@ -168,7 +186,7 @@
 
 .vKey { color: $dividerColor; }
 .vSep { color: $dividerColor; }
-.vVal { color: $primaryColor; }
+.vVal { color: $primaryColor; @include neon-glow($primaryColor); }
 
 .statusBadge {
   display: flex;
@@ -176,6 +194,7 @@
   gap: $space-2;  // 8px
   color: $successColor;
   font-weight: 700;
+  @include neon-glow($successColor);
 }
 
 .statusDot {
@@ -185,9 +204,16 @@
   background-color: $successColor;
   display: inline-block;
   animation: pulse 2s infinite;
+  box-shadow: 0 0 6px rgba($successColor, 0.6), 0 0 16px rgba($successColor, 0.3);
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.4; }
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 6px rgba($successColor, 0.6), 0 0 16px rgba($successColor, 0.3);
+  }
+  50% {
+    opacity: 0.4;
+    box-shadow: 0 0 2px rgba($successColor, 0.3), 0 0 8px rgba($successColor, 0.15);
+  }
 }

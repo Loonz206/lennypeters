@@ -44,9 +44,47 @@ Specialized instruction files live in `.github/instructions/`. Each can be activ
 | `linting.instructions.md` | Runs `npm run lint`, auto-fixes, retries up to 3× |
 | `unit-testing.instructions.md` | Runs `npm test`, auto-fixes failures, retries up to 3× |
 | `e2e-testing.instructions.md` | Runs `npm run test:e2e`, auto-fixes failures, retries up to 3× |
-| `pipeline.instructions.md` | **Full pipeline**: coding → lint → unit test → e2e → summary |
+| `pipeline.instructions.md` | **Full pipeline**: research → coding → lint → unit test → e2e → summary |
 
-**To run the full pipeline**, tell Copilot to use `@.github/instructions/pipeline.instructions.md` and describe your task. It will implement the change, validate it through all three quality gates, and present a structured summary of results.
+**Research agent** (`.github/agents/research.agent.md`) can also be invoked standalone:
+```
+/agent research
+# or
+copilot --agent research --prompt "How does useOptimistic work in React 19?"
+```
+
+**Research skill** can be used inline in any prompt:
+```
+Use /internet-research to look up the Next.js 15 caching API, then implement server-side caching for the blog page.
+```
+
+### Setting up Context7 MCP (one-time, per machine)
+
+Context7 provides live, version-accurate library documentation to the research agent. Add it to your Copilot CLI MCP config:
+
+```bash
+# In a Copilot CLI session:
+/mcp add
+
+# Fill in:
+#   Name:    context7
+#   Command: npx
+#   Args:    -y @upstash/context7-mcp
+```
+
+Or edit `~/.copilot/mcp-config.json` directly:
+```json
+{
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"]
+    }
+  }
+}
+```
+
+Context7 tools available after setup: `resolve-library-id`, `get-library-docs`.
 
 
 ## Conventions

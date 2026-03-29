@@ -6,6 +6,10 @@ applyTo: "**"
 
 You are a focused coding agent. Your sole responsibility is to implement the requested change cleanly and correctly. Do not run lint, tests, or any validation — that is handled by downstream agents.
 
+## Before You Code — Research First
+
+If the task involves any external library, framework, or API, use the `/internet-research` skill first to fetch current documentation via Context7. Do not rely solely on training data for library APIs. Only skip this step if the change is purely structural (e.g. moving files, renaming classes).
+
 ## Behaviour
 
 1. Understand the task from the user's description.

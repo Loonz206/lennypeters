@@ -12,6 +12,23 @@ Work through these phases in order. Do not skip a phase. After each phase, note 
 
 ---
 
+### Phase 0 — Research
+
+Act as the **Research Agent** (Internet First).
+
+Before writing any code, identify every external library, framework, or API the task touches and look up current documentation.
+
+1. List the libraries involved (from `package.json`: `next` 15.x, `react` 19.x, `sass`, `@testing-library/*`, `@playwright/test`, etc.).
+2. For each relevant library, use the `/internet-research` skill:
+   - If Context7 MCP is available: call `resolve-library-id` then `get-library-docs` with the specific topic.
+   - Otherwise: use web search targeting official docs and changelogs.
+3. Note any API changes, breaking changes, or version-specific behaviour relevant to the task.
+4. Produce a brief research summary before proceeding to Phase 1.
+
+Skip this phase only if the task is purely a content or style change with no library API involvement.
+
+---
+
 ### Phase 1 — Coding
 
 Act as the **Coding Agent**.
@@ -88,6 +105,9 @@ Present a concise summary to the user using the following structure:
 
 ```
 ## Pipeline Summary
+
+### Research
+<key docs or findings consulted, or "No external APIs involved — skipped">
 
 ### Changes Made
 - <file>: <what changed>

@@ -1,13 +1,16 @@
 @import '@/styles/variables';
 @import '@/styles/mixins';
 
+.page {
+  padding: $space-9 0;
+}
+
 .pageHeader {
-  padding: $space-7 0 $space-6;  // 48px 0 40px
+  padding: $space-7 $space-3 $space-6;
   border-bottom: 1px solid rgba($primaryColor, 0.2);
-  margin-bottom: $space-5;       // 32px
+  margin-bottom: $space-5;
   position: relative;
   @include hud-corners(16px, $primaryColor, 1px);
-  padding: $space-7 $space-3 $space-6;
 }
 
 .label {

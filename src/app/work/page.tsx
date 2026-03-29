@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 const WorkPage = () => {
   return (
-    <>
+    <div className={styles.page}>
       <div className={styles.pageHeader}>
         <p className={styles.label}>SELECTED_WORK</p>
         <h1 className={styles.title}>Projects</h1>
@@ -37,7 +37,7 @@ const WorkPage = () => {
           </article>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

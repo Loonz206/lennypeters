@@ -34,9 +34,24 @@ Use `render` + `screen` queries from `@testing-library/react`. Prefer queries by
 ### E2e tests (Playwright)
 E2e tests live in `e2e/` and use the `.spec.ts` extension. The `playwright.config.ts` points to `http://localhost:3000` and auto-starts `npm run dev` if no server is already running. Only Chromium is configured by default.
 
+## Custom Agents
+
+Specialized instruction files live in `.github/instructions/`. Each can be activated individually or used together as a full pipeline via `/instructions` in the CLI.
+
+| Agent file | Purpose |
+|---|---|
+| `coding.instructions.md` | Implements code changes only — no validation |
+| `linting.instructions.md` | Runs `npm run lint`, auto-fixes, retries up to 3× |
+| `unit-testing.instructions.md` | Runs `npm test`, auto-fixes failures, retries up to 3× |
+| `e2e-testing.instructions.md` | Runs `npm run test:e2e`, auto-fixes failures, retries up to 3× |
+| `pipeline.instructions.md` | **Full pipeline**: coding → lint → unit test → e2e → summary |
+
+**To run the full pipeline**, tell Copilot to use `@.github/instructions/pipeline.instructions.md` and describe your task. It will implement the change, validate it through all three quality gates, and present a structured summary of results.
 
 
-### Component structure
+## Conventions
+
+
 Each component gets its own folder with two files:
 ```
 src/components/my-component/

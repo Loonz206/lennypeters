@@ -1,0 +1,52 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.section {
+  padding: 4rem 0;
+  border-bottom: 1px solid rgba($primaryColor, 0.25);
+}
+
+.sectionTitle {
+  font-family: $monoSpaced;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: $secondaryText;
+  margin-bottom: 2rem;
+  text-transform: lowercase;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  columns: 2;
+  column-gap: 2rem;
+
+  @include responsive(tablet) {
+    columns: 4;
+  }
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba($dividerColor, 0.5);
+  break-inside: avoid;
+}
+
+.chevron {
+  font-family: $monoSpaced;
+  font-size: 0.75rem;
+  color: $primaryColor;
+  flex-shrink: 0;
+}
+
+.label {
+  font-family: $monoSpaced;
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  color: $primaryText;
+}

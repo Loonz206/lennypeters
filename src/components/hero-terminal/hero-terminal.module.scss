@@ -1,0 +1,193 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.hero {
+  padding: 3.5rem 0 4rem;
+  font-family: $monoSpaced;
+  border-bottom: 1px solid rgba($primaryColor, 0.25);
+}
+
+// ── Top meta bar ─────────────────────────────────────────────────────────────
+
+.topMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $secondaryText;
+}
+
+.metaLabel { color: $primaryColor; font-weight: 700; }
+.metaSep   { color: $dividerColor; }
+.metaValue { color: $secondaryText; }
+
+// ── Main title block ──────────────────────────────────────────────────────────
+
+.main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.titleBlock { flex: 1; }
+
+.aiLabel {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $dividerColor;
+  margin-bottom: 0.5rem;
+  font-style: italic;
+}
+
+.name {
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: $primaryText;
+  line-height: 1;
+  margin: 0;
+  font-family: $monoSpaced;
+}
+
+.dot { color: $primaryColor; }
+
+// ── Sidebar metadata ──────────────────────────────────────────────────────────
+
+.sidebar {
+  display: none;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
+
+  @include responsive(tablet) {
+    display: flex;
+  }
+}
+
+.coord {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  margin: 0;
+  color: $secondaryText;
+}
+
+.coordKey { color: $primaryColor; }
+.coordSep { color: $dividerColor; margin: 0 0.2rem; }
+.coordVal { color: $primaryText; }
+
+.seq {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: $dividerColor;
+  margin: 0;
+}
+
+// ── Tagline ───────────────────────────────────────────────────────────────────
+
+.tagline {
+  font-family: $sansSerif;
+  font-size: 1.15rem;
+  color: $secondaryText;
+  line-height: 1.6;
+  max-width: 560px;
+  margin-bottom: 2rem;
+
+  @include responsive(tablet) {
+    font-size: 1.25rem;
+  }
+}
+
+// ── CTA buttons ───────────────────────────────────────────────────────────────
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.btnPrimary,
+.btnSecondary {
+  font-family: $monoSpaced;
+  font-size: 0.875rem;
+  letter-spacing: 0.08em;
+  padding: 0.65rem 1.5rem;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.btnPrimary {
+  background-color: $primaryColor;
+  color: $white;
+  border: 1px solid $primaryColor;
+
+  &:hover, &:focus-visible {
+    background-color: $darkPrimaryColor;
+    border-color: $darkPrimaryColor;
+    color: $white;
+    text-decoration: none;
+  }
+}
+
+.btnSecondary {
+  background-color: transparent;
+  color: $primaryText;
+  border: 1px solid $dividerColor;
+
+  &:hover, &:focus-visible {
+    border-color: $primaryColor;
+    color: $primaryColor;
+    text-decoration: none;
+  }
+}
+
+// ── Bottom status badges ──────────────────────────────────────────────────────
+
+.bottomMeta {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: $secondaryText;
+}
+
+.version {
+  display: flex;
+  gap: 0.2rem;
+}
+
+.vKey { color: $dividerColor; }
+.vSep { color: $dividerColor; }
+.vVal { color: $primaryColor; }
+
+.statusBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: $successColor;
+  font-weight: 700;
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: $successColor;
+  display: inline-block;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}

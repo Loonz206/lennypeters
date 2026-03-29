@@ -6,9 +6,9 @@ import { usePathname } from 'next/navigation';
 import styles from './header.module.scss';
 
 const NAV_LINKS = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
+  { href: '/work', label: 'Work' },
   { href: '/articles', label: 'Articles' },
+  { href: '/about', label: 'About' },
 ];
 
 const Header = () => {

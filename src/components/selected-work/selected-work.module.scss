@@ -1,0 +1,133 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.section {
+  padding: 4rem 0;
+  border-bottom: 1px solid rgba($primaryColor, 0.25);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.sectionTitle {
+  font-family: $monoSpaced;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $primaryText;
+  margin: 0;
+}
+
+.count {
+  font-family: $monoSpaced;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: $secondaryText;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+
+  @include responsive(tablet) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+}
+
+.card {
+  padding: 2rem 0;
+  border-top: 1px solid $dividerColor;
+  display: flex;
+  flex-direction: column;
+
+  @include responsive(tablet) {
+    padding: 2rem 2rem 2rem 0;
+    border-top: 1px solid $dividerColor;
+    border-right: 1px solid $dividerColor;
+
+    &:last-child {
+      border-right: none;
+      padding-right: 0;
+    }
+
+    &:nth-child(n+2) {
+      padding-left: 2rem;
+    }
+
+    &:first-child {
+      padding-left: 0;
+    }
+  }
+}
+
+.projectId {
+  font-family: $monoSpaced;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: $primaryColor;
+  margin-bottom: 0.75rem;
+}
+
+.title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: $primaryText;
+  margin-bottom: 0.875rem;
+  line-height: 1.3;
+}
+
+.description {
+  font-size: 0.9rem;
+  color: $secondaryText;
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
+  flex: 1;
+}
+
+.tags {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-family: $monoSpaced;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: $secondaryText;
+  border: 1px solid $dividerColor;
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+}
+
+.btn {
+  font-family: $monoSpaced;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $primaryColor;
+  text-decoration: none;
+  border-bottom: 1px solid $primaryColor;
+  padding-bottom: 2px;
+  align-self: flex-start;
+  transition: color 0.2s ease, border-color 0.2s ease;
+
+  &:hover, &:focus-visible {
+    color: $darkPrimaryColor;
+    border-color: $darkPrimaryColor;
+    text-decoration: none;
+  }
+}

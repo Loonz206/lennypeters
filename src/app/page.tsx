@@ -1,32 +1,22 @@
 import type { Metadata } from 'next';
-import Hero from '@/components/hero';
-import ArticleCard from '@/components/article-card';
-import SkillsGrid from '@/components/skills-grid';
-import { getFeaturedArticles } from '@/data/articles';
+import HeroTerminal from '@/components/hero-terminal';
+import SelectedWork from '@/components/selected-work';
+import ExpertiseList from '@/components/expertise-list';
+import CodeThinking from '@/components/code-thinking';
 
 export const metadata: Metadata = {
-  title: 'Lenny Peters — Web Engineer',
+  title: 'Lenny Peters — Senior Software Engineer',
   description:
-    'Web Engineer crafting fast, accessible, and beautiful web experiences. Articles on React, TypeScript, CSS, and modern web development.',
+    'Senior Software Engineer turning complex AI ideas into production-ready systems. React, TypeScript, Next.js.',
 };
 
 const Home = () => {
-  const featuredArticles = getFeaturedArticles(3);
-
   return (
     <>
-      <Hero />
-
-      <section aria-labelledby="featured-articles-heading">
-        <h2 id="featured-articles-heading">Featured Articles</h2>
-        <div>
-          {featuredArticles.map(article => (
-            <ArticleCard key={article.slug} article={article} />
-          ))}
-        </div>
-      </section>
-
-      <SkillsGrid />
+      <HeroTerminal />
+      <SelectedWork />
+      <ExpertiseList />
+      <CodeThinking />
     </>
   );
 };

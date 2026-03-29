@@ -1,0 +1,106 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.pageHeader {
+  padding: 3rem 0 2.5rem;
+  border-bottom: 1px solid rgba($primaryColor, 0.25);
+  margin-bottom: 2rem;
+}
+
+.label {
+  font-family: $monoSpaced;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: $primaryColor;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: $primaryText;
+  margin: 0 0 1rem;
+}
+
+.sub {
+  font-size: 1rem;
+  color: $secondaryText;
+  max-width: 520px;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 4rem;
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid $dividerColor;
+
+  @include responsive(tablet) {
+    grid-template-columns: 140px 1fr;
+    gap: 2rem;
+  }
+}
+
+.entryMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-top: 0.2rem;
+}
+
+.projectId {
+  font-family: $monoSpaced;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: $primaryColor;
+  font-weight: 700;
+}
+
+.index {
+  font-family: $monoSpaced;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: $dividerColor;
+}
+
+.entryTitle {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: $primaryText;
+  margin-bottom: 0.75rem;
+}
+
+.entryDesc {
+  font-size: 0.95rem;
+  color: $secondaryText;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.tags {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-family: $monoSpaced;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: $secondaryText;
+  border: 1px solid $dividerColor;
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+}

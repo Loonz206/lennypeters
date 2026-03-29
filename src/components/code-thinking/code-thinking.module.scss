@@ -1,0 +1,130 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.section {
+  padding: 4rem 0;
+}
+
+.sectionHeader {
+  margin-bottom: 3rem;
+}
+
+.sectionTitle {
+  font-family: $monoSpaced;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: $primaryText;
+  margin-bottom: 0.75rem;
+}
+
+.intro {
+  font-size: 0.9rem;
+  color: $secondaryText;
+  line-height: 1.65;
+  max-width: 540px;
+}
+
+.posts {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.post {
+  padding: 2rem 0;
+  border-top: 1px solid $dividerColor;
+
+  &:last-child {
+    border-bottom: 1px solid $dividerColor;
+  }
+}
+
+.date {
+  font-family: $monoSpaced;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: $secondaryText;
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dateCaret {
+  color: $primaryColor;
+  font-weight: 700;
+}
+
+.title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  line-height: 1.35;
+}
+
+.titleLink {
+  color: $primaryText;
+  text-decoration: none;
+
+  &:hover, &:focus-visible {
+    color: $primaryColor;
+    text-decoration: underline;
+  }
+}
+
+.excerpt {
+  font-size: 0.9rem;
+  color: $secondaryText;
+  line-height: 1.65;
+  margin-bottom: 1rem;
+}
+
+.tags {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-family: $monoSpaced;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: $secondaryText;
+  border: 1px solid $dividerColor;
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.scroll {
+  font-family: $monoSpaced;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: $dividerColor;
+  text-transform: uppercase;
+}
+
+.more {
+  font-family: $monoSpaced;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: $primaryColor;
+  text-decoration: none;
+  font-weight: 700;
+
+  &:hover, &:focus-visible {
+    text-decoration: underline;
+  }
+}

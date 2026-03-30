@@ -31,13 +31,17 @@
 
 .main {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  flex-direction: column;
   gap: $space-5;           // 32px
   margin-bottom: $space-4; // 24px
+
+  @include responsive(tablet) {
+    flex-direction: row;
+    align-items: flex-start;
+  }
 }
 
-.titleBlock { flex: 1; }
+.titleBlock { width: 100%; min-width: 0; flex: 1 1 0; }
 
 // ── Terminal window ───────────────────────────────────────────────────────────
 
@@ -149,12 +153,10 @@
 // ── Sidebar metadata ──────────────────────────────────────────────────────────
 
 .sidebar {
-  display: none;
-  flex-shrink: 0;
-
-  @include responsive(tablet) {
-    display: block;
-  }
+  display: block;
+  width: 100%;
+  min-width: 0;
+  flex: 1 1 0;
 }
 
 // ── Tagline ───────────────────────────────────────────────────────────────────

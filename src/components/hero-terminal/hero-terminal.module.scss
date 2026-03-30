@@ -35,39 +35,115 @@
   align-items: flex-start;
   gap: $space-5;           // 32px
   margin-bottom: $space-4; // 24px
-  @include hud-corners(20px, $primaryColor, 2px);
-  padding: $space-3;
 }
 
 .titleBlock { flex: 1; }
 
-.aiLabel {
-  font-size: 0.7rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: $dividerColor;
-  margin-bottom: $space-2;  // 8px
-  font-style: italic;
-}
+// ── Terminal window ───────────────────────────────────────────────────────────
 
-.name {
-  font-size: clamp(2.5rem, 8vw, 5.5rem);
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  color: $primaryText;
-  line-height: 1;
-  margin: 0;
+.terminal {
+  background-color: rgba($darkest, 0.9);
+  border: 1px solid rgba($primaryColor, 0.25);
+  border-radius: 6px;
+  overflow: hidden;
   font-family: $monoSpaced;
-  animation: flicker 8s infinite;
+  font-size: 0.875rem;
+  box-shadow:
+    0 0 0 1px rgba($primaryColor, 0.08),
+    0 0 20px rgba($primaryColor, 0.08),
+    0 4px 24px rgba(0, 0, 0, 0.6);
+  transition: box-shadow 0.3s ease;
 
   &:hover {
-    animation: glitch 3s infinite;
+    box-shadow:
+      0 0 0 1px rgba($primaryColor, 0.2),
+      0 0 30px rgba($primaryColor, 0.15),
+      0 4px 32px rgba(0, 0, 0, 0.7);
   }
 }
 
-.dot {
+.terminalBar {
+  display: flex;
+  align-items: center;
+  gap: $space-1;           // 4px
+  padding: $space-2 $space-3; // 8px 16px
+  background-color: rgba($dark, 0.9);
+  border-bottom: 1px solid rgba($primaryColor, 0.15);
+}
+
+.terminalDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dotRed    { background-color: #ff5f57; }
+.dotYellow { background-color: #febc2e; }
+.dotGreen  { background-color: #28c840; }
+
+.terminalTitle {
+  flex: 1;
+  text-align: center;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: $secondaryText;
+}
+
+.terminalBody {
+  padding: $space-3 $space-4; // 16px 24px
+  min-height: 196px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.terminalLine {
+  display: flex;
+  align-items: baseline;
+  gap: $space-2;  // 8px
+  line-height: 1.7;
+}
+
+.promptCmd {
+  color: $accentColor;
+  @include neon-glow($accentColor);
+  flex-shrink: 0;
+  font-weight: 700;
+  user-select: none;
+}
+
+.promptOut {
   color: $primaryColor;
   @include neon-glow($primaryColor);
+  flex-shrink: 0;
+  font-weight: 700;
+  user-select: none;
+}
+
+.command {
+  color: $primaryText;
+}
+
+.output {
+  color: rgba($primaryColor, 0.85);
+}
+
+.cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1em;
+  background-color: $primaryColor;
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+  box-shadow: 0 0 6px rgba($primaryColor, 0.8);
+  margin-left: 1px;
+  flex-shrink: 0;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
 }
 
 // ── Sidebar metadata ──────────────────────────────────────────────────────────

@@ -1,9 +1,52 @@
-import React from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Profile from '@/components/profile';
 import styles from './hero-terminal.module.scss';
 
+const LINES = [
+  { prompt: '$', text: 'whoami' },
+  { prompt: '>', text: 'lenny.peters // senior software engineer' },
+  { prompt: '$', text: 'cat values.txt' },
+  { prompt: '>', text: 'build with empathy' },
+  { prompt: '>', text: 'ship with intention' },
+  { prompt: '>', text: 'obsess over craft' },
+  { prompt: '$', text: 'node mission.js' },
+  { prompt: '>', text: 'turning complex AI ideas' },
+  { prompt: '>', text: 'into production-ready systems' },
+];
+
+const CHAR_DELAY = 45;
+const LINE_DELAY = 520;
+
 const HeroTerminal = () => {
+  const [completedLines, setCompletedLines] = useState<typeof LINES>([]);
+  const [currentLineIdx, setCurrentLineIdx] = useState(0);
+  const [currentText, setCurrentText] = useState('');
+
+  useEffect(() => {
+    if (currentLineIdx >= LINES.length) return;
+
+    const line = LINES[currentLineIdx];
+
+    if (currentText.length < line.text.length) {
+      const timer = setTimeout(() => {
+        setCurrentText(line.text.slice(0, currentText.length + 1));
+      }, CHAR_DELAY);
+      return () => clearTimeout(timer);
+    }
+
+    const timer = setTimeout(() => {
+      setCompletedLines(prev => [...prev, line]);
+      setCurrentLineIdx(prev => prev + 1);
+      setCurrentText('');
+    }, LINE_DELAY);
+    return () => clearTimeout(timer);
+  }, [currentText, currentLineIdx]);
+
+  const currentLine = LINES[currentLineIdx];
+
   return (
     <section className={styles.hero} aria-label="Introduction">
       <div className={styles.topMeta}>
@@ -14,8 +57,46 @@ const HeroTerminal = () => {
 
       <div className={styles.main}>
         <div className={styles.titleBlock}>
-          <p className={styles.aiLabel}>AI Generated Text Goes Here</p>
-          <h1 className={styles.name}>LENNY<span className={styles.dot}>.</span>PETERS</h1>
+          <div className={styles.terminal}>
+            <div className={styles.terminalBar}>
+              <span className={`${styles.terminalDot} ${styles.dotRed}`} aria-hidden="true" />
+              <span className={`${styles.terminalDot} ${styles.dotYellow}`} aria-hidden="true" />
+              <span className={`${styles.terminalDot} ${styles.dotGreen}`} aria-hidden="true" />
+              <span className={styles.terminalTitle}>~/portfolio</span>
+            </div>
+
+            <div className={styles.terminalBody} aria-live="polite" aria-label="Terminal output">
+              {completedLines.map((line, i) => (
+                <div key={`${line.prompt}-${line.text}-${i}`} className={styles.terminalLine}>
+                  <span className={line.prompt === '$' ? styles.promptCmd : styles.promptOut}>
+                    {line.prompt}
+                  </span>
+                  <span className={line.prompt === '$' ? styles.command : styles.output}>
+                    {line.text}
+                  </span>
+                </div>
+              ))}
+
+              {currentLine && (
+                <div className={styles.terminalLine}>
+                  <span className={currentLine.prompt === '$' ? styles.promptCmd : styles.promptOut}>
+                    {currentLine.prompt}
+                  </span>
+                  <span className={currentLine.prompt === '$' ? styles.command : styles.output}>
+                    {currentText}
+                  </span>
+                  <span className={styles.cursor} aria-hidden="true" />
+                </div>
+              )}
+
+              {currentLineIdx >= LINES.length && (
+                <div className={styles.terminalLine}>
+                  <span className={styles.promptCmd}>$</span>
+                  <span className={styles.cursor} aria-hidden="true" />
+                </div>
+              )}
+            </div>
+          </div>
         </div>
 
         <div className={styles.sidebar}>
@@ -39,7 +120,7 @@ const HeroTerminal = () => {
           <span className={styles.vVal}>v4.2.1</span>
         </span>
         <span className={styles.statusBadge}>
-          <span className={styles.statusDot} aria-hidden="true" />
+          <span className={styles.statusDot} aria-hidden="true"></span>{' '}
           STATUS: STABLE
         </span>
       </div>

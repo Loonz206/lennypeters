@@ -11,8 +11,12 @@
   padding: $space-7 $space-3 $space-6;
   border-bottom: 1px solid rgba($primaryColor, 0.2);
   margin-bottom: $space-5;
-  position: relative;
-  @include hud-corners(16px, $primaryColor, 1px);
+  // Reset global header element styles (height, overflow, background)
+  height: auto;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+  position: static;
 }
 
 .label {
@@ -27,6 +31,8 @@
 
 .title {
   font-size: 2.5rem;
+  line-height: 1.15;
+  letter-spacing: 0;
   font-weight: 900;
   color: $primaryText;
   margin: 0 0 $space-3;

@@ -41,6 +41,7 @@ Specialized instruction files live in `.github/instructions/`. Each can be activ
 | Agent file | Purpose |
 |---|---|
 | `coding.instructions.md` | Implements code changes only — no validation |
+| `code-then-lint.instructions.md` | Focused mini-pipeline: research → code → lint |
 | `linting.instructions.md` | Runs `npm run lint`, auto-fixes, retries up to 3× |
 | `unit-testing.instructions.md` | Runs `npm test`, auto-fixes failures, retries up to 3× |
 | `e2e-testing.instructions.md` | Runs `npm run test:e2e`, auto-fixes failures, retries up to 3× |
@@ -51,6 +52,20 @@ Specialized instruction files live in `.github/instructions/`. Each can be activ
 /agent research
 # or
 copilot --agent research --prompt "How does useOptimistic work in React 19?"
+```
+
+**Code agent** (`.github/agents/code.agent.md`) implements changes only, then hands off to linting:
+```
+/agent code
+# or
+copilot --agent code --prompt "Implement feature X"
+```
+
+**Lint agent** (`.github/agents/lint.agent.md`) runs lint and auto-fixes reported issues:
+```
+/agent lint
+# or
+copilot --agent lint --prompt "Lint and fix current changes"
 ```
 
 **Write-article agent** (`.github/agents/write-article.agent.md`) researches a topic and writes a markdown article:

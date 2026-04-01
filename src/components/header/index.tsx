@@ -14,7 +14,7 @@ const NAV_LINKS = [
 const Header = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const overlayRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDialogElement>(null);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
 
   const close = useCallback(() => setIsOpen(false), []);
@@ -108,12 +108,10 @@ const Header = () => {
       </header>
 
       {/* Full-screen mobile overlay */}
-      <div
+      <dialog
         id="mobile-overlay"
         ref={overlayRef}
         className={`${styles.overlay} ${isOpen ? styles.overlayOpen : ''}`}
-        role="dialog"
-        aria-modal="true"
         aria-label="Mobile navigation"
       >
         {/* Scanline texture layer */}
@@ -163,7 +161,7 @@ const Header = () => {
         <p className={styles.overlayFooter} aria-hidden="true">
           SYS.NAV // LENNY.PETERS
         </p>
-      </div>
+      </dialog>
     </>
   );
 };

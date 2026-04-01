@@ -5,15 +5,7 @@ description: >
   in content/articles/. Uses internet-research for live documentation, then drafts
   in a Senior Engineer voice with full citations and runnable code examples.
   Invoke with /agent write-article or --agent write-article.
-tools: ["read", "edit", "search", "web", "context7/*"]
-mcp-servers:
-  context7:
-    type: stdio
-    command: npx
-    args:
-      - -y
-      - "@upstash/context7-mcp"
-    tools: ["*"]
+tools: [read/getNotebookSummary, read/problems, read/readFile, read/viewImage, read/terminalSelection, read/terminalLastCommand, read/getTaskOutput, edit/createDirectory, edit/createFile, edit/createJupyterNotebook, edit/editFiles, edit/editNotebook, edit/rename, search/changes, search/codebase, search/fileSearch, search/listDirectory, search/searchResults, search/textSearch, search/usages, web/fetch, web/githubRepo, todo]
 ---
 
 # Write Article Agent

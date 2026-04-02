@@ -11,11 +11,13 @@ export default defineConfig({
     baseURL: 'http://localhost:3000',
     trace: 'on-first-retry',
   },
-  projects: [
-    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-  ],
+  projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
   webServer: process.env.CI
-    ? undefined
+    ? {
+        command: 'npx serve@latest out --listen 3000',
+        url: 'http://localhost:3000',
+        reuseExistingServer: false,
+      }
     : {
         command: 'npm run dev',
         url: 'http://localhost:3000',

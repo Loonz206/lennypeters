@@ -16,7 +16,7 @@ const config = {
     '!src/app/not-found.tsx', // Next.js convention file
     '!src/**/*.d.ts',
   ],
-  coverageThresholds: {
+  coverageThreshold: {
     global: {
       branches: 80,
       functions: 80,
@@ -26,4 +26,4 @@ const config = {
   },
 }
 
-module.exports = createJestConfig(config)
+export default createJestConfig(config)

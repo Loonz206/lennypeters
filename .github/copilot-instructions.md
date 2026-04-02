@@ -68,6 +68,34 @@ copilot --agent code --prompt "Implement feature X"
 copilot --agent lint --prompt "Lint and fix current changes"
 ```
 
+**Testing agent** (`.github/agents/testing.agent.md`) writes or repairs Jest and React Testing Library coverage after linting:
+```
+/agent testing
+# or
+copilot --agent testing --prompt "Add unit tests for the selected-work component"
+```
+
+**Unit-testing agent** (`.github/agents/unit-testing.agent.md`) is the stricter post-lint unit-test agent that runs `npm test` without handling e2e:
+```
+/agent unit-testing
+# or
+copilot --agent unit-testing --prompt "Fix the failing header tests"
+```
+
+**E2E-testing agent** (`.github/agents/e2e-testing.agent.md`) runs Playwright after unit testing and repairs failing browser flows without skipping specs:
+```
+/agent e2e-testing
+# or
+copilot --agent e2e-testing --prompt "Fix the failing home page Playwright spec"
+```
+
+**Pipeline agent** (`.github/agents/pipeline.agent.md`) runs the full repo workflow from research through e2e:
+```
+/agent pipeline
+# or
+copilot --agent pipeline --prompt "Implement feature X and carry it through verification"
+```
+
 **Write-article agent** (`.github/agents/write-article.agent.md`) researches a topic and writes a markdown article:
 ```
 /agent write-article
@@ -85,6 +113,11 @@ A GitHub Action (`.github/workflows/write-article.yml`) also auto-generates arti
 **Research skill** can be used inline in any prompt:
 ```
 Use /internet-research to look up the Next.js 15 caching API, then implement server-side caching for the blog page.
+```
+
+**Testing skill** can be used inline in any prompt:
+```
+Use /testing to write or fix Jest and React Testing Library coverage for a component.
 ```
 
 ### Setting up Context7 MCP (one-time, per machine)

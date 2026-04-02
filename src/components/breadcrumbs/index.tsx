@@ -1,13 +1,13 @@
-import Link from 'next/link';
-import styles from './breadcrumbs.module.scss';
+import Link from 'next/link'
+import styles from './breadcrumbs.module.scss'
 
 interface BreadcrumbItem {
-  readonly label: string;
-  readonly href?: string;
+  readonly label: string
+  readonly href?: string
 }
 
 interface BreadcrumbsProps {
-  readonly items: BreadcrumbItem[];
+  readonly items: BreadcrumbItem[]
 }
 
 const Breadcrumbs = ({ items }: BreadcrumbsProps) => (
@@ -15,7 +15,7 @@ const Breadcrumbs = ({ items }: BreadcrumbsProps) => (
     <ol className={styles.list}>
       {items.map((item, index) => (
         <li key={item.label}>
-          {index > 0 && <span className={styles.separator}>//</span>}
+          {index > 0 && <span className={styles.separator}>{`//`}</span>}
           {item.href ? (
             <Link href={item.href} className={styles.link}>
               {item.label}
@@ -29,6 +29,6 @@ const Breadcrumbs = ({ items }: BreadcrumbsProps) => (
       ))}
     </ol>
   </nav>
-);
+)
 
-export default Breadcrumbs;
+export default Breadcrumbs

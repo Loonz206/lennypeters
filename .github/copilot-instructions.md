@@ -261,7 +261,8 @@ $serif, $sansSerif, $monoSpaced  // font stacks
 Responsive mixin — use named breakpoints:
 
 ```scss
-@include responsive(desktop) // min-width: 70em
+@include responsive(widescreen) // min-width: 120em  (1920px)
+  @include responsive(desktop) // min-width: 70em
   @include responsive(laptop) // min-width: 64em
   @include responsive(tablet) // min-width: 50em
   @include responsive(phablet) // min-width: 37.5em
@@ -270,7 +271,7 @@ Responsive mixin — use named breakpoints:
 
 ### Grid system
 
-A custom Bootstrap-style flexbox grid is available globally. Use `.container`, `.row`, and `.col-xs-*` / `.col-sm-*` / `.col-md-*` / `.col-lg-*` classes (1–12 columns).
+A custom Bootstrap-style flexbox grid is available globally. Use `.container`, `.row`, and `.col-xs-*` / `.col-sm-*` / `.col-md-*` / `.col-lg-*` / `.col-xl-*` classes (1–12 columns). The XL tier activates at `min-width: 120em` (1920px) with wider gutters (24px) and outer margin (48px).
 
 ### TypeScript
 

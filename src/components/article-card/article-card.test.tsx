@@ -20,12 +20,24 @@ jest.mock('next/link', () => ({
   ),
 }))
 
+jest.mock('next/image', () => ({
+  __esModule: true,
+  default: ({ src, alt, ...props }: { src: string; alt: string; [key: string]: unknown }) => {
+    const { fill, priority, ...imageProps } = props
+    void fill
+    void priority
+    return <span role="img" aria-label={alt} data-src={src} {...imageProps} />
+  },
+}))
+
 const baseArticle: ArticleMeta = {
   slug: 'hello-world',
   title: 'Hello World',
   date: '2024-06-15',
   excerpt: 'An intro post',
   tags: ['React', 'TypeScript'],
+  image: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4',
+  imageAlt: 'Code editor open on a monitor in a developer workspace',
 }
 
 describe('ArticleCard', () => {
@@ -70,5 +82,12 @@ describe('ArticleCard', () => {
   it('renders excerpt text', () => {
     render(<ArticleCard article={baseArticle} />)
     expect(screen.getByText('An intro post')).toBeInTheDocument()
+  })
+
+  it('renders article image with alt text', () => {
+    render(<ArticleCard article={baseArticle} />)
+    expect(
+      screen.getByRole('img', { name: 'Code editor open on a monitor in a developer workspace' })
+    ).toBeInTheDocument()
   })
 })

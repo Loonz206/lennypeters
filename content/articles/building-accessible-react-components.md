@@ -3,6 +3,8 @@ title: 'Building Accessible React Components'
 date: '2025-11-14'
 excerpt: 'Accessibility is not an afterthought — it is a fundamental part of good engineering. This article walks through practical patterns for writing React components that work for everyone.'
 tags: ['React', 'Accessibility', 'TypeScript']
+image: 'https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=1600&q=80'
+imageAlt: 'Developer working at a laptop with assistive devices nearby'
 ---
 
 Accessibility (a11y) is one of the most impactful things you can invest in as a front-end engineer.

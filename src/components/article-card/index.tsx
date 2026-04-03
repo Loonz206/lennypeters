@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import type { ArticleMeta } from '@/lib/articles'
 import styles from './article-card.module.scss'
 
@@ -22,6 +23,16 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
           {formattedDate}
         </time>
       </div>
+      <Link href={`/articles/${article.slug}`} className={styles.mediaLink}>
+        <div className={styles.media}>
+          <Image
+            src={article.image}
+            alt={article.imageAlt}
+            fill
+            sizes="(max-width: 800px) 100vw, 33vw"
+          />
+        </div>
+      </Link>
       <div className={styles.body}>
         <h2 className={styles.title}>
           <Link href={`/articles/${article.slug}`} className={styles.titleLink}>

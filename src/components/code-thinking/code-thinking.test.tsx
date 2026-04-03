@@ -28,9 +28,25 @@ const makeArticles = (n: number): ArticleMeta[] =>
     date: `2024-01-0${(i % 9) + 1}`,
     excerpt: `Excerpt ${i}`,
     tags: ['Tag'],
+    image: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4',
+    imageAlt: 'Code editor open on a monitor in a developer workspace',
   }))
 
 describe('CodeThinking', () => {
+  it('renders title as a link to the article page', () => {
+    render(<CodeThinking articles={makeArticles(1)} />)
+    const titleLink = screen.getByRole('link', { name: 'Article 0' })
+    expect(titleLink).toBeInTheDocument()
+    expect(titleLink).toHaveAttribute('href', '/articles/article-0')
+  })
+
+  it('renders article image alt text from metadata', () => {
+    render(<CodeThinking articles={makeArticles(1)} />)
+    expect(
+      screen.getByRole('img', { name: 'Code editor open on a monitor in a developer workspace' })
+    ).toBeInTheDocument()
+  })
+
   it('renders all 3 article titles with no pagination when given 3 articles', () => {
     render(<CodeThinking articles={makeArticles(3)} />)
 

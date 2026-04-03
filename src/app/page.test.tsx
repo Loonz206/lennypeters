@@ -73,8 +73,24 @@ describe('Home page', () => {
 
   it('passes articles returned by getAllArticleMetas to CodeThinking', () => {
     const fakeArticles = [
-      { slug: 'a', title: 'Article A', date: '2024-01-01', excerpt: '', tags: [] },
-      { slug: 'b', title: 'Article B', date: '2024-01-02', excerpt: '', tags: [] },
+      {
+        slug: 'a',
+        title: 'Article A',
+        date: '2024-01-01',
+        excerpt: '',
+        tags: [],
+        image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6',
+        imageAlt: 'Laptop screen showing code on a dark desk setup',
+      },
+      {
+        slug: 'b',
+        title: 'Article B',
+        date: '2024-01-02',
+        excerpt: '',
+        tags: [],
+        image: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4',
+        imageAlt: 'Code editor open on a monitor in a developer workspace',
+      },
     ]
     mockGetAllArticleMetas.mockReturnValue(fakeArticles)
     render(<Home />)

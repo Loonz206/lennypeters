@@ -5,14 +5,18 @@ import Profile from '@/components/profile'
 jest.mock('next/image', () => ({
   __esModule: true,
   default: (
-    props: React.ImgHTMLAttributes<HTMLImageElement> & {
+    props: React.HTMLAttributes<HTMLElement> & {
+      src?: string
+      alt?: string
       fill?: boolean
       priority?: boolean
       sizes?: string
     }
   ) => {
-    // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
-    return <img {...props} />
+    const { fill, priority, src, alt, ...imageProps } = props
+    void fill
+    void priority
+    return <span role="img" aria-label={alt} data-src={src} {...imageProps} />
   },
 }))
 
@@ -22,7 +26,7 @@ describe('Profile', () => {
   })
 
   it('renders an image with src="/profile.jpg"', () => {
-    expect(screen.getByRole('img')).toHaveAttribute('src', '/profile.jpg')
+    expect(screen.getByRole('img')).toHaveAttribute('data-src', '/profile.jpg')
   })
 
   it('image has alt="Lenny Peters"', () => {

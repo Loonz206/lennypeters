@@ -47,6 +47,21 @@
   margin: 0 0 $space-4;
 }
 
+.heroImage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  margin: 0 0 $space-4;
+  border: 1px solid rgba($primaryColor, 0.2);
+  @include hud-corners(14px, $primaryColor, 1px);
+
+  img {
+    object-fit: cover;
+    filter: saturate(0.9) contrast(1.08);
+  }
+}
+
 .tags {
   list-style: none;
   padding: 0;

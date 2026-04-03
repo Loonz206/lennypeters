@@ -3,6 +3,8 @@ title: 'TypeScript Patterns for Better DX'
 date: '2025-03-11'
 excerpt: 'TypeScript can feel like overhead until it saves you from a production bug. These patterns maximise the benefits while keeping your code readable and concise.'
 tags: ['TypeScript', 'Developer Experience']
+image: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1600&q=80'
+imageAlt: 'Code editor open on a monitor in a developer workspace'
 ---
 
 TypeScript's value compounds over time. Early in a project it can feel like friction;

@@ -45,7 +45,7 @@ You are a pipeline orchestrator for the lennypeters repo. Your job is to take a 
 
 6. **Documentation Sync**
    - Invoke the `docs` agent after implementation and verification.
-   - If files in `.github/agents/**`, `.github/skills/**`, `.github/instructions/**`, or `.github/prompts/**` changed, update relevant documentation and `.github/README.md` Mermaid flow.
+   - If files in `.github/agents/**`, `.github/skills/**`, `.github/instructions/**`, or `.github/prompts/**` changed, update relevant documentation and `.github/FLOW.md` Mermaid flow.
 
 7. **Summary**
    - Return a concise phase-by-phase summary with research notes, changes made, lint status, unit test status, e2e status, and any remaining issues.

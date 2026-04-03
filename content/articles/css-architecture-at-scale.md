@@ -3,6 +3,8 @@ title: 'CSS Architecture at Scale'
 date: '2025-06-20'
 excerpt: 'As applications grow, CSS becomes a source of bugs and confusion. This article explores SCSS architecture patterns that keep stylesheets manageable at any team size.'
 tags: ['CSS', 'SCSS', 'Architecture']
+image: 'https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=1600&q=80'
+imageAlt: 'Abstract close-up of computer hardware and circuitry'
 ---
 
 Good CSS architecture is invisible — stylesheets that are easy to read, predictable to change, and

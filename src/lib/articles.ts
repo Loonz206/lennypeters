@@ -8,6 +8,8 @@ export interface ArticleMeta {
   date: string
   excerpt: string
   tags: string[]
+  image: string
+  imageAlt: string
 }
 
 export interface Article {
@@ -16,6 +18,27 @@ export interface Article {
 }
 
 const articlesDirectory = path.join(process.cwd(), 'content', 'articles')
+const defaultArticleImage =
+  'https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=1600&q=80'
+
+function resolveArticleImage(data: matter.GrayMatterFile<string>['data']): string {
+  const image = data.image
+  if (typeof image === 'string' && image.trim().length > 0) {
+    return image
+  }
+  return defaultArticleImage
+}
+
+function resolveArticleImageAlt(
+  data: matter.GrayMatterFile<string>['data'],
+  title: string
+): string {
+  const imageAlt = data.imageAlt
+  if (typeof imageAlt === 'string' && imageAlt.trim().length > 0) {
+    return imageAlt
+  }
+  return `${title} placeholder image`
+}
 
 async function renderMarkdown(content: string): Promise<string> {
   const { unified } = await import('unified')
@@ -55,6 +78,8 @@ function parseArticleMeta(filename: string): ArticleMeta {
     date: data.date,
     excerpt: data.excerpt,
     tags: data.tags ?? [],
+    image: resolveArticleImage(data),
+    imageAlt: resolveArticleImageAlt(data, data.title),
   }
 }
 
@@ -81,6 +106,8 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
       date: data.date,
       excerpt: data.excerpt,
       tags: data.tags ?? [],
+      image: resolveArticleImage(data),
+      imageAlt: resolveArticleImageAlt(data, data.title),
     },
     contentHtml,
   }

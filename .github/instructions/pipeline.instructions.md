@@ -114,7 +114,7 @@ Act as the **Docs Agent**.
 2. If no matching changes, record "No docs updates needed" and move to Summary.
 3. If matching changes exist:
    - Update relevant documentation files (for example `.github/copilot-instructions.md`).
-   - Update `.github/README.md` Mermaid flow chart so it reflects the current agentic flow.
+   - Update `.github/FLOW.md` Mermaid flow chart so it reflects the current agentic flow.
    - Keep updates minimal and factual.
 
 ---

@@ -23,14 +23,18 @@ jest.mock('next/link', () => ({
 jest.mock('next/image', () => ({
   __esModule: true,
   default: (
-    props: React.ImgHTMLAttributes<HTMLImageElement> & {
+    props: React.HTMLAttributes<HTMLElement> & {
+      src?: string
+      alt?: string
       fill?: boolean
       priority?: boolean
       sizes?: string
     }
   ) => {
-    // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
-    return <img {...props} />
+    const { fill, priority, src, alt, ...imageProps } = props
+    void fill
+    void priority
+    return <span role="img" aria-label={alt} data-src={src} {...imageProps} />
   },
 }))
 
@@ -71,14 +75,14 @@ describe('ProjectCard', () => {
     expect(link).toHaveAttribute('href', '/project')
   })
 
-  it('renders img element with correct src when image is provided', () => {
+  it('renders image role with correct src when image is provided', () => {
     render(<ProjectCard project={projectWithImage} />)
     const img = screen.getByRole('img', { name: 'Test Project' })
     expect(img).toBeInTheDocument()
-    expect(img).toHaveAttribute('src', '/test-image.jpg')
+    expect(img).toHaveAttribute('data-src', '/test-image.jpg')
   })
 
-  it('does not render an img element when image is absent', () => {
+  it('does not render an image role when image is absent', () => {
     render(<ProjectCard project={projectWithoutImage} />)
     expect(screen.queryByRole('img')).not.toBeInTheDocument()
   })

@@ -4,7 +4,7 @@ applyTo: '**'
 
 # Pipeline Agent
 
-You are a pipeline orchestrator. When the user describes a task, you execute it through four sequential phases — coding, linting, unit testing, and e2e testing — then present a structured summary. You embody each phase agent in turn.
+You are a pipeline orchestrator. When the user describes a task, you execute it through sequential phases — research, coding, linting, unit testing, e2e testing, and docs synchronization — then present a structured summary. You embody each phase agent in turn.
 
 ## Pipeline Phases
 
@@ -102,7 +102,24 @@ Useful commands:
 
 ---
 
-### Phase 5 — Summary
+### Phase 5 — Documentation Sync
+
+Act as the **Docs Agent**.
+
+1. Check whether files changed in:
+   - `.github/agents/**`
+   - `.github/skills/**`
+   - `.github/instructions/**`
+   - `.github/prompts/**`
+2. If no matching changes, record "No docs updates needed" and move to Summary.
+3. If matching changes exist:
+   - Update relevant documentation files (for example `.github/copilot-instructions.md`).
+   - Update `.github/README.md` Mermaid flow chart so it reflects the current agentic flow.
+   - Keep updates minimal and factual.
+
+---
+
+### Phase 6 — Summary
 
 Present a concise summary to the user using the following structure:
 
@@ -127,6 +144,10 @@ Present a concise summary to the user using the following structure:
 ### E2E Tests
 ✅ All X tests passed  /  ⚠️ Fixed N failures  /  ❌ N failures remaining
 <list remaining failures if any>
+
+### Docs Sync
+✅ Updated  /  ⚪ No changes needed  /  ❌ N outstanding doc updates
+<list outstanding docs updates if any>
 
 ### Next Steps
 <only include if there are outstanding issues or follow-up actions needed>

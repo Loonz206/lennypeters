@@ -16,7 +16,7 @@ npm run test:e2e:ui  # Playwright interactive UI mode
 
 > **For any request that involves writing or modifying code, always use the pipeline agent.**
 
-The pipeline runs: **research → coding → lint → unit test → e2e → summary**
+The pipeline runs: **research → coding → lint → unit test → e2e → docs sync → summary**
 
 ```bash
 /agent pipeline
@@ -124,12 +124,20 @@ copilot --agent unit-testing --prompt "Fix the failing header tests"
 copilot --agent e2e-testing --prompt "Fix the failing home page Playwright spec"
 ```
 
-**Pipeline agent** (`.github/agents/pipeline.agent.md`) runs the full repo workflow from research through e2e:
+**Pipeline agent** (`.github/agents/pipeline.agent.md`) runs the full repo workflow from research through docs sync:
 
 ```
 /agent pipeline
 # or
 copilot --agent pipeline --prompt "Implement feature X and carry it through verification"
+```
+
+**Docs agent** (`.github/agents/docs.agent.md`) updates `.github` documentation when orchestration files change:
+
+```bash
+/agent docs
+# or
+copilot --agent docs --prompt "Sync docs after updating pipeline and skills"
 ```
 
 **Write-article agent** (`.github/agents/write-article.agent.md`) researches a topic and writes a markdown article:

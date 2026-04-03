@@ -1,6 +1,6 @@
-import React from 'react';
-import Link from 'next/link';
-import styles from './hero.module.scss';
+import React from 'react'
+import Link from 'next/link'
+import styles from './hero.module.scss'
 
 const Hero = () => {
   return (
@@ -21,7 +21,7 @@ const Hero = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Hero;
+export default Hero

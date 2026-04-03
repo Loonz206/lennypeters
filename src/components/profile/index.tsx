@@ -1,6 +1,6 @@
-import React from 'react';
-import Image from 'next/image';
-import styles from '@/components/profile/profile.module.scss';
+import React from 'react'
+import Image from 'next/image'
+import styles from '@/components/profile/profile.module.scss'
 
 const Profile = () => {
   return (
@@ -22,7 +22,7 @@ const Profile = () => {
         <div className={styles.photoScanline} aria-hidden="true" />
       </div>
     </aside>
-  );
-};
+  )
+}
 
-export default Profile;
+export default Profile

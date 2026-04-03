@@ -19,15 +19,15 @@
 //  $space-14  7.00rem = 112px  (14 units)
 //  $space-16  8.00rem = 128px  (16 units)
 
-$space-1:  0.25rem;
-$space-2:  0.5rem;
-$space-3:  1rem;
-$space-4:  1.5rem;
-$space-5:  2rem;
-$space-6:  2.5rem;
-$space-7:  3rem;
-$space-8:  3.5rem;
-$space-9:  4rem;
+$space-1: 0.25rem;
+$space-2: 0.5rem;
+$space-3: 1rem;
+$space-4: 1.5rem;
+$space-5: 2rem;
+$space-6: 2.5rem;
+$space-7: 3rem;
+$space-8: 3.5rem;
+$space-9: 4rem;
 $space-10: 4.5rem;
 $space-11: 5rem;
 $space-12: 6rem;
@@ -37,14 +37,14 @@ $space-16: 8rem;
 $header-height: $space-10; // 72px
 
 // Brand palette
-$cyberTeal: #00F0FF;
-$neonGreen: #30F802;
-$neonMagenta: #FF00FF;
-$waveBlue: #3057F8;
-$darkest: #0E0E0E;
-$darker: #1C1B1B;
+$cyberTeal: #00f0ff;
+$neonGreen: #30f802;
+$neonMagenta: #ff00ff;
+$waveBlue: #3057f8;
+$darkest: #0e0e0e;
+$darker: #1c1b1b;
 $dark: #333232;
-$light: #F6F6F6;
+$light: #f6f6f6;
 
 $primaryColor: $cyberTeal;
 $lightPrimaryColor: lighten($primaryColor, 10%);
@@ -65,11 +65,23 @@ $infoColor: $waveBlue;
 $inverseColor: $darker;
 
 // Font stacks
-$serif: Georgia, Times, "Times New Roman", serif;
-$sansSerif: "Helvetica Neue", Helvetica, Arial, sans-serif;
-$monoSpaced: "SF Mono", "Fira Code", "JetBrains Mono", Monaco, "Cascadia Code", "Courier New", Courier, monospace;
+$serif: Georgia, Times, 'Times New Roman', serif;
+$sansSerif: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$monoSpaced:
+  'SF Mono', 'Fira Code', 'JetBrains Mono', Monaco, 'Cascadia Code', 'Courier New', Courier,
+  monospace;
+
+// ── Container max-width ───────────────────────────────────────────────────
+// Caps all .wrapper / .container elements at 1920px (240 × 8px).
+$container-max-width: 120rem; // 1920px
 
 // ── Cyberpunk Glow Tokens ──────────────────────────────────────────────────
-$glow-cyan:    0 0 8px rgba($primaryColor, 0.6), 0 0 20px rgba($primaryColor, 0.3);
-$glow-magenta: 0 0 8px rgba($neonMagenta, 0.6), 0 0 20px rgba($neonMagenta, 0.3);
-$glow-green:   0 0 8px rgba($accentColor, 0.6), 0 0 20px rgba($accentColor, 0.3);
+$glow-cyan:
+  0 0 8px rgba($primaryColor, 0.6),
+  0 0 20px rgba($primaryColor, 0.3);
+$glow-magenta:
+  0 0 8px rgba($neonMagenta, 0.6),
+  0 0 20px rgba($neonMagenta, 0.3);
+$glow-green:
+  0 0 8px rgba($accentColor, 0.6),
+  0 0 20px rgba($accentColor, 0.3);

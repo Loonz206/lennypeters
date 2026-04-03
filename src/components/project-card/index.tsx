@@ -1,11 +1,11 @@
-import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { Project } from '@/data/projects';
-import styles from './project-card.module.scss';
+import React from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
+import { Project } from '@/data/projects'
+import styles from './project-card.module.scss'
 
 interface ProjectCardProps {
-  project: Project;
+  project: Project
 }
 
 const ProjectCard = ({ project }: ProjectCardProps) => {
@@ -34,7 +34,9 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
 
         <ul className={styles.tags} aria-label="Technologies">
           {project.tags.map(tag => (
-            <li key={tag} className={styles.tag}>{tag}</li>
+            <li key={tag} className={styles.tag}>
+              {tag}
+            </li>
           ))}
         </ul>
 
@@ -43,7 +45,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
         </Link>
       </div>
     </article>
-  );
-};
+  )
+}
 
-export default ProjectCard;
+export default ProjectCard

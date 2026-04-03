@@ -2,14 +2,14 @@
 @import '@/styles/mixins';
 
 .section {
-  padding: $space-7 0 $space-9;  // 48px 0 64px
+  padding: $space-7 0 $space-9; // 48px 0 64px
 }
 
 .sectionTitle {
   font-size: 1.75rem;
   color: $primaryColor;
-  margin-bottom: $space-3;    // 16px
-  padding-bottom: $space-3;   // 16px
+  margin-bottom: $space-3; // 16px
+  padding-bottom: $space-3; // 16px
   border-bottom: 2px solid $primaryColor;
   display: inline-block;
   @include neon-glow($primaryColor);
@@ -19,7 +19,7 @@
   color: $secondaryText;
   line-height: 1.65;
   max-width: 540px;
-  margin-bottom: $space-5;  // 32px
+  margin-bottom: $space-5; // 32px
 }
 
 .links {
@@ -28,20 +28,22 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: $space-3;  // 16px
+  gap: $space-3; // 16px
 }
 
 .link {
   display: inline-flex;
   align-items: center;
-  gap: $space-3;  // 16px
+  gap: $space-3; // 16px
   color: $primaryText;
   text-decoration: none;
   font-size: 1rem;
   font-weight: 500;
   font-family: $monoSpaced;
   letter-spacing: 0.02em;
-  transition: color 0.2s ease, text-shadow 0.2s ease;
+  transition:
+    color 0.2s ease,
+    text-shadow 0.2s ease;
 
   &:hover,
   &:focus-visible {
@@ -55,8 +57,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: $space-5;   // 32px
-  height: $space-5;  // 32px
+  width: $space-5; // 32px
+  height: $space-5; // 32px
   border-radius: 4px;
   background-color: rgba($primaryColor, 0.15);
   color: $primaryColor;
@@ -65,11 +67,15 @@
   flex-shrink: 0;
   border: 1px solid rgba($primaryColor, 0.3);
   box-shadow: 0 0 6px rgba($primaryColor, 0.2);
-  transition: box-shadow 0.2s ease, background-color 0.2s ease;
+  transition:
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
 
   .link:hover &,
   .link:focus-visible & {
-    box-shadow: 0 0 10px rgba($primaryColor, 0.4), 0 0 24px rgba($primaryColor, 0.2);
+    box-shadow:
+      0 0 10px rgba($primaryColor, 0.4),
+      0 0 24px rgba($primaryColor, 0.2);
     background-color: rgba($primaryColor, 0.2);
   }
 }

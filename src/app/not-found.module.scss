@@ -43,7 +43,9 @@
   color: $primaryColor;
   line-height: 1;
   @include neon-glow($primaryColor);
-  animation: glitch 3s infinite, textGlow 3s ease-in-out infinite;
+  animation:
+    glitch 3s infinite,
+    textGlow 3s ease-in-out infinite;
   position: relative;
 
   &::before,
@@ -73,18 +75,43 @@
 }
 
 @keyframes glitchLayer {
-  0%, 100% { transform: translate(0); }
-  5%       { transform: translate(-3px, 2px); }
-  10%      { transform: translate(3px, -2px); }
-  15%      { transform: translate(0); }
-  45%      { transform: translate(0); }
-  50%      { transform: translate(2px, 1px); }
-  55%      { transform: translate(-2px, -1px); }
-  60%      { transform: translate(0); }
-  80%      { transform: translate(0); }
-  85%      { transform: translate(-1px, 3px); }
-  90%      { transform: translate(1px, -2px); }
-  95%      { transform: translate(0); }
+  0%,
+  100% {
+    transform: translate(0);
+  }
+  5% {
+    transform: translate(-3px, 2px);
+  }
+  10% {
+    transform: translate(3px, -2px);
+  }
+  15% {
+    transform: translate(0);
+  }
+  45% {
+    transform: translate(0);
+  }
+  50% {
+    transform: translate(2px, 1px);
+  }
+  55% {
+    transform: translate(-2px, -1px);
+  }
+  60% {
+    transform: translate(0);
+  }
+  80% {
+    transform: translate(0);
+  }
+  85% {
+    transform: translate(-1px, 3px);
+  }
+  90% {
+    transform: translate(1px, -2px);
+  }
+  95% {
+    transform: translate(0);
+  }
 }
 
 // ── Terminal block ──────────────────────────────────────────────────────────
@@ -131,8 +158,13 @@
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50%      { opacity: 0; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
 // ── CTA Button ──────────────────────────────────────────────────────────────
@@ -148,7 +180,11 @@
   border: 2px solid rgba($primaryColor, 0.5);
   padding: $space-3 $space-5;
   text-decoration: none;
-  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
   animation: borderGlow 3s ease-in-out infinite;
 
   &:hover,

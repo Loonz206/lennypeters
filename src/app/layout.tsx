@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Header from '@/components/header'
 import Main from '@/components/main'
 import Footer from '@/components/footer'
-import '@/styles/global.css'
+import '@/styles/global.scss'
 
 export const metadata: Metadata = {
   title: 'Lenny Peters — Web Engineer',

@@ -22,6 +22,7 @@ Use this skill to implement a Figma design as React components following this pr
 ### Step 1 — Parse the Figma URL
 
 From `https://figma.com/design/:fileKey/:name?node-id=X-Y`, extract:
+
 - **fileKey**: segment after `/design/`
 - **nodeId**: value of the `node-id` query parameter (e.g. `42-15`)
 
@@ -50,6 +51,7 @@ Use `localhost` asset URLs returned by the MCP server directly. Do not substitut
 ### Step 5 — Map design tokens to project SCSS
 
 **Colors** (match to `src/styles/variables.scss`):
+
 - Primary blue → `$primaryColor`
 - Light blue / info → `$infoColor`
 - Success green → `$successColor`
@@ -62,6 +64,7 @@ Use `localhost` asset URLs returned by the MCP server directly. Do not substitut
 Use exact hex values for colours not in the palette.
 
 **Typography** (match to `src/styles/typography.scss`):
+
 - Serif body → `$serif`
 - Sans-serif headings → `$sansSerif`
 - Mono → `$monoSpaced`
@@ -73,6 +76,7 @@ Use exact hex values for colours not in the palette.
 ### Step 6 — Implement the component
 
 Structure:
+
 ```
 src/components/<component-name>/
   index.tsx              ← default export, TypeScript, interface ComponentNameProps
@@ -80,6 +84,7 @@ src/components/<component-name>/
 ```
 
 Rules:
+
 - CSS Modules for all component styles (`className={styles.x}`)
 - Global class names (`.container`, `.wrapper`, `.row`, `.col-*`) applied as plain strings
 - `"use client"` only if browser APIs or React hooks are needed
@@ -89,6 +94,7 @@ Rules:
 ### Step 7 — Validate against the screenshot
 
 Check each item before marking done:
+
 - [ ] Layout (spacing, alignment, sizing)
 - [ ] Typography (font, size, weight, line height)
 - [ ] Colors (exact match or closest variable)

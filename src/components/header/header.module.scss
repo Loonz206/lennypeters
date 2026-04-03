@@ -56,16 +56,25 @@
   height: 2px;
   background-color: $primaryColor;
   border-radius: 2px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
   transform-origin: center;
   box-shadow: 0 0 4px rgba($primaryColor, 0.5);
 }
 
 // Animate bars into × when open
 // bars are 2px tall; gap = (20px - 3×2px) / 2 = 7px → offset = 9px
-.hamburgerOpen .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); }
-.hamburgerOpen .bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
-.hamburgerOpen .bar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+.hamburgerOpen .bar:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+.hamburgerOpen .bar:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.hamburgerOpen .bar:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
 
 // ── Full-screen overlay ───────────────────────────────────────────────────────
 
@@ -174,7 +183,9 @@
   justify-content: center;
   padding: 0;
   z-index: 2;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
 
   &:hover,
   &:focus-visible {
@@ -195,10 +206,16 @@
   height: 1.5px;
   background-color: rgba($light, 0.8);
   border-radius: 1px;
-  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
 
-  &:nth-child(1) { transform: rotate(45deg); }
-  &:nth-child(2) { transform: rotate(-45deg); }
+  &:nth-child(1) {
+    transform: rotate(45deg);
+  }
+  &:nth-child(2) {
+    transform: rotate(-45deg);
+  }
 }
 
 // ── Overlay nav links ─────────────────────────────────────────────────────────
@@ -228,7 +245,7 @@
   display: flex;
   align-items: baseline;
   justify-content: center;
-  gap: $space-2;          // 8px
+  gap: $space-2; // 8px
   padding: $space-3 $space-5; // 16px 32px
   font-family: $monoSpaced;
   font-size: clamp(2rem, 10vw, 3.5rem);
@@ -238,7 +255,9 @@
   color: rgba($light, 0.75);
   text-decoration: none;
   line-height: 1.1;
-  transition: color 0.2s ease, text-shadow 0.2s ease;
+  transition:
+    color 0.2s ease,
+    text-shadow 0.2s ease;
 
   &:hover,
   &:focus-visible {

@@ -13,7 +13,9 @@ body {
 header {
   background: $darker;
   border-bottom: 1px solid rgba($primaryColor, 0.3);
-  box-shadow: 0 2px 8px 0 rgba(0,0,0,.5), 0 1px 0 rgba($primaryColor, 0.15);
+  box-shadow:
+    0 2px 8px 0 rgba(0, 0, 0, 0.5),
+    0 1px 0 rgba($primaryColor, 0.15);
   height: $header-height;
   position: relative;
   overflow: hidden;
@@ -37,6 +39,9 @@ header {
 
 .wrapper {
   width: 85%;
+  max-width: $container-max-width;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .navbar {
@@ -64,7 +69,9 @@ header {
   letter-spacing: 0.04em;
   text-transform: uppercase;
   font-size: 0.85rem;
-  transition: color 0.2s ease, text-shadow 0.2s ease;
+  transition:
+    color 0.2s ease,
+    text-shadow 0.2s ease;
 
   &:hover {
     color: $primaryColor;
@@ -81,8 +88,8 @@ header .navbar {
 }
 
 header .navbar ul li {
-  padding: $space-2;      // 8px (was 10px)
-  margin: 0 $space-2;    // 8px (was 10px)
+  padding: $space-2; // 8px (was 10px)
+  margin: 0 $space-2; // 8px (was 10px)
 }
 
 main {
@@ -94,16 +101,9 @@ footer {
   text-align: center;
 }
 
-
-
-@media screen and (max-width: 767px){
-// mobile first
+@media screen and (max-width: 767px) {
+  // mobile first
   .wrapper {
     width: 94%;
   }
 }
-
-
-
-
-

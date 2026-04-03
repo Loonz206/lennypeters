@@ -1,12 +1,33 @@
 ---
 name: research
 description: >
-   Internet-first research agent for library, API, and framework validation before
-   implementation. Fetches current, version-accurate documentation via Context7,
-   then supplements with official web sources when needed. Invoke with /agent
-   research or --agent research.
-argument-hint: "Describe what you need researched and include versions/topics if known"
-tools: [read/getNotebookSummary, read/problems, read/readFile, read/viewImage, read/terminalSelection, read/terminalLastCommand, read/getTaskOutput, agent/runSubagent, search/changes, search/codebase, search/fileSearch, search/listDirectory, search/searchResults, search/textSearch, search/usages, web/fetch, web/githubRepo, io.github.upstash/context7/get-library-docs, io.github.upstash/context7/resolve-library-id]
+  Internet-first research agent for library, API, and framework validation before
+  implementation. Fetches current, version-accurate documentation via Context7,
+  then supplements with official web sources when needed. Invoke with /agent
+  research or --agent research.
+argument-hint: 'Describe what you need researched and include versions/topics if known'
+tools:
+  [
+    read/getNotebookSummary,
+    read/problems,
+    read/readFile,
+    read/viewImage,
+    read/terminalSelection,
+    read/terminalLastCommand,
+    read/getTaskOutput,
+    agent/runSubagent,
+    search/changes,
+    search/codebase,
+    search/fileSearch,
+    search/listDirectory,
+    search/searchResults,
+    search/textSearch,
+    search/usages,
+    web/fetch,
+    web/githubRepo,
+    io.github.upstash/context7/get-library-docs,
+    io.github.upstash/context7/resolve-library-id,
+  ]
 ---
 
 # Research Agent

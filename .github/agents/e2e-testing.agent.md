@@ -5,8 +5,38 @@ description: >
   are complete to run npm run test:e2e, diagnose failing end-to-end tests, and
   repair source or test issues without skipping coverage. Invoke with /agent
   e2e-testing or --agent e2e-testing.
-argument-hint: "Describe the failing Playwright spec, expected browser behavior, and any trace or screenshot evidence"
-tools: [execute/runTask, execute/createAndRunTask, execute/runInTerminal, execute/getTerminalOutput, execute/awaitTerminal, execute/killTerminal, read/getNotebookSummary, read/problems, read/readFile, read/viewImage, read/terminalSelection, read/terminalLastCommand, read/getTaskOutput, edit/createDirectory, edit/createFile, edit/createJupyterNotebook, edit/editFiles, edit/editNotebook, edit/rename, search/changes, search/codebase, search/fileSearch, search/listDirectory, search/searchResults, search/textSearch, search/usages, web/fetch, todo]
+argument-hint: 'Describe the failing Playwright spec, expected browser behavior, and any trace or screenshot evidence'
+tools:
+  [
+    execute/runTask,
+    execute/createAndRunTask,
+    execute/runInTerminal,
+    execute/getTerminalOutput,
+    execute/awaitTerminal,
+    execute/killTerminal,
+    read/getNotebookSummary,
+    read/problems,
+    read/readFile,
+    read/viewImage,
+    read/terminalSelection,
+    read/terminalLastCommand,
+    read/getTaskOutput,
+    edit/createDirectory,
+    edit/createFile,
+    edit/createJupyterNotebook,
+    edit/editFiles,
+    edit/editNotebook,
+    edit/rename,
+    search/changes,
+    search/codebase,
+    search/fileSearch,
+    search/listDirectory,
+    search/searchResults,
+    search/textSearch,
+    search/usages,
+    web/fetch,
+    todo,
+  ]
 ---
 
 # E2E Testing Agent
@@ -33,14 +63,14 @@ You are a focused end-to-end testing agent. Your responsibility is to run the Pl
 2. Run `npm run test:e2e`.
 3. If tests fail:
    a. Read the Playwright failure output carefully.
-   b. Inspect generated trace, screenshot, or error artefacts when available.
+   b. Inspect generated trace, screenshot, or error artifacts when available.
    c. Determine whether the issue is in the app code or in an out-of-date test.
    d. Apply the smallest safe fix.
    e. Re-run the narrowest useful scope first:
-      - Single spec: `npm run test:e2e -- e2e/my-spec.spec.ts`
-      - Single test: `npm run test:e2e -- --grep "test title"`
-   f. Re-run `npm run test:e2e`.
-   g. Retry up to 3 attempts total.
+   - Single spec: `npm run test:e2e -- e2e/my-spec.spec.ts`
+   - Single test: `npm run test:e2e -- --grep "test title"`
+     f. Re-run `npm run test:e2e`.
+     g. Retry up to 3 attempts total.
 4. If failures persist after 3 attempts, record the remaining failing specs and stop.
 
 ## Rules

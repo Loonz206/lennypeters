@@ -1,11 +1,11 @@
-import type { Metadata } from 'next';
-import { projects } from '@/data/projects';
-import styles from './work.module.scss';
+import type { Metadata } from 'next'
+import { projects } from '@/data/projects'
+import styles from './work.module.scss'
 
 export const metadata: Metadata = {
   title: 'Work — Lenny Peters',
   description: 'Selected projects and case studies from Lenny Peters.',
-};
+}
 
 const WorkPage = () => {
   return (
@@ -14,7 +14,8 @@ const WorkPage = () => {
         <p className={styles.label}>SELECTED_WORK</p>
         <h1 className={styles.title}>Projects</h1>
         <p className={styles.sub}>
-          A selection of systems and products built across AI infrastructure, tooling, and front-end engineering.
+          A selection of systems and products built across AI infrastructure, tooling, and front-end
+          engineering.
         </p>
       </div>
 
@@ -30,7 +31,9 @@ const WorkPage = () => {
               <p className={styles.entryDesc}>{project.description}</p>
               <ul className={styles.tags} aria-label="Technologies">
                 {project.tags.map(tag => (
-                  <li key={tag} className={styles.tag}>{tag}</li>
+                  <li key={tag} className={styles.tag}>
+                    {tag}
+                  </li>
                 ))}
               </ul>
             </div>
@@ -38,7 +41,7 @@ const WorkPage = () => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default WorkPage;
+export default WorkPage

@@ -1,8 +1,8 @@
 ---
-title: "Reducing Context with Layered Skills, Prompts, and Agents"
-date: "2026-03-30"
-excerpt: "A practical architecture for shrinking LLM context load by separating stable guidance from task-specific execution through tools, skills, and agents."
-tags: ["AI Engineering", "Agents", "Prompt Engineering", "MCP"]
+title: 'Reducing Context with Layered Skills, Prompts, and Agents'
+date: '2026-03-30'
+excerpt: 'A practical architecture for shrinking LLM context load by separating stable guidance from task-specific execution through tools, skills, and agents.'
+tags: ['AI Engineering', 'Agents', 'Prompt Engineering', 'MCP']
 ---
 
 ## Introduction
@@ -85,71 +85,75 @@ Below is a complete, runnable example of a minimal router that assigns requests 
 // filename: router.ts
 // Run: npx tsx router.ts
 
-type TaskType = "bugfix" | "feature" | "docs";
+type TaskType = 'bugfix' | 'feature' | 'docs'
 
 type Task = {
-  id: string;
-  type: TaskType;
-  goal: string;
-  files: string[];
-};
+  id: string
+  type: TaskType
+  goal: string
+  files: string[]
+}
 
 type Skill = {
-  name: string;
-  appliesTo: (task: Task) => boolean;
-  promptTemplate: (task: Task) => string;
-};
+  name: string
+  appliesTo: (task: Task) => boolean
+  promptTemplate: (task: Task) => string
+}
 
 const skills: Skill[] = [
   {
-    name: "linting",
-    appliesTo: (task) => task.type === "bugfix" && task.files.some((f) => f.endsWith(".ts") || f.endsWith(".tsx")),
-    promptTemplate: (task) => [
-      "You are a linting specialist.",
-      `Task: ${task.goal}`,
-      "Output: minimal code changes and lint error resolution summary."
-    ].join("\n")
+    name: 'linting',
+    appliesTo: task =>
+      task.type === 'bugfix' && task.files.some(f => f.endsWith('.ts') || f.endsWith('.tsx')),
+    promptTemplate: task =>
+      [
+        'You are a linting specialist.',
+        `Task: ${task.goal}`,
+        'Output: minimal code changes and lint error resolution summary.',
+      ].join('\n'),
   },
   {
-    name: "write-article",
-    appliesTo: (task) => task.type === "docs",
-    promptTemplate: (task) => [
-      "You are a technical writing specialist.",
-      `Task: ${task.goal}`,
-      "Output: markdown article with citations and references."
-    ].join("\n")
+    name: 'write-article',
+    appliesTo: task => task.type === 'docs',
+    promptTemplate: task =>
+      [
+        'You are a technical writing specialist.',
+        `Task: ${task.goal}`,
+        'Output: markdown article with citations and references.',
+      ].join('\n'),
   },
   {
-    name: "feature-implementation",
-    appliesTo: (task) => task.type === "feature",
-    promptTemplate: (task) => [
-      "You are a feature implementation specialist.",
-      `Task: ${task.goal}`,
-      "Output: patch, tests, and migration notes."
-    ].join("\n")
-  }
-];
+    name: 'feature-implementation',
+    appliesTo: task => task.type === 'feature',
+    promptTemplate: task =>
+      [
+        'You are a feature implementation specialist.',
+        `Task: ${task.goal}`,
+        'Output: patch, tests, and migration notes.',
+      ].join('\n'),
+  },
+]
 
 function routeTask(task: Task): { skill: string; prompt: string } {
-  const selected = skills.find((skill) => skill.appliesTo(task));
+  const selected = skills.find(skill => skill.appliesTo(task))
   if (!selected) {
-    throw new Error(`No skill found for task ${task.id}`);
+    throw new Error(`No skill found for task ${task.id}`)
   }
   return {
     skill: selected.name,
-    prompt: selected.promptTemplate(task)
-  };
+    prompt: selected.promptTemplate(task),
+  }
 }
 
 const task: Task = {
-  id: "DOC-119",
-  type: "docs",
-  goal: "Explain how to reduce LLM context by layering tools, skills, and agents",
-  files: ["content/articles/new-article.md"]
-};
+  id: 'DOC-119',
+  type: 'docs',
+  goal: 'Explain how to reduce LLM context by layering tools, skills, and agents',
+  files: ['content/articles/new-article.md'],
+}
 
-const routed = routeTask(task);
-console.log(JSON.stringify(routed, null, 2));
+const routed = routeTask(task)
+console.log(JSON.stringify(routed, null, 2))
 ```
 
 The point is not the router itself. The point is that each skill holds stable logic once, so the prompt for each task stays small and purpose-built.[1][4]

@@ -1,8 +1,8 @@
 ---
-title: "Aligning Card Buttons with CSS Flexbox"
-date: "2026-03-29"
-excerpt: "How a single flex: 1 declaration on the right element solves the misaligned button problem in card grid layouts."
-tags: ["CSS", "Flexbox", "Layout", "SCSS"]
+title: 'Aligning Card Buttons with CSS Flexbox'
+date: '2026-03-29'
+excerpt: 'How a single flex: 1 declaration on the right element solves the misaligned button problem in card grid layouts.'
+tags: ['CSS', 'Flexbox', 'Layout', 'SCSS']
 ---
 
 ## The Problem
@@ -30,14 +30,16 @@ Consider a straightforward article card component rendered inside a CSS Grid:
       <li>React</li>
       <li>CSS</li>
     </ul>
-    <a href="/articles/my-article" className={styles.btn}>Read Article</a>
+    <a href="/articles/my-article" className={styles.btn}>
+      Read Article
+    </a>
   </div>
 </article>
 ```
 
-The parent grid ensures every card in a row stretches to the same height — CSS Grid does that by default with `align-items: stretch` [1]. But the *internal* layout of each card is still regular block flow. Block-level elements stack top to bottom and stop where their content ends. If Card A's content is shorter than Card B's, Card A's button floats somewhere in the middle of the card while Card B's sits near the bottom.
+The parent grid ensures every card in a row stretches to the same height — CSS Grid does that by default with `align-items: stretch` [1]. But the _internal_ layout of each card is still regular block flow. Block-level elements stack top to bottom and stop where their content ends. If Card A's content is shorter than Card B's, Card A's button floats somewhere in the middle of the card while Card B's sits near the bottom.
 
-The grid made the cards equal height. It didn't make their *contents* fill that height.
+The grid made the cards equal height. It didn't make their _contents_ fill that height.
 
 ## The Flexbox Fix
 
@@ -132,9 +134,9 @@ That's it. No JavaScript. No hardcoded heights. No absolute positioning. The fle
 
 ## Why `margin-top: auto` Is the Wrong Tool Here
 
-You'll sometimes see advice to use `margin-top: auto` on the button itself instead of `flex: 1` on the excerpt [3]. This works when you have a button and nothing else below the variable-height content. But it fails the moment you have *multiple* elements that should stick to the bottom together — like tags *and* a button.
+You'll sometimes see advice to use `margin-top: auto` on the button itself instead of `flex: 1` on the excerpt [3]. This works when you have a button and nothing else below the variable-height content. But it fails the moment you have _multiple_ elements that should stick to the bottom together — like tags _and_ a button.
 
-With `margin-top: auto` on the button, the tags stay glued to the excerpt and only the button drops. Now your tags are misaligned across cards too. By putting `flex: 1` on the excerpt instead, *everything* below it — tags, button, any future element — moves as a unit to the bottom of the card.
+With `margin-top: auto` on the button, the tags stay glued to the excerpt and only the button drops. Now your tags are misaligned across cards too. By putting `flex: 1` on the excerpt instead, _everything_ below it — tags, button, any future element — moves as a unit to the bottom of the card.
 
 ```scss
 // Don't do this if you have multiple bottom elements
@@ -154,7 +156,7 @@ With `margin-top: auto` on the button, the tags stay glued to the excerpt and on
 
 I've debugged this for other engineers more times than I can count. They set the card to `display: flex; flex-direction: column` and then put `flex: 1` directly on the excerpt — but the excerpt isn't a direct child of the card. It's nested inside a `.body` wrapper.
 
-Flex properties only apply to *direct children* of a flex container [1]. If your card has a wrapper div between the card and the excerpt, you need that wrapper to *also* be a flex column with `flex: 1`. The chain must be unbroken:
+Flex properties only apply to _direct children_ of a flex container [1]. If your card has a wrapper div between the card and the excerpt, you need that wrapper to _also_ be a flex column with `flex: 1`. The chain must be unbroken:
 
 ```
 .card (flex column)
@@ -170,7 +172,7 @@ Break any link in this chain and the button floats back up.
 
 ## Grid Does the Outer Work, Flexbox Does the Inner Work
 
-It's worth calling out the relationship between the grid and flexbox here. CSS Grid handles the *macro* layout — arranging cards in rows and columns, making cards in the same row equal height. Flexbox handles the *micro* layout — distributing space inside each card so the internal elements land in the right place [4].
+It's worth calling out the relationship between the grid and flexbox here. CSS Grid handles the _macro_ layout — arranging cards in rows and columns, making cards in the same row equal height. Flexbox handles the _micro_ layout — distributing space inside each card so the internal elements land in the right place [4].
 
 ```scss
 .grid {
@@ -180,11 +182,11 @@ It's worth calling out the relationship between the grid and flexbox here. CSS G
 }
 ```
 
-Grid's default `align-items: stretch` is what makes all cards in a row the same height. Without it, each card would shrink to fit its own content and the entire alignment trick would be moot. This isn't something you need to explicitly set — it's the default behavior — but it's important to understand *why* the pattern works.
+Grid's default `align-items: stretch` is what makes all cards in a row the same height. Without it, each card would shrink to fit its own content and the entire alignment trick would be moot. This isn't something you need to explicitly set — it's the default behavior — but it's important to understand _why_ the pattern works.
 
 ## Conclusion
 
-The misaligned button problem comes down to a single missing concept: flexbox growth. When cards live in a grid, they're stretched to equal heights, but their *contents* don't automatically fill that height. The fix is a three-step flex column cascade:
+The misaligned button problem comes down to a single missing concept: flexbox growth. When cards live in a grid, they're stretched to equal heights, but their _contents_ don't automatically fill that height. The fix is a three-step flex column cascade:
 
 1. The card is a flex column container
 2. The body wrapper gets `flex: 1` to fill the card

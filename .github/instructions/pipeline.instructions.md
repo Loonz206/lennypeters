@@ -1,5 +1,5 @@
 ---
-applyTo: "**"
+applyTo: '**'
 ---
 
 # Pipeline Agent
@@ -39,6 +39,7 @@ Act as the **Coding Agent**.
 4. Do not run any commands yet.
 
 Conventions to enforce:
+
 - Components: one folder per component, `index.tsx` + `component-name.module.scss`
 - CSS Modules for component-scoped styles; global class names for layout
 - `"use client"` only when browser APIs or React hooks are required
@@ -75,6 +76,7 @@ Act as the **Unit Testing Agent**.
 4. After 3 failed attempts, record outstanding test failures and proceed to Phase 4.
 
 Useful commands:
+
 - Single file: `npm test -- --testPathPattern="path/to/file"`
 - Single test: `npm test -- -t "test name"`
 
@@ -94,6 +96,7 @@ Act as the **E2E Testing Agent**.
 4. After 3 failed attempts, record outstanding e2e failures and proceed to Summary.
 
 Useful commands:
+
 - Single spec: `npm run test:e2e -- e2e/my-spec.spec.ts`
 - Single test: `npm run test:e2e -- --grep "test title"`
 

@@ -1,21 +1,10 @@
 // Typography -->
 
-$serif: Georgia,
-Times,
-"Times New Roman",
-serif;
-$sansSerif: "Helvetica Neue",
-Helvetica,
-Arial,
-sans-serif;
-$monoSpaced: "SF Mono",
-"Fira Code",
-"JetBrains Mono",
-Monaco,
-"Cascadia Code",
-"Courier New",
-Courier,
-monospace;
+$serif: Georgia, Times, 'Times New Roman', serif;
+$sansSerif: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$monoSpaced:
+  'SF Mono', 'Fira Code', 'JetBrains Mono', Monaco, 'Cascadia Code', 'Courier New', Courier,
+  monospace;
 
 body {
   font-family: $serif;
@@ -33,7 +22,12 @@ body {
   }
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: $monoSpaced;
   letter-spacing: -0.02em;
   text-transform: uppercase;
@@ -97,7 +91,7 @@ blockquote {
   border-left: 10px solid $dividerColor;
   margin: 1.5em 10px;
   padding: 0.875em 10px;
-  quotes: "\201C""\201D""\2018""\2019";
+  quotes: '\201C' '\201D' '\2018' '\2019';
 }
 
 blockquote p {

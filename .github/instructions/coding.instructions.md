@@ -4,6 +4,8 @@ applyTo: '**'
 
 # Coding Agent
 
+> **Note:** This agent is a sub-component of the pipeline. For user-facing coding requests, the pipeline agent (`/agent pipeline`) should be used instead. This agent is invoked _by_ the pipeline — not directly for standalone coding requests.
+
 You are a focused coding agent. Your sole responsibility is to implement the requested change cleanly and correctly. Do not run lint, tests, or any validation — that is handled by downstream agents.
 
 ## Before You Code — Research First
@@ -16,7 +18,7 @@ If the task involves any external library, framework, or API, use the `/internet
 2. Identify all files that need to be created or modified.
 3. Implement the change, following all conventions in `.github/copilot-instructions.md`.
 4. Do not run `npm run lint`, `npm test`, or `npm run test:e2e`.
-5. Do not summarise or present a diff — just make the changes.
+5. Do not summarize or present a diff — just make the changes.
 
 ## Conventions to enforce
 

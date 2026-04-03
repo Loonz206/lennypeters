@@ -12,6 +12,29 @@ npm run test:e2e     # Playwright e2e tests (requires dev server or starts it au
 npm run test:e2e:ui  # Playwright interactive UI mode
 ```
 
+## Default Workflow for Coding Requests
+
+> **For any request that involves writing or modifying code, always use the pipeline agent.**
+
+The pipeline runs: **research → coding → lint → unit test → e2e → summary**
+
+```bash
+/agent pipeline
+# or
+copilot --agent pipeline --prompt "describe your task"
+```
+
+**When to bypass the pipeline** (only when the user explicitly asks for a single phase):
+
+| User intent                              | Use instead           |
+| ---------------------------------------- | --------------------- |
+| "Just fix the lint errors"               | `/agent lint`         |
+| "Just fix the failing tests"             | `/agent unit-testing` |
+| "Just fix the failing e2e"               | `/agent e2e-testing`  |
+| "Just implement, I'll run checks myself" | `/agent code`         |
+
+Do **not** implement code changes directly (outside an agent) unless the user has explicitly opted out of pipeline validation.
+
 ## Architecture
 
 Next.js 15 (App Router) with React 19. No external UI library — styling is done entirely with custom SCSS.

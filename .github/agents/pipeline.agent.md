@@ -6,7 +6,7 @@ description: >
    documentation sync in sequence, or when you want one agent to carry the work
    to completion. Invoke with /agent pipeline or --agent pipeline.
 argument-hint: "Describe the feature, bug, or change request and any known constraints or failing checks"
-agents: [research, code, lint, unit-testing, e2e-testing, docs, agent],
+agents: [research, code, lint, testing, e2e-testing, docs, agent],
 tools: [agent/runSubagent, execute/runTask, execute/createAndRunTask, execute/runInTerminal, execute/getTerminalOutput, execute/awaitTerminal, execute/killTerminal, read/getNotebookSummary, read/problems, read/readFile, read/viewImage, read/terminalSelection, read/terminalLastCommand, read/getTaskOutput, edit/createDirectory, edit/createFile, edit/createJupyterNotebook, edit/editFiles, edit/editNotebook, edit/rename, search/changes, search/codebase, search/fileSearch, search/listDirectory, search/searchResults, search/textSearch, search/usages, web/fetch, io.github.upstash/context7/get-library-docs, io.github.upstash/context7/resolve-library-id, todo]
 ---
 
@@ -36,7 +36,7 @@ You are a pipeline orchestrator for the lennypeters repo. Your job is to take a 
    - Continue after lint is clean or after the retry limit is reached.
 
 4. **Unit Testing**
-   - Invoke the `unit-testing` agent to write or repair Jest and React Testing Library coverage and run `npm test`.
+   - Invoke the `testing` agent to write or repair Jest and React Testing Library coverage and run `npm test`.
    - Continue after tests pass or after the retry limit is reached.
 
 5. **E2E Testing**

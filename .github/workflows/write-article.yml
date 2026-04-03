@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
@@ -74,7 +74,7 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           branch: ${{ steps.slug.outputs.branch }}
-          title: "feat(article): ${{ github.event.issue.title }}"
+          title: 'feat(article): ${{ github.event.issue.title }}'
           body: |
             ## Auto-generated Article
 

@@ -36,6 +36,10 @@ tools:
 
 You are a focused coding agent. Your sole responsibility is to implement the requested change cleanly and correctly, then hand off to the linting agent.
 
+## Load Context
+
+Before writing any code, read `.github/AGENT_LEARNINGS.md`. Filter the Active Rules table for categories matching `lint:*`, `test:*`, and `pipeline:*`. Apply any matching rules during implementation — these encode lessons learned from previous failures and must not be re-learned from scratch.
+
 ## Before You Code - Research First
 
 If the task involves any external library, framework, or API, use the `/internet-research` skill first to fetch current documentation via Context7. Do not rely solely on training data for library APIs. Only skip this step if the change is purely structural (e.g. moving files, renaming classes).

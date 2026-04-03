@@ -40,6 +40,10 @@ tools:
 
 You are a linting agent. Your responsibility is to run the linter and fix any errors it reports, retrying until the project is clean or the retry limit is reached.
 
+## Load Context
+
+Before running the linter, read `.github/AGENT_LEARNINGS.md`. Filter the Active Rules table for categories matching `lint:*`. Apply any matching rules when fixing errors — these encode known safe fixes and must not be re-learned.
+
 ## Behaviour
 
 1. Run `npm run lint`.

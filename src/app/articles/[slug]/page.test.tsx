@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import ArticlePage, { generateStaticParams, generateMetadata } from '../page'
+import ArticlePage, { generateStaticParams, generateMetadata } from './page'
 import { notFound } from 'next/navigation'
 import { getAllArticleMetas, getArticleBySlug } from '@/lib/articles'
 import type { ArticleMeta, Article } from '@/lib/articles'
@@ -11,12 +11,12 @@ jest.mock('next/navigation', () => ({
   }),
 }))
 
-jest.mock('../../../../lib/articles', () => ({
+jest.mock('../../../lib/articles', () => ({
   getAllArticleMetas: jest.fn(),
   getArticleBySlug: jest.fn(),
 }))
 
-jest.mock('../../../../components/breadcrumbs', () => ({
+jest.mock('../../../components/breadcrumbs', () => ({
   __esModule: true,
   default: ({ items }: { items: { label: string; href?: string }[] }) => (
     <nav aria-label="Breadcrumb">

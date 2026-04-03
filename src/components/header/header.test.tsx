@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import Header from '../index'
+import Header from './index'
 
 jest.mock('next/link', () => ({
   __esModule: true,

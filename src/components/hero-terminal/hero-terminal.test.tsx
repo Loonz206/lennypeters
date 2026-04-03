@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen, act } from '@testing-library/react'
-import HeroTerminal from '../index'
+import HeroTerminal from './index'
 
 jest.mock('next/link', () => ({
   __esModule: true,
@@ -19,7 +19,7 @@ jest.mock('next/link', () => ({
   ),
 }))
 
-jest.mock('../../profile', () => ({
+jest.mock('../profile', () => ({
   __esModule: true,
   default: () => <div data-testid="profile" />,
 }))

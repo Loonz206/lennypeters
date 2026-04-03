@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import ArticleCard from '../index'
+import ArticleCard from './index'
 import type { ArticleMeta } from '@/lib/articles'
 
 jest.mock('next/link', () => ({

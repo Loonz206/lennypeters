@@ -2,7 +2,7 @@ import React from 'react'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import type { ArticleMeta } from '@/lib/articles'
-import CodeThinking from '../index'
+import CodeThinking from './index'
 
 jest.mock('next/link', () => ({
   __esModule: true,

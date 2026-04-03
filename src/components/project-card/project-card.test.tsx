@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import ProjectCard from '../index'
+import ProjectCard from './index'
 import type { Project } from '@/data/projects'
 
 jest.mock('next/link', () => ({

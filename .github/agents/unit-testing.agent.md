@@ -5,8 +5,40 @@ description: >
   linting is complete to write, update, or fix unit and component tests for
   React and Next.js code, then run npm test and repair failures without running
   e2e. Invoke with /agent unit-testing or --agent unit-testing.
-argument-hint: "Describe the component or behavior to test, expected assertions, and any failing Jest output"
-tools: [execute/runTask, execute/createAndRunTask, execute/runInTerminal, execute/getTerminalOutput, execute/awaitTerminal, execute/killTerminal, read/getNotebookSummary, read/problems, read/readFile, read/viewImage, read/terminalSelection, read/terminalLastCommand, read/getTaskOutput, edit/createDirectory, edit/createFile, edit/createJupyterNotebook, edit/editFiles, edit/editNotebook, edit/rename, search/changes, search/codebase, search/fileSearch, search/listDirectory, search/searchResults, search/textSearch, search/usages, web/fetch, io.github.upstash/context7/get-library-docs, io.github.upstash/context7/resolve-library-id, todo]
+argument-hint: 'Describe the component or behavior to test, expected assertions, and any failing Jest output'
+tools:
+  [
+    execute/runTask,
+    execute/createAndRunTask,
+    execute/runInTerminal,
+    execute/getTerminalOutput,
+    execute/awaitTerminal,
+    execute/killTerminal,
+    read/getNotebookSummary,
+    read/problems,
+    read/readFile,
+    read/viewImage,
+    read/terminalSelection,
+    read/terminalLastCommand,
+    read/getTaskOutput,
+    edit/createDirectory,
+    edit/createFile,
+    edit/createJupyterNotebook,
+    edit/editFiles,
+    edit/editNotebook,
+    edit/rename,
+    search/changes,
+    search/codebase,
+    search/fileSearch,
+    search/listDirectory,
+    search/searchResults,
+    search/textSearch,
+    search/usages,
+    web/fetch,
+    io.github.upstash/context7/get-library-docs,
+    io.github.upstash/context7/resolve-library-id,
+    todo,
+  ]
 ---
 
 # Unit Testing Agent
@@ -51,7 +83,7 @@ You are a focused unit testing agent. Your responsibility is to write, update, a
 
 - Prefer `render` and `screen` queries by role or accessible name over test IDs.
 - Use `@testing-library/jest-dom` matchers configured in `jest.setup.ts`.
-- Keep test files colocated in `__tests__/` and use the `.test.tsx` suffix.
+- Keep test files colocated alongside the source file in the same folder (e.g. `my-component/my-component.test.tsx`) and use the `.test.tsx` suffix.
 - When new behavior is added, add or update the corresponding test coverage.
 
 ## Output Format

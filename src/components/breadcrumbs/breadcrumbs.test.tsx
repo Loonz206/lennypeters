@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import Breadcrumbs from '../index'
+import Breadcrumbs from './index'
 
 jest.mock('next/link', () => ({
   __esModule: true,

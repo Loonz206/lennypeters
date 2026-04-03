@@ -1,14 +1,14 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import ArticlesPage, { metadata } from '../page'
+import ArticlesPage, { metadata } from './page'
 import { getAllArticleMetas } from '@/lib/articles'
 import type { ArticleMeta } from '@/lib/articles'
 
-jest.mock('../../../lib/articles', () => ({
+jest.mock('../../lib/articles', () => ({
   getAllArticleMetas: jest.fn(),
 }))
 
-jest.mock('../../../components/article-card', () => ({
+jest.mock('../../components/article-card', () => ({
   __esModule: true,
   default: ({ article }: { article: ArticleMeta }) => (
     <div data-testid="article-card">{article.title}</div>

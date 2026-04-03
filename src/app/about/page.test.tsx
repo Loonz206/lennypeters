@@ -1,18 +1,18 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import AboutPage, { metadata } from '../page'
+import AboutPage, { metadata } from './page'
 
-jest.mock('../../../components/skills-grid', () => ({
+jest.mock('../../components/skills-grid', () => ({
   __esModule: true,
   default: () => <div data-testid="skills-grid" />,
 }))
 
-jest.mock('../../../components/experience-timeline', () => ({
+jest.mock('../../components/experience-timeline', () => ({
   __esModule: true,
   default: () => <div data-testid="experience-timeline" />,
 }))
 
-jest.mock('../../../components/contact-section', () => ({
+jest.mock('../../components/contact-section', () => ({
   __esModule: true,
   default: () => <div data-testid="contact-section" />,
 }))

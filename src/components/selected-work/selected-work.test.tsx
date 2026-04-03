@@ -2,7 +2,7 @@ import React from 'react'
 import { render, screen } from '@testing-library/react'
 import SelectedWork from '@/components/selected-work'
 
-jest.mock('../../project-card', () => ({
+jest.mock('../project-card', () => ({
   __esModule: true,
   default: ({ project }: { project: { title: string } }) => (
     <div data-testid="project-card">{project.title}</div>

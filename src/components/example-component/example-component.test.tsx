@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import ExampleComponent from '../index'
+import ExampleComponent from './index'
 
 describe('ExampleComponent', () => {
   it('renders the name prop as a heading', () => {

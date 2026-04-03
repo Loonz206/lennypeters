@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import ExperienceTimeline from '../index'
+import ExperienceTimeline from './index'
 import { experience } from '@/data/experience'
 
 describe('ExperienceTimeline', () => {

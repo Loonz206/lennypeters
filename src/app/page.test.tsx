@@ -1,28 +1,28 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import Home, { metadata } from '../page'
+import Home, { metadata } from './page'
 import { getAllArticleMetas } from '@/lib/articles'
 
-jest.mock('../../lib/articles', () => ({
+jest.mock('../lib/articles', () => ({
   getAllArticleMetas: jest.fn().mockReturnValue([]),
 }))
 
-jest.mock('../../components/hero-terminal', () => ({
+jest.mock('../components/hero-terminal', () => ({
   __esModule: true,
   default: () => <div data-testid="hero-terminal" />,
 }))
 
-jest.mock('../../components/selected-work', () => ({
+jest.mock('../components/selected-work', () => ({
   __esModule: true,
   default: () => <div data-testid="selected-work" />,
 }))
 
-jest.mock('../../components/expertise-list', () => ({
+jest.mock('../components/expertise-list', () => ({
   __esModule: true,
   default: () => <div data-testid="expertise-list" />,
 }))
 
-jest.mock('../../components/code-thinking', () => ({
+jest.mock('../components/code-thinking', () => ({
   __esModule: true,
   default: ({ articles }: { articles: unknown[] }) => (
     <div data-testid="code-thinking" data-count={articles.length} />

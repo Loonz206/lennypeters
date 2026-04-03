@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import WorkPage, { metadata } from '../page'
+import WorkPage, { metadata } from './page'
 
 describe('Work page', () => {
   it('renders the "Projects" heading', () => {

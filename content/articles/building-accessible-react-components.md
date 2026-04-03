@@ -45,3 +45,10 @@ For inputs, use `<label>`. For icon-only buttons, use `aria-label`.
 
 Run automated checks with axe-core, but remember that automated tooling catches only ~30% of accessibility issues.
 Manual keyboard navigation and a quick screen reader test (VoiceOver on macOS, NVDA on Windows) are essential.
+
+## References
+
+1. [W3C — Web Content Accessibility Guidelines (WCAG) 2.1](https://www.w3.org/TR/WCAG21/)
+2. [W3C WAI — ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/)
+3. [Deque Systems — axe-core (automated accessibility testing engine)](https://github.com/dequelabs/axe-core)
+4. [WebAIM — Keyboard Accessibility](https://webaim.org/techniques/keyboard/)

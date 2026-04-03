@@ -173,7 +173,7 @@ If your current pipeline has agents that fail on the same categories repeatedly,
 
 ## References
 
-1. Anthropic Engineering — Building Effective Agents: https://www.anthropic.com/engineering/building-effective-agents
-2. OpenAI Platform Docs — Memory: https://platform.openai.com/docs/guides/memory
-3. Shinn, N. et al. — Reflexion: Language Agents with Verbal Reinforcement Learning (arXiv 2303.11366): https://arxiv.org/abs/2303.11366
-4. GitHub Docs — Using Copilot to work with GitHub Actions workflows: https://docs.github.com/en/copilot/using-github-copilot/using-copilot-with-github-actions
+1. [Anthropic Engineering — Building Effective Agents](https://www.anthropic.com/engineering/building-effective-agents)
+2. [OpenAI Platform Docs — Memory](https://platform.openai.com/docs/guides/memory)
+3. [Shinn, N. et al. — Reflexion: Language Agents with Verbal Reinforcement Learning (arXiv 2303.11366)](https://arxiv.org/abs/2303.11366)
+4. [GitHub Docs — Writing Workflows with GitHub Actions](https://docs.github.com/en/actions/writing-workflows)

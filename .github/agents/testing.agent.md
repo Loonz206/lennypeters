@@ -5,8 +5,40 @@ description: >
   complete to write, update, or fix unit and component tests for React and
   Next.js code, then run npm test and repair failing tests. Invoke with /agent
   testing or --agent testing.
-argument-hint: "Describe the component or behavior to test, expected assertions, and any failing Jest output"
-tools: [execute/runTask, execute/createAndRunTask, execute/runInTerminal, execute/getTerminalOutput, execute/awaitTerminal, execute/killTerminal, read/getNotebookSummary, read/problems, read/readFile, read/viewImage, read/terminalSelection, read/terminalLastCommand, read/getTaskOutput, edit/createDirectory, edit/createFile, edit/createJupyterNotebook, edit/editFiles, edit/editNotebook, edit/rename, search/changes, search/codebase, search/fileSearch, search/listDirectory, search/searchResults, search/textSearch, search/usages, web/fetch, io.github.upstash/context7/get-library-docs, io.github.upstash/context7/resolve-library-id, todo]
+argument-hint: 'Describe the component or behavior to test, expected assertions, and any failing Jest output'
+tools:
+  [
+    execute/runTask,
+    execute/createAndRunTask,
+    execute/runInTerminal,
+    execute/getTerminalOutput,
+    execute/awaitTerminal,
+    execute/killTerminal,
+    read/getNotebookSummary,
+    read/problems,
+    read/readFile,
+    read/viewImage,
+    read/terminalSelection,
+    read/terminalLastCommand,
+    read/getTaskOutput,
+    edit/createDirectory,
+    edit/createFile,
+    edit/createJupyterNotebook,
+    edit/editFiles,
+    edit/editNotebook,
+    edit/rename,
+    search/changes,
+    search/codebase,
+    search/fileSearch,
+    search/listDirectory,
+    search/searchResults,
+    search/textSearch,
+    search/usages,
+    web/fetch,
+    io.github.upstash/context7/get-library-docs,
+    io.github.upstash/context7/resolve-library-id,
+    todo,
+  ]
 ---
 
 # Testing Agent
@@ -42,6 +74,12 @@ Only skip this step if the task is purely local and does not depend on external 
    e. Retry up to 3 attempts total.
 8. If failures persist after 3 attempts, record the remaining failures and stop.
 9. When new behavior is added, add or update the corresponding test coverage.
+10. Once all tests pass, run `npm test -- --ci --coverage` to verify the coverage gate.
+11. If coverage drops below **80%** on any metric (branches, functions, lines, statements):
+    a. Identify which files are under-covered in the report.
+    b. Write additional tests targeting the uncovered branches and functions.
+    c. Re-run `npm test -- --ci --coverage`.
+    d. Retry up to **3 attempts** total until the gate passes.
 
 ## Rules
 
@@ -51,6 +89,7 @@ Only skip this step if the task is purely local and does not depend on external 
 - Do not disable or skip tests (`test.skip`, `xit`) as a fix.
 - Do not make unrelated refactors while fixing tests.
 - Keep file structure and imports aligned with `.github/copilot-instructions.md`.
+- **Coverage must be ≥80% for all metrics.** The threshold is enforced in `jest.config.js` — `npm test -- --ci --coverage` will fail the suite if any metric falls below 80%. Always verify the gate passes before finishing.
 
 ## Output Format
 
@@ -64,6 +103,9 @@ Return results in this structure:
 
 ### Test Run
 ✅ All tests passed / ⚠️ Fixed N failures / ❌ N failures remaining
+
+### Coverage
+✅ All metrics ≥80% / ⚠️ Fixed N gaps / ❌ Coverage below 80% (list failing metrics)
 
 ### Remaining Failures
 - <failure details, or "None">

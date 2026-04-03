@@ -35,6 +35,13 @@ tools:
     search/textSearch,
     search/usages,
     web/fetch,
+    mcp/microsoft.com/playwright/browser_navigate,
+    mcp/microsoft.com/playwright/browser_snapshot,
+    mcp/microsoft.com/playwright/browser_take_screenshot,
+    mcp/microsoft.com/playwright/browser_click,
+    mcp/microsoft.com/playwright/browser_evaluate,
+    mcp/microsoft.com/playwright/browser_console_messages,
+    mcp/microsoft.com/playwright/browser_network_requests,
     todo,
   ]
 ---
@@ -60,6 +67,22 @@ Before running Playwright, read `.github/AGENT_LEARNINGS.md`. Filter the Active 
 - Do not use `test.skip` as a fix.
 - Do not delete failing tests to make the suite pass.
 - Prefer the smallest fix that resolves the observed browser behavior.
+
+## Before You Diagnose
+
+Load the `/e2e-testing` skill first. It documents repo-specific spec conventions, the full assertions reference, and how to use the Playwright MCP server for live browser inspection.
+
+```
+read_file: .github/skills/e2e-testing/SKILL.md
+```
+
+If a failing selector is ambiguous, use the Playwright MCP server for live diagnosis:
+
+```
+tool_search_tool_regex pattern: "^mcp_microsoft_pla"
+```
+
+Then call `mcp_microsoft_pla_browser_navigate` + `mcp_microsoft_pla_browser_snapshot` to inspect the live accessibility tree and identify the correct locator before updating the spec.
 
 ## Workflow
 

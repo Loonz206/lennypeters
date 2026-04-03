@@ -93,14 +93,23 @@ Return results in this structure:
 ## Unit Testing Summary
 
 ### Tests Updated
+
 - <file>: <what changed>
 
 ### Test Run
+
 ✅ All tests passed / ⚠️ Fixed N failures / ❌ N failures remaining
 
 ### Coverage
+
 ✅ All metrics ≥80% / ⚠️ Fixed N gaps / ❌ Coverage below 80% (list failing metrics)
 
 ### Remaining Failures
+
 - <failure details, or "None">
+
+```
+
+```
+
 ```

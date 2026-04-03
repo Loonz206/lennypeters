@@ -4,7 +4,32 @@ description: >
   Focused coding agent that writes and edits code only, then hands off to linting.
   Use when you want implementation without running lint, unit tests, or e2e tests.
   Invoke with /agent code or --agent code.
-tools: [read/getNotebookSummary, read/problems, read/readFile, read/viewImage, read/terminalSelection, read/terminalLastCommand, read/getTaskOutput, edit/createDirectory, edit/createFile, edit/createJupyterNotebook, edit/editFiles, edit/editNotebook, edit/rename, search/changes, search/codebase, search/fileSearch, search/listDirectory, search/searchResults, search/textSearch, search/usages, web/fetch, web/githubRepo, todo]
+tools:
+  [
+    read/getNotebookSummary,
+    read/problems,
+    read/readFile,
+    read/viewImage,
+    read/terminalSelection,
+    read/terminalLastCommand,
+    read/getTaskOutput,
+    edit/createDirectory,
+    edit/createFile,
+    edit/createJupyterNotebook,
+    edit/editFiles,
+    edit/editNotebook,
+    edit/rename,
+    search/changes,
+    search/codebase,
+    search/fileSearch,
+    search/listDirectory,
+    search/searchResults,
+    search/textSearch,
+    search/usages,
+    web/fetch,
+    web/githubRepo,
+    todo,
+  ]
 ---
 
 # Code Agent
@@ -22,7 +47,7 @@ If the task involves any external library, framework, or API, use the `/internet
 3. Implement the change, following all conventions in `.github/copilot-instructions.md`.
 4. Do not run `npm run lint`, `npm test`, or `npm run test:e2e`.
 5. When coding is complete, explicitly hand off to the linting agent.
-6. Do not summarise or present a diff - just make the changes.
+6. Do not summarize or present a diff - just make the changes.
 
 ## Conventions to enforce
 

@@ -26,12 +26,12 @@ copilot --agent pipeline --prompt "describe your task"
 
 **When to bypass the pipeline** (only when the user explicitly asks for a single phase):
 
-| User intent                              | Use instead           |
-| ---------------------------------------- | --------------------- |
-| "Just fix the lint errors"               | `/agent lint`         |
-| "Just fix the failing tests"             | `/agent unit-testing` |
-| "Just fix the failing e2e"               | `/agent e2e-testing`  |
-| "Just implement, I'll run checks myself" | `/agent code`         |
+| User intent                              | Use instead          |
+| ---------------------------------------- | -------------------- |
+| "Just fix the lint errors"               | `/agent lint`        |
+| "Just fix the failing tests"             | `/agent testing`     |
+| "Just fix the failing e2e"               | `/agent e2e-testing` |
+| "Just implement, I'll run checks myself" | `/agent code`        |
 
 Do **not** implement code changes directly (outside an agent) unless the user has explicitly opted out of pipeline validation.
 
@@ -61,7 +61,7 @@ Use `render` + `screen` queries from `@testing-library/react`. Prefer queries by
 
 ### E2e tests (Playwright)
 
-E2e tests live in `e2e/` and use the `.spec.ts` extension. The `playwright.config.ts` points to `http://localhost:3000` and auto-starts `npm run dev` if no server is already running. Only Chromium is configured by default.
+E2e tests live in `e2e/` and use the `.spec.ts` extension, one suite per route. The `playwright.config.ts` points to `http://localhost:3000` and auto-starts `npm run dev` if no server is already running. Only Chromium is configured by default.
 
 ## Custom Agents
 
@@ -100,7 +100,7 @@ copilot --agent code --prompt "Implement feature X"
 copilot --agent lint --prompt "Lint and fix current changes"
 ```
 
-**Testing agent** (`.github/agents/testing.agent.md`) writes or repairs Jest and React Testing Library coverage after linting:
+**Testing agent** (`.github/agents/testing.agent.md`) writes or repairs Jest and React Testing Library coverage after linting. Replaces the former unit-testing agent:
 
 ```
 /agent testing
@@ -108,15 +108,7 @@ copilot --agent lint --prompt "Lint and fix current changes"
 copilot --agent testing --prompt "Add unit tests for the selected-work component"
 ```
 
-**Unit-testing agent** (`.github/agents/unit-testing.agent.md`) is the stricter post-lint unit-test agent that runs `npm test` without handling e2e:
-
-```
-/agent unit-testing
-# or
-copilot --agent unit-testing --prompt "Fix the failing header tests"
-```
-
-**E2E-testing agent** (`.github/agents/e2e-testing.agent.md`) runs Playwright after unit testing and repairs failing browser flows without skipping specs:
+**E2E-testing agent** (`.github/agents/e2e-testing.agent.md`) runs Playwright after unit testing and repairs failing browser flows without skipping specs. Can use the Playwright MCP server for live browser diagnosis:
 
 ```
 /agent e2e-testing
@@ -166,6 +158,12 @@ Use /internet-research to look up the Next.js 15 caching API, then implement ser
 
 ```
 Use /testing to write or fix Jest and React Testing Library coverage for a component.
+```
+
+**E2E-testing skill** can be used inline in any prompt:
+
+```
+Use /e2e-testing to write or fix Playwright specs, or to diagnose a failing browser flow using the Playwright MCP server.
 ```
 
 ### Setting up Context7 MCP (one-time, per machine)

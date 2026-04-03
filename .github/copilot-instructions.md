@@ -140,6 +140,22 @@ copilot --agent pipeline --prompt "Implement feature X and carry it through veri
 copilot --agent docs --prompt "Sync docs after updating pipeline and skills"
 ```
 
+**Reflective agent** (`.github/agents/reflective.agent.md`) evaluates task outcomes, logs failure patterns, extracts rules when a failure category hits 3 occurrences, and purges resolved rules older than 30 days:
+
+```
+/agent reflective
+# or
+copilot --agent reflective --prompt "Evaluate this pipeline run and update learnings"
+```
+
+**Reflect skill** can be used inline at the end of any prompt to log failures and extract rules without invoking the full agent:
+
+```
+Use /reflect to evaluate this session and update AGENT_LEARNINGS.md.
+```
+
+Every agent reads `.github/AGENT_LEARNINGS.md` before starting — Active Rules in this file encode lessons from past failures and are applied automatically.
+
 **Write-article agent** (`.github/agents/write-article.agent.md`) researches a topic and writes a markdown article:
 
 ```

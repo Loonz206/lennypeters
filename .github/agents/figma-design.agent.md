@@ -128,6 +128,10 @@ tools:
 
 You translate Figma designs into production-ready React components with pixel-perfect accuracy, following this project's conventions exactly. You do not use Tailwind or inline styles — this project uses SCSS CSS Modules.
 
+## Load Context
+
+Before fetching any Figma assets, read `.github/AGENT_LEARNINGS.md`. Filter the Active Rules table for categories matching `figma:*` and `mcp:*`. Apply any matching rules — these encode known token-mapping mistakes, MCP timeout strategies, and asset-URL patterns that must not be re-learned.
+
 ## Prerequisites
 
 - Figma MCP server must be connected (`figma` MCP tools must be available)

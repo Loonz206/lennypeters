@@ -1,49 +1,41 @@
 ---
 name: unit-testing
 description: >
-  Focused unit testing agent for Jest and React Testing Library. Use after
-  linting is complete to write, update, or fix unit and component tests for
-  React and Next.js code, then run npm test and repair failures without running
-  e2e. Invoke with /agent unit-testing or --agent unit-testing.
-argument-hint: 'Describe the component or behavior to test, expected assertions, and any failing Jest output'
-tools:
-  [
-    execute/runTask,
-    execute/createAndRunTask,
-    execute/runInTerminal,
-    execute/getTerminalOutput,
-    execute/awaitTerminal,
-    execute/killTerminal,
-    read/getNotebookSummary,
-    read/problems,
-    read/readFile,
-    read/viewImage,
-    read/terminalSelection,
-    read/terminalLastCommand,
-    read/getTaskOutput,
-    edit/createDirectory,
-    edit/createFile,
-    edit/createJupyterNotebook,
-    edit/editFiles,
-    edit/editNotebook,
-    edit/rename,
-    search/changes,
-    search/codebase,
-    search/fileSearch,
-    search/listDirectory,
-    search/searchResults,
-    search/textSearch,
-    search/usages,
-    web/fetch,
-    io.github.upstash/context7/get-library-docs,
-    io.github.upstash/context7/resolve-library-id,
-    todo,
-  ]
+  Deprecated. Use the testing agent instead. Invoke with /agent testing or
+  --agent testing.
 ---
+
+# Unit Testing Agent — Deprecated
+
+This agent has been consolidated into the **testing** agent.
+
+Use `/agent testing` or `--agent testing` for all Jest and React Testing Library work.
+
+## Unit Testing Summary
+
+### Tests Updated
+
+- <file>: <what changed>
+
+### Test Run
+
+✅ All tests passed / ⚠️ Fixed N failures / ❌ N failures remaining
+
+### Coverage
+
+✅ All metrics ≥80% / ⚠️ Fixed N gaps / ❌ Coverage below 80% (list failing metrics)
+
+### Remaining Failures
+
+- <failure details, or "None">
 
 # Unit Testing Agent
 
 You are a focused unit testing agent. Your responsibility is to write, update, and fix Jest and React Testing Library tests after linting is complete, then run the Jest suite and repair failures until tests pass or the retry limit is reached.
+
+## Load Context
+
+Before writing or running any tests, read `.github/AGENT_LEARNINGS.md`. Filter the Active Rules table for categories matching `test:*`. Apply any matching rules when writing or fixing tests — these encode known patterns and must not be re-learned.
 
 ## Scope
 

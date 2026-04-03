@@ -1,81 +1,87 @@
-"use client"
+'use client'
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import styles from './header.module.scss';
+import React, { useState, useEffect, useRef, useCallback } from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import styles from './header.module.scss'
 
 const NAV_LINKS = [
   { href: '/work', label: 'Work' },
   { href: '/articles', label: 'Articles' },
   { href: '/about', label: 'About' },
-];
+]
 
 const Header = () => {
-  const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
-  const overlayRef = useRef<HTMLDialogElement>(null);
-  const hamburgerRef = useRef<HTMLButtonElement>(null);
+  const pathname = usePathname()
+  const [isOpen, setIsOpen] = useState(false)
+  const overlayRef = useRef<HTMLDialogElement>(null)
+  const hamburgerRef = useRef<HTMLButtonElement>(null)
 
-  const close = useCallback(() => setIsOpen(false), []);
+  const close = useCallback(() => setIsOpen(false), [])
 
   // Close on route change
   useEffect(() => {
-    close();
-  }, [pathname, close]);
+    close()
+  }, [pathname, close])
 
   // Lock body scroll when overlay is open
   useEffect(() => {
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [isOpen]);
+    document.body.style.overflow = isOpen ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isOpen])
 
   // Trap focus inside overlay + Escape to close
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen) return
 
-    const overlay = overlayRef.current;
-    if (!overlay) return;
+    const overlay = overlayRef.current
+    if (!overlay) return
 
-    const focusableSelectors =
-      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+    const focusableSelectors = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
 
-    const getFocusable = () =>
-      Array.from(overlay.querySelectorAll<HTMLElement>(focusableSelectors));
+    const getFocusable = () => Array.from(overlay.querySelectorAll<HTMLElement>(focusableSelectors))
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        close();
-        hamburgerRef.current?.focus();
-        return;
+        close()
+        hamburgerRef.current?.focus()
+        return
       }
-      if (e.key !== 'Tab') return;
+      if (e.key !== 'Tab') return
 
-      const focusable = getFocusable();
-      if (!focusable.length) return;
+      const focusable = getFocusable()
+      if (!focusable.length) return
 
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
+      const first = focusable.at(0)
+      const last = focusable.at(-1)
 
       if (e.shiftKey) {
-        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
-      } else {
-        if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+        if (document.activeElement === first) {
+          e.preventDefault()
+          last?.focus()
+        }
+      } else if (document.activeElement === last) {
+        e.preventDefault()
+        first?.focus()
       }
-    };
+    }
 
-    document.addEventListener('keydown', handleKeyDown);
-    getFocusable()[0]?.focus();
+    document.addEventListener('keydown', handleKeyDown)
+    getFocusable()[0]?.focus()
 
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, close]);
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [isOpen, close])
 
   return (
     <>
       <header role="banner">
         <div className="navbar wrapper">
           <h2>
-            <Link href="/" className={styles.brand}>Lenny Peters</Link>
+            <Link href="/" className={styles.brand}>
+              Lenny Peters
+            </Link>
           </h2>
 
           {/* Desktop nav */}
@@ -124,11 +130,7 @@ const Header = () => {
         <span className={`${styles.corner} ${styles.cornerBR}`} aria-hidden="true" />
 
         {/* Close button */}
-        <button
-          className={styles.overlayClose}
-          onClick={close}
-          aria-label="Close navigation"
-        >
+        <button className={styles.overlayClose} onClick={close} aria-label="Close navigation">
           <span className={styles.closeX} aria-hidden="true" />
           <span className={styles.closeX} aria-hidden="true" />
         </button>
@@ -163,7 +165,7 @@ const Header = () => {
         </p>
       </dialog>
     </>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

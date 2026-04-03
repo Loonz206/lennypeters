@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './contact-section.module.scss';
+import React from 'react'
+import styles from './contact-section.module.scss'
 
 const ContactSection = () => {
   return (
@@ -18,7 +18,9 @@ const ContactSection = () => {
             className={styles.link}
             aria-label="Send email to Lenny Peters"
           >
-            <span className={styles.icon} aria-hidden="true">✉</span>
+            <span className={styles.icon} aria-hidden="true">
+              ✉
+            </span>{' '}
             hello@lennypeters.dev
           </a>
         </li>
@@ -30,7 +32,9 @@ const ContactSection = () => {
             className={styles.link}
             aria-label="GitHub profile (opens in new tab)"
           >
-            <span className={styles.icon} aria-hidden="true">⌥</span>
+            <span className={styles.icon} aria-hidden="true">
+              ⌥
+            </span>{' '}
             github.com/lennypeters
           </a>
         </li>
@@ -42,13 +46,15 @@ const ContactSection = () => {
             className={styles.link}
             aria-label="LinkedIn profile (opens in new tab)"
           >
-            <span className={styles.icon} aria-hidden="true">in</span>
+            <span className={styles.icon} aria-hidden="true">
+              in
+            </span>{' '}
             linkedin.com/in/lennypeters
           </a>
         </li>
       </ul>
     </section>
-  );
-};
+  )
+}
 
-export default ContactSection;
+export default ContactSection

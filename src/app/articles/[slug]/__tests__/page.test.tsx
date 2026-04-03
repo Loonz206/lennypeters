@@ -42,17 +42,17 @@ const mockArticle: Article = {
   contentHtml: '<p>Article content here</p>',
 }
 
+async function renderPage(slug = 'test-article') {
+  const jsx = await ArticlePage({ params: Promise.resolve({ slug }) })
+  render(jsx)
+}
+
 describe('ArticlePage', () => {
   beforeEach(() => {
     jest.clearAllMocks()
     mockGetArticleBySlug.mockResolvedValue(mockArticle)
     mockGetAllArticleMetas.mockReturnValue([])
   })
-
-  async function renderPage(slug = 'test-article') {
-    const jsx = await ArticlePage({ params: Promise.resolve({ slug }) })
-    render(jsx)
-  }
 
   it('renders the article title as an h1', async () => {
     await renderPage()

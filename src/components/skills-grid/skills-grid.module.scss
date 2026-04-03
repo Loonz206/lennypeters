@@ -2,14 +2,14 @@
 @import '@/styles/mixins';
 
 .section {
-  padding: $space-7 0;  // 48px
+  padding: $space-7 0; // 48px
 }
 
 .sectionTitle {
   font-size: 1.75rem;
   color: $primaryColor;
-  margin-bottom: $space-5;    // 32px
-  padding-bottom: $space-3;   // 16px
+  margin-bottom: $space-5; // 32px
+  padding-bottom: $space-3; // 16px
   border-bottom: 2px solid $primaryColor;
   display: inline-block;
   @include neon-glow($primaryColor);
@@ -18,7 +18,7 @@
 .grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: $space-4;  // 24px
+  gap: $space-4; // 24px
 
   @include responsive(tablet) {
     grid-template-columns: repeat(2, 1fr);
@@ -32,11 +32,12 @@
 .group {
   background-color: rgba($primaryColor, 0.03);
   border-radius: 4px;
-  padding: $space-3 $space-4;  // 16px 24px
-  border-top: 3px solid $primaryColor;
+  padding: $space-3 $space-4; // 16px 24px
   border: 1px solid rgba($primaryColor, 0.15);
   border-top: 3px solid $primaryColor;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
   @include hud-corners(10px, $primaryColor, 1px);
 
   &:hover {
@@ -51,7 +52,7 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: $primaryColor;
-  margin-bottom: $space-3;  // 16px
+  margin-bottom: $space-3; // 16px
   font-family: $monoSpaced;
   @include neon-glow($primaryColor);
 }
@@ -65,7 +66,7 @@
 .skill {
   font-size: 0.9rem;
   color: $primaryText;
-  padding: $space-1 0;  // 4px
+  padding: $space-1 0; // 4px
   border-bottom: 1px solid rgba($primaryColor, 0.1);
   font-family: $monoSpaced;
   letter-spacing: 0.02em;

@@ -1,29 +1,29 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
+import fs from 'node:fs'
+import path from 'node:path'
+import matter from 'gray-matter'
 
 export interface ArticleMeta {
-  slug: string;
-  title: string;
-  date: string;
-  excerpt: string;
-  tags: string[];
+  slug: string
+  title: string
+  date: string
+  excerpt: string
+  tags: string[]
 }
 
 export interface Article {
-  meta: ArticleMeta;
-  contentHtml: string;
+  meta: ArticleMeta
+  contentHtml: string
 }
 
-const articlesDirectory = path.join(process.cwd(), 'content', 'articles');
+const articlesDirectory = path.join(process.cwd(), 'content', 'articles')
 
 async function renderMarkdown(content: string): Promise<string> {
-  const { unified } = await import('unified');
-  const remarkParse = (await import('remark-parse')).default;
-  const remarkRehype = (await import('remark-rehype')).default;
-  const rehypeStringify = (await import('rehype-stringify')).default;
-  const rehypePrettyCode = (await import('rehype-pretty-code')).default;
-  const rehypeSlug = (await import('rehype-slug')).default;
+  const { unified } = await import('unified')
+  const remarkParse = (await import('remark-parse')).default
+  const remarkRehype = (await import('remark-rehype')).default
+  const rehypeStringify = (await import('rehype-stringify')).default
+  const rehypePrettyCode = (await import('rehype-pretty-code')).default
+  const rehypeSlug = (await import('rehype-slug')).default
 
   const result = await unified()
     .use(remarkParse)
@@ -31,23 +31,23 @@ async function renderMarkdown(content: string): Promise<string> {
     .use(rehypePrettyCode, { theme: 'github-dark' })
     .use(rehypeSlug)
     .use(rehypeStringify)
-    .process(content);
+    .process(content)
 
-  return String(result);
+  return String(result)
 }
 
 function getArticleFiles(): string[] {
   return fs
     .readdirSync(articlesDirectory)
-    .filter((file) => file.endsWith('.md'))
-    .sort();
+    .filter(file => file.endsWith('.md'))
+    .sort((a, b) => a.localeCompare(b))
 }
 
 function parseArticleMeta(filename: string): ArticleMeta {
-  const slug = filename.replace(/\.md$/, '');
-  const fullPath = path.join(articlesDirectory, filename);
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
-  const { data } = matter(fileContents);
+  const slug = filename.replace(/\.md$/, '')
+  const fullPath = path.join(articlesDirectory, filename)
+  const fileContents = fs.readFileSync(fullPath, 'utf8')
+  const { data } = matter(fileContents)
 
   return {
     slug,
@@ -55,24 +55,24 @@ function parseArticleMeta(filename: string): ArticleMeta {
     date: data.date,
     excerpt: data.excerpt,
     tags: data.tags ?? [],
-  };
+  }
 }
 
 export function getAllArticleMetas(): ArticleMeta[] {
   return getArticleFiles()
     .map(parseArticleMeta)
-    .sort((a, b) => (a.date > b.date ? -1 : 1));
+    .sort((a, b) => (a.date > b.date ? -1 : 1))
 }
 
 export async function getArticleBySlug(slug: string): Promise<Article | null> {
-  const filename = `${slug}.md`;
-  const fullPath = path.join(articlesDirectory, filename);
+  const filename = `${slug}.md`
+  const fullPath = path.join(articlesDirectory, filename)
 
-  if (!fs.existsSync(fullPath)) return null;
+  if (!fs.existsSync(fullPath)) return null
 
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
-  const { data, content } = matter(fileContents);
-  const contentHtml = await renderMarkdown(content);
+  const fileContents = fs.readFileSync(fullPath, 'utf8')
+  const { data, content } = matter(fileContents)
+  const contentHtml = await renderMarkdown(content)
 
   return {
     meta: {
@@ -83,9 +83,9 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
       tags: data.tags ?? [],
     },
     contentHtml,
-  };
+  }
 }
 
 export function getFeaturedArticles(count = 3): ArticleMeta[] {
-  return getAllArticleMetas().slice(0, count);
+  return getAllArticleMetas().slice(0, count)
 }

@@ -1,34 +1,40 @@
-"use client"
+'use client'
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import type { ArticleMeta } from '@/lib/articles';
-import styles from './code-thinking.module.scss';
+import React, { useState } from 'react'
+import Link from 'next/link'
+import type { ArticleMeta } from '@/lib/articles'
+import styles from './code-thinking.module.scss'
 
-const ITEMS_PER_PAGE = 4;
+const ITEMS_PER_PAGE = 4
 
 interface CodeThinkingProps {
-  articles: ArticleMeta[];
+  articles: ArticleMeta[]
 }
 
 const CodeThinking = ({ articles }: CodeThinkingProps) => {
-  const [page, setPage] = useState(0);
-  const totalPages = Math.ceil(articles.length / ITEMS_PER_PAGE);
-  const visible = articles.slice(page * ITEMS_PER_PAGE, (page + 1) * ITEMS_PER_PAGE);
+  const [page, setPage] = useState(0)
+  const totalPages = Math.ceil(articles.length / ITEMS_PER_PAGE)
+  const visible = articles.slice(page * ITEMS_PER_PAGE, (page + 1) * ITEMS_PER_PAGE)
 
   return (
     <section className={styles.section} aria-labelledby="blog-heading">
       <div className={styles.sectionHeader}>
-        <h2 id="blog-heading" className={styles.sectionTitle}>ARTICLES</h2>
+        <h2 id="blog-heading" className={styles.sectionTitle}>
+          ARTICLES
+        </h2>
         <span className={styles.line} aria-hidden="true" />
-        <span className={styles.count}>[{String(articles.length).padStart(2, '0')}_TOTAL_ENTRIES]</span>
+        <span className={styles.count}>
+          [{String(articles.length).padStart(2, '0')}_TOTAL_ENTRIES]
+        </span>
       </div>
 
       <div className={styles.grid}>
         {visible.map(article => (
           <article key={article.slug} className={styles.card}>
             <div className={styles.topBar}>
-              <span className={styles.cardId}>{article.slug.replace(/-/g, '_').toUpperCase()}</span>
+              <span className={styles.cardId}>
+                {article.slug.replaceAll('-', '_').toUpperCase()}
+              </span>
               <span className={styles.dot} aria-hidden="true" />
             </div>
 
@@ -40,7 +46,9 @@ const CodeThinking = ({ articles }: CodeThinkingProps) => {
 
               <ul className={styles.tags} aria-label="Tags">
                 {article.tags.map(tag => (
-                  <li key={tag} className={styles.tag}>{tag}</li>
+                  <li key={tag} className={styles.tag}>
+                    {tag}
+                  </li>
                 ))}
               </ul>
 
@@ -76,7 +84,7 @@ const CodeThinking = ({ articles }: CodeThinkingProps) => {
         </div>
       )}
     </section>
-  );
-};
+  )
+}
 
-export default CodeThinking;
+export default CodeThinking

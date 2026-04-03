@@ -1,6 +1,6 @@
-import React from 'react';
-import { experience, formatDateRange } from '@/data/experience';
-import styles from './experience-timeline.module.scss';
+import React from 'react'
+import { experience, formatDateRange } from '@/data/experience'
+import styles from './experience-timeline.module.scss'
 
 const ExperienceTimeline = () => {
   return (
@@ -9,8 +9,8 @@ const ExperienceTimeline = () => {
         Experience
       </h2>
       <ol className={styles.timeline} aria-label="Work history">
-        {experience.map((entry, index) => (
-          <li key={index} className={styles.entry}>
+        {experience.map(entry => (
+          <li key={`${entry.company}-${entry.role}-${entry.startDate}`} className={styles.entry}>
             <div className={styles.marker} aria-hidden="true" />
             <div className={styles.content}>
               <div className={styles.header}>
@@ -20,14 +20,12 @@ const ExperienceTimeline = () => {
                     {entry.company} &mdash; {entry.location}
                   </p>
                 </div>
-                <p className={styles.dates}>
-                  {formatDateRange(entry.startDate, entry.endDate)}
-                </p>
+                <p className={styles.dates}>{formatDateRange(entry.startDate, entry.endDate)}</p>
               </div>
               <p className={styles.description}>{entry.description}</p>
               <ul className={styles.highlights}>
-                {entry.highlights.map((highlight, i) => (
-                  <li key={i} className={styles.highlight}>
+                {entry.highlights.map(highlight => (
+                  <li key={highlight} className={styles.highlight}>
                     {highlight}
                   </li>
                 ))}
@@ -37,7 +35,7 @@ const ExperienceTimeline = () => {
         ))}
       </ol>
     </section>
-  );
-};
+  )
+}
 
-export default ExperienceTimeline;
+export default ExperienceTimeline

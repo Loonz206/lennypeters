@@ -1,11 +1,11 @@
 export interface ExperienceEntry {
-  role: string;
-  company: string;
-  location: string;
-  startDate: string;
-  endDate: string | 'Present';
-  description: string;
-  highlights: string[];
+  role: string
+  company: string
+  location: string
+  startDate: string
+  endDate: string
+  description: string
+  highlights: string[]
 }
 
 export const experience: ExperienceEntry[] = [
@@ -54,15 +54,15 @@ export const experience: ExperienceEntry[] = [
       'Explored GraphQL and Express through personal and open-source projects',
     ],
   },
-];
+]
 
-export function formatDateRange(start: string, end: string | 'Present'): string {
+export function formatDateRange(start: string, end: string): string {
   const fmt = (d: string) => {
-    const [year, month] = d.split('-');
+    const [year, month] = d.split('-')
     return new Date(Number(year), Number(month) - 1).toLocaleDateString('en-GB', {
       month: 'short',
       year: 'numeric',
-    });
-  };
-  return `${fmt(start)} – ${end === 'Present' ? 'Present' : fmt(end)}`;
+    })
+  }
+  return `${fmt(start)} – ${end === 'Present' ? 'Present' : fmt(end)}`
 }

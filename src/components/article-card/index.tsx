@@ -1,10 +1,10 @@
-import React from 'react';
-import Link from 'next/link';
-import type { ArticleMeta } from '@/lib/articles';
-import styles from './article-card.module.scss';
+import React from 'react'
+import Link from 'next/link'
+import type { ArticleMeta } from '@/lib/articles'
+import styles from './article-card.module.scss'
 
 interface ArticleCardProps {
-  article: ArticleMeta;
+  article: ArticleMeta
 }
 
 const ArticleCard = ({ article }: ArticleCardProps) => {
@@ -12,12 +12,12 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
-  });
+  })
 
   return (
     <article className={styles.card}>
       <div className={styles.topBar}>
-        <span className={styles.slug}>{article.slug.replace(/-/g, '_').toUpperCase()}</span>
+        <span className={styles.slug}>{article.slug.replaceAll('-', '_').toUpperCase()}</span>
         <time dateTime={article.date} className={styles.date}>
           {formattedDate}
         </time>
@@ -36,12 +36,16 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
             </li>
           ))}
         </ul>
-        <Link href={`/articles/${article.slug}`} className={styles.btn} aria-label={`Read ${article.title}`}>
+        <Link
+          href={`/articles/${article.slug}`}
+          className={styles.btn}
+          aria-label={`Read ${article.title}`}
+        >
           Read Article
         </Link>
       </div>
     </article>
-  );
-};
+  )
+}
 
-export default ArticleCard;
+export default ArticleCard

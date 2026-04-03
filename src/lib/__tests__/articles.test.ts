@@ -1,4 +1,4 @@
-import fs from 'fs'
+import fs from 'node:fs'
 import matter from 'gray-matter'
 
 jest.mock('fs')
@@ -35,7 +35,7 @@ const FAKE_METAS = {
 }
 
 function setupMocks() {
-  mockFs.readdirSync.mockReturnValue(FAKE_FILES as unknown as fs.Dirent[])
+  mockFs.readdirSync.mockReturnValue(FAKE_FILES as unknown as ReturnType<typeof fs.readdirSync>)
   mockFs.readFileSync.mockImplementation((filePath: fs.PathOrFileDescriptor) => {
     const filename = String(filePath).split('/').pop()!
     const meta = FAKE_METAS[filename as keyof typeof FAKE_METAS]
@@ -45,16 +45,17 @@ function setupMocks() {
     const filename = String(filePath).split('/').pop()!
     return FAKE_FILES.includes(filename)
   })
-  mockMatter.mockImplementation((content: string | Buffer) => {
+  mockMatter.mockImplementation((input: string | Buffer | { content: string | Buffer }) => {
+    const content = typeof input === 'object' && !Buffer.isBuffer(input) ? input.content : input
     const str = String(content)
-    const titleMatch = str.match(/title: (.+)/)
+    const titleMatch = /title: (.+)/.exec(str)
     const filename = FAKE_FILES.find(
       f => FAKE_METAS[f as keyof typeof FAKE_METAS].title === titleMatch?.[1]
     )
     const meta = filename
       ? FAKE_METAS[filename as keyof typeof FAKE_METAS]
       : FAKE_METAS['article-a.md']
-    return { data: meta, content: 'body content' } as ReturnType<typeof matter>
+    return { data: meta, content: 'body content' } as unknown as ReturnType<typeof matter>
   })
 }
 
@@ -85,7 +86,7 @@ describe('getAllArticleMetas', () => {
   })
 
   it('returns empty array when no .md files exist', () => {
-    mockFs.readdirSync.mockReturnValue([] as unknown as fs.Dirent[])
+    mockFs.readdirSync.mockReturnValue([] as unknown as ReturnType<typeof fs.readdirSync>)
     expect(getAllArticleMetas()).toEqual([])
   })
 })

@@ -1,9 +1,9 @@
-'use client';
+'use client'
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import Profile from '@/components/profile';
-import styles from './hero-terminal.module.scss';
+import React, { useState, useEffect } from 'react'
+import Link from 'next/link'
+import Profile from '@/components/profile'
+import styles from './hero-terminal.module.scss'
 
 const LINES = [
   { prompt: '$', text: 'whoami' },
@@ -15,37 +15,37 @@ const LINES = [
   { prompt: '$', text: 'node mission.js' },
   { prompt: '>', text: 'turning complex AI ideas' },
   { prompt: '>', text: 'into production-ready systems' },
-];
+]
 
-const CHAR_DELAY = 45;
-const LINE_DELAY = 520;
+const CHAR_DELAY = 45
+const LINE_DELAY = 520
 
 const HeroTerminal = () => {
-  const [completedLines, setCompletedLines] = useState<typeof LINES>([]);
-  const [currentLineIdx, setCurrentLineIdx] = useState(0);
-  const [currentText, setCurrentText] = useState('');
+  const [completedLines, setCompletedLines] = useState<typeof LINES>([])
+  const [currentLineIdx, setCurrentLineIdx] = useState(0)
+  const [currentText, setCurrentText] = useState('')
 
   useEffect(() => {
-    if (currentLineIdx >= LINES.length) return;
+    if (currentLineIdx >= LINES.length) return
 
-    const line = LINES[currentLineIdx];
+    const line = LINES[currentLineIdx]
 
     if (currentText.length < line.text.length) {
       const timer = setTimeout(() => {
-        setCurrentText(line.text.slice(0, currentText.length + 1));
-      }, CHAR_DELAY);
-      return () => clearTimeout(timer);
+        setCurrentText(line.text.slice(0, currentText.length + 1))
+      }, CHAR_DELAY)
+      return () => clearTimeout(timer)
     }
 
     const timer = setTimeout(() => {
-      setCompletedLines(prev => [...prev, line]);
-      setCurrentLineIdx(prev => prev + 1);
-      setCurrentText('');
-    }, LINE_DELAY);
-    return () => clearTimeout(timer);
-  }, [currentText, currentLineIdx]);
+      setCompletedLines(prev => [...prev, line])
+      setCurrentLineIdx(prev => prev + 1)
+      setCurrentText('')
+    }, LINE_DELAY)
+    return () => clearTimeout(timer)
+  }, [currentText, currentLineIdx])
 
-  const currentLine = LINES[currentLineIdx];
+  const currentLine = LINES[currentLineIdx]
 
   return (
     <section className={styles.hero} aria-label="Introduction">
@@ -79,7 +79,9 @@ const HeroTerminal = () => {
 
               {currentLine && (
                 <div className={styles.terminalLine}>
-                  <span className={currentLine.prompt === '$' ? styles.promptCmd : styles.promptOut}>
+                  <span
+                    className={currentLine.prompt === '$' ? styles.promptCmd : styles.promptOut}
+                  >
                     {currentLine.prompt}
                   </span>
                   <span className={currentLine.prompt === '$' ? styles.command : styles.output}>
@@ -109,8 +111,12 @@ const HeroTerminal = () => {
       </p>
 
       <div className={styles.actions}>
-        <Link href="/articles" className={styles.btnPrimary}>Articles</Link>
-        <Link href="/about" className={styles.btnSecondary}>about</Link>
+        <Link href="/articles" className={styles.btnPrimary}>
+          Articles
+        </Link>
+        <Link href="/about" className={styles.btnSecondary}>
+          about
+        </Link>
       </div>
 
       <div className={styles.bottomMeta}>
@@ -120,12 +126,11 @@ const HeroTerminal = () => {
           <span className={styles.vVal}>v4.2.1</span>
         </span>
         <span className={styles.statusBadge}>
-          <span className={styles.statusDot} aria-hidden="true"></span>{' '}
-          STATUS: STABLE
+          <span className={styles.statusDot} aria-hidden="true"></span> STATUS: STABLE
         </span>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default HeroTerminal;
+export default HeroTerminal

@@ -1,16 +1,16 @@
-import type { Metadata } from 'next';
-import ArticleCard from '@/components/article-card';
-import { getAllArticleMetas } from '@/lib/articles';
-import styles from './articles.module.scss';
+import type { Metadata } from 'next'
+import ArticleCard from '@/components/article-card'
+import { getAllArticleMetas } from '@/lib/articles'
+import styles from './articles.module.scss'
 
 export const metadata: Metadata = {
   title: 'Articles — Lenny Peters',
   description:
     'Writing on React, TypeScript, CSS architecture, accessibility, and modern web engineering.',
-};
+}
 
 const ArticlesPage = () => {
-  const articles = getAllArticleMetas();
+  const articles = getAllArticleMetas()
 
   return (
     <div className={styles.page}>
@@ -27,7 +27,7 @@ const ArticlesPage = () => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ArticlesPage;
+export default ArticlesPage

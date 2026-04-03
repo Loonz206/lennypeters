@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const Main = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -6,6 +6,6 @@ const Main = ({ children }: { children: React.ReactNode }) => {
       {children}
     </main>
   )
-};
+}
 
-export default Main;
+export default Main

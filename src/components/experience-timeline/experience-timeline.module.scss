@@ -2,14 +2,14 @@
 @import '@/styles/mixins';
 
 .section {
-  padding: $space-7 0;  // 48px
+  padding: $space-7 0; // 48px
 }
 
 .sectionTitle {
   font-size: 1.75rem;
   color: $primaryColor;
-  margin-bottom: $space-6;   // 40px
-  padding-bottom: $space-3;  // 16px
+  margin-bottom: $space-6; // 40px
+  padding-bottom: $space-3; // 16px
   border-bottom: 2px solid $primaryColor;
   display: inline-block;
   @include neon-glow($primaryColor);
@@ -24,8 +24,8 @@
   &::before {
     content: '';
     position: absolute;
-    left: 8px;   // 1 unit
-    top: 8px;    // 1 unit
+    left: 8px; // 1 unit
+    top: 8px; // 1 unit
     bottom: 0;
     width: 2px;
     background-color: rgba($primaryColor, 0.3);
@@ -39,8 +39,8 @@
 
 .entry {
   display: flex;
-  gap: $space-5;          // 32px
-  padding-bottom: $space-6;  // 40px
+  gap: $space-5; // 32px
+  padding-bottom: $space-6; // 40px
   position: relative;
 
   &:last-child {
@@ -50,15 +50,17 @@
 
 .marker {
   flex-shrink: 0;
-  width: 24px;   // 3 units
-  height: 24px;  // 3 units
+  width: 24px; // 3 units
+  height: 24px; // 3 units
   border-radius: 50%;
   background-color: $primaryColor;
   border: 3px solid rgba($primaryColor, 0.3);
   margin-top: 0;
   position: relative;
   z-index: 1;
-  box-shadow: 0 0 8px rgba($primaryColor, 0.5), 0 0 20px rgba($primaryColor, 0.2);
+  box-shadow:
+    0 0 8px rgba($primaryColor, 0.5),
+    0 0 20px rgba($primaryColor, 0.2);
   animation: borderGlow 3s infinite;
 }
 
@@ -69,7 +71,7 @@
 .header {
   display: flex;
   flex-direction: column;
-  gap: $space-1;           // 4px
+  gap: $space-1; // 4px
   margin-bottom: $space-3; // 16px
 
   @include responsive(tablet) {
@@ -83,7 +85,7 @@
   font-size: 1.1rem;
   font-weight: 700;
   color: $primaryText;
-  margin: 0 0 $space-1;  // 4px
+  margin: 0 0 $space-1; // 4px
 }
 
 .company {
@@ -105,7 +107,7 @@
 .description {
   color: $secondaryText;
   line-height: 1.65;
-  margin-bottom: $space-3;  // 16px
+  margin-bottom: $space-3; // 16px
 }
 
 .highlights {
@@ -117,7 +119,7 @@
 .highlight {
   font-size: 0.9rem;
   color: $primaryText;
-  padding: $space-1 0 $space-1 $space-3;  // 4px 0 4px 16px
+  padding: $space-1 0 $space-1 $space-3; // 4px 0 4px 16px
   position: relative;
 
   &::before {

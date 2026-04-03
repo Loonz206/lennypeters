@@ -2,7 +2,7 @@
 @import '@/styles/mixins';
 
 .hero {
-  padding: $space-8 0 $space-9;  // 56px 0 64px
+  padding: $space-8 0 $space-9; // 56px 0 64px
   font-family: $monoSpaced;
   border-bottom: 1px solid rgba($primaryColor, 0.3);
   position: relative;
@@ -15,7 +15,7 @@
 .topMeta {
   display: flex;
   align-items: center;
-  gap: $space-2;           // 8px
+  gap: $space-2; // 8px
   margin-bottom: $space-6; // 40px
   font-size: 0.75rem;
   letter-spacing: 0.08em;
@@ -23,16 +23,24 @@
   color: $secondaryText;
 }
 
-.metaLabel { color: $primaryColor; font-weight: 700; @include neon-glow($primaryColor); }
-.metaSep   { color: $dividerColor; }
-.metaValue { color: $secondaryText; }
+.metaLabel {
+  color: $primaryColor;
+  font-weight: 700;
+  @include neon-glow($primaryColor);
+}
+.metaSep {
+  color: $dividerColor;
+}
+.metaValue {
+  color: $secondaryText;
+}
 
 // ── Main title block ──────────────────────────────────────────────────────────
 
 .main {
   display: flex;
   flex-direction: column;
-  gap: $space-5;           // 32px
+  gap: $space-5; // 32px
   margin-bottom: $space-4; // 24px
 
   @include responsive(tablet) {
@@ -41,7 +49,11 @@
   }
 }
 
-.titleBlock { width: 100%; min-width: 0; flex: 1 1 0; }
+.titleBlock {
+  width: 100%;
+  min-width: 0;
+  flex: 1 1 0;
+}
 
 // ── Terminal window ───────────────────────────────────────────────────────────
 
@@ -69,7 +81,7 @@
 .terminalBar {
   display: flex;
   align-items: center;
-  gap: $space-1;           // 4px
+  gap: $space-1; // 4px
   padding: $space-2 $space-3; // 8px 16px
   background-color: rgba($dark, 0.9);
   border-bottom: 1px solid rgba($primaryColor, 0.15);
@@ -82,9 +94,15 @@
   flex-shrink: 0;
 }
 
-.dotRed    { background-color: #ff5f57; }
-.dotYellow { background-color: #febc2e; }
-.dotGreen  { background-color: #28c840; }
+.dotRed {
+  background-color: #ff5f57;
+}
+.dotYellow {
+  background-color: #febc2e;
+}
+.dotGreen {
+  background-color: #28c840;
+}
 
 .terminalTitle {
   flex: 1;
@@ -105,7 +123,7 @@
 .terminalLine {
   display: flex;
   align-items: baseline;
-  gap: $space-2;  // 8px
+  gap: $space-2; // 8px
   line-height: 1.7;
 }
 
@@ -146,8 +164,13 @@
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
 // ── Sidebar metadata ──────────────────────────────────────────────────────────
@@ -167,7 +190,7 @@
   color: $secondaryText;
   line-height: 1.6;
   max-width: 560px;
-  margin-bottom: $space-5;  // 32px
+  margin-bottom: $space-5; // 32px
 
   @include responsive(tablet) {
     font-size: 1.25rem;
@@ -178,7 +201,7 @@
 
 .actions {
   display: flex;
-  gap: $space-3;           // 16px
+  gap: $space-3; // 16px
   flex-wrap: wrap;
   margin-bottom: $space-7; // 48px
 }
@@ -188,10 +211,15 @@
   font-family: $monoSpaced;
   font-size: 0.875rem;
   letter-spacing: 0.08em;
-  padding: $space-2 $space-4;  // 8px 24px
+  padding: $space-2 $space-4; // 8px 24px
   text-decoration: none;
   border-radius: 2px;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, text-shadow 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    text-shadow 0.2s ease;
   text-transform: uppercase;
 }
 
@@ -201,12 +229,16 @@
   border: 1px solid $primaryColor;
   @include neon-border($primaryColor);
 
-  &:hover, &:focus-visible {
+  &:hover,
+  &:focus-visible {
     background-color: lighten($primaryColor, 10%);
     border-color: lighten($primaryColor, 10%);
     color: $darkest;
     text-decoration: none;
-    box-shadow: 0 0 12px rgba($primaryColor, 0.6), 0 0 30px rgba($primaryColor, 0.3), 0 0 60px rgba($primaryColor, 0.15);
+    box-shadow:
+      0 0 12px rgba($primaryColor, 0.6),
+      0 0 30px rgba($primaryColor, 0.3),
+      0 0 60px rgba($primaryColor, 0.15);
   }
 }
 
@@ -215,7 +247,8 @@
   color: $primaryText;
   border: 1px solid rgba($primaryColor, 0.3);
 
-  &:hover, &:focus-visible {
+  &:hover,
+  &:focus-visible {
     border-color: $primaryColor;
     color: $primaryColor;
     @include neon-border($primaryColor);
@@ -229,7 +262,7 @@
 .bottomMeta {
   display: flex;
   align-items: center;
-  gap: $space-4;  // 24px
+  gap: $space-4; // 24px
   flex-wrap: wrap;
   font-size: 0.7rem;
   letter-spacing: 0.1em;
@@ -238,39 +271,53 @@
 
 .version {
   display: flex;
-  gap: $space-1;  // 4px
+  gap: $space-1; // 4px
 }
 
-.vKey { color: $dividerColor; }
-.vSep { color: $dividerColor; }
-.vVal { color: $primaryColor; @include neon-glow($primaryColor); }
+.vKey {
+  color: $dividerColor;
+}
+.vSep {
+  color: $dividerColor;
+}
+.vVal {
+  color: $primaryColor;
+  @include neon-glow($primaryColor);
+}
 
 .statusBadge {
   display: flex;
   align-items: center;
-  gap: $space-2;  // 8px
+  gap: $space-2; // 8px
   color: $successColor;
   font-weight: 700;
   @include neon-glow($successColor);
 }
 
 .statusDot {
-  width: 8px;   // 1 unit
-  height: 8px;  // 1 unit
+  width: 8px; // 1 unit
+  height: 8px; // 1 unit
   border-radius: 50%;
   background-color: $successColor;
   display: inline-block;
   animation: pulse 2s infinite;
-  box-shadow: 0 0 6px rgba($successColor, 0.6), 0 0 16px rgba($successColor, 0.3);
+  box-shadow:
+    0 0 6px rgba($successColor, 0.6),
+    0 0 16px rgba($successColor, 0.3);
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
-    box-shadow: 0 0 6px rgba($successColor, 0.6), 0 0 16px rgba($successColor, 0.3);
+    box-shadow:
+      0 0 6px rgba($successColor, 0.6),
+      0 0 16px rgba($successColor, 0.3);
   }
   50% {
     opacity: 0.4;
-    box-shadow: 0 0 2px rgba($successColor, 0.3), 0 0 8px rgba($successColor, 0.15);
+    box-shadow:
+      0 0 2px rgba($successColor, 0.3),
+      0 0 8px rgba($successColor, 0.15);
   }
 }

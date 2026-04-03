@@ -4,7 +4,7 @@ description: >
   Write, update, and fix Jest and React Testing Library tests for this Next.js
   portfolio. Use for unit tests, component tests, accessible assertions,
   colocated __tests__ files, and repo-specific testing patterns.
-argument-hint: "Describe the component or behavior to test and any failing Jest output"
+argument-hint: 'Describe the component or behavior to test and any failing Jest output'
 ---
 
 # Testing Skill

@@ -41,12 +41,12 @@
     text-decoration: none;
   }
 
-  article a[href^="http"]:after {
-    content: " <"attr(href) "> ";
+  article a[href^='http']:after {
+    content: ' <' attr(href) '> ';
   }
 
-  article a[href^="#"]:after {
-    content: "";
+  article a[href^='#']:after {
+    content: '';
   }
 
   ul,

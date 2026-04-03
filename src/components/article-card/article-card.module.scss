@@ -7,7 +7,9 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
   @include hud-corners(14px, $primaryColor, 1px);
 
   &:hover {
@@ -64,7 +66,9 @@
 .titleLink {
   color: $primaryText;
   text-decoration: none;
-  transition: color 0.2s ease, text-shadow 0.2s ease;
+  transition:
+    color 0.2s ease,
+    text-shadow 0.2s ease;
 
   &:hover,
   &:focus-visible {
@@ -113,7 +117,11 @@
   border: 2px solid rgba($primaryColor, 0.5);
   padding: $space-2 $space-4;
   text-decoration: none;
-  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 
   &:hover,
   &:focus-visible {

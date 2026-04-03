@@ -23,10 +23,10 @@ Every article file must live at `content/articles/{slug}.md` and include this fr
 
 ```yaml
 ---
-title: "Article Title Here"
-date: "YYYY-MM-DD"
-excerpt: "A one- or two-sentence summary for card previews."
-tags: ["Tag1", "Tag2", "Tag3"]
+title: 'Article Title Here'
+date: 'YYYY-MM-DD'
+excerpt: 'A one- or two-sentence summary for card previews.'
+tags: ['Tag1', 'Tag2', 'Tag3']
 ---
 ```
 
@@ -41,6 +41,7 @@ tags: ["Tag1", "Tag2", "Tag3"]
 ### 1. Parse the topic
 
 Extract from the user prompt or issue body:
+
 - **Topic**: the core subject
 - **Angle** (optional): specific perspective or subtopic
 - **Target audience** (default: Senior engineers)
@@ -98,12 +99,14 @@ Generate a structured outline before writing:
 Write the article following these rules:
 
 **Voice & Tone:**
+
 - Senior Engineer perspective: confident, opinionated but fair, practical over theoretical
 - First person singular: "I've found...", "In my experience...", "Here's what I recommend..."
 - Direct and concise — no filler, no hedging without reason
 - Assume the reader is a competent developer, not a beginner
 
 **Content Rules:**
+
 - Every code example must be complete and runnable — never use pseudo-code or `// ...` elisions
 - Code blocks must specify the language: ` ```tsx `, ` ```scss `, ` ```bash `, etc.
 - Every major claim or recommendation cites a source: `[1]`, `[2]`, etc.
@@ -112,6 +115,7 @@ Write the article following these rules:
 - Keep total length between 800–1500 words (excluding code blocks)
 
 **Markdown Rules:**
+
 - Use `##` for main sections, `###` for subsections — never `#` (the title comes from frontmatter)
 - Use fenced code blocks with language identifiers
 - Use `>` blockquotes for callouts or important notes
@@ -121,6 +125,7 @@ Write the article following these rules:
 ### 5. Write the file
 
 Save to `content/articles/{slug}.md` where `{slug}` is derived from the title:
+
 - Lowercase
 - Replace spaces with hyphens
 - Remove special characters
@@ -129,6 +134,7 @@ Save to `content/articles/{slug}.md` where `{slug}` is derived from the title:
 ### 6. Validate
 
 After creating the file, verify:
+
 - [ ] Frontmatter has all required fields: `title`, `date`, `excerpt`, `tags`
 - [ ] `date` is a valid ISO date string
 - [ ] `tags` is an array of strings
@@ -139,12 +145,12 @@ After creating the file, verify:
 
 ## Example Output
 
-```markdown
+````markdown
 ---
-title: "React Server Components Streaming Patterns"
-date: "2025-07-10"
-excerpt: "Practical streaming patterns for React Server Components that improve perceived performance without sacrificing DX."
-tags: ["React", "Server Components", "Performance", "Next.js"]
+title: 'React Server Components Streaming Patterns'
+date: '2025-07-10'
+excerpt: 'Practical streaming patterns for React Server Components that improve perceived performance without sacrificing DX.'
+tags: ['React', 'Server Components', 'Performance', 'Next.js']
 ---
 
 ## Introduction
@@ -164,9 +170,10 @@ export default async function Dashboard() {
         <Metrics />
       </Suspense>
     </main>
-  );
+  )
 }
 ```
+````
 
 ...
 
@@ -174,4 +181,7 @@ export default async function Dashboard() {
 
 1. [React Server Components RFC](https://github.com/reactjs/rfcs/pull/188)
 2. [Next.js Streaming Documentation](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming)
+
+```
+
 ```

@@ -21,10 +21,13 @@ Use this skill before implementing any code that involves an external library, f
 1. **List libraries involved** in the current task.
 
 2. **Use Context7 to resolve each library** (if the MCP tool is available):
+
    ```
    resolve-library-id: <library name>
    ```
+
    Then fetch its docs:
+
    ```
    get-library-docs: <resolved-id>, topic: <specific topic>
    ```
@@ -43,6 +46,7 @@ Use this skill before implementing any code that involves an external library, f
 ## Project dependencies to research with Context7
 
 Key libraries in this project:
+
 - `next` (15.x) — App Router, server components, server actions
 - `react` (19.x) — hooks, concurrent features
 - `sass` — SCSS module usage

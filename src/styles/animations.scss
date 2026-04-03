@@ -2,17 +2,22 @@
 
 // Glitch text distortion — clip-path + transform (3s loop)
 @keyframes glitch {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0);
     text-shadow: none;
   }
   2% {
     transform: translate(-2px, 1px);
-    text-shadow: 2px 0 $primaryColor, -2px 0 $neonMagenta;
+    text-shadow:
+      2px 0 $primaryColor,
+      -2px 0 $neonMagenta;
   }
   4% {
     transform: translate(2px, -1px);
-    text-shadow: -2px 0 $primaryColor, 2px 0 $neonMagenta;
+    text-shadow:
+      -2px 0 $primaryColor,
+      2px 0 $neonMagenta;
   }
   6% {
     transform: translate(0);
@@ -24,11 +29,15 @@
   }
   44% {
     transform: translate(-1px, 2px);
-    text-shadow: 1px 0 $neonMagenta, -1px 0 $primaryColor;
+    text-shadow:
+      1px 0 $neonMagenta,
+      -1px 0 $primaryColor;
   }
   46% {
     transform: translate(1px, -1px);
-    text-shadow: -1px 0 $neonMagenta, 1px 0 $primaryColor;
+    text-shadow:
+      -1px 0 $neonMagenta,
+      1px 0 $primaryColor;
   }
   48% {
     transform: translate(0);
@@ -48,51 +57,92 @@
 
 // Subtle opacity flicker (random-ish intervals)
 @keyframes flicker {
-  0%, 100% { opacity: 1; }
-  3%  { opacity: 0.94; }
-  6%  { opacity: 1; }
-  7%  { opacity: 0.91; }
-  9%  { opacity: 1; }
-  12% { opacity: 0.96; }
-  20% { opacity: 1; }
-  50% { opacity: 1; }
-  52% { opacity: 0.92; }
-  54% { opacity: 1; }
-  70% { opacity: 1; }
-  72% { opacity: 0.88; }
-  77% { opacity: 1; }
-  93% { opacity: 0.95; }
-  95% { opacity: 1; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  3% {
+    opacity: 0.94;
+  }
+  6% {
+    opacity: 1;
+  }
+  7% {
+    opacity: 0.91;
+  }
+  9% {
+    opacity: 1;
+  }
+  12% {
+    opacity: 0.96;
+  }
+  20% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  52% {
+    opacity: 0.92;
+  }
+  54% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  72% {
+    opacity: 0.88;
+  }
+  77% {
+    opacity: 1;
+  }
+  93% {
+    opacity: 0.95;
+  }
+  95% {
+    opacity: 1;
+  }
 }
 
 // Pulsing border/box-shadow glow intensity
 @keyframes borderGlow {
-  0%, 100% {
-    box-shadow: 0 0 4px rgba($primaryColor, 0.3),
-                0 0 12px rgba($primaryColor, 0.15);
+  0%,
+  100% {
+    box-shadow:
+      0 0 4px rgba($primaryColor, 0.3),
+      0 0 12px rgba($primaryColor, 0.15);
   }
   50% {
-    box-shadow: 0 0 8px rgba($primaryColor, 0.5),
-                0 0 24px rgba($primaryColor, 0.25),
-                0 0 48px rgba($primaryColor, 0.1);
+    box-shadow:
+      0 0 8px rgba($primaryColor, 0.5),
+      0 0 24px rgba($primaryColor, 0.25),
+      0 0 48px rgba($primaryColor, 0.1);
   }
 }
 
 // Pulsing text glow
 @keyframes textGlow {
-  0%, 100% {
-    text-shadow: 0 0 4px rgba($primaryColor, 0.4),
-                 0 0 12px rgba($primaryColor, 0.2);
+  0%,
+  100% {
+    text-shadow:
+      0 0 4px rgba($primaryColor, 0.4),
+      0 0 12px rgba($primaryColor, 0.2);
   }
   50% {
-    text-shadow: 0 0 8px rgba($primaryColor, 0.6),
-                 0 0 20px rgba($primaryColor, 0.3),
-                 0 0 40px rgba($primaryColor, 0.15);
+    text-shadow:
+      0 0 8px rgba($primaryColor, 0.6),
+      0 0 20px rgba($primaryColor, 0.3),
+      0 0 40px rgba($primaryColor, 0.15);
   }
 }
 
 // Data stream — horizontal dash pattern
 @keyframes dataStream {
-  0%   { background-position: 0 0; }
-  100% { background-position: 100% 0; }
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
 }

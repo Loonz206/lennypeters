@@ -1,11 +1,11 @@
 export interface Project {
-  id: string;
-  title: string;
-  description: string;
-  tags: string[];
-  buttonLabel: string;
-  href: string;
-  image?: string;
+  id: string
+  title: string
+  description: string
+  tags: string[]
+  buttonLabel: string
+  href: string
+  image?: string
 }
 
 export const projects: Project[] = [
@@ -26,5 +26,5 @@ export const projects: Project[] = [
     tags: ['Python', 'FastAPI', 'Redis', 'Docker'],
     buttonLabel: 'View Project',
     href: '#',
-  }
-];
+  },
+]

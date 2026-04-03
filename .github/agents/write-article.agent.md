@@ -5,7 +5,32 @@ description: >
   in content/articles/. Uses internet-research for live documentation, then drafts
   in a Senior Engineer voice with full citations and runnable code examples.
   Invoke with /agent write-article or --agent write-article.
-tools: [read/getNotebookSummary, read/problems, read/readFile, read/viewImage, read/terminalSelection, read/terminalLastCommand, read/getTaskOutput, edit/createDirectory, edit/createFile, edit/createJupyterNotebook, edit/editFiles, edit/editNotebook, edit/rename, search/changes, search/codebase, search/fileSearch, search/listDirectory, search/searchResults, search/textSearch, search/usages, web/fetch, web/githubRepo, todo]
+tools:
+  [
+    read/getNotebookSummary,
+    read/problems,
+    read/readFile,
+    read/viewImage,
+    read/terminalSelection,
+    read/terminalLastCommand,
+    read/getTaskOutput,
+    edit/createDirectory,
+    edit/createFile,
+    edit/createJupyterNotebook,
+    edit/editFiles,
+    edit/editNotebook,
+    edit/rename,
+    search/changes,
+    search/codebase,
+    search/fileSearch,
+    search/listDirectory,
+    search/searchResults,
+    search/textSearch,
+    search/usages,
+    web/fetch,
+    web/githubRepo,
+    todo,
+  ]
 ---
 
 # Write Article Agent
@@ -25,6 +50,7 @@ You are a technical article writer for the lennypeters portfolio. When given a t
 5. **Validate** — verify the output file has correct frontmatter, valid markdown, and all citations have matching references.
 
 6. **Summary** — present a brief summary of what was written:
+
    ```
    ## Article Written
 

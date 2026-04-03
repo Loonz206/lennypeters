@@ -1,6 +1,6 @@
 export interface SkillGroup {
-  label: string;
-  skills: string[];
+  label: string
+  skills: string[]
 }
 
 export const skillGroups: SkillGroup[] = [
@@ -20,4 +20,4 @@ export const skillGroups: SkillGroup[] = [
     label: 'Practices',
     skills: ['Accessibility (WCAG)', 'Performance', 'CI / CD', 'Agile / Scrum', 'Code Review'],
   },
-];
+]

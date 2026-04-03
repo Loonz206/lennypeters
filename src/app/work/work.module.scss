@@ -19,7 +19,7 @@
   letter-spacing: 0.2em;
   color: $primaryColor;
   text-transform: uppercase;
-  margin-bottom: $space-2;  // 8px
+  margin-bottom: $space-2; // 8px
   @include neon-glow($primaryColor);
 }
 
@@ -27,7 +27,7 @@
   font-size: 2.5rem;
   font-weight: 900;
   color: $primaryText;
-  margin: 0 0 $space-3;  // 16px
+  margin: 0 0 $space-3; // 16px
   @include glitch-hover;
 }
 
@@ -42,26 +42,26 @@
 .list {
   display: flex;
   flex-direction: column;
-  padding-bottom: $space-9;  // 64px
+  padding-bottom: $space-9; // 64px
 }
 
 .entry {
   display: grid;
   grid-template-columns: 1fr;
-  gap: $space-3;         // 16px
-  padding: $space-6 0;   // 40px
+  gap: $space-3; // 16px
+  padding: $space-6 0; // 40px
   border-bottom: 1px solid rgba($primaryColor, 0.12);
 
   @include responsive(tablet) {
     grid-template-columns: 140px 1fr;
-    gap: $space-5;  // 32px
+    gap: $space-5; // 32px
   }
 }
 
 .entryMeta {
   display: flex;
   flex-direction: column;
-  gap: $space-1;         // 4px
+  gap: $space-1; // 4px
   padding-top: $space-1; // 4px
 }
 
@@ -85,14 +85,14 @@
   font-size: 1.3rem;
   font-weight: 700;
   color: $primaryText;
-  margin-bottom: $space-3;  // 16px
+  margin-bottom: $space-3; // 16px
 }
 
 .entryDesc {
   font-size: 0.95rem;
   color: $secondaryText;
   line-height: 1.7;
-  margin-bottom: $space-3;  // 16px
+  margin-bottom: $space-3; // 16px
 }
 
 .tags {
@@ -100,7 +100,7 @@
   padding: 0;
   margin: 0;
   display: flex;
-  gap: $space-2;  // 8px
+  gap: $space-2; // 8px
   flex-wrap: wrap;
 }
 
@@ -110,7 +110,7 @@
   letter-spacing: 0.06em;
   color: $primaryColor;
   border: 1px solid rgba($primaryColor, 0.25);
-  padding: $space-1 $space-2;  // 4px 8px
+  padding: $space-1 $space-2; // 4px 8px
   border-radius: 2px;
   background-color: rgba($primaryColor, 0.05);
 }

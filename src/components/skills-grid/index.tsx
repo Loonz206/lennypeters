@@ -1,6 +1,6 @@
-import React from 'react';
-import { skillGroups } from '@/data/skills';
-import styles from './skills-grid.module.scss';
+import React from 'react'
+import { skillGroups } from '@/data/skills'
+import styles from './skills-grid.module.scss'
 
 const SkillsGrid = () => {
   return (
@@ -23,7 +23,7 @@ const SkillsGrid = () => {
         ))}
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default SkillsGrid;
+export default SkillsGrid

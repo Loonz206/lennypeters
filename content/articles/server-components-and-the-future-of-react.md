@@ -3,6 +3,8 @@ title: 'Server Components and the Future of React'
 date: '2025-09-02'
 excerpt: 'React Server Components change the mental model of data fetching. Here is what that means for how we structure applications in 2025 and beyond.'
 tags: ['React', 'Next.js', 'Performance']
+image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80'
+imageAlt: 'Glowing network map over a globe representing server connectivity'
 ---
 
 React Server Components (RSC) represent the most significant shift in React architecture since hooks.

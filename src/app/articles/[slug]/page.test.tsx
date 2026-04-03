@@ -27,6 +27,16 @@ jest.mock('../../../components/breadcrumbs', () => ({
   ),
 }))
 
+jest.mock('next/image', () => ({
+  __esModule: true,
+  default: ({ src, alt, ...props }: { src: string; alt: string; [key: string]: unknown }) => {
+    const { fill, priority, ...imageProps } = props
+    void fill
+    void priority
+    return <span role="img" aria-label={alt} data-src={src} {...imageProps} />
+  },
+}))
+
 const mockNotFound = notFound as jest.MockedFunction<typeof notFound>
 const mockGetArticleBySlug = getArticleBySlug as jest.MockedFunction<typeof getArticleBySlug>
 const mockGetAllArticleMetas = getAllArticleMetas as jest.MockedFunction<typeof getAllArticleMetas>
@@ -38,6 +48,8 @@ const mockArticle: Article = {
     date: '2024-06-15',
     excerpt: 'A test excerpt',
     tags: ['React', 'TypeScript'],
+    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa',
+    imageAlt: 'Glowing network map over a globe representing server connectivity',
   },
   contentHtml: '<p>Article content here</p>',
 }
@@ -99,8 +111,24 @@ describe('ArticlePage', () => {
   describe('generateStaticParams', () => {
     it('returns slugs derived from getAllArticleMetas', async () => {
       const metas: ArticleMeta[] = [
-        { slug: 'post-one', title: 'Post One', date: '2024-01-01', excerpt: '', tags: [] },
-        { slug: 'post-two', title: 'Post Two', date: '2024-02-01', excerpt: '', tags: [] },
+        {
+          slug: 'post-one',
+          title: 'Post One',
+          date: '2024-01-01',
+          excerpt: '',
+          tags: [],
+          image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6',
+          imageAlt: 'Laptop screen showing code on a dark desk setup',
+        },
+        {
+          slug: 'post-two',
+          title: 'Post Two',
+          date: '2024-02-01',
+          excerpt: '',
+          tags: [],
+          image: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4',
+          imageAlt: 'Code editor open on a monitor in a developer workspace',
+        },
       ]
       mockGetAllArticleMetas.mockReturnValue(metas)
       const result = await generateStaticParams()

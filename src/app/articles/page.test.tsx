@@ -24,6 +24,8 @@ const sampleArticles: ArticleMeta[] = [
     date: '2024-03-01',
     excerpt: 'Excerpt one',
     tags: ['React'],
+    image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6',
+    imageAlt: 'Laptop screen showing code on a dark desk setup',
   },
   {
     slug: 'second-post',
@@ -31,6 +33,8 @@ const sampleArticles: ArticleMeta[] = [
     date: '2024-04-01',
     excerpt: 'Excerpt two',
     tags: ['TypeScript'],
+    image: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4',
+    imageAlt: 'Code editor open on a monitor in a developer workspace',
   },
 ]
 

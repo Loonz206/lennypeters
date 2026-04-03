@@ -3,7 +3,7 @@ name: docs
 description: >
   Documentation sync agent that updates .github documentation when agent, skill,
   instruction, or prompt files change, including the Mermaid flow chart in
-  .github/README.md. Invoke with /agent docs or --agent docs.
+  .github/FLOW.md. Invoke with /agent docs or --agent docs.
 argument-hint: 'Describe what changed and which docs should be synchronized'
 tools:
   [
@@ -46,8 +46,8 @@ Run this agent when changes touch any of the following paths:
 ## Behaviour
 
 1. Inspect changed files and identify documentation impact.
-2. Update `.github/README.md` when the agentic flow or responsibilities change.
-3. Update Mermaid diagrams in `.github/README.md` to match the current pipeline.
+2. Update `.github/FLOW.md` when the agentic flow or responsibilities change.
+3. Update Mermaid diagrams in `.github/FLOW.md` to match the current pipeline.
 4. Update related docs (for example `.github/copilot-instructions.md`) when usage, phase order, or invocation examples change.
 5. Keep edits minimal, accurate, and consistent with current repo conventions.
 

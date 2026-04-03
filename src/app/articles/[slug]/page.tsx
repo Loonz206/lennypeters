@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { getAllArticleMetas, getArticleBySlug } from '@/lib/articles'
 import Breadcrumbs from '@/components/breadcrumbs'
 import styles from './article.module.scss'
@@ -47,6 +48,15 @@ const ArticlePage = async ({ params }: Props) => {
         </p>
         <h1 className={styles.title}>{article.meta.title}</h1>
         <p className={styles.sub}>{article.meta.excerpt}</p>
+        <div className={styles.heroImage}>
+          <Image
+            src={article.meta.image}
+            alt={article.meta.imageAlt}
+            fill
+            priority
+            sizes="(max-width: 800px) 100vw, 720px"
+          />
+        </div>
         <ul className={styles.tags} aria-label="Tags">
           {article.meta.tags.map(tag => (
             <li key={tag} className={styles.tag}>

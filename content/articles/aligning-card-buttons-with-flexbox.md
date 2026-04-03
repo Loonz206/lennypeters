@@ -3,6 +3,8 @@ title: 'Aligning Card Buttons with CSS Flexbox'
 date: '2026-03-29'
 excerpt: 'How a single flex: 1 declaration on the right element solves the misaligned button problem in card grid layouts.'
 tags: ['CSS', 'Flexbox', 'Layout', 'SCSS']
+image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1600&q=80'
+imageAlt: 'Laptop screen showing code on a dark desk setup'
 ---
 
 ## The Problem

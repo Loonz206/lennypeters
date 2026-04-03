@@ -3,6 +3,8 @@ title: 'Reducing Context with Layered Skills, Prompts, and Agents'
 date: '2026-03-30'
 excerpt: 'A practical architecture for shrinking LLM context load by separating stable guidance from task-specific execution through tools, skills, and agents.'
 tags: ['AI Engineering', 'Agents', 'Prompt Engineering', 'MCP']
+image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1600&q=80'
+imageAlt: 'Futuristic AI-themed visualization with glowing circuitry'
 ---
 
 ## Introduction

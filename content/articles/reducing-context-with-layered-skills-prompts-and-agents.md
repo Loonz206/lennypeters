@@ -196,7 +196,7 @@ If your current setup feels fragile, do not start by rewriting sentence wording.
 
 ## References
 
-1. Model Context Protocol Specification (architecture, primitives, capabilities): https://github.com/modelcontextprotocol/modelcontextprotocol
-2. OpenAI Docs - Prompt Caching and Latency Optimization: https://developers.openai.com/api/docs/guides/prompt-caching and https://developers.openai.com/api/docs/guides/latency-optimization
-3. Anthropic Docs - Prompt Engineering Overview: https://platform.claude.com/docs/en/docs/build-with-claude/prompt-engineering/overview
-4. GitHub Docs - Repository and path-specific custom instructions for Copilot: https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions
+1. [Model Context Protocol Specification — architecture, primitives, capabilities](https://github.com/modelcontextprotocol/modelcontextprotocol)
+2. [OpenAI Docs — Prompt Caching and Latency Optimization: Prompt Caching](https://developers.openai.com/api/docs/guides/prompt-caching) · [Latency Optimization](https://developers.openai.com/api/docs/guides/latency-optimization)
+3. [Anthropic Docs — Prompt Engineering Overview](https://platform.claude.com/docs/en/docs/build-with-claude/prompt-engineering/overview)
+4. [GitHub Docs — Repository and path-specific custom instructions for Copilot](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions)

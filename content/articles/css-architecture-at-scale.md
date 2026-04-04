@@ -47,3 +47,10 @@ Everything else belongs in a CSS Module.
 
 Centralise media queries in a single responsive mixin.
 This prevents magic numbers from spreading across the codebase.
+
+## References
+
+1. [CSS Modules — Specification and usage guide](https://github.com/css-modules/css-modules)
+2. [BEM — Block Element Modifier methodology](https://getbem.com/introduction/)
+3. [Sass — Official documentation](https://sass-lang.com/documentation/)
+4. [MDN — Using CSS custom properties (design tokens)](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties)

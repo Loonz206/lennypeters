@@ -43,3 +43,10 @@ TypeScript 4.1+ template literal types unlock expressive, type-safe string manip
 ```ts
 type EventName = `on${Capitalize<string>}`
 ```
+
+## References
+
+1. [TypeScript Handbook — Narrowing (discriminated unions)](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
+2. [TypeScript Handbook — Types from Types (const assertions, mapped types, template literals)](https://www.typescriptlang.org/docs/handbook/2/types-from-types.html)
+3. [TypeScript Handbook — Declaration Files: Do's and Don'ts (interface vs type guidance)](https://www.typescriptlang.org/docs/handbook/declaration-files/do-s-and-don-ts.html)
+4. [Microsoft DevBlogs — Announcing TypeScript 4.1 (template literal types)](https://devblogs.microsoft.com/typescript/announcing-typescript-4-1/)

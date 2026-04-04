@@ -83,7 +83,7 @@ This repository is configured for a user or organization Pages site. The Next.js
 ```text
 src/
 ├── app/           # Next.js App Router pages
-├── components/    # Reusable UI components (each with CSS Module + colocated .test.tsx)
+├── components/    # Reusable UI components (typically with a CSS Module; tests are colocated when present)
 ├── data/          # Static data (experience, projects, skills)
 ├── lib/           # Utilities (articles markdown pipeline)
 └── styles/        # Global SCSS partials

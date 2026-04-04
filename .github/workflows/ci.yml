@@ -63,6 +63,8 @@ jobs:
   e2e:
     name: E2E Tests
     runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_BASE_PATH: ${{ github.event.repository.name == format('{0}.github.io', github.repository_owner) && '' || format('/{0}', github.event.repository.name) }}
     steps:
       - uses: actions/checkout@v4
 
@@ -85,6 +87,16 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Verify static export output
+        run: |
+          test -d out
+          find out -maxdepth 4 -name index.html -print -quit | grep -q .
+
+      - name: Debug E2E URL config
+        run: |
+          echo "NEXT_PUBLIC_BASE_PATH=$NEXT_PUBLIC_BASE_PATH"
+          echo "GITHUB_REPOSITORY=$GITHUB_REPOSITORY"
 
       - name: Cache Playwright browsers
         id: playwright-cache

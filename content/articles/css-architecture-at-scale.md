@@ -1,5 +1,6 @@
 ---
 title: 'CSS Architecture at Scale'
+author: 'Lenny Peters'
 date: '2025-06-20'
 excerpt: 'As applications grow, CSS becomes a source of bugs and confusion. This article explores SCSS architecture patterns that keep stylesheets manageable at any team size.'
 tags: ['CSS', 'SCSS', 'Architecture']
@@ -15,10 +16,9 @@ impossible to accidentally break are the hallmark of a mature codebase.
 Define your full colour palette, spacing scale, and type ramp as SCSS variables in one place.
 Every other file references those variables — never hard-coded values.
 
-```scss
+````scss
 $primaryColor: #2980b9;
 $spacingUnit: 8px;
-```
 
 ## CSS Modules for component isolation
 
@@ -30,7 +30,7 @@ accidental global pollution. Pair them with a naming convention like BEM for rea
 .card { ... }
 .card__title { ... }
 .card__meta { ... }
-```
+````
 
 ## Global styles for shared utilities
 

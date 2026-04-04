@@ -7,12 +7,10 @@ describe('Profile', () => {
     render(<Profile />)
   })
 
-  it('renders an image from Unsplash', () => {
+  it('renders the local profile image', () => {
     const image = screen.getByRole('img')
     expect(image).toHaveAttribute('src')
-    expect(decodeURIComponent(image.getAttribute('src') ?? '')).toContain(
-      'https://images.unsplash.com/'
-    )
+    expect(decodeURIComponent(image.getAttribute('src') ?? '')).toContain('/lenny.jpeg')
   })
 
   it('image has alt="Lenny Peters"', () => {

@@ -1,5 +1,6 @@
 ---
 title: 'Server Components and the Future of React'
+author: 'Lenny Peters'
 date: '2025-09-02'
 excerpt: 'React Server Components change the mental model of data fetching. Here is what that means for how we structure applications in 2025 and beyond.'
 tags: ['React', 'Next.js', 'Performance']

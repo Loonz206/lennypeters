@@ -1,5 +1,6 @@
 ---
 title: 'Reducing Context with Layered Skills, Prompts, and Agents'
+author: 'Lenny Peters'
 date: '2026-03-30'
 excerpt: 'A practical architecture for shrinking LLM context load by separating stable guidance from task-specific execution through tools, skills, and agents.'
 tags: ['AI Engineering', 'Agents', 'Prompt Engineering', 'MCP']

@@ -1,5 +1,6 @@
 ---
 title: 'Leveraging the Reflective Agent to Address Common Problems'
+author: 'Lenny Peters'
 date: '2026-04-03'
 excerpt: 'How a persistent memory file and a 3-strike rule system stops AI agents from repeating the same mistakes across every task in your pipeline.'
 tags: ['AI', 'Learnings', 'Memory', 'Agents']

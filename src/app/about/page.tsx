@@ -2,12 +2,31 @@ import type { Metadata } from 'next'
 import SkillsGrid from '@/components/skills-grid'
 import ExperienceTimeline from '@/components/experience-timeline'
 import ContactSection from '@/components/contact-section'
+import { DEFAULT_OG_IMAGE } from '@/lib/seo'
 import styles from './about.module.scss'
 
 export const metadata: Metadata = {
   title: 'About — Lenny Peters',
   description:
     'Senior Web Engineer at lululemon with 8+ years of experience building fast, accessible web products. Based in Cascadia.',
+  alternates: {
+    canonical: '/about/',
+  },
+  openGraph: {
+    type: 'profile',
+    url: '/about/',
+    title: 'About — Lenny Peters',
+    description:
+      'Senior Web Engineer at lululemon with 8+ years of experience building fast, accessible web products. Based in Cascadia.',
+    images: [DEFAULT_OG_IMAGE],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About — Lenny Peters',
+    description:
+      'Senior Web Engineer at lululemon with 8+ years of experience building fast, accessible web products. Based in Cascadia.',
+    images: [DEFAULT_OG_IMAGE],
+  },
 }
 
 const AboutPage = () => {

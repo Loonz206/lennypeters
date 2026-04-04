@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 //variables.scss-->
 
 // ── 8-Point Grid System ──────────────────────────────────────────────────────
@@ -47,11 +49,11 @@ $dark: #333232;
 $light: #f6f6f6;
 
 $primaryColor: $cyberTeal;
-$lightPrimaryColor: lighten($primaryColor, 10%);
-$darkPrimaryColor: darken($primaryColor, 10%);
+$lightPrimaryColor: color.adjust($primaryColor, $lightness: 10%);
+$darkPrimaryColor: color.adjust($primaryColor, $lightness: -10%);
 $accentColor: $neonGreen;
 $primaryText: $light;
-$secondaryText: darken($light, 20%);
+$secondaryText: color.adjust($light, $lightness: -20%);
 $dividerColor: $dark;
 $textIcons: $light;
 

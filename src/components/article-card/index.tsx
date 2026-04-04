@@ -52,7 +52,7 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
           className={styles.btn}
           aria-label={`Read ${article.title}`}
         >
-          Read Article
+          Read <span aria-hidden="true">{article.title}</span>
         </Link>
       </div>
     </article>

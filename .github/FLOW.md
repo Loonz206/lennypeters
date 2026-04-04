@@ -98,6 +98,11 @@ The docs phase (Phase 5) and Docs Agent update documentation when changes are de
 - `.github/skills/**`
 - `.github/instructions/**`
 - `.github/prompts/**`
+- `src/app/**`
+- `src/components/**`
+- `src/data/**`
+- `src/lib/**`
+- `content/**`
 - `.github/AGENT_LEARNINGS.md` (when new rules are extracted by the Reflective Agent)
 
 **When new agents, skills, or MCP servers are added**, the docs phase must also:
@@ -105,3 +110,7 @@ The docs phase (Phase 5) and Docs Agent update documentation when changes are de
 1. Add a row to the **Skills** or **MCP Servers** table above.
 2. Add a node and edge to the **Pipeline Flow** Mermaid diagram.
 3. Update the agent/skill inventory in `copilot-instructions.md` if the entry point or invocation pattern changed.
+
+**When structural source folders change**, the docs phase must also:
+
+1. Update the root `README.md` Project Structure section so it reflects the current directory layout.

@@ -1,5 +1,5 @@
-@import '@/styles/variables';
-@import '@/styles/mixins';
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
 
 .card {
   background: linear-gradient(180deg, rgba($darkest, 0.95) 0%, rgba($darker, 0.95) 100%);

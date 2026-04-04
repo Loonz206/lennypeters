@@ -1,5 +1,6 @@
-@import '@/styles/variables';
-@import '@/styles/mixins';
+@use 'sass:color';
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
 
 .hero {
   padding: $space-8 0 $space-9; // 56px 0 64px
@@ -231,8 +232,8 @@
 
   &:hover,
   &:focus-visible {
-    background-color: lighten($primaryColor, 10%);
-    border-color: lighten($primaryColor, 10%);
+    background-color: color.adjust($primaryColor, $lightness: 10%);
+    border-color: color.adjust($primaryColor, $lightness: 10%);
     color: $darkest;
     text-decoration: none;
     box-shadow:

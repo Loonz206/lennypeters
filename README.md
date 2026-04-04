@@ -48,15 +48,24 @@ npm run format:check # Prettier — check without writing
 
 ## CI/CD
 
-Three parallel jobs run on every push and pull request:
+Three parallel jobs run on every push and pull request, and a deploy job publishes to GitHub Pages from `main` after they pass:
 
 | Job            | What it does                                                               |
 | -------------- | -------------------------------------------------------------------------- |
 | **Lint**       | `npm run lint`                                                             |
 | **Unit Tests** | `npm test -- --ci --coverage` — enforces ≥ 80% coverage across all metrics |
 | **E2E Tests**  | Builds a static export, serves it with `npx serve`, runs Playwright        |
+| **Deploy**     | Builds `out/` and deploys it to GitHub Pages when `main` passes CI         |
 
 Coverage threshold is enforced in `jest.config.js` — the `Unit Tests` job fails if any metric (statements, branches, functions, lines) drops below **80%**.
+
+To enable GitHub Pages for this repository:
+
+1. Go to **Settings → Pages**.
+2. Set **Source** to **GitHub Actions**.
+3. Push to `main` and wait for the `Deploy GitHub Pages` job to publish the site.
+
+This repository is configured for a user or organization Pages site. The Next.js export uses `trailingSlash: true`, which emits folder-based routes like `/about/index.html` for reliable deep-linking on GitHub Pages.
 
 ---
 
@@ -71,7 +80,7 @@ Coverage threshold is enforced in `jest.config.js` — the `Unit Tests` job fail
 
 ## Project Structure
 
-```
+```text
 src/
 ├── app/           # Next.js App Router pages
 ├── components/    # Reusable UI components (each with CSS Module + __tests__)

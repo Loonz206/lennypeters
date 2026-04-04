@@ -50,7 +50,9 @@ You are a pipeline orchestrator for the lennypeters repo. Your job is to take a 
 
 7. **Documentation Sync**
    - Invoke the `docs` agent after implementation and verification.
-   - If files in `.github/agents/**`, `.github/skills/**`, `.github/instructions/**`, or `.github/prompts/**` changed, update relevant documentation and `.github/FLOW.md` Mermaid flow.
+   - If files in `.github/agents/**`, `.github/skills/**`, `.github/instructions/**`, or `.github/prompts/**` changed, update the relevant orchestration docs; update `.github/FLOW.md` only when the agentic workflow changed.
+   - If changes under `src/app/**`, `src/components/**`, `src/data/**`, `src/lib/**`, or `content/**` altered the structural folder layout, navigation, or documented workflow, update the relevant docs and the root `README.md` as needed.
+   - For routine code or content edits that do not change structure or workflow, docs sync may be a no-op.
 
 8. **Evaluate & Reflect**
    - Invoke the `reflective` agent (or use the `/reflect` skill inline) to close the feedback loop.

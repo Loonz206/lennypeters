@@ -46,6 +46,11 @@ Run this agent when changes touch any of the following paths:
 - `.github/skills/**`
 - `.github/instructions/**`
 - `.github/prompts/**`
+- `src/app/**`
+- `src/components/**`
+- `src/data/**`
+- `src/lib/**`
+- `content/**`
 
 ## Behaviour
 
@@ -54,6 +59,7 @@ Run this agent when changes touch any of the following paths:
 3. Update Mermaid diagrams in `.github/FLOW.md` to match the current pipeline.
 4. Update related docs (for example `.github/copilot-instructions.md`) when usage, phase order, or invocation examples change.
 5. Keep edits minimal, accurate, and consistent with current repo conventions.
+6. Always verify the root `README.md` is reflective of the current application state, especially when folders/directories are added, removed, or renamed.
 
 ## Additions Checklist
 
@@ -79,6 +85,14 @@ When a **new agent**, **skill**, **MCP server**, or **instruction file** is adde
 ### New Instruction File (`instructions/*.instructions.md`)
 
 - [ ] Ensure it is referenced in the **Custom Agents** or pipeline description in `copilot-instructions.md` if it introduces a new phase or agent variant.
+
+### Structural Source Changes
+
+- [ ] If `src/app/**` changed structurally (new/removed/renamed route folders), update the `README.md` Project Structure section.
+- [ ] If `src/components/**` changed structurally (new/removed/renamed component folders), update the `README.md` Project Structure section.
+- [ ] If `src/data/**` changed structurally (new/removed/renamed data files or folders), update the `README.md` Project Structure section.
+- [ ] If `src/lib/**` changed structurally (new/removed/renamed utilities), update the `README.md` Project Structure section.
+- [ ] If `content/**` changed structurally (new/removed/renamed content directories), update the `README.md` Project Structure section.
 
 ## Rules
 

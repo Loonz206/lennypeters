@@ -13,7 +13,8 @@ test('articles index links to an article detail page', async ({ page }) => {
   const firstReadArticleLink = page.getByRole('link', { name: /^Read\s+/ }).first()
   await expect(firstReadArticleLink).toBeAttached()
   await expect(firstReadArticleLink).toBeVisible()
-  await firstReadArticleLink.click()
+  await firstReadArticleLink.focus()
+  await firstReadArticleLink.press('Enter')
 
   await expect(page).toHaveURL(/\/articles\/[^/]+\/?$/)
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible()

@@ -10,10 +10,11 @@ test('articles index renders Writing heading', async ({ page }) => {
 test('articles index links to an article detail page', async ({ page }) => {
   await page.goto('/articles')
 
-  const firstReadArticleLink = page.getByRole('link', { name: /^Read / }).first()
+  const firstReadArticleLink = page.getByRole('link', { name: /^Read\s+/ }).first()
+  await expect(firstReadArticleLink).toBeAttached()
   await expect(firstReadArticleLink).toBeVisible()
   await firstReadArticleLink.click()
 
-  await expect(page).toHaveURL(/\/articles\//)
+  await expect(page).toHaveURL(/\/articles\/[^/]+\/?$/)
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
 })

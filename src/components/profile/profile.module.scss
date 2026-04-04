@@ -2,21 +2,13 @@
 @import '@/styles/mixins';
 
 .card {
-  background-color: $darker;
-  border: 1px solid rgba($primaryColor, 0.15);
+  background: linear-gradient(180deg, rgba($darkest, 0.95) 0%, rgba($darker, 0.95) 100%);
+  border: 1px solid rgba($primaryColor, 0.22);
   display: flex;
   flex-direction: column;
   width: 100%;
   max-width: 100%;
-  transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
-  @include hud-corners(14px, $primaryColor, 1px);
-
-  &:hover {
-    border-color: rgba($primaryColor, 0.4);
-    @include neon-border($primaryColor);
-  }
+  overflow: hidden;
 }
 
 // ── Top bar ───────────────────────────────────────────────────────────────────
@@ -25,27 +17,26 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: $space-2 $space-3;
-  background-color: rgba($darkest, 0.5);
-  border-bottom: 1px solid rgba($primaryColor, 0.15);
+  padding: $space-3 $space-4;
+  background-color: rgba($darkest, 0.55);
+  border-bottom: 1px solid rgba($primaryColor, 0.2);
 }
 
 .userId {
   font-family: $monoSpaced;
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: $primaryColor;
-  @include neon-glow($primaryColor);
 }
 
 .dot {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background-color: $successColor;
-  opacity: 0.8;
-  box-shadow: 0 0 4px rgba($successColor, 0.5);
+  background-color: $primaryColor;
+  opacity: 0.9;
+  box-shadow: 0 0 10px rgba($primaryColor, 0.45);
 }
 
 // ── Photo ────────────────────────────────────────────────────────────────────
@@ -53,121 +44,32 @@
 .photo {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
-  border-bottom: 1px solid rgba($primaryColor, 0.2);
+  border-top: 1px solid rgba($primaryColor, 0.08);
+  border-left: 1px solid rgba($primaryColor, 0.16);
+  border-right: 1px solid rgba($primaryColor, 0.16);
   background-color: $darkest;
 }
 
 .photoImg {
   object-fit: cover;
   object-position: center top;
-  filter: grayscale(100%) contrast(1.1);
-  transition: filter 0.4s ease;
-  aspect-ratio: 16 / 9;
-
-  .card:hover & {
-    filter: grayscale(80%) contrast(1.05);
-  }
+  filter: grayscale(92%) contrast(1.03);
+  aspect-ratio: 4 / 3;
 }
 
 .photoScanline {
   position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 0, 0, 0.08) 2px,
-    rgba(0, 0, 0, 0.08) 4px
-  );
+  background:
+    linear-gradient(180deg, rgba($primaryColor, 0.05) 0%, rgba($darkest, 0) 35%),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.08) 2px,
+      rgba(0, 0, 0, 0.08) 4px
+    );
   pointer-events: none;
-}
-
-// ── Body ──────────────────────────────────────────────────────────────────────
-
-.body {
-  padding: $space-4;
-}
-
-.name {
-  font-family: $monoSpaced;
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  color: $primaryColor;
-  margin: 0 0 $space-1;
-  @include neon-glow($primaryColor);
-}
-
-.role {
-  font-family: $monoSpaced;
-  font-size: 0.7rem;
-  letter-spacing: 0.12em;
-  color: $secondaryText;
-  margin: 0 0 $space-4;
-}
-
-// ── Stats ─────────────────────────────────────────────────────────────────────
-
-.stats {
-  margin: 0 0 $space-4;
-  display: flex;
-  flex-direction: column;
-  gap: $space-2;
-}
-
-.row {
-  display: flex;
-  align-items: baseline;
-  gap: $space-2;
-  font-family: $monoSpaced;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-}
-
-.key {
-  color: $primaryColor;
-  font-weight: 700;
-  min-width: 40px;
-}
-
-.sep {
-  color: $dividerColor;
-  margin: 0;
-}
-
-.val {
-  color: $secondaryText;
-  margin: 0;
-}
-
-// ── Links ─────────────────────────────────────────────────────────────────────
-
-.links {
-  display: flex;
-  gap: $space-2;
-}
-
-.link {
-  font-family: $monoSpaced;
-  font-size: 0.65rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: $primaryColor;
-  border: 1px solid rgba($primaryColor, 0.3);
-  padding: $space-1 $space-2;
-  text-decoration: none;
-  transition:
-    background-color 0.2s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
-
-  &:hover,
-  &:focus-visible {
-    background-color: rgba($primaryColor, 0.1);
-    border-color: $primaryColor;
-    @include neon-border($primaryColor);
-    outline: none;
-  }
 }

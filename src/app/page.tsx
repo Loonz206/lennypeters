@@ -6,9 +6,9 @@ import CodeThinking from '@/components/code-thinking'
 import { getAllArticleMetas } from '@/lib/articles'
 
 export const metadata: Metadata = {
-  title: 'Lenny Peters — Senior Software Engineer',
+  title: 'Lenny Peters — Senior Software Engineer II',
   description:
-    'Senior Software Engineer turning complex AI ideas into production-ready systems. React, TypeScript, Next.js.',
+    'Senior Software Engineer II turning complex AI ideas into production-ready systems. React, TypeScript, Next.js.',
 }
 
 const Home = () => {

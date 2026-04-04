@@ -44,14 +44,13 @@ jobs:
           git checkout -b "${{ steps.slug.outputs.branch }}"
 
       - name: Write article via Copilot
-        uses: github/copilot-action@v1
-        with:
-          agent: write-article
-          prompt: |
-            Write a technical article about: ${{ github.event.issue.title }}
-
-            Additional context from the issue:
-            ${{ github.event.issue.body }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npx -y @github/gh-copilot -- api /models/copilot_chat/completions \
+            -f messages='[{"role":"user","content":"Write a technical article about: ${{ github.event.issue.title }}\n\nAdditional context from the issue:\n${{ github.event.issue.body }}"}]' \
+            -f model=gpt-4o \
+            > article_output.json
 
       - name: Check for new article
         id: check

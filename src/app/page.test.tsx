@@ -57,12 +57,12 @@ describe('Home page', () => {
   })
 
   it('exports correct metadata title', () => {
-    expect(metadata.title).toBe('Lenny Peters — Senior Software Engineer')
+    expect(metadata.title).toBe('Lenny Peters — Senior Software Engineer II')
   })
 
   it('exports correct metadata description', () => {
     expect(metadata.description).toBe(
-      'Senior Software Engineer turning complex AI ideas into production-ready systems. React, TypeScript, Next.js.'
+      'Senior Software Engineer II turning complex AI ideas into production-ready systems. React, TypeScript, Next.js.'
     )
   })
 

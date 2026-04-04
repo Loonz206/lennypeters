@@ -7,14 +7,13 @@ import styles from './hero-terminal.module.scss'
 
 const LINES = [
   { prompt: '$', text: 'whoami' },
-  { prompt: '>', text: 'lenny.peters // senior software engineer' },
+  { prompt: '>', text: 'lenny.peters // senior software engineer II' },
   { prompt: '$', text: 'cat values.txt' },
-  { prompt: '>', text: 'build with empathy' },
-  { prompt: '>', text: 'ship with intention' },
-  { prompt: '>', text: 'obsess over craft' },
+  { prompt: '>', text: 'teaching & guiding' },
+  { prompt: '>', text: 'supporting engineers' },
   { prompt: '$', text: 'node mission.js' },
-  { prompt: '>', text: 'turning complex AI ideas' },
-  { prompt: '>', text: 'into production-ready systems' },
+  { prompt: '>', text: 'adventure into the new world leveraging AI' },
+  { prompt: '>', text: 'to transform into production-ready systems' },
 ]
 
 const CHAR_DELAY = 45
@@ -52,7 +51,7 @@ const HeroTerminal = () => {
       <div className={styles.topMeta}>
         <span className={styles.metaLabel}>status</span>
         <span className={styles.metaSep}>{'//'}</span>
-        <span className={styles.metaValue}>senior software engineer</span>
+        <span className={styles.metaValue}>senior software engineer II</span>
       </div>
 
       <div className={styles.main}>
@@ -107,7 +106,8 @@ const HeroTerminal = () => {
       </div>
 
       <p className={styles.tagline}>
-        Senior Software Engineer turning complex AI ideas into production-ready systems.
+        Senior Software Engineer II helping teams leverage AI to transform ideas into
+        production-ready systems.
       </p>
 
       <div className={styles.actions}>

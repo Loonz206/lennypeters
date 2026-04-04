@@ -2,31 +2,17 @@ import React from 'react'
 import { render, screen } from '@testing-library/react'
 import Profile from '@/components/profile'
 
-jest.mock('next/image', () => ({
-  __esModule: true,
-  default: (
-    props: React.HTMLAttributes<HTMLElement> & {
-      src?: string
-      alt?: string
-      fill?: boolean
-      priority?: boolean
-      sizes?: string
-    }
-  ) => {
-    const { fill, priority, src, alt, ...imageProps } = props
-    void fill
-    void priority
-    return <span role="img" aria-label={alt} data-src={src} {...imageProps} />
-  },
-}))
-
 describe('Profile', () => {
   beforeEach(() => {
     render(<Profile />)
   })
 
-  it('renders an image with src="/profile.jpg"', () => {
-    expect(screen.getByRole('img')).toHaveAttribute('data-src', '/profile.jpg')
+  it('renders an image from Unsplash', () => {
+    const image = screen.getByRole('img')
+    expect(image).toHaveAttribute('src')
+    expect(decodeURIComponent(image.getAttribute('src') ?? '')).toContain(
+      'https://images.unsplash.com/'
+    )
   })
 
   it('image has alt="Lenny Peters"', () => {

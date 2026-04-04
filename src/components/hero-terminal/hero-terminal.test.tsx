@@ -24,15 +24,18 @@ jest.mock('../profile', () => ({
   default: () => <div data-testid="profile" />,
 }))
 
-// Total LINES = 9. Each line takes (text.length × CHAR_DELAY) + LINE_DELAY ms.
-// To advance the full animation we run all pending timers in a loop, flushing
+// To advance the full animation we drain pending timers in a loop, flushing
 // React state updates between each iteration so newly-scheduled timers are
 // captured in the next pass.
 const runAllLines = async () => {
-  for (let i = 0; i < 200; i++) {
+  for (let i = 0; i < 400; i++) {
     await act(async () => {
       jest.runAllTimers()
     })
+
+    if (jest.getTimerCount() === 0) {
+      break
+    }
   }
 }
 
@@ -58,21 +61,20 @@ describe('HeroTerminal', () => {
     expect(screen.getByText('$')).toBeInTheDocument()
   })
 
-  it("renders all 9 lines' text after the animation completes", async () => {
+  it("renders all 8 lines' text after the animation completes", async () => {
     render(<HeroTerminal />)
 
     await runAllLines()
 
     const expectedTexts = [
       'whoami',
-      'lenny.peters // senior software engineer',
+      'lenny.peters // senior software engineer II',
       'cat values.txt',
-      'build with empathy',
-      'ship with intention',
-      'obsess over craft',
+      'teaching & guiding',
+      'supporting engineers',
       'node mission.js',
-      'turning complex AI ideas',
-      'into production-ready systems',
+      'adventure into the new world leveraging AI',
+      'to transform into production-ready systems',
     ]
 
     for (const text of expectedTexts) {

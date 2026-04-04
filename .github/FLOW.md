@@ -22,10 +22,12 @@ flowchart TD
         P2 --> P3[Phase 3: Unit Tests]
         P3 --> P4[Phase 4: E2E Tests]
         P4 --> P5[Phase 5: Docs Sync]
-        P5 --> DC{.github files\nchanged?}
-        DC -->|Yes| DU[Update Docs + FLOW.md]
+        P5 --> DC{.github, src/**, or\ncontent/** changed?}
+        DC -->|Workflow/agent\nchanges| DU[Update Docs + FLOW.md]
+        DC -->|Structural folder\nlayout changes| DR[Update README.md\nProject Structure]
         DU --> P6[Phase 6: Evaluate & Reflect]
-        DC -->|No| P6
+        DR --> P6
+        DC -->|Routine code/\ncontent edits| P6
         P6 --> P7[Phase 7: Summary]
     end
 

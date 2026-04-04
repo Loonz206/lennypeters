@@ -13,12 +13,12 @@ describe('ContactSection', () => {
 
   it('email link has the correct href', () => {
     const link = screen.getByRole('link', { name: 'Send email to Lenny Peters' })
-    expect(link).toHaveAttribute('href', 'mailto:hello@lennypeters.dev')
+    expect(link).toHaveAttribute('href', 'mailto:lenny@lennypeters.com')
   })
 
   it('GitHub link has correct href, target="_blank", and rel="noopener noreferrer"', () => {
     const link = screen.getByRole('link', { name: 'GitHub profile (opens in new tab)' })
-    expect(link).toHaveAttribute('href', 'https://github.com/lennypeters')
+    expect(link).toHaveAttribute('href', 'https://github.com/loonz206')
     expect(link).toHaveAttribute('target', '_blank')
     expect(link).toHaveAttribute('rel', 'noopener noreferrer')
   })

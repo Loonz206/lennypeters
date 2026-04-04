@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import SkillsGrid from '@/components/skills-grid'
+import Certifications from '@/components/certifications'
 import ExperienceTimeline from '@/components/experience-timeline'
 import ContactSection from '@/components/contact-section'
 import { DEFAULT_OG_IMAGE } from '@/lib/seo'
@@ -45,26 +46,26 @@ const AboutPage = () => {
       <section className={styles.bio} aria-labelledby="about-heading">
         <div className={styles.bioContent}>
           <p>
-            I&rsquo;m a Senior Web Engineer at lululemon with over 8 years of experience designing
-            and building production web applications. I specialize in React, TypeScript, and modern
-            CSS — with a particular focus on performance, accessibility, and developer experience.
+            As a seasoned senior software engineer, I have a proven track record of developing
+            engaging, user-centric, and responsive websites and applications. My ability to adapt to
+            various team dynamics, along with my broad skillset, ranging from coding to designing
+            graphical elements, allows me to make meaningful contributions to any project. I am
+            dedicated to promoting accessibility, utilizing automation, and upholding the principle
+            of equal access to the internet. My ultimate goal is to craft impactful and memorable
+            experiences for users on the web.
           </p>
           <p>
-            Accessibility isn&rsquo;t a checkbox for me — it&rsquo;s a core engineering value.
-            I&rsquo;m actively involved in a11y-focused projects and collaboration, and I bring a
-            unique perspective as a proficient ASL (American Sign Language) user. Whether
-            that&rsquo;s making an interface navigable by keyboard, meeting WCAG standards, or
-            advocating for inclusive design from the outset — the details matter.
-          </p>
-          <p>
-            Outside of work I write about web engineering, contribute to open source on GitHub, and
-            am currently expanding my knowledge of AWS infrastructure and JAMStack architectures.
-            Every person is a contributor to your journey — open minds and be kind.
+            With over 15 years of experience, my journey spans the age of responsive design and
+            ecommerce implementation through to emerging technologies like module federation and
+            Next.js. I have seen the web evolve and have continuously adapted, bringing that breadth
+            of perspective to every project I contribute to.
           </p>
         </div>
       </section>
 
       <SkillsGrid />
+
+      <Certifications />
 
       <ExperienceTimeline />
 

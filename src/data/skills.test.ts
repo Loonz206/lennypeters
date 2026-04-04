@@ -20,25 +20,25 @@ describe('skillGroups array', () => {
     }
   )
 
-  it('Languages group contains TypeScript', () => {
+  it('Languages group contains Responsive Web Development', () => {
     const languages = skillGroups.find(g => g.label === 'Languages') as SkillGroup
-    expect(languages.skills).toContain('TypeScript')
+    expect(languages.skills).toContain('Responsive Web Development')
   })
 
-  it('Frameworks & Libraries group contains React and Next.js', () => {
+  it('Frameworks & Libraries group contains React and NextJS', () => {
     const frameworks = skillGroups.find(g => g.label === 'Frameworks & Libraries') as SkillGroup
     expect(frameworks.skills).toContain('React')
-    expect(frameworks.skills).toContain('Next.js')
+    expect(frameworks.skills).toContain('NextJS')
   })
 
-  it('Tooling group contains Jest', () => {
+  it('Tooling group contains Playwright/Cypress', () => {
     const tooling = skillGroups.find(g => g.label === 'Tooling') as SkillGroup
-    expect(tooling.skills).toContain('Jest')
+    expect(tooling.skills).toContain('Playwright/Cypress')
   })
 
-  it('Practices group contains Accessibility (WCAG)', () => {
+  it('Practices group contains a11y', () => {
     const practices = skillGroups.find(g => g.label === 'Practices') as SkillGroup
-    expect(practices.skills).toContain('Accessibility (WCAG)')
+    expect(practices.skills).toContain('a11y')
   })
 
   it('each skill within each group is a non-empty string', () => {

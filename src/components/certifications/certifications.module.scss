@@ -1,0 +1,68 @@
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
+
+.section {
+  padding: $space-6 0;
+}
+
+.sectionTitle {
+  font-size: 1.75rem;
+  color: $primaryColor;
+  margin-bottom: $space-3;
+  padding-bottom: $space-2;
+  border-bottom: 2px solid rgba($primaryColor, 0.8);
+  display: inline-block;
+  @include neon-glow($primaryColor);
+}
+
+.intro {
+  color: $secondaryText;
+  margin: 0 0 $space-4;
+  max-width: 680px;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-3;
+
+  @include responsive(tablet) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.item {
+  border: 1px solid rgba($primaryColor, 0.18);
+  background-color: rgba($primaryColor, 0.03);
+  @include hud-corners(10px, $primaryColor, 1px);
+}
+
+.link {
+  display: block;
+  padding: $space-3;
+  text-decoration: none;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+
+  &:hover {
+    @include neon-border($primaryColor);
+  }
+}
+
+.title {
+  display: block;
+  color: $primaryText;
+  font-family: $monoSpaced;
+  margin-bottom: $space-1;
+}
+
+.meta {
+  color: $primaryColor;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}

@@ -12,6 +12,11 @@ jest.mock('../../components/experience-timeline', () => ({
   default: () => <div data-testid="experience-timeline" />,
 }))
 
+jest.mock('../../components/certifications', () => ({
+  __esModule: true,
+  default: () => <div data-testid="certifications" />,
+}))
+
 jest.mock('../../components/contact-section', () => ({
   __esModule: true,
   default: () => <div data-testid="contact-section" />,
@@ -31,6 +36,11 @@ describe('About page', () => {
   it('renders ExperienceTimeline', () => {
     render(<AboutPage />)
     expect(screen.getByTestId('experience-timeline')).toBeInTheDocument()
+  })
+
+  it('renders Certifications', () => {
+    render(<AboutPage />)
+    expect(screen.getByTestId('certifications')).toBeInTheDocument()
   })
 
   it('renders ContactSection', () => {

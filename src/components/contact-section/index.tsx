@@ -14,19 +14,19 @@ const ContactSection = () => {
       <ul className={styles.links}>
         <li>
           <a
-            href="mailto:hello@lennypeters.dev"
+            href="mailto:lenny@lennypeters.com"
             className={styles.link}
             aria-label="Send email to Lenny Peters"
           >
             <span className={styles.icon} aria-hidden="true">
               ✉
             </span>{' '}
-            hello@lennypeters.dev
+            lenny@lennypeters.com
           </a>
         </li>
         <li>
           <a
-            href="https://github.com/lennypeters"
+            href="https://github.com/loonz206"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.link}
@@ -35,7 +35,7 @@ const ContactSection = () => {
             <span className={styles.icon} aria-hidden="true">
               ⌥
             </span>{' '}
-            github.com/lennypeters
+            github.com/loonz206
           </a>
         </li>
         <li>

@@ -14,8 +14,8 @@ describe('formatDateRange', () => {
   })
 
   it('formats a range with a concrete end date', () => {
-    expect(formatDateRange('2018-06', '2020-12')).toBe(
-      `${localFormat('2018-06')} – ${localFormat('2020-12')}`
+    expect(formatDateRange('2014-06', '2017-11')).toBe(
+      `${localFormat('2014-06')} – ${localFormat('2017-11')}`
     )
   })
 
@@ -52,19 +52,19 @@ describe('experience array', () => {
   )
 
   it('first entry is the most recent role', () => {
-    expect(experience[0].role).toBe('Senior Web Engineer')
+    expect(experience[0].role).toBe('Senior Software Engineer 2')
     expect(experience[0].company).toBe('lululemon')
     expect(experience[0].endDate).toBe('Present')
   })
 
-  it('second entry is the freelance/agency role', () => {
-    expect(experience[1].role).toBe('Web Engineer')
-    expect(experience[1].company).toBe('Freelance & Agency Work')
+  it('second entry is the Holland America role', () => {
+    expect(experience[1].role).toBe('Front-End UI Developer')
+    expect(experience[1].company).toBe('Holland America Line')
   })
 
   it('third entry is the earliest role', () => {
-    expect(experience[2].role).toBe('Front-End Developer')
-    expect(experience[2].company).toBe('Early Career')
+    expect(experience[2].role).toBe('Web Designer')
+    expect(experience[2].company).toBe('Seamonster Studios')
   })
 
   it('each highlights array contains only non-empty strings', () => {

@@ -12,12 +12,12 @@ describe('ExperienceTimeline', () => {
   it('renders all 3 roles as headings', () => {
     render(<ExperienceTimeline />)
     expect(
-      screen.getByRole('heading', { name: 'Senior Web Engineer', level: 3 })
+      screen.getByRole('heading', { name: 'Senior Software Engineer 2', level: 3 })
     ).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: 'Web Engineer', level: 3 })).toBeInTheDocument()
     expect(
-      screen.getByRole('heading', { name: 'Front-End Developer', level: 3 })
+      screen.getByRole('heading', { name: 'Front-End UI Developer', level: 3 })
     ).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Web Designer', level: 3 })).toBeInTheDocument()
   })
 
   it('the "Present" entry shows "Present" in the date range text', () => {
@@ -30,8 +30,8 @@ describe('ExperienceTimeline', () => {
   it('renders all company names', () => {
     render(<ExperienceTimeline />)
     expect(screen.getByText(/lululemon/)).toBeInTheDocument()
-    expect(screen.getByText(/Freelance & Agency Work/)).toBeInTheDocument()
-    expect(screen.getByText(/Early Career/)).toBeInTheDocument()
+    expect(screen.getByText(/Holland America Line/)).toBeInTheDocument()
+    expect(screen.getByText(/Seamonster Studios/)).toBeInTheDocument()
   })
 
   it("first entry's highlights list is non-empty", () => {

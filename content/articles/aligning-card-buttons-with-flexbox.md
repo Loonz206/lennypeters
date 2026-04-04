@@ -1,5 +1,6 @@
 ---
 title: 'Aligning Card Buttons with CSS Flexbox'
+author: 'Lenny Peters'
 date: '2026-03-29'
 excerpt: 'How a single flex: 1 declaration on the right element solves the misaligned button problem in card grid layouts.'
 tags: ['CSS', 'Flexbox', 'Layout', 'SCSS']
@@ -34,13 +35,12 @@ Consider a straightforward article card component rendered inside a CSS Grid:
     </ul>
     <a href="/articles/my-article" className={styles.btn}>
       Read Article
-    </a>
   </div>
 </article>
 ```
 
 The parent grid ensures every card in a row stretches to the same height — CSS Grid does that by default with `align-items: stretch` [1]. But the _internal_ layout of each card is still regular block flow. Block-level elements stack top to bottom and stop where their content ends. If Card A's content is shorter than Card B's, Card A's button floats somewhere in the middle of the card while Card B's sits near the bottom.
-
+author: 'Lenny Peters'
 The grid made the cards equal height. It didn't make their _contents_ fill that height.
 
 ## The Flexbox Fix

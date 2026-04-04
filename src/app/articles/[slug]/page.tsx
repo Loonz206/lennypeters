@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import { getAllArticleMetas, getArticleBySlug } from '@/lib/articles'
 import Breadcrumbs from '@/components/breadcrumbs'
+import { DEFAULT_OG_IMAGE } from '@/lib/seo'
 import styles from './article.module.scss'
 
 interface Props {
@@ -17,9 +18,32 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const article = await getArticleBySlug(slug)
   if (!article) return {}
+
+  const canonicalPath = `/articles/${slug}/`
+
   return {
     title: `${article.meta.title} — Lenny Peters`,
     description: article.meta.excerpt,
+    keywords: article.meta.tags,
+    alternates: {
+      canonical: canonicalPath,
+    },
+    openGraph: {
+      type: 'article',
+      url: canonicalPath,
+      title: article.meta.title,
+      description: article.meta.excerpt,
+      images: [article.meta.image || DEFAULT_OG_IMAGE],
+      publishedTime: article.meta.date,
+      tags: article.meta.tags,
+      authors: ['Lenny Peters'],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: article.meta.title,
+      description: article.meta.excerpt,
+      images: [article.meta.image || DEFAULT_OG_IMAGE],
+    },
   }
 }
 

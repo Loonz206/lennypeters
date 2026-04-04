@@ -1,5 +1,6 @@
 ---
 title: 'Building Accessible React Components'
+author: 'Lenny Peters'
 date: '2025-11-14'
 excerpt: 'Accessibility is not an afterthought — it is a fundamental part of good engineering. This article walks through practical patterns for writing React components that work for everyone.'
 tags: ['React', 'Accessibility', 'TypeScript']
@@ -17,13 +18,12 @@ The single most effective thing you can do is reach for the right HTML element b
 A `<button>` element is focusable, activatable via keyboard, and announces its role to screen readers
 without any extra attributes.
 
-```tsx
+````tsx
 // ✅ Good
 <button onClick={handleSave}>Save</button>
 
 // ❌ Avoid
 <div onClick={handleSave} role="button" tabIndex={0}>Save</div>
-```
 
 ## Visible focus indicators
 
@@ -39,7 +39,7 @@ For inputs, use `<label>`. For icon-only buttons, use `aria-label`.
 <button aria-label="Close modal">
   <CloseIcon aria-hidden="true" />
 </button>
-```
+````
 
 ## Testing your work
 

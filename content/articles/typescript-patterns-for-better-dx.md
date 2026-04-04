@@ -1,5 +1,6 @@
 ---
 title: 'TypeScript Patterns for Better DX'
+author: 'Lenny Peters'
 date: '2025-03-11'
 excerpt: 'TypeScript can feel like overhead until it saves you from a production bug. These patterns maximise the benefits while keeping your code readable and concise.'
 tags: ['TypeScript', 'Developer Experience']
@@ -20,13 +21,11 @@ type RequestState<T> =
   | { status: 'loading' }
   | { status: 'success'; data: T }
   | { status: 'error'; error: Error }
-```
 
 ## Const assertions for immutable data
 
 Mark configuration objects and lookup tables as `as const` to get the narrowest possible types.
 
-```ts
 const ROLES = ['admin', 'editor', 'viewer'] as const
 type Role = (typeof ROLES)[number] // 'admin' | 'editor' | 'viewer'
 ```

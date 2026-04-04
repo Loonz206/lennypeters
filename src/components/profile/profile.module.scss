@@ -53,10 +53,9 @@
 }
 
 .photoImg {
-  object-fit: cover;
-  object-position: center top;
+  object-fit: contain;
+  object-position: center;
   filter: grayscale(92%) contrast(1.03);
-  aspect-ratio: 4 / 3;
 }
 
 .photoScanline {

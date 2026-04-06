@@ -11,14 +11,15 @@ describe('ExpertiseList', () => {
     expect(screen.getByRole('heading', { name: 'Expertise' })).toBeInTheDocument()
   })
 
-  it('renders all 4 skills as uppercase text', () => {
-    expect(screen.getByText('TYPESCRIPT')).toBeInTheDocument()
-    expect(screen.getByText('NEXT.JS')).toBeInTheDocument()
+  it('renders all 5 skills as uppercase text', () => {
+    expect(screen.getByText('NEXTJS')).toBeInTheDocument()
     expect(screen.getByText('REACT')).toBeInTheDocument()
-    expect(screen.getByText('PYTHON')).toBeInTheDocument()
+    expect(screen.getByText('TYPESCRIPT')).toBeInTheDocument()
+    expect(screen.getByText('AI')).toBeInTheDocument()
+    expect(screen.getByText('PLAYWRIGHT')).toBeInTheDocument()
   })
 
-  it('renders exactly 4 list items', () => {
-    expect(screen.getAllByRole('listitem')).toHaveLength(4)
+  it('renders exactly 5 list items', () => {
+    expect(screen.getAllByRole('listitem')).toHaveLength(5)
   })
 })

@@ -8,7 +8,7 @@ const basePath =
   process.env.NEXT_PUBLIC_BASE_PATH ?? (isGithubActions && isProjectPagesRepo ? `/${repoName}` : '')
 
 const nextConfig: NextConfig = {
-  output: 'export',
+  output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
   trailingSlash: true,
   basePath: basePath || undefined,
   assetPrefix: basePath || undefined,

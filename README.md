@@ -67,6 +67,25 @@ To enable GitHub Pages for this repository:
 
 This repository is configured for a user or organization Pages site. The Next.js export uses `trailingSlash: true`, which emits folder-based routes like `/about/index.html` for reliable deep-linking on GitHub Pages.
 
+### Preparing lennypeters.com (custom domain)
+
+When you are ready to move this site to `lennypeters.com`, use this order:
+
+1. Verify `lennypeters.com` in your GitHub account Pages settings (domain verification TXT record).
+2. In repository **Settings -> Secrets and variables -> Actions -> Variables**, set:
+   - `NEXT_PUBLIC_SITE_URL=https://lennypeters.com`
+3. Keep **Settings -> Pages -> Source** set to **GitHub Actions**, then set **Custom domain** to `lennypeters.com`.
+4. Configure DNS at your registrar:
+   - Apex (`@`): `A` records to `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+   - Optional IPv6: `AAAA` records to `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153`
+   - `www`: `CNAME` to `Loonz206.github.io`
+5. After DNS propagation, enable **Enforce HTTPS** in Pages settings.
+
+Notes:
+
+- The CI workflow automatically sets `NEXT_PUBLIC_BASE_PATH` to empty when `NEXT_PUBLIC_SITE_URL` is configured, so your custom domain serves from root (`/`) instead of `/lennypeters`.
+- Avoid wildcard DNS records (for example `*.lennypeters.com`) to reduce domain takeover risk.
+
 ---
 
 ## Git Hooks

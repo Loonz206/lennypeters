@@ -89,6 +89,19 @@ describe('getAllArticleMetas', () => {
     mockFs.readdirSync.mockReturnValue([] as unknown as ReturnType<typeof fs.readdirSync>)
     expect(getAllArticleMetas()).toEqual([])
   })
+
+  it('skips malformed files when metadata parsing fails', () => {
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => undefined)
+    mockMatter.mockImplementationOnce(() => {
+      throw new Error('malformed frontmatter')
+    })
+
+    const metas = getAllArticleMetas()
+
+    expect(metas).toHaveLength(2)
+    expect(consoleErrorSpy).toHaveBeenCalled()
+    consoleErrorSpy.mockRestore()
+  })
 })
 
 describe('getArticleBySlug', () => {
@@ -109,6 +122,19 @@ describe('getArticleBySlug', () => {
   it('defaults tags to [] when frontmatter has no tags', async () => {
     const article = await getArticleBySlug('article-c')
     expect(article?.meta.tags).toEqual([])
+  })
+
+  it('returns null when article parsing fails', async () => {
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => undefined)
+    mockMatter.mockImplementationOnce(() => {
+      throw new Error('invalid markdown frontmatter')
+    })
+
+    const article = await getArticleBySlug('article-a')
+
+    expect(article).toBeNull()
+    expect(consoleErrorSpy).toHaveBeenCalled()
+    consoleErrorSpy.mockRestore()
   })
 })
 

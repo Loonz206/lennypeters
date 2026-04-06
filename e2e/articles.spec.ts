@@ -19,3 +19,10 @@ test('articles index links to an article detail page', async ({ page }) => {
   await expect(page).toHaveURL(/\/articles\/[^/]+\/?$/)
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
 })
+
+test('unknown article slug returns 404 on direct load', async ({ page }) => {
+  const response = await page.goto('/articles/this-article-does-not-exist')
+
+  expect(response?.status()).toBe(404)
+  await expect(page.getByRole('heading', { name: '404' })).toBeVisible()
+})

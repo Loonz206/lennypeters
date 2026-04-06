@@ -72,20 +72,34 @@ function parseArticleMeta(filename: string): ArticleMeta {
   const fileContents = fs.readFileSync(fullPath, 'utf8')
   const { data } = matter(fileContents)
 
+  const title = typeof data.title === 'string' ? data.title : slug
+  const date = typeof data.date === 'string' ? data.date : ''
+  const excerpt = typeof data.excerpt === 'string' ? data.excerpt : ''
+  const tags = Array.isArray(data.tags)
+    ? data.tags.filter((tag): tag is string => typeof tag === 'string')
+    : []
+
   return {
     slug,
-    title: data.title,
-    date: data.date,
-    excerpt: data.excerpt,
-    tags: data.tags ?? [],
+    title,
+    date,
+    excerpt,
+    tags,
     image: resolveArticleImage(data),
-    imageAlt: resolveArticleImageAlt(data, data.title),
+    imageAlt: resolveArticleImageAlt(data, title),
   }
 }
 
 export function getAllArticleMetas(): ArticleMeta[] {
   return getArticleFiles()
-    .map(parseArticleMeta)
+    .flatMap(filename => {
+      try {
+        return [parseArticleMeta(filename)]
+      } catch (error) {
+        console.error(`Failed to parse article metadata for ${filename}`, error)
+        return []
+      }
+    })
     .sort((a, b) => (a.date > b.date ? -1 : 1))
 }
 
@@ -95,21 +109,33 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
 
   if (!fs.existsSync(fullPath)) return null
 
-  const fileContents = fs.readFileSync(fullPath, 'utf8')
-  const { data, content } = matter(fileContents)
-  const contentHtml = await renderMarkdown(content)
+  try {
+    const fileContents = fs.readFileSync(fullPath, 'utf8')
+    const { data, content } = matter(fileContents)
+    const contentHtml = await renderMarkdown(content)
 
-  return {
-    meta: {
-      slug,
-      title: data.title,
-      date: data.date,
-      excerpt: data.excerpt,
-      tags: data.tags ?? [],
-      image: resolveArticleImage(data),
-      imageAlt: resolveArticleImageAlt(data, data.title),
-    },
-    contentHtml,
+    const title = typeof data.title === 'string' ? data.title : slug
+    const date = typeof data.date === 'string' ? data.date : ''
+    const excerpt = typeof data.excerpt === 'string' ? data.excerpt : ''
+    const tags = Array.isArray(data.tags)
+      ? data.tags.filter((tag): tag is string => typeof tag === 'string')
+      : []
+
+    return {
+      meta: {
+        slug,
+        title,
+        date,
+        excerpt,
+        tags,
+        image: resolveArticleImage(data),
+        imageAlt: resolveArticleImageAlt(data, title),
+      },
+      contentHtml,
+    }
+  } catch (error) {
+    console.error(`Failed to load article ${slug}`, error)
+    return null
   }
 }
 

@@ -12,7 +12,7 @@ describe('ExpertiseList', () => {
   })
 
   it('renders all 5 skills as uppercase text', () => {
-    expect(screen.getByText('NEXTJS')).toBeInTheDocument()
+    expect(screen.getByText('NEXT.JS')).toBeInTheDocument()
     expect(screen.getByText('REACT')).toBeInTheDocument()
     expect(screen.getByText('TYPESCRIPT')).toBeInTheDocument()
     expect(screen.getByText('AI')).toBeInTheDocument()

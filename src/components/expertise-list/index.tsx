@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './expertise-list.module.scss'
 
-const FEATURED_SKILLS = ['NextJS', 'React', 'Typescript', 'AI', 'Playwright']
+const FEATURED_SKILLS = ['Next.js', 'React', 'TypeScript', 'AI', 'Playwright']
 
 const ExpertiseList = () => {
   return (

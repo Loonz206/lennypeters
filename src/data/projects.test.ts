@@ -41,7 +41,7 @@ describe('projects array', () => {
 
   it('second project is the AI Pipeline Orchestrator', () => {
     expect(projects[1].title).toBe('AI Pipeline Orchestrator')
-    expect(projects[1].tags).toContain('Python')
+    expect(projects[1].tags).toContain('JavaScript')
     expect(projects[1].tags).toContain('Docker')
   })
 

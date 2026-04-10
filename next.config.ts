@@ -1,11 +1,14 @@
 import path from 'node:path'
 import type { NextConfig } from 'next'
+import { resolveBasePath } from '@/lib/site-config'
 
-const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? ''
-const isGithubActions = process.env.GITHUB_ACTIONS === 'true'
-const isProjectPagesRepo = repoName.length > 0 && !repoName.endsWith('.github.io')
-const basePath =
-  process.env.NEXT_PUBLIC_BASE_PATH ?? (isGithubActions && isProjectPagesRepo ? `/${repoName}` : '')
+const basePath = resolveBasePath({
+  configuredBasePath: process.env.NEXT_PUBLIC_BASE_PATH,
+  customDomain: process.env.GITHUB_PAGES_CUSTOM_DOMAIN,
+  githubActions: process.env.GITHUB_ACTIONS,
+  githubRepository: process.env.GITHUB_REPOSITORY,
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL,
+})
 
 const nextConfig: NextConfig = {
   output: process.env.NODE_ENV === 'production' ? 'export' : undefined,

@@ -64,7 +64,9 @@ jobs:
     name: E2E Tests
     runs-on: ubuntu-latest
     env:
-      NEXT_PUBLIC_BASE_PATH: ${{ github.event.repository.name == format('{0}.github.io', github.repository_owner) && '' || format('/{0}', github.event.repository.name) }}
+      # Build without a basePath so `npx serve out` serves assets from root
+      # and all page/asset URLs resolve correctly during testing.
+      NEXT_PUBLIC_BASE_PATH: ''
     steps:
       - uses: actions/checkout@v4
 

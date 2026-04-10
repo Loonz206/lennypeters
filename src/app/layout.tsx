@@ -18,6 +18,17 @@ export const metadata: Metadata = {
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
+  manifest: '/manifest.webmanifest',
+  themeColor: '#0E0E0E',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-32.png', type: 'image/png', sizes: '32x32' },
+      { url: '/favicon-16.png', type: 'image/png', sizes: '16x16' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+    other: [{ rel: 'mask-icon', url: '/safari-pinned-tab.svg', color: '#00F0FF' }],
+  },
   alternates: {
     canonical: '/',
   },

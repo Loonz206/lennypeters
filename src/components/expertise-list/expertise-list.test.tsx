@@ -15,7 +15,7 @@ describe('ExpertiseList', () => {
     expect(screen.getByText('TYPESCRIPT')).toBeInTheDocument()
     expect(screen.getByText('NEXT.JS')).toBeInTheDocument()
     expect(screen.getByText('REACT')).toBeInTheDocument()
-    expect(screen.getByText('PYTHON')).toBeInTheDocument()
+    expect(screen.getByText('JAVASCRIPT')).toBeInTheDocument()
   })
 
   it('renders exactly 4 list items', () => {

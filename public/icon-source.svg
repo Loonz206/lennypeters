@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">Lenny Peters Cyberpunk Glyph</title>
+  <desc id="desc">A neon cyan geometric rune on a dark square background.</desc>
+  <defs>
+    <linearGradient id="neon-stroke" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00F0FF" />
+      <stop offset="100%" stop-color="#30F802" />
+    </linearGradient>
+    <radialGradient id="bg" cx="50%" cy="35%" r="80%">
+      <stop offset="0%" stop-color="#1C1B1B" />
+      <stop offset="100%" stop-color="#0E0E0E" />
+    </radialGradient>
+    <filter id="soft-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="7" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1024" height="1024" rx="200" fill="url(#bg)" />
+  <rect x="30" y="30" width="964" height="964" rx="180" fill="none" stroke="#00F0FF" stroke-opacity="0.24" stroke-width="10" />
+
+  <g filter="url(#soft-glow)" fill="none" stroke="url(#neon-stroke)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M300 290 L300 734 L605 734" stroke-width="84" />
+    <path d="M470 290 L670 290 C760 290 812 344 812 424 C812 505 760 560 670 560 L470 560" stroke-width="78" />
+    <path d="M470 560 L712 770" stroke-width="62" />
+  </g>
+
+  <circle cx="826" cy="230" r="20" fill="#FF00FF" fill-opacity="0.82" />
+</svg>

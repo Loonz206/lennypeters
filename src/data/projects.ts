@@ -23,7 +23,7 @@ export const projects: Project[] = [
     title: 'AI Pipeline Orchestrator',
     description:
       'Distributed orchestration layer for LLM inference pipelines. Handles multi-model routing, latency budgeting, and graceful degradation under capacity constraints.',
-    tags: ['Python', 'FastAPI', 'Redis', 'Docker'],
+    tags: ['JavaScript', 'FastAPI', 'Redis', 'Docker'],
     buttonLabel: 'View Project',
     href: '#',
   },

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Lenny Peters Site Preview</title>
+  <desc id="desc">Neon cyberpunk preview card with glyph and title text.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0E0E0E"/>
+      <stop offset="55%" stop-color="#1C1B1B"/>
+      <stop offset="100%" stop-color="#121212"/>
+    </linearGradient>
+    <linearGradient id="neon" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00F0FF"/>
+      <stop offset="100%" stop-color="#30F802"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="34" y="34" width="1132" height="562" rx="26" fill="none" stroke="#00F0FF" stroke-opacity="0.25" stroke-width="3"/>
+
+  <g transform="translate(92 115)">
+    <rect x="0" y="0" width="400" height="400" rx="74" fill="#0D0D0D" stroke="#00F0FF" stroke-opacity="0.35" stroke-width="4"/>
+    <g transform="translate(60 55)" fill="none" stroke="url(#neon)" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M55 35 L55 260 L220 260" stroke-width="44" />
+      <path d="M148 35 L262 35 C311 35 340 65 340 106 C340 148 311 178 262 178 L148 178" stroke-width="40" />
+      <path d="M148 178 L286 286" stroke-width="32" />
+    </g>
+    <circle cx="330" cy="58" r="9" fill="#FF00FF" />
+  </g>
+
+  <g font-family="'SF Mono','Fira Code','JetBrains Mono',Monaco,'Courier New',monospace" fill="#F6F6F6">
+    <text x="548" y="260" font-size="72" font-weight="700" letter-spacing="1">LENNY PETERS</text>
+    <text x="548" y="328" font-size="34" fill="#00F0FF">WEB ENGINEER</text>
+    <text x="548" y="384" font-size="26" fill="#A7F9FF">Fast. Accessible. Beautiful web experiences.</text>
+    <text x="548" y="470" font-size="22" fill="#30F802">lennypeters.com</text>
+  </g>
+</svg>

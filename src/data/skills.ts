@@ -6,18 +6,18 @@ export interface SkillGroup {
 export const skillGroups: SkillGroup[] = [
   {
     label: 'Languages',
-    skills: ['Responsive Web Development', 'HTML 5', 'CSS3', 'JavaScript'],
+    skills: ['TypeScript', 'JavaScript', 'HTML5', 'CSS3'],
   },
   {
     label: 'Frameworks & Libraries',
-    skills: ['React', 'NextJS', 'VueJS', 'AngularJS'],
+    skills: ['React', 'Next.js', 'Vue.js', 'AngularJS', 'Node.js'],
   },
   {
     label: 'Tooling',
-    skills: ['Playwright/Cypress', 'Photoshop/Figma', 'Adobe Target', 'CICD', 'AWS'],
+    skills: ['Agentic Software Engineer', 'Playwright/Cypress', 'Photoshop/Figma', 'CI/CD', 'AWS'],
   },
   {
     label: 'Practices',
-    skills: ['UI/UX Design', 'Graphic Design', 'a11y', 'Data Driven KPIs', 'AI'],
+    skills: ['UI/UX Design', 'Graphic Design', 'A11y', 'Data-Driven KPIs', 'Responsive Web Design'],
   },
 ]

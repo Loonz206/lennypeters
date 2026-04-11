@@ -35,7 +35,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
         <ul className={styles.tags} aria-label="Technologies">
           {project.tags.map(tag => (
             <li key={tag} className={styles.tag}>
-              {tag}
+              {tag.toUpperCase()}
             </li>
           ))}
         </ul>

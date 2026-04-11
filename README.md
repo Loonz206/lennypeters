@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/Loonz206/lennypeters/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Loonz206/lennypeters/actions/workflows/ci.yml)
 [![coverage: ≥80%](https://img.shields.io/badge/coverage-%E2%89%A580%25-brightgreen)](https://github.com/Loonz206/lennypeters/actions/workflows/ci.yml)
+[![Known Vulnerabilities](https://snyk.io/test/github/Loonz206/lennypeters/badge.svg)](https://snyk.io/test/github/Loonz206/lennypeters)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 

@@ -61,7 +61,7 @@ Use `render` + `screen` queries from `@testing-library/react`. Prefer queries by
 
 ### E2e tests (Playwright)
 
-E2e tests live in `e2e/` and use the `.spec.ts` extension, one suite per route. The `playwright.config.ts` points to `http://localhost:3000` and auto-starts `npm run dev` if no server is already running. Only Chromium is configured by default.
+E2e tests live in `e2e/` and use the `.spec.ts` extension, one suite per route. The `playwright.config.ts` defaults to `http://localhost:3000` and auto-starts `npm run dev` if no server is already running. Set `E2E_TEST_URL` to point all tests at any external URL instead (no local server is started when this var is set). Only Chromium is configured by default.
 
 ## Custom Agents
 

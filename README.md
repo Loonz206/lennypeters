@@ -33,6 +33,26 @@ content/
 └── articles/      # Markdown articles
 ```
 
+## Running Tests
+
+### Unit and component tests
+
+```bash
+npm test              # Watch mode
+npm test -- --ci      # Single run (used in CI)
+```
+
+### E2E tests (Playwright)
+
+```bash
+npm run test:e2e            # Local dev — auto-starts the dev server
+npm run test:e2e:prod       # Against https://lennypeters.com
+E2E_TEST_URL=<url> npm run test:e2e:url  # Against any URL
+npm run test:e2e:ui         # Interactive UI mode
+```
+
+Setting `E2E_TEST_URL` skips local server startup and points all tests at the given domain.
+
 ## Notes
 
-The site is statically exported and deployed through GitHub Actions.
+The site is statically exported and deployed through GitHub Actions. After each successful deploy to `main`, a production E2E job runs automatically against `https://lennypeters.com`. A standalone on-demand job is also available in the Actions tab (`E2E Tests — Production`).

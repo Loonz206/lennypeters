@@ -20,6 +20,7 @@ const Profile = () => {
           fill
           sizes="(max-width: 800px) 100vw, 50vw"
           className={styles.photoImg}
+          fetchPriority="high"
           priority
         />
         <div className={styles.photoScanline} aria-hidden="true" />

@@ -28,7 +28,7 @@ export const experience: ExperienceEntry[] = [
   {
     role: 'Front-End UI Developer',
     company: 'Holland America Line',
-    location: 'On-Site',
+    location: 'On-site',
     startDate: '2014-06',
     endDate: '2017-11',
     description:

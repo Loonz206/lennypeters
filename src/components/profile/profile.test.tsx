@@ -34,6 +34,14 @@ describe('Profile', () => {
     expect(screen.getByRole('img', { name: 'Lenny Peters' })).toBeInTheDocument()
   })
 
+  it('sets fetchpriority="high" on the profile image', () => {
+    render(<Profile />)
+    expect(screen.getByRole('img', { name: 'Lenny Peters' })).toHaveAttribute(
+      'fetchpriority',
+      'high'
+    )
+  })
+
   it('image is rendered by the Profile component', () => {
     render(<Profile />)
     expect(screen.getByRole('img')).toBeInTheDocument()

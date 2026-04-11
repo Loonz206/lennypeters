@@ -9,11 +9,14 @@
 
 .row {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  flex-direction: column;
   gap: $space-4;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 
   @include responsive(tablet) {
+    align-items: center;
+    flex-direction: row;
     flex-wrap: nowrap;
   }
 }
@@ -37,7 +40,21 @@
   display: flex;
   align-items: center;
   gap: $space-3;
-  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  flex-shrink: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+
+  @include responsive(tablet) {
+    width: auto;
+    max-width: none;
+    min-width: auto;
+    flex-shrink: 0;
+    overflow: visible;
+  }
 }
 
 .item {

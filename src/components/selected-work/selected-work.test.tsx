@@ -27,7 +27,7 @@ describe('SelectedWork', () => {
   })
 
   it('renders both project titles', () => {
-    expect(screen.getByText('Telemetry UI Framework')).toBeInTheDocument()
-    expect(screen.getByText('AI Pipeline Orchestrator')).toBeInTheDocument()
+    expect(screen.getByText('videos-hooks')).toBeInTheDocument()
+    expect(screen.getByText('lennypeters')).toBeInTheDocument()
   })
 })

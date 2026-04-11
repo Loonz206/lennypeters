@@ -29,9 +29,9 @@ Individual failure occurrences tracked by category. When a category reaches coun
 Failure categories use dot-notation at mid-level specificity:
 `lint:unused-vars` · `lint:import-order` · `test:mock-resolution` · `test:async-act` · `test:next-image-props` · `e2e:port-not-ready` · `e2e:selector-stale` · `mcp:context7-unavailable` · `mcp:figma-screenshot-timeout` · `figma:token-mismatch` · `pipeline:phase-skip` · `docs:stale-mermaid`
 
-| ID  | Category | Error Signature           | Count | Last Seen | Status |
-| --- | -------- | ------------------------- | ----- | --------- | ------ |
-| —   | —        | _No failures logged yet._ | —     | —         | —      |
+| ID   | Category                       | Error Signature                                                       | Count | Last Seen  | Status |
+| ---- | ------------------------------ | --------------------------------------------------------------------- | ----- | ---------- | ------ |
+| F001 | test:content-expectation-drift | "Unable to find an element with the text: Responsive Web Development" | 1     | 2026-04-10 | open   |
 
 ---
 

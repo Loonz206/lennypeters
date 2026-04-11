@@ -10,12 +10,8 @@ describe('Work page', () => {
 
   it('renders both project titles as h2 headings', () => {
     render(<WorkPage />)
-    expect(
-      screen.getByRole('heading', { name: 'Telemetry UI Framework', level: 2 })
-    ).toBeInTheDocument()
-    expect(
-      screen.getByRole('heading', { name: 'AI Pipeline Orchestrator', level: 2 })
-    ).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'videos-hooks', level: 2 })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'lennypeters', level: 2 })).toBeInTheDocument()
   })
 
   it('renders both project IDs', () => {
@@ -34,10 +30,21 @@ describe('Work page', () => {
     render(<WorkPage />)
     const tagsList = screen.getAllByRole('list', { name: 'Technologies' })
     const firstProjectTags = tagsList[0]
-    expect(firstProjectTags).toHaveTextContent('React')
-    expect(firstProjectTags).toHaveTextContent('TypeScript')
-    expect(firstProjectTags).toHaveTextContent('WebSockets')
-    expect(firstProjectTags).toHaveTextContent('Canvas')
+    expect(firstProjectTags).toHaveTextContent('REACT')
+    expect(firstProjectTags).toHaveTextContent('HOOKS')
+    expect(firstProjectTags).toHaveTextContent('STATE')
+    expect(firstProjectTags).toHaveTextContent('API')
+  })
+
+  it('renders project titles as links to project repositories', () => {
+    render(<WorkPage />)
+    const firstProjectLink = screen.getByRole('link', { name: 'videos-hooks' })
+    const secondProjectLink = screen.getByRole('link', { name: 'lennypeters' })
+
+    expect(firstProjectLink).toHaveAttribute('href', 'https://github.com/Loonz206/videos-hooks')
+    expect(secondProjectLink).toHaveAttribute('href', 'https://github.com/Loonz206/lennypeters')
+    expect(firstProjectLink).toHaveAttribute('target', '_blank')
+    expect(firstProjectLink).toHaveAttribute('rel', 'noopener noreferrer')
   })
 
   it('exports correct metadata title', () => {

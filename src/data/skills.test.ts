@@ -20,15 +20,20 @@ describe('skillGroups array', () => {
     }
   )
 
-  it('Languages group contains Responsive Web Development', () => {
+  it('Languages group contains TypeScript', () => {
     const languages = skillGroups.find(g => g.label === 'Languages') as SkillGroup
-    expect(languages.skills).toContain('Responsive Web Development')
+    expect(languages.skills).toContain('TypeScript')
   })
 
-  it('Frameworks & Libraries group contains React and NextJS', () => {
+  it('Frameworks & Libraries group contains React and Next.js', () => {
     const frameworks = skillGroups.find(g => g.label === 'Frameworks & Libraries') as SkillGroup
     expect(frameworks.skills).toContain('React')
-    expect(frameworks.skills).toContain('NextJS')
+    expect(frameworks.skills).toContain('Next.js')
+  })
+
+  it('Tooling group has Agentic Software Engineer first', () => {
+    const tooling = skillGroups.find(g => g.label === 'Tooling') as SkillGroup
+    expect(tooling.skills[0]).toBe('Agentic Software Engineer')
   })
 
   it('Tooling group contains Playwright/Cypress', () => {
@@ -36,9 +41,9 @@ describe('skillGroups array', () => {
     expect(tooling.skills).toContain('Playwright/Cypress')
   })
 
-  it('Practices group contains a11y', () => {
+  it('Practices group contains A11y', () => {
     const practices = skillGroups.find(g => g.label === 'Practices') as SkillGroup
-    expect(practices.skills).toContain('a11y')
+    expect(practices.skills).toContain('A11y')
   })
 
   it('each skill within each group is a non-empty string', () => {

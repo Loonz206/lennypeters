@@ -1,1 +1,1 @@
-npm run lint && npm test -- --ci
+npm run check

@@ -19,9 +19,9 @@ describe('SkillsGrid', () => {
   })
 
   it('renders a representative skill from each group', () => {
-    expect(screen.getByText('Responsive Web Development')).toBeInTheDocument()
+    expect(screen.getByText('TypeScript')).toBeInTheDocument()
     expect(screen.getByText('React')).toBeInTheDocument()
     expect(screen.getByText('Playwright/Cypress')).toBeInTheDocument()
-    expect(screen.getByText('a11y')).toBeInTheDocument()
+    expect(screen.getByText('A11y')).toBeInTheDocument()
   })
 })

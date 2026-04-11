@@ -33,16 +33,16 @@ describe('projects array', () => {
     })
   })
 
-  it('first project is the Telemetry UI Framework', () => {
-    expect(projects[0].title).toBe('Telemetry UI Framework')
-    expect(projects[0].tags).toContain('React')
-    expect(projects[0].tags).toContain('TypeScript')
+  it('first project is videos-hooks', () => {
+    expect(projects[0].title).toBe('videos-hooks')
+    expect(projects[0].tags).toContain('react')
+    expect(projects[0].tags).toContain('hooks')
   })
 
-  it('second project is the AI Pipeline Orchestrator', () => {
-    expect(projects[1].title).toBe('AI Pipeline Orchestrator')
-    expect(projects[1].tags).toContain('JavaScript')
-    expect(projects[1].tags).toContain('Docker')
+  it('second project is lennypeters', () => {
+    expect(projects[1].title).toBe('lennypeters')
+    expect(projects[1].tags).toContain('nextjs')
+    expect(projects[1].tags).toContain('blogging')
   })
 
   it('satisfies the Project interface shape', () => {

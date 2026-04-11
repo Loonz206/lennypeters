@@ -11,20 +11,20 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: 'PRJ_001',
-    title: 'Telemetry UI Framework',
+    title: 'videos-hooks',
     description:
-      'A high-velocity UI framework designed for real-time telemetry dashboards and tactical operations centers. Built for sustained 60fps rendering under continuous data load.',
-    tags: ['React', 'TypeScript', 'WebSockets', 'Canvas'],
+      'A modern React course project that demonstrates advanced React concepts using custom hooks, context, and functional components. This app allows users to search for YouTube videos and view details, leveraging the YouTube Data API v3.',
+    tags: ['react', 'hooks', 'state', 'api'],
     buttonLabel: 'View Project',
-    href: '#',
+    href: 'https://github.com/Loonz206/videos-hooks',
   },
   {
     id: 'PRJ_002',
-    title: 'AI Pipeline Orchestrator',
+    title: 'lennypeters',
     description:
-      'Distributed orchestration layer for LLM inference pipelines. Handles multi-model routing, latency budgeting, and graceful degradation under capacity constraints.',
-    tags: ['JavaScript', 'FastAPI', 'Redis', 'Docker'],
+      'Personal profilo site build on Github Pages using NextJS leveraging AI, Blogging via Issues',
+    tags: ['nextjs', 'static hosting', 'blogging', 'ai'],
     buttonLabel: 'View Project',
-    href: '#',
+    href: 'https://github.com/Loonz206/lennypeters',
   },
 ]

@@ -64,8 +64,8 @@ describe('ProjectCard', () => {
     render(<ProjectCard project={projectWithoutImage} />)
     const techList = screen.getByRole('list', { name: 'Technologies' })
     expect(techList).toBeInTheDocument()
-    expect(screen.getByText('React')).toBeInTheDocument()
-    expect(screen.getByText('TypeScript')).toBeInTheDocument()
+    expect(screen.getByText('REACT')).toBeInTheDocument()
+    expect(screen.getByText('TYPESCRIPT')).toBeInTheDocument()
   })
 
   it('link has correct href and button label text', () => {
@@ -90,5 +90,10 @@ describe('ProjectCard', () => {
   it('renders title as an h3 heading', () => {
     render(<ProjectCard project={projectWithoutImage} />)
     expect(screen.getByRole('heading', { name: 'Test Project', level: 3 })).toBeInTheDocument()
+  })
+
+  it('does not render title as a link', () => {
+    render(<ProjectCard project={projectWithoutImage} />)
+    expect(screen.queryByRole('link', { name: 'Test Project' })).not.toBeInTheDocument()
   })
 })

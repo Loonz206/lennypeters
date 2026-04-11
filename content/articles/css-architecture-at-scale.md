@@ -13,7 +13,7 @@ impossible to accidentally break are the hallmark of a mature codebase.
 
 ## Design tokens as variables
 
-Define your full colour palette, spacing scale, and type ramp as SCSS variables in one place.
+Define your full color palette, spacing scale, and type ramp as SCSS variables in one place.
 Every other file references those variables — never hard-coded values.
 
 ````scss
@@ -45,7 +45,7 @@ Everything else belongs in a CSS Module.
 
 ## Responsive design with mixins
 
-Centralise media queries in a single responsive mixin.
+Centralize media queries in a single responsive mixin.
 This prevents magic numbers from spreading across the codebase.
 
 ## References

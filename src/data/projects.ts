@@ -22,7 +22,7 @@ export const projects: Project[] = [
     id: 'PRJ_002',
     title: 'lennypeters',
     description:
-      'Personal profilo site build on Github Pages using NextJS leveraging AI, Blogging via Issues',
+      'Personal portfolio site built on GitHub Pages using NextJS, leveraging AI and blogging via Issues.',
     tags: ['nextjs', 'static hosting', 'blogging', 'ai'],
     buttonLabel: 'View Project',
     href: 'https://github.com/Loonz206/lennypeters',

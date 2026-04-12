@@ -31,7 +31,6 @@ describe('seo', () => {
       'Web Engineer crafting fast, accessible, and beautiful web experiences.'
     )
     expect(seo.SOCIAL_HANDLE).toBe('@lennypeters')
-    expect(seo.DEFAULT_OG_IMAGE).toBe('/og-image.png')
   })
 
   it('uses the fallback site URL when NEXT_PUBLIC_SITE_URL is not set', async () => {

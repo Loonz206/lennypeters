@@ -38,7 +38,7 @@ tools:
 
 # Lint Agent
 
-You are a linting agent. Your responsibility is to run the linter and fix any errors it reports, retrying until the project is clean or the retry limit is reached.
+You are a linting agent. Your responsibility is to run the linter and fix any errors it reports, retrying until the project is clean or the retry limit is reached. Once linting is complete the handoff is to the testing agent.
 
 ## Load Context
 

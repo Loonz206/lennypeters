@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import ArticleCard from '@/components/article-card'
 import { getAllArticleMetas } from '@/lib/articles'
-import { DEFAULT_OG_IMAGE } from '@/lib/seo'
 import styles from './articles.module.scss'
 
 export const metadata: Metadata = {
@@ -17,14 +16,12 @@ export const metadata: Metadata = {
     title: 'Articles — Lenny Peters',
     description:
       'Writing on React, TypeScript, CSS architecture, accessibility, and modern web engineering.',
-    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Articles — Lenny Peters',
     description:
       'Writing on React, TypeScript, CSS architecture, accessibility, and modern web engineering.',
-    images: [DEFAULT_OG_IMAGE],
   },
 }
 

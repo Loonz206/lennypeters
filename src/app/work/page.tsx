@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { projects } from '@/data/projects'
-import { DEFAULT_OG_IMAGE } from '@/lib/seo'
 import styles from './work.module.scss'
 
 export const metadata: Metadata = {
@@ -15,13 +14,11 @@ export const metadata: Metadata = {
     url: '/work/',
     title: 'Work — Lenny Peters',
     description: 'Selected projects and case studies from Lenny Peters.',
-    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Work — Lenny Peters',
     description: 'Selected projects and case studies from Lenny Peters.',
-    images: [DEFAULT_OG_IMAGE],
   },
 }
 

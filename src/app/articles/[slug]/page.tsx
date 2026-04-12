@@ -3,7 +3,6 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import { getAllArticleMetas, getArticleBySlug } from '@/lib/articles'
 import Breadcrumbs from '@/components/breadcrumbs'
-import { DEFAULT_OG_IMAGE } from '@/lib/seo'
 import styles from './article.module.scss'
 
 interface Props {
@@ -33,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: canonicalPath,
       title: article.meta.title,
       description: article.meta.excerpt,
-      images: [article.meta.image || DEFAULT_OG_IMAGE],
+      images: [article.meta.image],
       publishedTime: article.meta.date,
       tags: article.meta.tags,
       authors: ['Lenny Peters'],
@@ -42,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: 'summary_large_image',
       title: article.meta.title,
       description: article.meta.excerpt,
-      images: [article.meta.image || DEFAULT_OG_IMAGE],
+      images: [article.meta.image],
     },
   }
 }

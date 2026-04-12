@@ -3,7 +3,6 @@ import Header from '@/components/header'
 import Main from '@/components/main'
 import Footer from '@/components/footer'
 import {
-  DEFAULT_OG_IMAGE,
   SITE_DESCRIPTION,
   SITE_NAME,
   SITE_TITLE,
@@ -23,10 +22,11 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
-      { url: '/favicon-32.png', type: 'image/png', sizes: '32x32' },
+      { url: '/favicon.svg', type: 'image/svg+xml', sizes: 'any' },
+      { url: '/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
       { url: '/favicon-16.png', type: 'image/png', sizes: '16x16' },
     ],
-    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+    apple: [{ url: '/favicon-180x180.png', sizes: '180x180', type: 'image/png' }],
     other: [{ rel: 'mask-icon', url: '/safari-pinned-tab.svg', color: '#00F0FF' }],
   },
   alternates: {
@@ -38,19 +38,12 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: [
-      {
-        url: DEFAULT_OG_IMAGE,
-        alt: `${SITE_NAME} site preview`,
-      },
-    ],
   },
   twitter: {
     card: 'summary_large_image',
     creator: SOCIAL_HANDLE,
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: [DEFAULT_OG_IMAGE],
   },
   robots: {
     index: true,

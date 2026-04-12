@@ -3,7 +3,6 @@ import SkillsGrid from '@/components/skills-grid'
 import Certifications from '@/components/certifications'
 import ExperienceTimeline from '@/components/experience-timeline'
 import ContactSection from '@/components/contact-section'
-import { DEFAULT_OG_IMAGE } from '@/lib/seo'
 import styles from './about.module.scss'
 
 export const metadata: Metadata = {
@@ -19,14 +18,12 @@ export const metadata: Metadata = {
     title: 'About — Lenny Peters',
     description:
       'Senior Web Engineer at lululemon with 8+ years of experience building fast, accessible web products. Based in Cascadia.',
-    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'About — Lenny Peters',
     description:
       'Senior Web Engineer at lululemon with 8+ years of experience building fast, accessible web products. Based in Cascadia.',
-    images: [DEFAULT_OG_IMAGE],
   },
 }
 

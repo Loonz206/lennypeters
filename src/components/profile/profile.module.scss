@@ -53,8 +53,8 @@
 }
 
 .photoImg {
-  object-fit: contain;
-  object-position: center;
+  object-fit: cover;
+  object-position: center top;
   filter: grayscale(92%) contrast(1.03);
 }
 

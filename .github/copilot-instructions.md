@@ -164,6 +164,16 @@ Use /write-article to write an article about TypeScript discriminated unions.
 
 A GitHub Action (`.github/workflows/write-article.yml`) also auto-generates articles when a GitHub Issue is labeled `article`. Use the issue template at `.github/ISSUE_TEMPLATE/article-request.yml`.
 
+**Performance agent** (`.github/agents/performance.agent.md`) diagnoses and fixes Lighthouse performance issues, using the research skill to fetch current best-practice documentation before implementing changes:
+
+```
+/agent performance
+# or
+copilot --agent performance --prompt "LCP is failing the 2500 ms budget on the home page"
+```
+
+The performance agent always researches first, then audits locally with `npx @lhci/cli@0.14.x autorun`, implements the minimal fix, and re-audits to confirm the budget passes. Performance budgets are defined in `lighthouserc.js` and enforced on every PR by the **Lighthouse CI** GitHub Actions workflow (`.github/workflows/lhci.yml`).
+
 **Research skill** can be used inline in any prompt:
 
 ```

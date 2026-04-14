@@ -1,5 +1,7 @@
 # Lenny Peters — Personal Portfolio
 
+[![Lighthouse CI](https://github.com/Loonz206/lennypeters/actions/workflows/lhci.yml/badge.svg)](https://github.com/Loonz206/lennypeters/actions/workflows/lhci.yml)
+
 Personal portfolio site for [Lenny Peters](https://lennypeters.com), built with Next.js, React, TypeScript, and custom SCSS.
 
 ## Overview
@@ -52,6 +54,18 @@ npm run test:e2e:ui         # Interactive UI mode
 ```
 
 Setting `E2E_TEST_URL` skips local server startup and points all tests at the given domain.
+
+### Lighthouse / performance audit
+
+```bash
+# Build the static export, then run the full LHCI audit locally
+NEXT_PUBLIC_BASE_PATH='' npm run build
+npx @lhci/cli@0.14.x autorun
+```
+
+The audit runs automatically on every pull request via the **Lighthouse CI** GitHub Actions workflow.
+Performance budgets (LCP, FCP, TBT, CLS, Speed Index, TTI) and minimum Lighthouse scores (≥ 90 for
+Performance, Accessibility, Best Practices, and SEO) are defined in `lighthouserc.js`.
 
 ## Notes
 

@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import Header from '@/components/header'
 import Main from '@/components/main'
 import Footer from '@/components/footer'
@@ -12,13 +12,16 @@ import {
 } from '@/lib/seo'
 import '@/styles/global.scss'
 
+export const viewport: Viewport = {
+  themeColor: '#0E0E0E',
+}
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
   manifest: '/manifest.webmanifest',
-  themeColor: '#0E0E0E',
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },

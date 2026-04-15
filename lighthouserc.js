@@ -47,6 +47,17 @@ export default {
         'redirects-http': 'off',
         // Uses-http2 is not applicable for a static CDN host
         'uses-http2': 'off',
+        // ── Audits that produce no score (NaN) in a static export ─────────────
+        // These audits are "not applicable" for static pages with no LCP image element
+        // or no non-composited animations; minScore is not a valid assertion for them.
+        'lcp-lazy-loaded': 'off',
+        'prioritize-lcp-image': 'off',
+        'non-composited-animations': 'off',
+        // ── Static-export image limitations ─────────────────────────────────
+        // unoptimized: true (required for `output: export`) means no srcset is
+        // generated. These audits cannot pass without a server-side optimizer.
+        'uses-responsive-images': 'off',
+        'image-size-responsive': 'off',
       },
     },
     upload: {

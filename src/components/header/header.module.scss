@@ -34,7 +34,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0;
+  padding: 2px 0; // total rendered height = 24px — WCAG 2.5.8 AA minimum touch target
   flex-shrink: 0;
   z-index: 200; // above overlay
   opacity: 1;

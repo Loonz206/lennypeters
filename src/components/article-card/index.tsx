@@ -30,6 +30,7 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
             alt={article.imageAlt}
             fill
             sizes="(max-width: 800px) 100vw, 33vw"
+            style={{ objectFit: 'cover' }}
           />
         </div>
       </Link>

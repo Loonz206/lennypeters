@@ -46,6 +46,7 @@ const CodeThinking = ({ articles }: CodeThinkingProps) => {
                   alt={article.imageAlt}
                   fill
                   sizes="(max-width: 800px) 100vw, 50vw"
+                  style={{ objectFit: 'cover' }}
                 />
               </div>
             </Link>

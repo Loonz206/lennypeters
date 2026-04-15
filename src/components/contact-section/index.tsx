@@ -16,7 +16,7 @@ const ContactSection = () => {
           <a
             href="mailto:lenny@lennypeters.com"
             className={styles.link}
-            aria-label="Email: lenny@lennypeters.com"
+            aria-label="Send email to Lenny Peters"
           >
             <span className={styles.icon} aria-hidden="true">
               ✉
@@ -30,7 +30,7 @@ const ContactSection = () => {
             target="_blank"
             rel="noopener noreferrer"
             className={styles.link}
-            aria-label="GitHub: github.com/loonz206 (opens in new tab)"
+            aria-label="GitHub profile (opens in new tab)"
           >
             <span className={styles.icon} aria-hidden="true">
               ⌥
@@ -44,7 +44,7 @@ const ContactSection = () => {
             target="_blank"
             rel="noopener noreferrer"
             className={styles.link}
-            aria-label="LinkedIn: linkedin.com/in/lennypeters (opens in new tab)"
+            aria-label="LinkedIn profile (opens in new tab)"
           >
             <span className={styles.icon} aria-hidden="true">
               in

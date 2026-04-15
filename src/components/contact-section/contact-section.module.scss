@@ -41,8 +41,6 @@
   font-weight: 500;
   font-family: $monoSpaced;
   letter-spacing: 0.02em;
-  // Ensure at least a 44 × 44 px touch target (WCAG 2.5.5 Enhanced / AAA)
-  min-height: 44px;
   transition:
     color 0.2s ease,
     text-shadow 0.2s ease;

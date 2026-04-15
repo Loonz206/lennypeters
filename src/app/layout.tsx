@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from 'next'
+import type { Metadata } from 'next'
 import Header from '@/components/header'
 import Main from '@/components/main'
 import Footer from '@/components/footer'
@@ -18,6 +18,7 @@ export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
   manifest: '/manifest.webmanifest',
+  themeColor: '#0E0E0E',
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
@@ -55,10 +56,6 @@ export const metadata: Metadata = {
       'max-video-preview': -1,
     },
   },
-}
-
-export const viewport: Viewport = {
-  themeColor: '#0E0E0E',
 }
 
 export default function RootLayout({

@@ -1,8 +1,8 @@
 ---
 title: 'Using Hooks for AI Agent Flows'
 date: '2026-04-16'
-excerpt: 'How to use before_tool_call and after_tool_call hooks to intercept, validate, and block potentially harmful tool invocations in AI agent pipelines.'
-tags: ['AI', 'Agents', 'Python', 'Security']
+excerpt: 'How to use agent lifecycle hooks — from GitHub Copilot preToolUse to the OpenAI Agents SDK and the Anthropic Claude API — to intercept, validate, and block potentially harmful tool invocations.'
+tags: ['AI', 'Agents', 'Security', 'GitHub Copilot']
 image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1600&q=80'
 imageAlt: 'Glowing network of interconnected nodes representing AI agent communication'
 ---
@@ -11,42 +11,163 @@ imageAlt: 'Glowing network of interconnected nodes representing AI agent communi
 
 When I first started building AI agent systems, I treated tool calls like function calls: trust the model, let it run, and handle errors after the fact. That approach falls apart quickly once an agent has access to anything consequential — a database, a deployment pipeline, or an external API with billing implications.
 
-Hooks are the mechanism that changes that calculus. They give you an explicit interception point before and after every tool invocation, so you can enforce policy, log intent, and block harmful actions without restructuring the entire agent. In this article I'll walk through the hook lifecycle available in the OpenAI Agents SDK, show how to implement guards that prevent harmful calls, and cover patterns I've found reliable in production.[1]
+Hooks are the mechanism that changes that calculus. They give you an explicit interception point before and after every tool invocation, so you can enforce policy, log intent, and block harmful actions without restructuring the entire agent. In this article I'll walk through the hook lifecycle in three places engineers encounter it most often: GitHub Copilot's native agent hooks, the OpenAI Agents SDK, and the Anthropic Claude API.[1][2][3]
 
 This is aimed at engineers who have already built a basic agent and want to move from "it works in demos" to "it works safely in production."
 
 ## The tool call lifecycle
 
-Before writing a single hook, it helps to understand what actually happens when an agent decides to invoke a tool.
+The same logical sequence applies regardless of which agent runtime you're using.
 
 ```
 User message
   → LLM reasons and emits a tool_call
-  → SDK deserializes arguments
-  → [before_tool_call hook fires]
+  → Runtime deserializes arguments
+  → [pre-tool hook fires — inspect, modify, or deny]
   → Tool function executes
-  → [after_tool_call hook fires]
+  → [post-tool hook fires — sanitize output, emit metrics]
   → Result injected back into conversation
   → LLM produces next response
 ```
 
-The hooks sit on either side of execution. `before_tool_call` fires with the full tool reference and the deserialized arguments but before any real work is done — this is where you can inspect, modify, or abort. `after_tool_call` fires with the result (or exception) and is where you can sanitize output, emit metrics, or trigger downstream workflows.[1]
+The pre-tool hook is where you enforce policy. The post-tool hook is where you audit results and catch credential leaks before they re-enter the model's context. The implementations differ across runtimes, but the lifecycle is identical.
 
-One important constraint from the OpenAI Agents SDK documentation: hooks fire only for locally-executed Python function tools. Tools hosted on OpenAI's servers — like `WebSearchTool` or `CodeInterpreterTool` — execute remotely and do not trigger client-side hooks.[1] Keep that boundary in mind when designing your safety strategy.
+## GitHub Copilot agent hooks
 
-## Implementing AgentHooks
+GitHub Copilot's cloud agent and CLI expose hooks through a declarative JSON configuration file stored in your repository at `.github/hooks/*.json`.[1] The hooks file must be present on the default branch to be picked up by the cloud agent.
 
-The OpenAI Agents SDK exposes hooks through a base class called `AgentHooks`. Subclass it, override the methods you need, and pass an instance to your agent.
+### Available hook types
+
+| Hook                  | When it fires                                 |
+| --------------------- | --------------------------------------------- |
+| `sessionStart`        | Agent session begins or resumes               |
+| `sessionEnd`          | Agent session completes or is terminated      |
+| `userPromptSubmitted` | User submits a prompt                         |
+| `preToolUse`          | Before the agent executes any tool            |
+| `postToolUse`         | After a tool completes (success or failure)   |
+| `agentStop`           | Main agent finishes responding                |
+| `subagentStop`        | A subagent completes before returning results |
+| `errorOccurred`       | Any error occurs during execution             |
+
+`preToolUse` is the most powerful — it is the only hook that can **approve or deny** a tool execution by returning a `permissionDecision` in its output.[1]
+
+### Wiring up the configuration
+
+Create `.github/hooks/security.json` in your repository:
+
+```json
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "type": "command",
+        "bash": "echo \"Session started: $(date)\" >> logs/session.log",
+        "powershell": "Add-Content -Path logs/session.log -Value \"Session started: $(Get-Date)\"",
+        "cwd": ".",
+        "timeoutSec": 10
+      }
+    ],
+    "preToolUse": [
+      {
+        "type": "command",
+        "bash": "./scripts/security-check.sh",
+        "powershell": "./scripts/security-check.ps1",
+        "cwd": "scripts",
+        "timeoutSec": 15
+      }
+    ],
+    "postToolUse": [
+      {
+        "type": "command",
+        "bash": "cat >> logs/tool-results.jsonl",
+        "powershell": "$input | Add-Content -Path logs/tool-results.jsonl"
+      }
+    ]
+  }
+}
+```
+
+### Implementing a preToolUse security guard
+
+Each hook script receives a JSON payload via stdin and can output a JSON decision. For `preToolUse` the input contains the tool name and its arguments:
+
+```json
+{
+  "timestamp": 1704614600000,
+  "cwd": "/path/to/project",
+  "toolName": "bash",
+  "toolArgs": "{\"command\":\"rm -rf dist\",\"description\":\"Clean build directory\"}"
+}
+```
+
+To block dangerous commands, output `{"permissionDecision":"deny","permissionDecisionReason":"..."}`:
+
+```bash
+#!/bin/bash
+# scripts/security-check.sh
+
+INPUT=$(cat)
+TOOL_NAME=$(echo "$INPUT" | jq -r '.toolName')
+TOOL_ARGS=$(echo "$INPUT" | jq -r '.toolArgs')
+
+# Log every tool use for audit
+echo "$(date): Tool=$TOOL_NAME Args=$TOOL_ARGS" >> logs/tool-usage.log
+
+# Block dangerous shell patterns
+if echo "$TOOL_ARGS" | grep -qE "rm -rf /|DROP TABLE|format c:"; then
+  jq -n '{permissionDecision:"deny",permissionDecisionReason:"Dangerous command detected by security policy"}'
+  exit 0
+fi
+
+# Restrict edits to src/ and tests/ only
+if [ "$TOOL_NAME" = "edit" ] || [ "$TOOL_NAME" = "create" ]; then
+  PATH_ARG=$(echo "$TOOL_ARGS" | jq -r '.path // empty')
+  if [ -n "$PATH_ARG" ] && [[ ! "$PATH_ARG" =~ ^(src/|tests/) ]]; then
+    jq -n --arg path "$PATH_ARG" \
+      '{permissionDecision:"deny",permissionDecisionReason:("File path not in allowed directories: " + $path)}'
+    exit 0
+  fi
+fi
+
+# Allow everything else — omitting output also allows
+```
+
+The `postToolUse` hook receives the tool result as well:
+
+```bash
+#!/bin/bash
+# Appended to logs/tool-results.jsonl via the hooks.json config above
+# Input arrives on stdin; just pipe it through to the log.
+INPUT=$(cat)
+TOOL_NAME=$(echo "$INPUT" | jq -r '.toolName')
+RESULT_TYPE=$(echo "$INPUT" | jq -r '.toolResult.resultType')
+
+# Alert on tool failures
+if [ "$RESULT_TYPE" = "failure" ]; then
+  echo "$(date): FAILURE in $TOOL_NAME" >> logs/failures.log
+fi
+```
+
+A few key points from the GitHub Copilot documentation:[1]
+
+- Hooks run **synchronously** and block agent execution. Keep hook scripts under 5 seconds to avoid degrading the experience.
+- The default timeout is 30 seconds; increase `timeoutSec` for slower validation scripts.
+- Only `preToolUse` outputs a `permissionDecision`. All other hook outputs are currently ignored.
+- Test hooks locally by piping test JSON into the script: `echo '{"toolName":"bash","toolArgs":"{\"command\":\"ls\"}"}' | ./scripts/security-check.sh`
+
+## OpenAI Agents SDK hooks
+
+When building agents with the OpenAI Agents Python SDK, the same lifecycle is available through the `AgentHooks` base class.[2] Subclass it, override the methods you need, and pass an instance to your agent.
 
 ```python
 # filename: hooks.py
-# Run: python hooks.py
 
 import asyncio
 from agents import Agent, AgentHooks, RunContextWrapper, Tool, Runner, function_tool
 
-# Illustrative patterns only — see "Common pitfalls" for why keyword matching has limits
-SAMPLE_BLOCKED_PATTERNS = {"rm -rf", "DROP TABLE", "DELETE FROM", "shutdown", "format c:"}
+BLOCKED_PATTERNS = {"rm -rf", "DROP TABLE", "DELETE FROM", "format c:"}
+
 
 class SafetyHooks(AgentHooks):
     async def before_tool_call(
@@ -55,17 +176,13 @@ class SafetyHooks(AgentHooks):
         agent: Agent,
         tool: Tool,
     ) -> None:
-        print(f"[hook] before_tool_call: agent={agent.name!r} tool={tool.name!r}")
-
-        # context.context is the RunContext wrapped by RunContextWrapper;
-        # tool_args is injected by the runner just before the hook fires
         args = context.context.get("tool_args", {})
         for value in args.values():
             if isinstance(value, str):
-                for blocked in SAMPLE_BLOCKED_PATTERNS:
-                    if blocked.lower() in value.lower():
+                for pattern in BLOCKED_PATTERNS:
+                    if pattern.lower() in value.lower():
                         raise ValueError(
-                            f"Tool call blocked: argument contains disallowed pattern '{blocked}'"
+                            f"Tool call blocked: argument matches disallowed pattern '{pattern}'"
                         )
 
     async def after_tool_call(
@@ -75,16 +192,13 @@ class SafetyHooks(AgentHooks):
         tool: Tool,
         result: object,
     ) -> None:
-        print(f"[hook] after_tool_call: tool={tool.name!r} result_type={type(result).__name__}")
-        # Post-process: strip any accidental secrets from results before they re-enter context
         if isinstance(result, str) and ("password=" in result or "secret=" in result):
             raise ValueError("Tool result redacted: potential credential leak detected")
 
 
 @function_tool
 def run_shell_command(command: str) -> str:
-    """Execute a shell command and return the output."""
-    # In a real system this would call subprocess — blocked here for safety
+    """Execute a shell command and return output."""
     return f"[simulated] executed: {command}"
 
 
@@ -95,7 +209,6 @@ async def main() -> None:
         tools=[run_shell_command],
         hooks=SafetyHooks(),
     )
-
     result = await Runner.run(agent, "List files in the current directory")
     print(result.final_output)
 
@@ -104,23 +217,12 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-A few things worth noting here:
+One important constraint: hooks fire only for locally-executed Python function tools. Tools hosted on OpenAI's servers — like `WebSearchTool` or `CodeInterpreterTool` — execute remotely and do not trigger client-side hooks.[2]
 
-- Raising an exception inside `before_tool_call` aborts the tool call entirely. The exception propagates up to the runner, which can be caught and turned into a user-facing error.
-- The `context` object carries the full `RunContext`, so you have access to conversation history, metadata, and anything your application thread injected.
-- Hooks are `async` by default, so you can call external policy services, check a database, or hit an audit log endpoint without blocking.[1]
-
-## A production-grade pattern: the policy hook
-
-A simple keyword blocklist works for demos, but production systems need something more structured. I've converged on treating the `before_tool_call` hook as a policy enforcement point backed by a dedicated policy object.
+For production systems, separate the policy definition from the enforcement mechanism so the policy can be tested and loaded from configuration in isolation:
 
 ```python
-# filename: policy_hooks.py
-# Run: python policy_hooks.py
-
-import asyncio
 from dataclasses import dataclass, field
-from typing import Callable
 from agents import Agent, AgentHooks, RunContextWrapper, Tool, Runner, function_tool
 
 
@@ -134,19 +236,13 @@ class ToolPolicy:
     def check(self, tool_name: str, args: dict) -> None:
         if self.allowed_tools and tool_name not in self.allowed_tools:
             raise PermissionError(f"Tool '{tool_name}' is not on the allowlist")
-
         self._call_count += 1
         if self._call_count > self.max_calls_per_run:
-            raise RuntimeError(
-                f"Tool call budget exceeded ({self.max_calls_per_run} calls per run)"
-            )
-
+            raise RuntimeError(f"Tool call budget exceeded ({self.max_calls_per_run} per run)")
         for pattern in self.blocked_arg_patterns:
             for value in args.values():
                 if isinstance(value, str) and pattern.lower() in value.lower():
-                    raise ValueError(
-                        f"Argument blocked by policy pattern: {pattern!r}"
-                    )
+                    raise ValueError(f"Argument blocked by policy pattern: {pattern!r}")
 
 
 class PolicyEnforcedHooks(AgentHooks):
@@ -154,139 +250,151 @@ class PolicyEnforcedHooks(AgentHooks):
         self.policy = policy
 
     async def before_tool_call(
-        self,
-        context: RunContextWrapper,
-        agent: Agent,
-        tool: Tool,
+        self, context: RunContextWrapper, agent: Agent, tool: Tool
     ) -> None:
-        # context.context is the RunContext wrapped by RunContextWrapper
         args = context.context.get("tool_args", {})
         self.policy.check(tool.name, args)
-        print(f"[policy] approved tool={tool.name!r} call_count={self.policy._call_count}")
 
     async def after_tool_call(
-        self,
-        context: RunContextWrapper,
-        agent: Agent,
-        tool: Tool,
-        result: object,
+        self, context: RunContextWrapper, agent: Agent, tool: Tool, result: object
     ) -> None:
         print(f"[audit] tool={tool.name!r} returned {type(result).__name__}")
-
-
-@function_tool
-def read_file(path: str) -> str:
-    """Read a file from disk and return its contents."""
-    return f"[simulated] contents of {path}"
-
-
-@function_tool
-def write_file(path: str, content: str) -> str:
-    """Write content to a file on disk."""
-    return f"[simulated] wrote {len(content)} bytes to {path}"
-
-
-async def main() -> None:
-    policy = ToolPolicy(
-        allowed_tools={"read_file", "write_file"},
-        blocked_arg_patterns=["../", "/etc/passwd", "/proc/"],
-        max_calls_per_run=5,
-    )
-
-    agent = Agent(
-        name="file-agent",
-        instructions="You help read and write files safely.",
-        tools=[read_file, write_file],
-        hooks=PolicyEnforcedHooks(policy),
-    )
-
-    result = await Runner.run(agent, "Read the contents of config.json")
-    print(result.final_output)
-
-
-if __name__ == "__main__":
-    asyncio.run(main())
 ```
 
-This pattern separates the policy definition (`ToolPolicy`) from the enforcement mechanism (`PolicyEnforcedHooks`). The policy object is trivially testable in isolation and can be loaded from configuration at runtime — something you can't easily do when guards are scattered across individual tool definitions.[2]
+## Anthropic Claude API hooks
 
-## Equivalent patterns in other frameworks
-
-If you're not using the OpenAI Agents SDK, the same lifecycle exists under different names.
-
-**LangChain** surfaces hooks through `BaseCallbackHandler`. The `on_tool_start` and `on_tool_end` methods map directly to `before_tool_call` and `after_tool_call`.[2]
+The Anthropic Claude API does not provide a dedicated hooks class, but the tool-use flow gives you natural interception points.[3] When Claude decides to call a tool, the API returns a `tool_use` content block in the response. You control execution — so you implement the guard in your own dispatch layer before invoking the tool function.
 
 ```python
-from langchain_core.callbacks.base import BaseCallbackHandler
+import anthropic
+import json
 
-class GuardCallbackHandler(BaseCallbackHandler):
-    def on_tool_start(
-        self, serialized: dict, input_str: str, **kwargs
-    ) -> None:
-        if "DROP TABLE" in input_str.upper():
-            raise ValueError("Blocked: destructive SQL pattern detected")
+client = anthropic.Anthropic()
 
-    def on_tool_end(self, output: str, **kwargs) -> None:
-        print(f"[audit] tool returned {len(output)} chars")
+BLOCKED_PATTERNS = {"rm -rf", "DROP TABLE", "/etc/passwd"}
+ALLOWED_TOOLS = {"read_file", "write_file"}
+
+tools = [
+    {
+        "name": "read_file",
+        "description": "Read a file from disk and return its contents.",
+        "input_schema": {
+            "type": "object",
+            "properties": {"path": {"type": "string", "description": "Path to the file"}},
+            "required": ["path"],
+        },
+    },
+    {
+        "name": "write_file",
+        "description": "Write content to a file on disk.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "path": {"type": "string"},
+                "content": {"type": "string"},
+            },
+            "required": ["path", "content"],
+        },
+    },
+]
+
+
+def pre_tool_check(tool_name: str, tool_input: dict) -> None:
+    """Raise if the tool call violates policy — mirrors preToolUse / before_tool_call."""
+    if tool_name not in ALLOWED_TOOLS:
+        raise PermissionError(f"Tool '{tool_name}' is not on the allowlist")
+    for value in tool_input.values():
+        if isinstance(value, str):
+            for pattern in BLOCKED_PATTERNS:
+                if pattern.lower() in value.lower():
+                    raise ValueError(f"Tool call blocked: argument matches pattern '{pattern}'")
+
+
+def dispatch_tool(tool_name: str, tool_input: dict) -> str:
+    """Execute the tool and return a result string."""
+    if tool_name == "read_file":
+        return f"[simulated] contents of {tool_input['path']}"
+    if tool_name == "write_file":
+        return f"[simulated] wrote {len(tool_input['content'])} bytes to {tool_input['path']}"
+    raise ValueError(f"Unknown tool: {tool_name}")
+
+
+def post_tool_check(tool_name: str, result: str) -> str:
+    """Sanitize or redact the result before returning it to the model — mirrors postToolUse."""
+    if "password=" in result or "secret=" in result:
+        raise ValueError("Tool result redacted: potential credential leak detected")
+    print(f"[audit] tool={tool_name!r} returned {len(result)} chars")
+    return result
+
+
+def run_agent(user_message: str) -> str:
+    messages = [{"role": "user", "content": user_message}]
+
+    while True:
+        response = client.messages.create(
+            model="claude-opus-4-5",
+            max_tokens=1024,
+            tools=tools,
+            messages=messages,
+        )
+
+        if response.stop_reason == "end_turn":
+            return next(
+                block.text for block in response.content if hasattr(block, "text")
+            )
+
+        # Process tool_use blocks — this is where hooks fire
+        tool_results = []
+        for block in response.content:
+            if block.type != "tool_use":
+                continue
+
+            try:
+                pre_tool_check(block.name, block.input)          # preToolUse equivalent
+                raw_result = dispatch_tool(block.name, block.input)
+                result_content = post_tool_check(block.name, raw_result)  # postToolUse equivalent
+                tool_results.append(
+                    {"type": "tool_result", "tool_use_id": block.id, "content": result_content}
+                )
+            except (PermissionError, ValueError) as exc:
+                # Return the policy violation to the model as an error result
+                tool_results.append(
+                    {
+                        "type": "tool_result",
+                        "tool_use_id": block.id,
+                        "content": f"[blocked] {exc}",
+                        "is_error": True,
+                    }
+                )
+
+        messages.append({"role": "assistant", "content": response.content})
+        messages.append({"role": "user", "content": tool_results})
 ```
 
-**Semantic Kernel** (.NET) uses `IKernelFunctionInvocationFilter` with `OnFunctionInvokingAsync` (before) and `OnFunctionInvokedAsync` (after).[3]
-
-```csharp
-using Microsoft.SemanticKernel;
-
-public class SafetyFilter : IKernelFunctionInvocationFilter
-{
-    public async Task OnFunctionInvokingAsync(
-        FunctionInvocationContext context,
-        Func<FunctionInvocationContext, Task> next)
-    {
-        var args = context.Arguments;
-        if (args.ContainsKey("command") && ((string)args["command"]).Contains("rm -rf"))
-        {
-            throw new InvalidOperationException("Blocked: destructive command detected");
-        }
-        await next(context);
-    }
-
-    public async Task OnFunctionInvokedAsync(
-        FunctionInvocationContext context,
-        Func<FunctionInvocationContext, Task> next)
-    {
-        await next(context);
-        Console.WriteLine($"[audit] {context.Function.Name} completed");
-    }
-}
-
-// Register:
-kernel.FunctionInvocationFilters.Add(new SafetyFilter());
-```
-
-The pattern is identical across frameworks — the only differences are naming conventions and whether you compose via inheritance or interface implementation.
+Because the Claude API is stateless at the HTTP level, the hook layer lives entirely in your orchestration code. That means it is straightforward to unit-test `pre_tool_check` and `post_tool_check` in isolation — no agent runtime required.[3]
 
 ## Common pitfalls
 
-**Overly broad keyword matching causes false positives.** A blocklist containing `"delete"` will prevent legitimate operations like "delete this draft" or "clean up temp files." Use structured argument parsing and match against known dangerous patterns at the semantic level, not raw string content.
+**Overly broad keyword matching causes false positives.** A blocklist containing `"delete"` will block legitimate operations like "delete this draft" or "clean up temp files." Use structured argument parsing and match against known dangerous patterns at the semantic level, not raw string content.
 
-**Async hooks can introduce latency.** If your `before_tool_call` hook hits an external policy service synchronously, you're adding a network round-trip to every tool invocation. Use connection pooling, local caches with short TTLs, or circuit breakers so policy checks degrade gracefully under load.[2]
+**Hooks run synchronously in Copilot agents — keep them fast.** The GitHub Copilot documentation recommends keeping hook execution under 5 seconds. External policy service calls inside a hook add a network round-trip to every tool invocation; use local caches or background queues for expensive checks.[1]
 
-**Hooks are not a substitute for proper tool scoping.** The most effective guard is an allowlist of tools the agent can even see. A hook that blocks `run_shell_command` is a secondary defense. The primary defense is not registering `run_shell_command` in the first place unless the use case requires it.[1]
+**Hooks are a secondary defense, not a permission system.** The most effective guard is scoping which tools the agent can see at all. A `preToolUse` hook that blocks `bash` is useful, but the primary defense is not exposing `bash` unless the use case requires it.[1][2]
 
-**Swallowing exceptions silently breaks observability.** If a hook raises an exception that the runner catches and ignores, you get silent failures. Always emit a structured log event or metric from your hook before raising, so your monitoring system records the block event.
+**Return policy violations as errors, not silent swallows.** In the Claude pattern above, blocked calls return an `is_error: true` tool result so the model knows the call was rejected. In the Copilot pattern, the `permissionDecisionReason` is surfaced to the user. Always emit a structured log event before blocking so your monitoring system can surface patterns over time.
 
 ## Conclusion
 
-Hooks give you a principled place to enforce policy, build audit trails, and protect downstream systems from agent mistakes or adversarial inputs. The key insights I'd carry forward:
+Hooks give you a principled place to enforce policy, build audit trails, and protect downstream systems from agent mistakes or adversarial inputs. The implementations look different across runtimes, but the pattern is universal:
 
-- Treat `before_tool_call` as an enforcement boundary, not a logging afterthought.
-- Back your hooks with an explicit, testable policy object rather than inline conditionals.
-- Keep your primary defense at the tool registration layer — hooks are a safety net, not a permission system.
-- Instrument every block event so your monitoring systems can surface patterns over time.
+- **GitHub Copilot agents**: declarative `hooks.json` in `.github/hooks/`; `preToolUse` can deny calls and return a reason.[1]
+- **OpenAI Agents SDK**: subclass `AgentHooks` and override `before_tool_call` / `after_tool_call`; raise to abort.[2]
+- **Anthropic Claude API**: implement `pre_tool_check` and `post_tool_check` in your own dispatch loop around the `tool_use` content blocks.[3]
 
-The frameworks differ in naming — `on_tool_start`, `before_tool_call`, `OnFunctionInvokingAsync` — but the lifecycle is universal. Once you internalize the pattern, it transfers directly between them.
+Treat the pre-tool hook as an enforcement boundary. Back it with an explicit, testable policy object. Keep your primary defense at the tool registration layer. Instrument every block event so patterns surface over time.
 
 ## References
 
-1. [OpenAI Agents Python SDK — Agent Lifecycle Hooks](https://github.com/openai/openai-agents-python/blob/main/examples/basic/agent_lifecycle_example.py)
-2. [LangChain — Callbacks and Custom Callback Handlers](https://python.langchain.com/docs/concepts/callbacks/)
-3. [Microsoft Semantic Kernel — Function Invocation Filters](https://learn.microsoft.com/en-us/semantic-kernel/concepts/enterprise-readiness/filters)
+1. [GitHub Copilot — About hooks](https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-hooks) · [Using hooks with GitHub Copilot agents](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent/use-hooks) · [Hooks configuration reference](https://docs.github.com/en/copilot/reference/hooks-configuration)
+2. [OpenAI Agents Python SDK — Agent lifecycle hooks](https://openai.github.io/openai-agents-python/ref/lifecycle/)
+3. [Anthropic — Tool use with Claude](https://docs.anthropic.com/en/docs/build-with-claude/tool-use/overview)

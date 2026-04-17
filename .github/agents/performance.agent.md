@@ -121,18 +121,15 @@ Confirm that:
 2. No existing Lighthouse score has regressed.
 3. `npm run lint` is clean.
 4. `npm test -- --ci` passes.
-
-### Step 5 — Update the budget if warranted
-
-If you have genuinely improved a metric beyond the current budget threshold,
-tighten the corresponding assertion in `lighthouserc.js` to lock in the gain
-(e.g. lower `maxNumericValue` for LCP if you achieved a faster paint).
+5. If a metric has improved beyond its current budget threshold, tighten the
+   corresponding assertion in `lighthouserc.js` to lock in the gain.
 
 ---
 
 ## Performance Budget Reference
 
-The active budget is in `lighthouserc.js`. Google's "Good" thresholds:
+The active budget is defined in `lighthouserc.js` — read that file for current thresholds.
+Google's "Good" baseline for the four enforced categories and three Core Web Vitals:
 
 | Metric               | Good      |
 | -------------------- | --------- |
@@ -141,11 +138,8 @@ The active budget is in `lighthouserc.js`. Google's "Good" thresholds:
 | Best Practices score | ≥ 90      |
 | SEO score            | ≥ 90      |
 | LCP                  | ≤ 2500 ms |
-| FCP                  | ≤ 1800 ms |
 | TBT                  | ≤ 200 ms  |
 | CLS                  | ≤ 0.1     |
-| Speed Index          | ≤ 3400 ms |
-| TTI                  | ≤ 3800 ms |
 
 ---
 

@@ -45,3 +45,6 @@ certificates
 # playwright
 /playwright-report/
 /test-results/
+
+# lighthouse ci
+/.lighthouseci/

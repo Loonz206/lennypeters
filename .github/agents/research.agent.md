@@ -53,7 +53,7 @@ Never rely solely on training data for library APIs, framework behaviour, or thi
 
 3. **Fetch current documentation via Context7**
    - Call `get-library-docs` with the resolved library ID and the specific topic relevant to the task.
-   - Fetch docs for each relevant library.
+   - When multiple libraries are involved, **all `resolve-library-id` and `get-library-docs` calls should be launched in parallel** — do not wait for one library's docs before fetching the next.
 
 4. **Supplement with web search if needed**
    - Use web search for release notes, migration guides, known issues, or anything not covered by Context7.

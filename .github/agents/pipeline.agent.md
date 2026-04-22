@@ -27,6 +27,7 @@ You are a pipeline orchestrator for the lennypeters repo. Your job is to take a 
    - Read `.github/AGENT_LEARNINGS.md` before anything else.
    - Filter Active Rules by categories relevant to the current task (e.g. `lint:*`, `test:*`, `mcp:*`, `figma:*`).
    - Surface all matching rules and apply them throughout subsequent phases — do not re-learn what is already recorded.
+   - If the task touches an external library, reading AGENT_LEARNINGS and fetching that library's docs via Context7 can be done **in parallel**.
 
 2. **Research**
    - If the task touches an external library, framework, or API, use `/internet-research` or the `research` agent first.
@@ -59,6 +60,8 @@ You are a pipeline orchestrator for the lennypeters repo. Your job is to take a 
    - Log any failure patterns observed across all phases to `.github/AGENT_LEARNINGS.md`.
    - If any failure category reached the 3-strike threshold, a new rule is extracted automatically.
    - Report the reflect summary in the pipeline output.
+
+> **Steps 7 and 8** (Docs Sync and Reflect) are independent of each other — they can be invoked as parallel subagents once E2E testing completes.
 
 9. **Summary**
    - Return a concise phase-by-phase summary with research notes, changes made, lint status, unit test status, e2e status, docs sync status, and reflect summary.

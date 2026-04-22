@@ -325,3 +325,42 @@ Define prop interfaces inline above the component using `interface ComponentName
 ### Path alias
 
 Use `@/` for all imports from `src/` (configured in `tsconfig.json`).
+
+## Hook Enforcement
+
+> Instructions describe **intent**. Hooks enforce **hard limits** before any tool call executes.
+
+Repo-scoped Copilot hooks live in `.github/hooks/copilot-hooks.json`. They apply to both the GitHub Copilot cloud agent and local Copilot CLI sessions run from this repo's root. The hooks file must be on the default branch to be active for cloud agent sessions.
+
+The active hook is `preToolUse` — it runs before every tool call and can deny execution by outputting a JSON decision. The policy script is `.github/hooks/scripts/pre-tool-policy.js` (Node 22, no dependencies).
+
+### What the policy blocks
+
+**Shell commands (`bash` tool):**
+
+| Category                | Examples blocked                                                                                        |
+| ----------------------- | ------------------------------------------------------------------------------------------------------- |
+| Privilege escalation    | `sudo`, `su`, `runas`                                                                                   |
+| Root-destructive delete | `rm -rf /`, `rm -rf ~/`, `rm -rf *` at root                                                             |
+| System storage ops      | `mkfs`, `diskutil erase`, `dd of=/dev/*`, `format`                                                      |
+| Download-and-execute    | `curl … \| bash`, `wget … \| sh`, PowerShell `iex`+`irm`                                                |
+| Destructive git         | `git reset --hard`, `git checkout -- .`, `git clean -f*`, `git push --force` (not `--force-with-lease`) |
+
+**File write operations (`edit` / `create` tools):**
+
+| Always denied                               | Reason                                        |
+| ------------------------------------------- | --------------------------------------------- |
+| `.github/workflows/**`                      | CI/CD workflow changes require manual review  |
+| `.env`, `.env.*`, `*.env`                   | May contain secrets                           |
+| `certificates/**`                           | Certificate material                          |
+| `*.pem`, `*.key`, `*.crt`, `*.p12`, `*.pfx` | Private key / cert files anywhere in the tree |
+| `.husky/**`                                 | Git hook scripts                              |
+
+Anything outside the approved write paths is also denied. Approved paths are: `src/`, `content/articles/`, `e2e/`, `public/`, `.github/agents/`, `.github/instructions/`, `.github/skills/`, `.github/prompts/`, `.github/hooks/`, `.github/ISSUE_TEMPLATE/`, the main `.github/` governance docs (`FLOW.md`, `copilot-instructions.md`, `AGENT_LEARNINGS.md`), and root-level config files (`package.json`, `jest.config.js`, `tsconfig.json`, etc.).
+
+### Policy design principles
+
+- **Fail open on malformed input** — if the hook payload cannot be parsed, the tool call is allowed rather than permanently blocked by a configuration issue.
+- **`--force-with-lease` is allowed** — it is the safer git force mechanism; `--force` / `-f` are denied.
+- **No audit logging in v1** — logging will be added in a later phase once normal usage patterns are established.
+- **Extend by editing the script** — to expand or relax the policy, edit `.github/hooks/scripts/pre-tool-policy.js`. The deny rules are grouped into `SHELL_DENY_RULES`, `GIT_DENY_RULES`, `WRITE_DENY_RULES`, `ALLOWED_PREFIXES`, and `ALLOWED_EXACT` arrays at the top of the file.

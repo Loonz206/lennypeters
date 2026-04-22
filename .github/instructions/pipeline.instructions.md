@@ -38,14 +38,6 @@ Act as the **Coding Agent**.
 3. Implement the change following the conventions in `.github/copilot-instructions.md`.
 4. Do not run any commands yet.
 
-Conventions to enforce:
-
-- Components: one folder per component, `index.tsx` + `component-name.module.scss`
-- CSS Modules for component-scoped styles; global class names for layout
-- `"use client"` only when browser APIs or React hooks are required
-- Prop interfaces named `ComponentNameProps`, defined above the component
-- `@/` path alias for all `src/` imports
-
 ---
 
 ### Phase 2 — Linting
@@ -87,13 +79,13 @@ Useful commands:
 Act as the **E2E Testing Agent**.
 
 1. Run `npm run test:e2e`.
-2. If all pass → move to Summary.
+2. If all pass → move to Phase 5.
 3. If failures:
    - Read Playwright output and any traces.
    - Fix source or update the test — never delete or skip a test.
    - Re-run `npm run test:e2e`.
    - Retry up to **3 attempts** total.
-4. After 3 failed attempts, record outstanding e2e failures and proceed to Summary.
+4. After 3 failed attempts, record outstanding e2e failures and proceed to Phase 5.
 
 Useful commands:
 
@@ -102,7 +94,21 @@ Useful commands:
 
 ---
 
-### Phase 5 — Documentation Sync
+### Phase 5 — Evaluate & Reflect
+
+Act as the **Reflective Agent**.
+
+1. Read `.github/AGENT_LEARNINGS.md`.
+2. Log any failure patterns observed across all phases.
+3. If any failure category has reached the 3-strike threshold, extract it as a new Active Rule.
+4. Purge resolved rules older than 30 days.
+5. Report the reflect summary before moving to Phase 6.
+
+> **Phases 5 and 6** (Reflect and Docs Sync) are independent — they can run in parallel once E2E testing completes.
+
+---
+
+### Phase 6 — Documentation Sync
 
 Act as the **Docs Agent**.
 
@@ -119,7 +125,7 @@ Act as the **Docs Agent**.
 
 ---
 
-### Phase 6 — Summary
+### Phase 7 — Summary
 
 Present a concise summary to the user using the following structure:
 
@@ -148,6 +154,10 @@ Present a concise summary to the user using the following structure:
 ### Docs Sync
 ✅ Updated  /  ⚪ No changes needed  /  ❌ N outstanding doc updates
 <list outstanding docs updates if any>
+
+### Learnings
+✅ N new rules extracted (L00N, …) / ⚪ No new rules / ⚠️ N regressions detected
+<list any regressions — failures that broke an existing Active Rule>
 
 ### Next Steps
 <only include if there are outstanding issues or follow-up actions needed>

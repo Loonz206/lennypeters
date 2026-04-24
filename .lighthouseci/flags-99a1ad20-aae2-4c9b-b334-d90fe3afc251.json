@@ -1,0 +1,1 @@
+{ "chromeFlags": "--disable-gpu --no-sandbox --disable-dev-shm-usage --headless=new" }

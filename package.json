@@ -20,7 +20,8 @@
     "test:e2e:url": "playwright test",
     "prepare": "husky",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "perf": "lhci autorun --config=lhci.json"
   },
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
@@ -38,6 +39,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@lhci/cli": "^0.15.1",
     "@playwright/test": "^1.58.2",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
@@ -53,6 +55,8 @@
     "jest-environment-jsdom": "^30.3.0",
     "lint-staged": "^16.4.0",
     "prettier": "^3.8.1",
+    "puppeteer": "^23.10.4",
+    "serve": "^14.2.6",
     "typescript": "^5"
   },
   "lint-staged": {

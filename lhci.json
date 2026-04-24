@@ -1,0 +1,36 @@
+{
+  "ci": {
+    "collect": {
+      "settings": {
+        "chromeFlags": "--disable-gpu --no-sandbox --disable-dev-shm-usage",
+        "emulatedFormFactor": "mobile",
+        "throttlingMethod": "simulate",
+        "throttling": {
+          "rtt": 150,
+          "throughput": 500000,
+          "cpuSlowdownMultiplier": 4
+        }
+      },
+      "url": [
+        "http://localhost:3000/",
+        "http://localhost:3000/about",
+        "http://localhost:3000/articles",
+        "http://localhost:3000/work"
+      ],
+      "startServerCommand": "npx serve out -l 3000",
+      "startServerReadyPattern": "Accepting connections"
+    },
+    "assert": {
+      "assertions": {
+        "first-contentful-paint": ["maxNumericValue <= 3000"],
+        "largest-contentful-paint": ["maxNumericValue <= 3000"],
+        "cumulative-layout-shift": ["maxNumericValue <= 0.1"],
+        "total-blocking-time": ["maxNumericValue <= 300"],
+        "speed-index": ["maxNumericValue <= 3000"]
+      }
+    },
+    "upload": {
+      "target": "temporary-public-storage"
+    }
+  }
+}

@@ -21,7 +21,7 @@
     "prepare": "husky",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "perf": "lhci autorun --config=lhci.json"
+    "perf": "next build && lhci autorun --config=lhci.json"
   },
   "dependencies": {
     "@testing-library/dom": "^10.4.1",

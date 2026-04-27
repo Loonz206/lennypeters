@@ -13,9 +13,9 @@
       },
       "url": [
         "http://localhost:3000/",
-        "http://localhost:3000/about",
-        "http://localhost:3000/articles",
-        "http://localhost:3000/work"
+        "http://localhost:3000/about/",
+        "http://localhost:3000/articles/",
+        "http://localhost:3000/work/"
       ],
       "startServerCommand": "npx serve out -l 3000",
       "startServerReadyPattern": "Accepting connections"

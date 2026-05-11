@@ -4,6 +4,9 @@
 // ── Brand link ──────────────────────────────────────────────────────────────
 
 .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
   color: $successColor;
   @include neon-glow($successColor);
 
@@ -11,6 +14,11 @@
     color: $successColor;
     @include neon-glow($successColor);
   }
+}
+
+.logo {
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 4px $successColor);
 }
 
 // ── Desktop nav (hidden on mobile) ─────────────────────────────────────────

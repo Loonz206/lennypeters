@@ -20,6 +20,16 @@ jest.mock('next/link', () => ({
   ),
 }))
 
+jest.mock('next/image', () => ({
+  __esModule: true,
+  default: ({ src, alt, ...props }: { src: string; alt: string; [key: string]: unknown }) => {
+    const { fill, priority, ...imageProps } = props
+    void fill
+    void priority
+    return <span role="img" aria-label={alt} data-src={src} {...imageProps} />
+  },
+}))
+
 jest.mock('next/navigation', () => ({
   usePathname: jest.fn(),
 }))
@@ -42,6 +52,13 @@ describe('Header', () => {
     const brandLink = screen.getByRole('link', { name: 'Lenny Peters' })
     expect(brandLink).toBeInTheDocument()
     expect(brandLink).toHaveAttribute('href', '/')
+  })
+
+  it('renders the logo image inside the brand link', () => {
+    render(<Header />)
+    const brandLink = screen.getByRole('link', { name: 'Lenny Peters' })
+    const logo = brandLink.querySelector('[data-src="/favicon.svg"]')
+    expect(logo).toBeInTheDocument()
   })
 
   it('renders Work, Articles, and About links in the desktop navigation', () => {

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import styles from './header.module.scss'
 
@@ -80,6 +81,14 @@ const Header = () => {
         <div className="navbar wrapper">
           <h2>
             <Link href="/" className={styles.brand}>
+              <Image
+                src="/favicon.svg"
+                alt=""
+                width={28}
+                height={28}
+                className={styles.logo}
+                aria-hidden="true"
+              />
               Lenny Peters
             </Link>
           </h2>

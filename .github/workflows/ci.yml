@@ -152,7 +152,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [lint, test, e2e]
     outputs:
-      preview_url: ${{ steps.preview-url.outputs.value }}
+      preview-url: ${{ steps.preview-url.outputs.value }}
     environment:
       name: ${{ 'github-pages' }}
       url: ${{ steps.deployment.outputs.page_url }}
@@ -210,17 +210,34 @@ jobs:
       - name: Comment preview URL on pull request
         env:
           GITHUB_TOKEN: ${{ github.token }}
-          PREVIEW_URL: ${{ needs.deploy.outputs.preview_url }}
+          PREVIEW_URL: ${{ needs.deploy.outputs.preview-url }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
           REPOSITORY: ${{ github.repository }}
         run: |
-          COMMENT_BODY="🚀 GitHub Pages preview is ready: ${PREVIEW_URL}"
-          curl -sS \
-            -H "Authorization: Bearer ${GITHUB_TOKEN}" \
-            -H "Accept: application/vnd.github+json" \
-            -X POST \
-            "https://api.github.com/repos/${REPOSITORY}/issues/${PR_NUMBER}/comments" \
-            -d "$(jq -cn --arg body "${COMMENT_BODY}" '{body: $body}')"
+          python - <<'PY'
+          import json
+          import os
+          import urllib.request
+
+          body = f"🚀 GitHub Pages preview is ready: {os.environ['PREVIEW_URL']}"
+          url = f"https://api.github.com/repos/{os.environ['REPOSITORY']}/issues/{os.environ['PR_NUMBER']}/comments"
+          data = json.dumps({"body": body}).encode("utf-8")
+
+          req = urllib.request.Request(
+              url,
+              data=data,
+              method="POST",
+              headers={
+                  "Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}",
+                  "Accept": "application/vnd.github+json",
+                  "Content-Type": "application/json",
+              },
+          )
+
+          with urllib.request.urlopen(req) as response:
+              if response.status >= 300:
+                  raise RuntimeError(f"Failed to comment on PR. Status: {response.status}")
+          PY
 
   # ── Production E2E (post-deploy) ──────────────────────────────────────────
   # Runs after a successful deploy to main and validates the live domain.

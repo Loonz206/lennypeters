@@ -57,4 +57,4 @@ Setting `E2E_TEST_URL` skips local server startup and points all tests at the gi
 
 The site is statically exported and deployed through GitHub Actions. After each successful deploy to `main`, a production E2E job runs automatically against `https://lennypeters.com`. A standalone on-demand job is also available in the Actions tab (`E2E Tests — Production`).
 
-Pull requests from this repository now also trigger a GitHub Pages preview deployment after lint, unit, and E2E checks pass. The workflow posts a PR comment with a preview URL that includes `?pr=<number>` for easy review context.
+Pull requests from this repository now also trigger a GitHub Pages preview deployment after lint, unit, and E2E checks pass. The workflow posts a PR comment with the preview URL and includes `?pr=<number>` as review context in the query string.

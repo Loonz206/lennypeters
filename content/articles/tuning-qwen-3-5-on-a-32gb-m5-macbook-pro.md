@@ -57,7 +57,7 @@ cmake --build build --config Release -j
 
 ```bash
 llama-cli \
-  -hf Qwen/Qwen3-14B-GGUF:Q4_K_M \
+  -hf Qwen/Qwen3.5-9B-GGUF:UD-Q4_K_XL \
   --ctx-size 8192 \
   --n-gpu-layers 999 \
   --ubatch-size 256 \
@@ -67,7 +67,7 @@ llama-cli \
 
 Why this is a good baseline:
 
-- `Q4_K_M` usually gives a strong quality/perf tradeoff for local coding.
+- `UD-Q4_K_XL` is a strong quality/perf tradeoff for local coding on 32GB Apple Silicon.
 - `--ctx-size 8192` avoids overcommitting memory early.
 - `--n-gpu-layers 999` effectively pushes as much as possible to Metal-backed acceleration on Mac.
 - `q8_0` KV cache is a balanced starting point before trying more aggressive cache compression.
@@ -84,7 +84,7 @@ Then iterate:
 
 ```bash
 llama-server \
-  -hf Qwen/Qwen3-14B-GGUF:Q4_K_M \
+  -hf Qwen/Qwen3.5-9B-GGUF:UD-Q4_K_XL \
   --ctx-size 8192 \
   --n-gpu-layers 999 \
   --host 127.0.0.1 \
@@ -102,7 +102,7 @@ LM Studio exposes OpenAI-compatible endpoints (chat/completions/models) so you c
 The LM Studio CLI supports explicit context settings during model load.[5]
 
 ```bash
-lms load qwen3-14b-gguf --context-length 8192
+lms load "Qwen3.5-9B-GGUF:UD-Q4_K_XL" --context-length 8192
 ```
 
 You can confirm model capabilities through its REST endpoints and avoid setting context above model limits.[5]
@@ -138,14 +138,14 @@ OpenCode supports custom providers using OpenAI-compatible adapters and a provid
         "baseURL": "http://127.0.0.1:1234/v1"
       },
       "models": {
-        "Qwen3-14B-Q4_K_M": {
-          "name": "Qwen 3 14B Q4_K_M"
+        "Qwen3.5-9B-GGUF:UD-Q4_K_XL": {
+          "name": "Qwen 3.5 9B UD-Q4_K_XL"
         }
       }
     }
   },
-  "model": "local-qwen/Qwen3-14B-Q4_K_M",
-  "small_model": "local-qwen/Qwen3-14B-Q4_K_M"
+  "model": "local-qwen/Qwen3.5-9B-GGUF:UD-Q4_K_XL",
+  "small_model": "local-qwen/Qwen3.5-9B-GGUF:UD-Q4_K_XL"
 }
 ```
 
@@ -163,7 +163,7 @@ Copilot CLI now supports BYOK/custom providers (including local OpenAI-compatibl
 ```bash
 export COPILOT_PROVIDER_TYPE=openai
 export COPILOT_PROVIDER_BASE_URL=http://127.0.0.1:1234/v1
-export COPILOT_MODEL=Qwen3-14B-Q4_K_M
+export COPILOT_MODEL=Qwen3.5-9B-GGUF:UD-Q4_K_XL
 export COPILOT_OFFLINE=true
 copilot
 ```
@@ -205,13 +205,13 @@ Store two scripts and switch quickly:
 ```bash
 #!/usr/bin/env bash
 # fast-local.sh
-llama-server -hf Qwen/Qwen3-14B-GGUF:Q4_K_M --ctx-size 8192 --ubatch-size 256 --port 1234
+llama-server -hf Qwen/Qwen3.5-9B-GGUF:UD-Q4_K_XL --ctx-size 8192 --ubatch-size 256 --port 1234
 ```
 
 ```bash
 #!/usr/bin/env bash
 # deep-local.sh
-llama-server -hf Qwen/Qwen3-14B-GGUF:Q5_K_M --ctx-size 16384 --ubatch-size 256 --port 1234
+llama-server -hf Qwen/Qwen3.5-14B-GGUF:UD-Q5_K_M --ctx-size 16384 --ubatch-size 256 --port 1234
 ```
 
 This avoids ad hoc tuning drift and keeps performance predictable.

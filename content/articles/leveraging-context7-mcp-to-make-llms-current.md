@@ -3,6 +3,8 @@ title: 'Leveraging Context7 MCP to make stale coding LLMs current'
 date: '2026-06-02'
 excerpt: 'A practical playbook for reducing coding hallucinations by injecting current, version-specific docs through Context7 MCP and CLI workflows.'
 tags: ['LLM', 'Context7', 'MCP', 'Developer Tools']
+image: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=1600&q=80'
+imageAlt: 'Glowing human brain illustration representing AI knowledge and memory'
 ---
 
 ## Introduction

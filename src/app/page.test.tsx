@@ -56,6 +56,22 @@ describe('Home page', () => {
     expect(screen.getByTestId('code-thinking')).toBeInTheDocument()
   })
 
+  it('renders the Articles section before ExpertiseList and SelectedWork', () => {
+    render(<Home />)
+
+    const articlesSection = screen.getByTestId('code-thinking')
+    const expertiseSection = screen.getByTestId('expertise-list')
+    const selectedWorkSection = screen.getByTestId('selected-work')
+
+    expect(
+      articlesSection.compareDocumentPosition(expertiseSection) & Node.DOCUMENT_POSITION_FOLLOWING
+    ).toBeTruthy()
+    expect(
+      expertiseSection.compareDocumentPosition(selectedWorkSection) &
+        Node.DOCUMENT_POSITION_FOLLOWING
+    ).toBeTruthy()
+  })
+
   it('exports correct metadata title', () => {
     expect(metadata.title).toBe('Lenny Peters — Senior Software Engineer II')
   })

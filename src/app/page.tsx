@@ -33,9 +33,9 @@ const Home = () => {
   return (
     <>
       <HeroTerminal />
-      <SelectedWork />
-      <ExpertiseList />
       <CodeThinking articles={articles} />
+      <ExpertiseList />
+      <SelectedWork />
     </>
   )
 }

@@ -76,6 +76,17 @@ Specialized instruction files live in `.github/instructions/`. Each can be activ
 | `e2e-testing.instructions.md`    | Runs `npm run test:e2e`, auto-fixes failures, retries up to 3×          |
 | `pipeline.instructions.md`       | **Full pipeline**: research → coding → lint → unit test → e2e → summary |
 
+## Design Skills
+
+Specialized skills for frontend design and UI iteration live in `.github/skills/`:
+
+| Skill name          | Location                                                                         | Purpose                                                                             | Example usage                                      |
+| ------------------- | -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | -------------------------------------------------- |
+| `impeccable`        | [`.github/skills/impeccable/SKILL.md`](.github/skills/impeccable/)               | Full-fidelity frontend design with production-grade SCSS, accessibility, and motion | `/impeccable craft hero section`                   |
+| `testing`           | [`.github/skills/testing/SKILL.md`](.github/skills/testing/)                     | Jest + React Testing Library for unit/component tests                               | `/testing add tests for login form`                |
+| `e2e-testing`       | [`.github/skills/e2e-testing/SKILL.md`](.github/skills/e2e-testing/)             | Playwright browser testing with MCP integration                                     | `/e2e-testing fix home page flow`                  |
+| `internet-research` | [`.github/skills/internet-research/SKILL.md`](.github/skills/internet-research/) | Live documentation lookup via Context7 MCP for frameworks/libs                      | `/internet-research Next.js App Router caching API |
+
 **Research agent** (`.github/agents/research.agent.md`) can also be invoked standalone:
 
 ```
@@ -181,6 +192,14 @@ Use /testing to write or fix Jest and React Testing Library coverage for a compo
 ```
 Use /e2e-testing to write or fix Playwright specs, or to diagnose a failing browser flow using the Playwright MCP server.
 ```
+
+**Impeccable skill** can be used inline in any prompt:
+
+```
+Use /impeccable to design or iterate on a frontend interface component (e.g., "craft a hero section", "audit the homepage", "add animations to the contact form").
+```
+
+The skill covers design, critique, audit, polish, shape, craft, and enhancement commands for production-grade frontend UI. Use `/impeccable init` for new projects and `/impeccable [craft|shape|audit|critique|polish|animate|colorize] [target]` for existing code.
 
 ### Setting up Context7 MCP (one-time, per machine)
 

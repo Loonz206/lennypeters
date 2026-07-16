@@ -27,4 +27,13 @@ export const projects: Project[] = [
     buttonLabel: 'View Project',
     href: 'https://github.com/Loonz206/lennypeters',
   },
+  {
+    id: 'PRJ_003',
+    title: 'the-next-ferry',
+    description:
+      'A Next.js application for browsing Washington State Ferry schedules and routes, providing commuters with real-time departure information and terminal details.',
+    tags: ['nextjs', 'react', 'ferry', 'transit'],
+    buttonLabel: 'View Project',
+    href: 'https://github.com/Loonz206/the-next-ferry',
+  },
 ]

@@ -8,22 +8,25 @@ describe('Work page', () => {
     expect(screen.getByRole('heading', { name: 'Projects', level: 1 })).toBeInTheDocument()
   })
 
-  it('renders both project titles as h2 headings', () => {
+  it('renders all project titles as h2 headings', () => {
     render(<WorkPage />)
     expect(screen.getByRole('heading', { name: 'videos-hooks', level: 2 })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'lennypeters', level: 2 })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'the-next-ferry', level: 2 })).toBeInTheDocument()
   })
 
-  it('renders both project IDs', () => {
+  it('renders all project IDs', () => {
     render(<WorkPage />)
     expect(screen.getByText('PRJ_001')).toBeInTheDocument()
     expect(screen.getByText('PRJ_002')).toBeInTheDocument()
+    expect(screen.getByText('PRJ_003')).toBeInTheDocument()
   })
 
-  it('renders zero-padded index labels _01 and _02', () => {
+  it('renders zero-padded index labels _01, _02, and _03', () => {
     render(<WorkPage />)
     expect(screen.getByText('_01')).toBeInTheDocument()
     expect(screen.getByText('_02')).toBeInTheDocument()
+    expect(screen.getByText('_03')).toBeInTheDocument()
   })
 
   it('renders the tags for the first project', () => {
@@ -40,9 +43,11 @@ describe('Work page', () => {
     render(<WorkPage />)
     const firstProjectLink = screen.getByRole('link', { name: 'videos-hooks' })
     const secondProjectLink = screen.getByRole('link', { name: 'lennypeters' })
+    const thirdProjectLink = screen.getByRole('link', { name: 'the-next-ferry' })
 
     expect(firstProjectLink).toHaveAttribute('href', 'https://github.com/Loonz206/videos-hooks')
     expect(secondProjectLink).toHaveAttribute('href', 'https://github.com/Loonz206/lennypeters')
+    expect(thirdProjectLink).toHaveAttribute('href', 'https://github.com/Loonz206/the-next-ferry')
     expect(firstProjectLink).toHaveAttribute('target', '_blank')
     expect(firstProjectLink).toHaveAttribute('rel', 'noopener noreferrer')
   })

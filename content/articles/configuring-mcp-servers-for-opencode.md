@@ -8,11 +8,11 @@ image: 'https://images.unsplash.com/photo-1517637382994-f02da38c6728?auto=format
 imageAlt: 'Silhouette of a martial artist in a kung-fu training stance at dusk'
 ---
 
-There is a pattern I keep seeing when mid-level engineers first pick up an AI coding tool: they treat the model as a black box and accept whatever context it has out of the box. When the model is weak on runtime behavior — what the browser is actually doing, what the network actually returned — they assume that is just the cost of using AI.
+AI coding tools operate on the context made available to them. By default, that context comes from what you explicitly provide — source code, file contents, and typed instructions. When a model lacks direct visibility into runtime behavior — what the browser is actually doing, what the network actually returned — it works from inference rather than observation.
 
-It is not. MCP servers exist precisely to fill those gaps.
+MCP servers extend that boundary.
 
-This article shows how to configure a real MCP server inside OpenCode, using Chrome DevTools MCP as the concrete example. I will also cover how to invoke MCP tools via prompt and what token and context costs look like once you start adding tool results to a session.
+This article covers how to configure a real MCP server inside OpenCode, using Chrome DevTools MCP as the concrete example. It also covers how to invoke MCP tools via prompt and what token and context costs look like once you start adding tool results to a session.
 
 ## What MCP gives you
 
@@ -123,7 +123,7 @@ The model chains `navigate`, `type`, `click`, and `screenshot` calls, handling e
 
 ## Context cost and token cost
 
-This is the part engineers often skip until their session context blows up or a bill arrives unexpectedly.
+This is the part that often goes unexamined until a session context blows up or a bill arrives unexpectedly.
 
 Every MCP tool result gets appended to the session context as an assistant turn. That means large tool results — a full accessibility tree, a network waterfall, a performance trace — can consume significant context window space fast.
 

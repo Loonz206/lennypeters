@@ -4,8 +4,8 @@ author: 'Lenny Peters'
 date: '2026-07-19'
 excerpt: 'A practical guide to wiring MCP servers into OpenCode, using Chrome DevTools MCP as a hands-on example, with a clear breakdown of context and token costs.'
 tags: ['MCP', 'OpenCode', 'Developer Tools', 'AI']
-image: 'https://images.unsplash.com/photo-1517637382994-f02da38c6728?auto=format&fit=crop&w=1600&q=80'
-imageAlt: 'Silhouette of a martial artist in a kung-fu training stance at dusk'
+image: 'https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=1600&q=80'
+imageAlt: 'Close-up of metal gears and a wrench on a workbench'
 ---
 
 AI coding tools operate on the context made available to them. By default, that context comes from what you explicitly provide — source code, file contents, and typed instructions. When a model lacks direct visibility into runtime behavior — what the browser is actually doing, what the network actually returned — it works from inference rather than observation.

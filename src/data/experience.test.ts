@@ -52,7 +52,7 @@ describe('experience array', () => {
   )
 
   it('first entry is the most recent role', () => {
-    expect(experience[0].role).toBe('Senior Software Engineer 2')
+    expect(experience[0].role).toBe('Senior Software Engineer II')
     expect(experience[0].company).toBe('lululemon')
     expect(experience[0].endDate).toBe('Present')
   })

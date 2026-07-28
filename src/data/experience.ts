@@ -10,7 +10,7 @@ export interface ExperienceEntry {
 
 export const experience: ExperienceEntry[] = [
   {
-    role: 'Senior Software Engineer 2',
+    role: 'Senior Software Engineer II',
     company: 'lululemon',
     location: 'Hybrid',
     startDate: '2018-01',

@@ -8,7 +8,7 @@ import styles from './about.module.scss'
 export const metadata: Metadata = {
   title: 'About — Lenny Peters',
   description:
-    'Senior Web Engineer at lululemon with 8+ years of experience building fast, accessible web products. Based in Cascadia.',
+    'Senior Software Engineer II at lululemon with 8+ years of experience building fast, accessible web products. Based in Cascadia.',
   alternates: {
     canonical: '/about/',
   },
@@ -17,13 +17,13 @@ export const metadata: Metadata = {
     url: '/about/',
     title: 'About — Lenny Peters',
     description:
-      'Senior Web Engineer at lululemon with 8+ years of experience building fast, accessible web products. Based in Cascadia.',
+      'Senior Software Engineer II at lululemon with 8+ years of experience building fast, accessible web products. Based in Cascadia.',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'About — Lenny Peters',
     description:
-      'Senior Web Engineer at lululemon with 8+ years of experience building fast, accessible web products. Based in Cascadia.',
+      'Senior Software Engineer II at lululemon with 8+ years of experience building fast, accessible web products. Based in Cascadia.',
   },
 }
 
@@ -36,7 +36,8 @@ const AboutPage = () => {
           About Me
         </h1>
         <p className={styles.sub}>
-          Senior Web Engineer at lululemon, building fast and accessible web products from Cascadia.
+          Senior Software Engineer II at lululemon, building fast and accessible web products from
+          Cascadia.
         </p>
       </div>
 

@@ -26,9 +26,9 @@ describe('seo', () => {
     const seo = await loadSeoModule()
 
     expect(seo.SITE_NAME).toBe('Lenny Peters')
-    expect(seo.SITE_TITLE).toBe('Lenny Peters — Web Engineer')
+    expect(seo.SITE_TITLE).toBe('Lenny Peters — Senior Software Engineer II')
     expect(seo.SITE_DESCRIPTION).toBe(
-      'Web Engineer crafting fast, accessible, and beautiful web experiences.'
+      'Senior Software Engineer II crafting fast, accessible, and beautiful web experiences.'
     )
     expect(seo.SOCIAL_HANDLE).toBe('@lennypeters')
   })

@@ -11,7 +11,7 @@ If you are new to AI-assisted debugging, the fastest win is usually this: stop d
 
 A vision-capable model can inspect screenshots and reason about layout, spacing, contrast, clipped text, or missing UI states. In GitHub Copilot SDK workflows, this is explicit: the model must advertise `capabilities.supports.vision = true` to process images.[1]
 
-In my experience, junior engineers get the most value from vision when they use it as a **before/after feedback loop**:
+In my experience, curious folks get the most value from vision when they use it as a **before/after feedback loop**:
 
 1. capture current UI,
 2. ask for a targeted fix,
@@ -107,7 +107,7 @@ main().catch(error => {
 })
 ```
 
-For junior engineers, this is a great habit: capture screenshots in a consistent viewport so visual regressions are easier to compare over time.
+For curious folks, this is a great habit: capture screenshots in a consistent viewport so visual regressions are easier to compare over time.
 
 ## Source 3: Chrome DevTools MCP screenshots
 
@@ -137,7 +137,7 @@ That gives you two complementary debugging modes:
 
 Use structured mode for deterministic navigation and form interactions, then add screenshots when the issue is primarily visual (alignment, clipping, typography, spacing).
 
-## A practical prompt pattern for junior engineers
+## A practical prompt pattern for curious folks
 
 When people are new to vision workflows, prompts are often too vague ("fix my CSS"). I recommend this template:
 
@@ -202,7 +202,7 @@ For first-time users, this process usually beats text-only debugging because it 
 
 ## Conclusion
 
-Vision tools are not magic, but they are practical. They let junior engineers communicate UI problems with precision instead of long, ambiguous descriptions.
+Vision tools are not magic, but they are practical. They help people communicate UI problems with precision instead of long, ambiguous descriptions.
 
 If you remember one thing, make it this: **a screenshot plus scoped prompt plus one technical signal** is often enough to get a high-quality UI fix quickly.
 

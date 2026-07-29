@@ -202,7 +202,7 @@ For first-time users, this process usually beats text-only debugging because it 
 
 ## Conclusion
 
-Vision tools are not magic, but they are practical. They help people communicate UI problems with precision instead of long, ambiguous descriptions.
+Vision tools are not magic, but they are practical. They help curious folks communicate UI problems with precision instead of long, ambiguous descriptions.
 
 If you remember one thing, make it this: **a screenshot plus scoped prompt plus one technical signal** is often enough to get a high-quality UI fix quickly.
 

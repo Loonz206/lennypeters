@@ -44,6 +44,8 @@ Before writing any code, read `.github/AGENT_LEARNINGS.md`. Filter the Active Ru
 
 If the task involves any external library, framework, or API, use the `/internet-research` skill first to fetch current documentation via Context7. Do not rely solely on training data for library APIs. Only skip this step if the change is purely structural (e.g. moving files, renaming classes).
 
+Use the `/commit-message` skill to ensure that all proposed changes are described using the Commitizen/Conventional Commits format before proceeding with implementation.
+
 ## Behaviour
 
 1. Understand the task from the user's description.

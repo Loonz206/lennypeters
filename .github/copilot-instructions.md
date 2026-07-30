@@ -383,3 +383,12 @@ Anything outside the approved write paths is also denied. Approved paths are: `s
 - **`--force-with-lease` is allowed** — it is the safer git force mechanism; `--force` / `-f` are denied.
 - **No audit logging in v1** — logging will be added in a later phase once normal usage patterns are established.
 - **Extend by editing the script** — to expand or relax the policy, edit `.github/hooks/scripts/pre-tool-policy.js`. The deny rules are grouped into `SHELL_DENY_RULES`, `GIT_DENY_RULES`, `WRITE_DENY_RULES`, `ALLOWED_PREFIXES`, and `ALLOWED_EXACT` arrays at the top of the file.
+
+<!-- mermaid-ai-skills:start -->
+
+## Mermaid Diagrams
+
+When the user asks to create, edit, or visualize a diagram, follow the
+instructions in `.github/instructions/mermaid.instructions.md`.
+
+<!-- mermaid-ai-skills:end -->

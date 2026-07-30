@@ -2,8 +2,8 @@ import { projects } from '@/data/projects'
 import type { Project } from '@/data/projects'
 
 describe('projects array', () => {
-  it('contains exactly 2 projects', () => {
-    expect(projects).toHaveLength(2)
+  it('contains exactly 3 projects', () => {
+    expect(projects).toHaveLength(3)
   })
 
   it('first project has id PRJ_001', () => {
@@ -12,6 +12,10 @@ describe('projects array', () => {
 
   it('second project has id PRJ_002', () => {
     expect(projects[1].id).toBe('PRJ_002')
+  })
+
+  it('third project has id PRJ_003', () => {
+    expect(projects[2].id).toBe('PRJ_003')
   })
 
   it.each(projects.map((p, i) => [i, p] as const))(
@@ -43,6 +47,13 @@ describe('projects array', () => {
     expect(projects[1].title).toBe('lennypeters')
     expect(projects[1].tags).toContain('nextjs')
     expect(projects[1].tags).toContain('blogging')
+  })
+
+  it('third project is the-next-ferry', () => {
+    expect(projects[2].title).toBe('the-next-ferry')
+    expect(projects[2].tags).toContain('nextjs')
+    expect(projects[2].tags).toContain('react')
+    expect(projects[2].href).toBe('https://github.com/Loonz206/the-next-ferry')
   })
 
   it('satisfies the Project interface shape', () => {

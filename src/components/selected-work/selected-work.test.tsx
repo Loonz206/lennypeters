@@ -18,16 +18,17 @@ describe('SelectedWork', () => {
     expect(screen.getByRole('heading', { name: 'SELECTED_WORK' })).toBeInTheDocument()
   })
 
-  it('renders exactly 2 ProjectCard mocks', () => {
-    expect(screen.getAllByTestId('project-card')).toHaveLength(2)
+  it('renders exactly 3 ProjectCard mocks', () => {
+    expect(screen.getAllByTestId('project-card')).toHaveLength(3)
   })
 
-  it('renders the count display as "[02_TOTAL_ENTRIES]"', () => {
-    expect(screen.getByText('[02_TOTAL_ENTRIES]')).toBeInTheDocument()
+  it('renders the count display as "[03_TOTAL_ENTRIES]"', () => {
+    expect(screen.getByText('[03_TOTAL_ENTRIES]')).toBeInTheDocument()
   })
 
-  it('renders both project titles', () => {
+  it('renders all project titles', () => {
     expect(screen.getByText('videos-hooks')).toBeInTheDocument()
     expect(screen.getByText('lennypeters')).toBeInTheDocument()
+    expect(screen.getByText('the-next-ferry')).toBeInTheDocument()
   })
 })

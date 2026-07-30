@@ -9,7 +9,7 @@ const Hero = () => {
         <p className={styles.greeting}>Hi, I&rsquo;m</p>
         <h1 className={styles.name}>Lenny Peters</h1>
         <p className={styles.tagline}>
-          Web Engineer crafting fast, accessible, and beautiful web experiences.
+          Senior Software Engineer II crafting fast, accessible, and beautiful web experiences.
         </p>
         <div className={styles.actions}>
           <Link href="/articles" className={styles.btnPrimary}>

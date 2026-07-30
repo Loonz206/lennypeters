@@ -12,7 +12,7 @@ describe('ExperienceTimeline', () => {
   it('renders all 3 roles as headings', () => {
     render(<ExperienceTimeline />)
     expect(
-      screen.getByRole('heading', { name: 'Senior Software Engineer 2', level: 3 })
+      screen.getByRole('heading', { name: 'Senior Software Engineer II', level: 3 })
     ).toBeInTheDocument()
     expect(
       screen.getByRole('heading', { name: 'Front-End UI Developer', level: 3 })

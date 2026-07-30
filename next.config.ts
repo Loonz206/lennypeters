@@ -1,6 +1,5 @@
 import path from 'node:path'
 import type { NextConfig } from 'next'
-import { resolveBasePath } from '@/lib/site-config'
 
 function normalizeBasePath(value: string | undefined): string {
   if (!value) return ''

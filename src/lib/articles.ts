@@ -24,9 +24,19 @@ const defaultArticleImage =
 function resolveArticleImage(data: matter.GrayMatterFile<string>['data']): string {
   const image = data.image
   if (typeof image === 'string' && image.trim().length > 0) {
-    return image
+    return optimizeUnsplashImage(image)
   }
-  return defaultArticleImage
+  return optimizeUnsplashImage(defaultArticleImage)
+}
+
+function optimizeUnsplashImage(url: string): string {
+  if (!url.includes('unsplash.com')) return url
+
+  const optimized = url.replace(/w=1600/, 'w=1188')
+  if (optimized !== url) return optimized
+
+  const optimized2 = url.replace(/w=(2000|3000|4000|5000|6000|8000)/, 'w=1188')
+  return optimized2 !== url ? optimized2 : url
 }
 
 function resolveArticleImageAlt(
@@ -128,7 +138,7 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
         date,
         excerpt,
         tags,
-        image: resolveArticleImage(data),
+        image: optimizeUnsplashImage(resolveArticleImage(data)),
         imageAlt: resolveArticleImageAlt(data, title),
       },
       contentHtml,

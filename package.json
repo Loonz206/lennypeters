@@ -10,7 +10,7 @@
     "dev:https": "next dev --experimental-https",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint .",
+    "lint": "eslint src",
     "test": "jest",
     "check": "npm run lint && npm test -- --ci",
     "test:watch": "jest --watch",

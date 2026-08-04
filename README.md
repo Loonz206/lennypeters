@@ -1,5 +1,12 @@
 # Lenny Peters — Personal Portfolio
 
+[![Build Status](https://img.shields.io/github/actions/workflow/status/Loonz206/lennypeters/ci.yml?branch=main&style=flat-square&logo=github)](https://github.com/Loonz206/lennypeters/actions?query=workflow%3Aci)
+[![codecov](https://codecov.io/gh/Loonz206/lennypeters/branch/main/graph/badge.svg)](https://codecov.io/gh/Loonz206/lennypeters)
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=flat-square)](http://commitizen.github.io/cz-cli/)
+[![Next.js](https://img.shields.io/badge/Next.js-black?style=flat-square&logo=next.js)](https://nextjs.org/)
+[![Snyk](https://img.shields.io/badge/Snyk-monitored-brightgreen?style=flat-square&logo=snyk)](https://app.snyk.io/)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4?style=flat-square)](https://github.com/prettier/prettier)
+
 Personal portfolio site for [Lenny Peters](https://lennypeters.com), built with Next.js, React, TypeScript, and custom SCSS.
 
 ## Overview

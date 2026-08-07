@@ -63,3 +63,42 @@ Setting `E2E_TEST_URL` skips local server startup and points all tests at the gi
 ## Notes
 
 The site is statically exported and deployed through GitHub Actions. After each successful deploy to `main`, a production E2E job runs automatically against `https://lennypeters.com`. A standalone on-demand job is also available in the Actions tab (`E2E Tests — Production`).
+
+## Dependency Updates (Renovate)
+
+This repository uses Renovate for automated dependency update PRs with a zero-cost setup.
+
+### Enable Renovate (free)
+
+1. Install the hosted Renovate GitHub App from https://github.com/apps/renovate
+2. Select this repository during app installation
+3. Review and merge the `Configure Renovate` onboarding PR
+
+### Optional self-hosted fallback (free)
+
+If you prefer not to use the hosted app, this repository now includes a self-hosted workflow at `.github/workflows/renovate.yml`.
+
+1. Create a repository secret named `RENOVATE_TOKEN` with a GitHub token that can open branches and pull requests in this repo
+2. Run the `Renovate (Self-Hosted)` workflow manually once from the Actions tab
+3. Keep the scheduled run enabled to process updates automatically on weekdays
+
+For security, use a least-privilege token. For fine-grained tokens, grant access only to this repository with `Contents` (read/write), `Pull requests` (read/write), `Issues` (read/write), and `Metadata` (read-only).
+
+### Policy used in this repository
+
+- Base preset: `config:best-practices`
+- Dependency Dashboard enabled for triage and approvals
+- No automerge during initial stabilization
+- Major updates require dashboard approval
+- Non-major `devDependencies` are grouped weekly to reduce PR noise
+
+### Review order
+
+1. Security updates
+2. Patch updates
+3. Minor updates
+4. Major updates
+
+### Branch protection recommendation
+
+Require the CI workflow checks from `.github/workflows/ci.yml` before merging Renovate PRs.

@@ -23,8 +23,9 @@ jobs:
 
   unit-test:
     runs-on: ubuntu-latest
-    env:
-      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
@@ -37,17 +38,13 @@ jobs:
 
       - run: npm test -- --ci --coverage
 
-      - name: Codecov token fallback notice
-        if: ${{ env.CODECOV_TOKEN == '' }}
-        run: |
-          echo "::warning title=Codecov upload skipped::CODECOV_TOKEN is not set for this run. Coverage was generated locally in ./coverage/lcov.info, but upload to Codecov is disabled."
-
       - name: Upload coverage to Codecov
-        if: ${{ env.CODECOV_TOKEN != '' }}
         uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f # v7
         with:
-          token: ${{ env.CODECOV_TOKEN }}
+          use_oidc: true
           files: ./coverage/lcov.info
+          flags: unit
+          disable_search: true
           fail_ci_if_error: true
           verbose: true
 

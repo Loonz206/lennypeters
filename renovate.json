@@ -1,0 +1,36 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:best-practices", ":semanticCommits"],
+  "dependencyDashboard": true,
+  "automerge": false,
+  "separateMajorMinor": true,
+  "separateMultipleMajor": true,
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 2,
+  "labels": ["dependencies", "renovate"],
+  "semanticCommitType": "chore",
+  "semanticCommitScope": "deps",
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 5am on monday"]
+  },
+  "packageRules": [
+    {
+      "description": "Group non-major dev dependency updates to reduce PR noise.",
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["patch", "minor", "digest", "pin"],
+      "groupName": "devDependencies (non-major)",
+      "schedule": ["before 5am on monday"]
+    },
+    {
+      "description": "Keep GitHub Actions updates in dedicated PRs.",
+      "matchManagers": ["github-actions"],
+      "groupName": "github actions"
+    },
+    {
+      "description": "Require explicit dashboard approval for all major upgrades.",
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true
+    }
+  ]
+}

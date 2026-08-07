@@ -29,10 +29,10 @@ export default defineConfig({
     ? undefined
     : process.env.CI
       ? {
-          command: 'npm run dev',
+          command: 'npx serve@latest out --listen 3000',
           url: 'http://localhost:3000',
           reuseExistingServer: false,
-          timeout: 180 * 1000,
+          timeout: 120 * 1000,
         }
       : {
           command: 'npm run dev',

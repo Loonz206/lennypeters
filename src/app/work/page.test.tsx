@@ -2,6 +2,24 @@ import React from 'react'
 import { render, screen } from '@testing-library/react'
 import WorkPage, { metadata } from './page'
 
+jest.mock('../../data/projects', () => {
+  const actual = jest.requireActual('../../data/projects') as typeof import('../../data/projects')
+  return {
+    ...actual,
+    projects: [
+      ...actual.projects,
+      {
+        id: 'PRJ_004',
+        title: 'internal-case-study',
+        description: 'An internal case study project.',
+        tags: ['docs'],
+        buttonLabel: 'View Case Study',
+        href: '/case-studies/internal-case-study',
+      },
+    ],
+  }
+})
+
 describe('Work page', () => {
   it('renders the "Projects" heading', () => {
     render(<WorkPage />)
@@ -50,6 +68,16 @@ describe('Work page', () => {
     expect(thirdProjectLink).toHaveAttribute('href', 'https://github.com/Loonz206/the-next-ferry')
     expect(firstProjectLink).toHaveAttribute('target', '_blank')
     expect(firstProjectLink).toHaveAttribute('rel', 'noopener noreferrer')
+  })
+
+  it('does not add target or rel attributes to internal project links', () => {
+    render(<WorkPage />)
+
+    const internalLink = screen.getByRole('link', { name: 'internal-case-study' })
+
+    expect(internalLink).toHaveAttribute('href', '/case-studies/internal-case-study')
+    expect(internalLink).not.toHaveAttribute('target')
+    expect(internalLink).not.toHaveAttribute('rel')
   })
 
   it('exports correct metadata title', () => {

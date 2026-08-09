@@ -12,6 +12,7 @@
     "start": "next start",
     "lint": "eslint src",
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "check": "npm run lint && npm test -- --ci",
     "test:watch": "jest --watch",
     "test:e2e": "playwright test",

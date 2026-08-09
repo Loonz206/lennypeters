@@ -136,6 +136,119 @@ describe('getArticleBySlug', () => {
     expect(consoleErrorSpy).toHaveBeenCalled()
     consoleErrorSpy.mockRestore()
   })
+
+  it('applies fallbacks and image optimization for non-string frontmatter', async () => {
+    mockMatter.mockReturnValueOnce({
+      data: {
+        title: 42,
+        date: 123,
+        excerpt: false,
+        tags: [1, 'two'],
+        image: 'https://example.com/photo.png',
+        imageAlt: 'Custom alt',
+      },
+      content: 'body content',
+    })
+
+    const article = await getArticleBySlug('article-a')
+
+    expect(article?.meta.title).toBe('article-a')
+    expect(article?.meta.date).toBe('')
+    expect(article?.meta.excerpt).toBe('')
+    expect(article?.meta.tags).toEqual(['two'])
+    expect(article?.meta.image).toBe('https://example.com/photo.png')
+    expect(article?.meta.imageAlt).toBe('Custom alt')
+  })
+})
+
+describe('image and alt resolution', () => {
+  it('optimizes an unsplash image with w=1600 to w=1188', () => {
+    mockMatter.mockReturnValueOnce({
+      data: {
+        title: 'Article A',
+        date: '2024-03-01',
+        excerpt: 'Excerpt A',
+        tags: [],
+        image: 'https://images.unsplash.com/photo-1500000000?auto=format&fit=crop&w=1600&q=80',
+      },
+      content: 'body',
+    })
+
+    const meta = getAllArticleMetas().find(m => m.slug === 'article-a')
+
+    expect(meta?.image).toBe(
+      'https://images.unsplash.com/photo-1500000000?auto=format&fit=crop&w=1188&q=80'
+    )
+  })
+
+  it('optimizes an unsplash image with a large width to w=1188', () => {
+    mockMatter.mockReturnValueOnce({
+      data: {
+        title: 'Article A',
+        date: '2024-03-01',
+        excerpt: 'Excerpt A',
+        tags: [],
+        image: 'https://images.unsplash.com/photo-1500000000?auto=format&fit=crop&w=4000&q=80',
+      },
+      content: 'body',
+    })
+
+    const meta = getAllArticleMetas().find(m => m.slug === 'article-a')
+
+    expect(meta?.image).toBe(
+      'https://images.unsplash.com/photo-1500000000?auto=format&fit=crop&w=1188&q=80'
+    )
+  })
+
+  it('leaves non-unsplash image URLs unchanged', () => {
+    mockMatter.mockReturnValueOnce({
+      data: {
+        title: 'Article A',
+        date: '2024-03-01',
+        excerpt: 'Excerpt A',
+        tags: [],
+        image: 'https://example.com/photo.png',
+      },
+      content: 'body',
+    })
+
+    const meta = getAllArticleMetas().find(m => m.slug === 'article-a')
+
+    expect(meta?.image).toBe('https://example.com/photo.png')
+  })
+
+  it('uses the frontmatter imageAlt when provided', () => {
+    mockMatter.mockReturnValueOnce({
+      data: {
+        title: 'Article A',
+        date: '2024-03-01',
+        excerpt: 'Excerpt A',
+        tags: [],
+        imageAlt: 'A hand-drawn wireframe on paper',
+      },
+      content: 'body',
+    })
+
+    const meta = getAllArticleMetas().find(m => m.slug === 'article-a')
+
+    expect(meta?.imageAlt).toBe('A hand-drawn wireframe on paper')
+  })
+})
+
+describe('frontmatter fallbacks', () => {
+  it('falls back to the slug and defaults for non-string frontmatter', () => {
+    mockMatter.mockReturnValueOnce({
+      data: { title: 42, date: 123, excerpt: false, tags: [1, 'two'] },
+      content: 'body',
+    })
+
+    const meta = getAllArticleMetas().find(m => m.slug === 'article-a')
+
+    expect(meta?.title).toBe('article-a')
+    expect(meta?.date).toBe('')
+    expect(meta?.excerpt).toBe('')
+    expect(meta?.tags).toEqual(['two'])
+  })
 })
 
 describe('getFeaturedArticles', () => {

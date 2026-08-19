@@ -1,7 +1,7 @@
 name: Write Article from Issue
 on:
   issues:
-    types: [labeled]
+    types: [opened, labeled]
 
 permissions:
   contents: write
@@ -10,7 +10,9 @@ permissions:
 
 jobs:
   write-article:
-    if: github.event.label.name == 'article'
+    if: |
+      (github.event.action == 'opened' && contains(github.event.issue.labels.*.name, 'article')) ||
+      (github.event.action == 'labeled' && github.event.label.name == 'article')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -25,30 +27,52 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Derive slug from issue title
-        id: slug
+      - name: Derive article request context
+        id: article
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
         run: |
-          SLUG=$(echo "${{ github.event.issue.title }}" \
-            | tr '[:upper:]' '[:lower:]' \
-            | sed 's/[^a-z0-9 -]//g' \
-            | sed 's/ /-/g' \
-            | sed 's/--*/-/g' \
-            | head -c 60)
-          echo "slug=$SLUG" >> "$GITHUB_OUTPUT"
-          echo "branch=article/$SLUG" >> "$GITHUB_OUTPUT"
+          node <<'NODE'
+          const fs = require('node:fs')
+          const { buildArticleRequestContext } = require('./src/lib/article-request.js')
+
+          const context = buildArticleRequestContext({
+            issueTitle: process.env.ISSUE_TITLE,
+            issueBody: process.env.ISSUE_BODY,
+          })
+
+          fs.appendFileSync(
+            process.env.GITHUB_OUTPUT,
+            [
+              `slug=${context.slug}`,
+              `branch=${context.branch}`,
+              `topic<<EOF`,
+              context.topic,
+              `EOF`,
+              `commit_title<<EOF`,
+              context.commitTitle,
+              `EOF`,
+              `pr_title<<EOF`,
+              context.prTitle,
+              `EOF`,
+              '',
+            ].join('\n')
+          )
+          NODE
 
       - name: Create article branch
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git checkout -b "${{ steps.slug.outputs.branch }}"
+          git checkout -b "${{ steps.article.outputs.branch }}"
 
       - name: Write article via Copilot
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npx -y @github/gh-copilot -- api /models/copilot_chat/completions \
-            -f messages='[{"role":"user","content":"Write a technical article about: ${{ github.event.issue.title }}\n\nAdditional context from the issue:\n${{ github.event.issue.body }}"}]' \
+            -f messages='[{"role":"user","content":"Write a technical article about: ${{ steps.article.outputs.topic }}\n\nAdditional context from the issue:\n${{ github.event.issue.body }}"}]' \
             -f model=gpt-4o \
             > article_output.json
 
@@ -65,15 +89,15 @@ jobs:
         if: steps.check.outputs.has_article == 'true'
         run: |
           git add content/articles/
-          git commit -m "feat(article): add article — ${{ github.event.issue.title }}"
-          git push origin "${{ steps.slug.outputs.branch }}"
+          git commit -m "${{ steps.article.outputs.commit_title }}"
+          git push origin "${{ steps.article.outputs.branch }}"
 
       - name: Create Pull Request
         if: steps.check.outputs.has_article == 'true'
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8
         with:
-          branch: ${{ steps.slug.outputs.branch }}
-          title: 'feat(article): ${{ github.event.issue.title }}'
+          branch: ${{ steps.article.outputs.branch }}
+          title: ${{ steps.article.outputs.pr_title }}
           body: |
             ## Auto-generated Article
 
@@ -88,4 +112,4 @@ jobs:
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
-            The `write-article` agent has drafted an article for this topic. A pull request has been created on branch `${{ steps.slug.outputs.branch }}` for your review.
+            The `write-article` agent has drafted an article for this topic. A pull request has been created on branch `${{ steps.article.outputs.branch }}` for your review.

@@ -173,7 +173,7 @@ copilot --agent write-article --prompt "Write about React Server Components stre
 Use /write-article to write an article about TypeScript discriminated unions.
 ```
 
-A GitHub Action (`.github/workflows/write-article.yml`) also auto-generates articles when a GitHub Issue is labeled `article`. Use the issue template at `.github/ISSUE_TEMPLATE/article-request.yml`.
+A GitHub Action (`.github/workflows/write-article.yml`) also auto-generates articles when an article request issue is opened from `.github/ISSUE_TEMPLATE/article-request.yml` or later labeled `article`.
 
 **Research skill** can be used inline in any prompt:
 

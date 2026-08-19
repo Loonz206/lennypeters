@@ -15,8 +15,7 @@ function getIssueFormField(issueBody, fieldLabel) {
   if (typeof issueBody !== 'string' || issueBody.trim().length === 0) return ''
 
   const pattern = new RegExp(
-    `^### ${escapeRegExp(fieldLabel)}\\s*\\n([\\s\\S]*?)(?=^### |\\Z)`,
-    'm'
+    `(?:^|\\n)### ${escapeRegExp(fieldLabel)}\\s*\\n([\\s\\S]*?)(?=\\n### |$)`
   )
   const match = pattern.exec(issueBody)
 
@@ -26,7 +25,7 @@ function getIssueFormField(issueBody, fieldLabel) {
 function slugifyTopic(value) {
   const slug = normalizeFieldValue(value)
     .toLowerCase()
-    .replace(/[^a-z0-9 -]/g, '')
+    .replace(/[^a-z0-9 \-]/g, '')
     .trim()
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-')

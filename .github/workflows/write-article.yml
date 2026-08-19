@@ -43,21 +43,19 @@ jobs:
             issueTitle: process.env.ISSUE_TITLE,
             issueBody: process.env.ISSUE_BODY,
           })
+          const multilineOutput = (name, value) => {
+            const delimiter = `COPILOT_${name}_${Date.now()}_${Math.random().toString(36).slice(2)}`
+            return `${name}<<${delimiter}\n${value}\n${delimiter}`
+          }
 
           fs.appendFileSync(
             process.env.GITHUB_OUTPUT,
             [
-              `slug=${context.slug}`,
-              `branch=${context.branch}`,
-              `topic<<EOF`,
-              context.topic,
-              `EOF`,
-              `commit_title<<EOF`,
-              context.commitTitle,
-              `EOF`,
-              `pr_title<<EOF`,
-              context.prTitle,
-              `EOF`,
+              multilineOutput('slug', context.slug),
+              multilineOutput('branch', context.branch),
+              multilineOutput('topic', context.topic),
+              multilineOutput('commit_title', context.commitTitle),
+              multilineOutput('pr_title', context.prTitle),
               '',
             ].join('\n')
           )
@@ -72,9 +70,26 @@ jobs:
       - name: Write article via Copilot
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ARTICLE_TOPIC: ${{ steps.article.outputs.topic }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
         run: |
+          MESSAGES="$(node <<'NODE'
+          const messages = [
+            {
+              role: 'user',
+              content: `Write a technical article about: ${process.env.ARTICLE_TOPIC ?? ''}
+
+          Additional context from the issue:
+          ${process.env.ISSUE_BODY ?? ''}`,
+            },
+          ]
+
+          process.stdout.write(JSON.stringify(messages))
+          NODE
+          )"
+
           npx -y @github/gh-copilot -- api /models/copilot_chat/completions \
-            -f messages='[{"role":"user","content":"Write a technical article about: ${{ steps.article.outputs.topic }}\n\nAdditional context from the issue:\n${{ github.event.issue.body }}"}]' \
+            -f "messages=$MESSAGES" \
             -f model=gpt-4o \
             > article_output.json
 
@@ -99,7 +114,7 @@ jobs:
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8
         with:
           branch: ${{ steps.article.outputs.branch }}
-          title: ${{ steps.article.outputs.pr_title }}
+          title: '${{ steps.article.outputs.pr_title }}'
           body: |
             ## Auto-generated Article
 

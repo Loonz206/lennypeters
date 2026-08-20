@@ -3,8 +3,8 @@ title: 'Keeping AI Agents Honest: OS-Native Secrets Storage, No Plaintext Requir
 date: '2026-08-19'
 excerpt: 'A senior-engineer playbook for keeping AI tooling off plaintext secrets by fetching API keys from the OS credential store only when a subprocess actually needs them.'
 tags: ['AI', 'Security', 'Secrets Management', 'Developer Tools']
-image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80'
-imageAlt: 'A laptop keyboard with a glowing lock icon overlay'
+image: 'https://images.unsplash.com/photo-1555529902-5261145633bf?auto=format&fit=crop&w=1600&q=80'
+imageAlt: 'A silver padlock'
 ---
 
 AI coding agents are unusually good at touching places secrets should never go.

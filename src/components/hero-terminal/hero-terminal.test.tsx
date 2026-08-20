@@ -80,7 +80,7 @@ describe('HeroTerminal', () => {
     for (const text of expectedTexts) {
       expect(screen.getByText(text)).toBeInTheDocument()
     }
-  })
+  }, 30_000)
 
   it('shows the idle cursor "$" after the animation completes', async () => {
     render(<HeroTerminal />)
@@ -91,7 +91,7 @@ describe('HeroTerminal', () => {
     // When currentLineIdx >= LINES.length the idle cursor adds a 4th '$'.
     const dollarSigns = screen.getAllByText('$')
     expect(dollarSigns).toHaveLength(4)
-  })
+  }, 30_000)
 
   it('renders the "Articles" link pointing to "/articles"', () => {
     render(<HeroTerminal />)

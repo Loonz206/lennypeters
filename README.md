@@ -40,25 +40,49 @@ content/
 └── articles/      # Markdown articles
 ```
 
-## Running Tests
-
-### Unit and component tests
+## Development
 
 ```bash
-npm test              # Watch mode
-npm test -- --ci      # Single run (used in CI)
+npm run dev             # Start local dev server
+npm run dev:https       # Start dev server with HTTPS
+```
+
+## Commands
+
+### Quality checks
+
+```bash
+npm run lint            # ESLint on src/
+npm run check           # Lint + Jest single run (used in CI)
+npm run format          # Auto-format all files with Prettier
+npm run format:check    # Check formatting without writing
+```
+
+### Unit tests (Jest + React Testing Library)
+
+```bash
+npm test                # Watch mode
+npm test -- --ci        # Single run (used in CI)
+npm run test:coverage   # Single run with coverage report
 ```
 
 ### E2E tests (Playwright)
 
 ```bash
 npm run test:e2e            # Local dev — auto-starts the dev server
+npm run test:e2e:ui         # Interactive Playwright UI
 npm run test:e2e:prod       # Against https://lennypeters.com
-E2E_TEST_URL=<url> npm run test:e2e:url  # Against any URL
-npm run test:e2e:ui         # Interactive UI mode
+E2E_TEST_URL=<url> npm run test:e2e  # Against any URL
 ```
 
 Setting `E2E_TEST_URL` skips local server startup and points all tests at the given domain.
+
+### Build and deploy
+
+```bash
+npm run build           # Production export build
+npm run start           # Serve the production build locally
+```
 
 ## Notes
 

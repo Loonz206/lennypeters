@@ -60,6 +60,14 @@ jobs:
 
       - run: npm ci
 
+      - name: Cache Next.js build
+        uses: actions/cache@v4
+        with:
+          path: .next
+          key: next-build-${{ runner.os }}-${{ hashFiles('package-lock.json', 'next.config.ts', 'tsconfig.json', 'src/**') }}
+          restore-keys: |
+            next-build-${{ runner.os }}-
+
       - run: npx playwright install --with-deps chromium
 
       - run: npm run build

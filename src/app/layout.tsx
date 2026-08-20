@@ -3,6 +3,7 @@ import Header from '@/components/header'
 import Main from '@/components/main'
 import Footer from '@/components/footer'
 import {
+  BASE_PATH,
   SITE_DESCRIPTION,
   SITE_NAME,
   SITE_TITLE,
@@ -17,23 +18,23 @@ export const metadata: Metadata = {
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
-  manifest: '/manifest.webmanifest',
+  manifest: `${BASE_PATH}/manifest.webmanifest`,
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/favicon.svg', type: 'image/svg+xml', sizes: 'any' },
-      { url: '/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
-      { url: '/favicon-16.png', type: 'image/png', sizes: '16x16' },
+      { url: `${BASE_PATH}/favicon.ico`, sizes: 'any' },
+      { url: `${BASE_PATH}/favicon.svg`, type: 'image/svg+xml', sizes: 'any' },
+      { url: `${BASE_PATH}/favicon-32x32.png`, type: 'image/png', sizes: '32x32' },
+      { url: `${BASE_PATH}/favicon-16.png`, type: 'image/png', sizes: '16x16' },
     ],
-    apple: [{ url: '/favicon-180x180.png', sizes: '180x180', type: 'image/png' }],
-    other: [{ rel: 'mask-icon', url: '/safari-pinned-tab.svg', color: '#00F0FF' }],
+    apple: [{ url: `${BASE_PATH}/favicon-180x180.png`, sizes: '180x180', type: 'image/png' }],
+    other: [{ rel: 'mask-icon', url: `${BASE_PATH}/safari-pinned-tab.svg`, color: '#00F0FF' }],
   },
   alternates: {
-    canonical: '/',
+    canonical: `${BASE_PATH}/`,
   },
   openGraph: {
     type: 'website',
-    url: '/',
+    url: `${BASE_PATH}/`,
     siteName: SITE_NAME,
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,

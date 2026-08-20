@@ -1,17 +1,18 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { projects } from '@/data/projects'
+import { BASE_PATH } from '@/lib/seo'
 import styles from './work.module.scss'
 
 export const metadata: Metadata = {
   title: 'Work — Lenny Peters',
   description: 'Selected projects and case studies from Lenny Peters.',
   alternates: {
-    canonical: '/work/',
+    canonical: `${BASE_PATH}/work/`,
   },
   openGraph: {
     type: 'website',
-    url: '/work/',
+    url: `${BASE_PATH}/work/`,
     title: 'Work — Lenny Peters',
     description: 'Selected projects and case studies from Lenny Peters.',
   },

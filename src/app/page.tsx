@@ -4,17 +4,18 @@ import SelectedWork from '@/components/selected-work'
 import ExpertiseList from '@/components/expertise-list'
 import CodeThinking from '@/components/code-thinking'
 import { getAllArticleMetas } from '@/lib/articles'
+import { BASE_PATH } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: 'Lenny Peters — Senior Software Engineer II',
   description:
     'Senior Software Engineer II turning complex AI ideas into production-ready systems. React, TypeScript, Next.js.',
   alternates: {
-    canonical: '/',
+    canonical: `${BASE_PATH}/`,
   },
   openGraph: {
     type: 'website',
-    url: '/',
+    url: `${BASE_PATH}/`,
     title: 'Lenny Peters — Senior Software Engineer II',
     description:
       'Senior Software Engineer II turning complex AI ideas into production-ready systems. React, TypeScript, Next.js.',

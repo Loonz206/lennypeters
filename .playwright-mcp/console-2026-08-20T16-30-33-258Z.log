@@ -1,0 +1,20 @@
+[     231ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://lennypeters.com/lennypeters/lenny.jpeg:0
+[     244ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://lennypeters.com/lennypeters/_next/static/chunks/356-d7845b3b0d2bbd0c.js:0
+[     245ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://lennypeters.com/lennypeters/_next/static/css/ee3c89bf182827eb.css:0
+[     248ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://lennypeters.com/lennypeters/_next/static/chunks/255-771067b41be71d9a.js:0
+[     251ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://lennypeters.com/lennypeters/_next/static/chunks/619-ba102abea3e3d0e4.js:0
+[     254ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://lennypeters.com/lennypeters/_next/static/chunks/app/page-e457676def8c96da.js:0
+[     256ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://lennypeters.com/lennypeters/_next/static/chunks/main-app-f7339f8008fb226f.js:0
+[     259ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://lennypeters.com/lennypeters/_next/static/chunks/4bd1b696-c023c6e3521b1417.js:0
+[     264ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://lennypeters.com/lennypeters/_next/static/chunks/app/not-found-1a4fce6fc5464712.js:0
+[     265ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://lennypeters.com/lennypeters/_next/static/chunks/webpack-983e635369cf893e.js:0
+[     265ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://lennypeters.com/lennypeters/_next/static/css/ef31cf569fe37f53.css:0
+[     280ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://lennypeters.com/lennypeters/_next/static/chunks/app/layout-540a3bb9789f1902.js:0
+[     317ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://lennypeters.com/lennypeters/manifest.webmanifest:0
+[     317ms] [ERROR] Manifest fetch from https://lennypeters.com/lennypeters/manifest.webmanifest failed, code 404 @ https://lennypeters.com/:0
+[     341ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://lennypeters.com/lennypeters/manifest.webmanifest:0
+[     342ms] [ERROR] Manifest fetch from https://lennypeters.com/lennypeters/manifest.webmanifest failed, code 404 @ https://lennypeters.com/:0
+[     409ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://lennypeters.com/lennypeters/favicon.svg:0
+[     506ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://lennypeters.com/lennypeters/favicon.ico:0
+[     616ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://lennypeters.com/lennypeters/favicon-32x32.png:0
+[     713ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://lennypeters.com/lennypeters/favicon-16.png:0

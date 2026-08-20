@@ -1,14 +1,14 @@
 import path from 'node:path'
 import type { NextConfig } from 'next'
-import { resolveBasePath } from './src/lib/site-config'
 
-const basePath = resolveBasePath({
-  configuredBasePath: process.env.NEXT_PUBLIC_BASE_PATH,
-  customDomain: process.env.CUSTOM_DOMAIN,
-  githubActions: process.env.GITHUB_ACTIONS,
-  githubRepository: process.env.GITHUB_REPOSITORY,
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL,
-})
+function normalizeBasePath(value: string | undefined): string {
+  if (!value) return ''
+  const trimmed = value.trim()
+  if (!trimmed || trimmed === '/') return ''
+  return trimmed.startsWith('/') ? trimmed : `/${trimmed}`
+}
+
+const basePath = normalizeBasePath(process.env.NEXT_PUBLIC_BASE_PATH)
 
 const nextConfig: NextConfig = {
   output: process.env.NODE_ENV === 'production' ? 'export' : undefined,

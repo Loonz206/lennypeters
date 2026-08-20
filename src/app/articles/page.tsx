@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import ArticleCard from '@/components/article-card'
 import { getAllArticleMetas } from '@/lib/articles'
+import { BASE_PATH } from '@/lib/seo'
 import styles from './articles.module.scss'
 
 export const metadata: Metadata = {
@@ -8,11 +9,11 @@ export const metadata: Metadata = {
   description:
     'Writing on React, TypeScript, CSS architecture, accessibility, and modern web engineering.',
   alternates: {
-    canonical: '/articles/',
+    canonical: `${BASE_PATH}/articles/`,
   },
   openGraph: {
     type: 'website',
-    url: '/articles/',
+    url: `${BASE_PATH}/articles/`,
     title: 'Articles — Lenny Peters',
     description:
       'Writing on React, TypeScript, CSS architecture, accessibility, and modern web engineering.',

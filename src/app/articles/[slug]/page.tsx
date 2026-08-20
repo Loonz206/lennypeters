@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import { getAllArticleMetas, getArticleBySlug } from '@/lib/articles'
+import { BASE_PATH } from '@/lib/seo'
 import Breadcrumbs from '@/components/breadcrumbs'
 import styles from './article.module.scss'
 
@@ -18,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const article = await getArticleBySlug(slug)
   if (!article) return {}
 
-  const canonicalPath = `/articles/${slug}/`
+  const canonicalPath = `${BASE_PATH}/articles/${slug}/`
 
   return {
     title: `${article.meta.title} — Lenny Peters`,

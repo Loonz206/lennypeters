@@ -3,6 +3,7 @@ import SkillsGrid from '@/components/skills-grid'
 import Certifications from '@/components/certifications'
 import ExperienceTimeline from '@/components/experience-timeline'
 import ContactSection from '@/components/contact-section'
+import { BASE_PATH } from '@/lib/seo'
 import styles from './about.module.scss'
 
 export const metadata: Metadata = {
@@ -10,11 +11,11 @@ export const metadata: Metadata = {
   description:
     'Senior Software Engineer II at lululemon with 8+ years of experience building fast, accessible web products. Based in Cascadia.',
   alternates: {
-    canonical: '/about/',
+    canonical: `${BASE_PATH}/about/`,
   },
   openGraph: {
     type: 'profile',
-    url: '/about/',
+    url: `${BASE_PATH}/about/`,
     title: 'About — Lenny Peters',
     description:
       'Senior Software Engineer II at lululemon with 8+ years of experience building fast, accessible web products. Based in Cascadia.',

@@ -7,7 +7,8 @@ export const SITE_DESCRIPTION =
 export const SOCIAL_HANDLE = '@lennypeters'
 
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? FALLBACK_SITE_URL).replace(/\/+$/, '')
+export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 export function toAbsoluteUrl(pathname: string): string {
-  return new URL(pathname, SITE_URL).toString()
+  return new URL(`${BASE_PATH}${pathname}`, SITE_URL).toString()
 }

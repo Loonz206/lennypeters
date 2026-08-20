@@ -1,6 +1,5 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { render, screen, fireEvent } from '@testing-library/react'
 import type { ArticleMeta } from '@/lib/articles'
 import CodeThinking from './index'
 
@@ -87,20 +86,18 @@ describe('CodeThinking', () => {
     expect(screen.getByLabelText('Previous page')).toBeDisabled()
   })
 
-  it('disables the Next button on the last page after navigating to it', async () => {
-    const user = userEvent.setup()
+  it('disables the Next button on the last page after navigating to it', () => {
     render(<CodeThinking articles={makeArticles(5)} />)
 
-    await user.click(screen.getByLabelText('Next page'))
+    fireEvent.click(screen.getByLabelText('Next page'))
 
     expect(screen.getByLabelText('Next page')).toBeDisabled()
   })
 
-  it('shows articles 5–8 after clicking Next with 8 articles', async () => {
-    const user = userEvent.setup()
+  it('shows articles 5–8 after clicking Next with 8 articles', () => {
     render(<CodeThinking articles={makeArticles(8)} />)
 
-    await user.click(screen.getByLabelText('Next page'))
+    fireEvent.click(screen.getByLabelText('Next page'))
 
     for (let i = 4; i < 8; i++) {
       expect(screen.getByText(`Article ${i}`)).toBeInTheDocument()
@@ -110,12 +107,11 @@ describe('CodeThinking', () => {
     }
   })
 
-  it('returns to page 0 after clicking Next then Prev', async () => {
-    const user = userEvent.setup()
+  it('returns to page 0 after clicking Next then Prev', () => {
     render(<CodeThinking articles={makeArticles(5)} />)
 
-    await user.click(screen.getByLabelText('Next page'))
-    await user.click(screen.getByLabelText('Previous page'))
+    fireEvent.click(screen.getByLabelText('Next page'))
+    fireEvent.click(screen.getByLabelText('Previous page'))
 
     expect(screen.getByText('Article 0')).toBeInTheDocument()
     expect(screen.queryByText('Article 4')).not.toBeInTheDocument()

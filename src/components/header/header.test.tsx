@@ -1,6 +1,5 @@
 import React from 'react'
 import { render, screen, within, fireEvent } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import Header from './index'
 
 jest.mock('next/link', () => ({
@@ -86,38 +85,35 @@ describe('Header', () => {
     )
   })
 
-  it('sets aria-expanded="true" on the hamburger after clicking it', async () => {
-    const user = userEvent.setup()
+  it('sets aria-expanded="true" on the hamburger after clicking it', () => {
     render(<Header />)
 
     const hamburger = screen.getByRole('button', { name: 'Open navigation' })
-    await user.click(hamburger)
+    fireEvent.click(hamburger)
 
     expect(hamburger).toHaveAttribute('aria-expanded', 'true')
   })
 
-  it('closes the overlay when the dialog close button is clicked', async () => {
-    const user = userEvent.setup()
+  it('closes the overlay when the dialog close button is clicked', () => {
     render(<Header />)
 
     const hamburger = screen.getByRole('button', { name: 'Open navigation' })
-    await user.click(hamburger)
+    fireEvent.click(hamburger)
 
     const overlay = document.getElementById('mobile-overlay')!
     const closeBtn = overlay.querySelector<HTMLButtonElement>('[aria-label="Close navigation"]')!
-    await user.click(closeBtn)
+    fireEvent.click(closeBtn)
 
     expect(hamburger).toHaveAttribute('aria-expanded', 'false')
   })
 
-  it('closes the overlay when the Escape key is pressed', async () => {
-    const user = userEvent.setup()
+  it('closes the overlay when the Escape key is pressed', () => {
     render(<Header />)
 
     const hamburger = screen.getByRole('button', { name: 'Open navigation' })
-    await user.click(hamburger)
+    fireEvent.click(hamburger)
 
-    await user.keyboard('{Escape}')
+    fireEvent.keyDown(document, { key: 'Escape' })
 
     expect(hamburger).toHaveAttribute('aria-expanded', 'false')
   })
@@ -144,25 +140,23 @@ describe('Header', () => {
     expect(within(desktopNav).getByRole('link', { name: 'About' })).not.toHaveClass('active-link')
   })
 
-  it('sets body overflow to "hidden" when the overlay is open', async () => {
-    const user = userEvent.setup()
+  it('sets body overflow to "hidden" when the overlay is open', () => {
     render(<Header />)
 
-    await user.click(screen.getByRole('button', { name: 'Open navigation' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Open navigation' }))
 
     expect(document.body.style.overflow).toBe('hidden')
   })
 
-  it('clears body overflow to "" after the overlay is closed', async () => {
-    const user = userEvent.setup()
+  it('clears body overflow to "" after the overlay is closed', () => {
     render(<Header />)
 
     const hamburger = screen.getByRole('button', { name: 'Open navigation' })
-    await user.click(hamburger)
+    fireEvent.click(hamburger)
 
     const overlay = document.getElementById('mobile-overlay')!
     const closeBtn = overlay.querySelector<HTMLButtonElement>('[aria-label="Close navigation"]')!
-    await user.click(closeBtn)
+    fireEvent.click(closeBtn)
 
     expect(document.body.style.overflow).toBe('')
   })
@@ -175,21 +169,17 @@ function getOverlayFocusable(): HTMLElement[] {
   return Array.from(overlay.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR))
 }
 
-async function openOverlay(): Promise<void> {
-  const user = userEvent.setup()
-  render(<Header />)
-  await user.click(screen.getByRole('button', { name: 'Open navigation' }))
-}
-
 describe('Header focus trap', () => {
-  it('focuses the first focusable element when the overlay opens', async () => {
-    await openOverlay()
+  it('focuses the first focusable element when the overlay opens', () => {
+    render(<Header />)
+    fireEvent.click(screen.getByRole('button', { name: 'Open navigation' }))
 
     expect(document.activeElement).toBe(getOverlayFocusable()[0])
   })
 
-  it('wraps Tab focus from the last element back to the first', async () => {
-    await openOverlay()
+  it('wraps Tab focus from the last element back to the first', () => {
+    render(<Header />)
+    fireEvent.click(screen.getByRole('button', { name: 'Open navigation' }))
 
     const focusable = getOverlayFocusable()
     focusable[focusable.length - 1].focus()
@@ -199,8 +189,9 @@ describe('Header focus trap', () => {
     expect(document.activeElement).toBe(focusable[0])
   })
 
-  it('wraps Shift+Tab focus from the first element back to the last', async () => {
-    await openOverlay()
+  it('wraps Shift+Tab focus from the first element back to the last', () => {
+    render(<Header />)
+    fireEvent.click(screen.getByRole('button', { name: 'Open navigation' }))
 
     const focusable = getOverlayFocusable()
     focusable[0].focus()
@@ -210,8 +201,9 @@ describe('Header focus trap', () => {
     expect(document.activeElement).toBe(focusable[focusable.length - 1])
   })
 
-  it('does not move focus on Shift+Tab from a middle element', async () => {
-    await openOverlay()
+  it('does not move focus on Shift+Tab from a middle element', () => {
+    render(<Header />)
+    fireEvent.click(screen.getByRole('button', { name: 'Open navigation' }))
 
     const focusable = getOverlayFocusable()
     focusable[1].focus()
@@ -221,8 +213,9 @@ describe('Header focus trap', () => {
     expect(document.activeElement).toBe(focusable[1])
   })
 
-  it('ignores non-Tab keys', async () => {
-    await openOverlay()
+  it('ignores non-Tab keys', () => {
+    render(<Header />)
+    fireEvent.click(screen.getByRole('button', { name: 'Open navigation' }))
 
     const focusable = getOverlayFocusable()
     focusable[0].focus()
@@ -232,8 +225,9 @@ describe('Header focus trap', () => {
     expect(document.activeElement).toBe(focusable[0])
   })
 
-  it('does nothing when Tab is pressed and there are no focusable elements', async () => {
-    await openOverlay()
+  it('does nothing when Tab is pressed and there are no focusable elements', () => {
+    render(<Header />)
+    fireEvent.click(screen.getByRole('button', { name: 'Open navigation' }))
 
     document
       .getElementById('mobile-overlay')!

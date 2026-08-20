@@ -1,6 +1,5 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { render, screen, fireEvent } from '@testing-library/react'
 import ArticleError from './error'
 import { notFound } from 'next/navigation'
 
@@ -34,13 +33,12 @@ describe('ArticleError', () => {
     consoleErrorSpy.mockRestore()
   })
 
-  it('calls reset() when the "Try again" button is clicked', async () => {
-    const user = userEvent.setup()
+  it('calls reset() when the "Try again" button is clicked', () => {
     const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => undefined)
     const reset = jest.fn()
 
     render(<ArticleError error={new Error('boom')} reset={reset} />)
-    await user.click(screen.getByRole('button', { name: 'Try again' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Try again' }))
 
     expect(reset).toHaveBeenCalledTimes(1)
 

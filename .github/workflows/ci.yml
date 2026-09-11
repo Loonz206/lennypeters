@@ -36,6 +36,15 @@ jobs:
 
       - run: npm ci
 
+      - name: Cache Jest
+        uses: actions/cache@v4
+        with:
+          path: .cache/jest
+          key: jest-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-${{ github.sha }}
+          restore-keys: |
+            jest-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-
+            jest-cache-${{ runner.os }}-
+
       - run: npm test -- --ci --coverage
 
       - name: Upload coverage to Codecov

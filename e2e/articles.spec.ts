@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { expect, test } from '@playwright/test'
 
 const secretsSlug = 'keeping-ai-agents-honest-os-native-secrets-storage-no-plaintext-required'
 

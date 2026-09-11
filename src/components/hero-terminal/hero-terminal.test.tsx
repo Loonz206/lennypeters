@@ -1,5 +1,5 @@
-import React from 'react'
-import { render, screen, act } from '@testing-library/react'
+import { act, render, screen } from '@testing-library/react'
+import type React from 'react'
 import HeroTerminal from './index'
 
 jest.mock('next/link', () => ({
@@ -48,10 +48,10 @@ describe('HeroTerminal', () => {
     jest.useRealTimers()
   })
 
-  it('renders the terminal output region with aria-live="polite"', () => {
+  it('renders the terminal output region as a polite live region', () => {
     render(<HeroTerminal />)
 
-    expect(screen.getByLabelText('Terminal output')).toHaveAttribute('aria-live', 'polite')
+    expect(screen.getByRole('log', { name: 'Terminal output' })).toBeInTheDocument()
   })
 
   it('initially shows the first line\'s prompt "$" before any typing begins', () => {

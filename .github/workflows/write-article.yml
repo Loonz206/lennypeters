@@ -35,9 +35,9 @@ jobs:
           ISSUE_TITLE: ${{ github.event.issue.title }}
           ISSUE_BODY: ${{ github.event.issue.body }}
         run: |
-          node <<'NODE'
-          const fs = require('node:fs')
-          const { buildArticleRequestContext } = require('./src/lib/article-request.js')
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs'
+          import { buildArticleRequestContext } from './src/lib/article-request.js'
 
           const context = buildArticleRequestContext({
             issueTitle: process.env.ISSUE_TITLE,

@@ -37,12 +37,12 @@ const FAKE_METAS = {
 function setupMocks() {
   mockFs.readdirSync.mockReturnValue(FAKE_FILES as unknown as ReturnType<typeof fs.readdirSync>)
   mockFs.readFileSync.mockImplementation((filePath: fs.PathOrFileDescriptor) => {
-    const filename = String(filePath).split('/').pop()!
+    const filename = String(filePath).split('/').pop() ?? ''
     const meta = FAKE_METAS[filename as keyof typeof FAKE_METAS]
     return `---\ntitle: ${meta?.title ?? ''}\n---\nbody content`
   })
   mockFs.existsSync.mockImplementation((filePath: fs.PathLike) => {
-    const filename = String(filePath).split('/').pop()!
+    const filename = String(filePath).split('/').pop() ?? ''
     return FAKE_FILES.includes(filename)
   })
   mockMatter.mockImplementation((input: string | Buffer | { content: string | Buffer }) => {
@@ -148,7 +148,7 @@ describe('getArticleBySlug', () => {
         imageAlt: 'Custom alt',
       },
       content: 'body content',
-    })
+    } as unknown as ReturnType<typeof matter>)
 
     const article = await getArticleBySlug('article-a')
 
@@ -172,7 +172,7 @@ describe('image and alt resolution', () => {
         image: 'https://images.unsplash.com/photo-1500000000?auto=format&fit=crop&w=1600&q=80',
       },
       content: 'body',
-    })
+    } as unknown as ReturnType<typeof matter>)
 
     const meta = getAllArticleMetas().find(m => m.slug === 'article-a')
 
@@ -191,7 +191,7 @@ describe('image and alt resolution', () => {
         image: 'https://images.unsplash.com/photo-1500000000?auto=format&fit=crop&w=4000&q=80',
       },
       content: 'body',
-    })
+    } as unknown as ReturnType<typeof matter>)
 
     const meta = getAllArticleMetas().find(m => m.slug === 'article-a')
 
@@ -210,7 +210,7 @@ describe('image and alt resolution', () => {
         image: 'https://example.com/photo.png',
       },
       content: 'body',
-    })
+    } as unknown as ReturnType<typeof matter>)
 
     const meta = getAllArticleMetas().find(m => m.slug === 'article-a')
 
@@ -227,7 +227,7 @@ describe('image and alt resolution', () => {
         imageAlt: 'A hand-drawn wireframe on paper',
       },
       content: 'body',
-    })
+    } as unknown as ReturnType<typeof matter>)
 
     const meta = getAllArticleMetas().find(m => m.slug === 'article-a')
 
@@ -240,7 +240,7 @@ describe('frontmatter fallbacks', () => {
     mockMatter.mockReturnValueOnce({
       data: { title: 42, date: 123, excerpt: false, tags: [1, 'two'] },
       content: 'body',
-    })
+    } as unknown as ReturnType<typeof matter>)
 
     const meta = getAllArticleMetas().find(m => m.slug === 'article-a')
 

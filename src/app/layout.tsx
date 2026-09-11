@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next'
+import Footer from '@/components/footer'
 import Header from '@/components/header'
 import Main from '@/components/main'
-import Footer from '@/components/footer'
 import {
   BASE_PATH,
   SITE_DESCRIPTION,
@@ -94,10 +94,12 @@ export default function RootLayout({
       <body>
         <script
           type="application/ld+json"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: static JSON-LD payload built from constants via JSON.stringify
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
         <script
           type="application/ld+json"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: static JSON-LD payload built from constants via JSON.stringify
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
         <Header />

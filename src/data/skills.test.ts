@@ -1,5 +1,5 @@
-import { skillGroups } from '@/data/skills'
 import type { SkillGroup } from '@/data/skills'
+import { skillGroups } from '@/data/skills'
 
 describe('skillGroups array', () => {
   it('contains exactly 4 groups', () => {

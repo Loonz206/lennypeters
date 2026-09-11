@@ -1,7 +1,7 @@
+import type { ArticleMeta } from '@/lib/articles'
 import { getAllArticleMetas } from '@/lib/articles'
 import { SITE_URL } from '@/lib/seo'
 import sitemap from './sitemap'
-import type { ArticleMeta } from '@/lib/articles'
 
 jest.mock('../lib/articles', () => ({
   getAllArticleMetas: jest.fn(),

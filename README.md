@@ -5,7 +5,7 @@
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=flat-square)](http://commitizen.github.io/cz-cli/)
 [![Next.js](https://img.shields.io/badge/Next.js-black?style=flat-square&logo=next.js)](https://nextjs.org/)
 [![Snyk](https://img.shields.io/badge/Snyk-monitored-brightgreen?style=flat-square&logo=snyk)](https://app.snyk.io/)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4?style=flat-square)](https://github.com/prettier/prettier)
+[![code style: biome](https://img.shields.io/badge/code_style-biome-60a5fa?style=flat-square)](https://biomejs.dev)
 
 Personal portfolio site for [Lenny Peters](https://lennypeters.com), built with Next.js, React, TypeScript, and custom SCSS.
 
@@ -52,9 +52,9 @@ npm run dev:https       # Start dev server with HTTPS
 ### Quality checks
 
 ```bash
-npm run lint            # ESLint on src/
+npm run lint            # Biome lint and format check on src/
 npm run check           # Lint + Jest single run (used in CI)
-npm run format          # Auto-format all files with Prettier
+npm run format          # Auto-format all files with Biome
 npm run format:check    # Check formatting without writing
 ```
 

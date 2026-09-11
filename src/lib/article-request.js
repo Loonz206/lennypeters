@@ -11,7 +11,7 @@ function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
 
-function getIssueFormField(issueBody, fieldLabel) {
+export function getIssueFormField(issueBody, fieldLabel) {
   if (typeof issueBody !== 'string' || issueBody.trim().length === 0) return ''
 
   const pattern = new RegExp(
@@ -22,10 +22,10 @@ function getIssueFormField(issueBody, fieldLabel) {
   return normalizeFieldValue(match?.[1] ?? '')
 }
 
-function slugifyTopic(value) {
+export function slugifyTopic(value) {
   const slug = normalizeFieldValue(value)
     .toLowerCase()
-    .replace(/[^a-z0-9 \-]/g, '')
+    .replace(/[^a-z0-9 -]/g, '')
     .trim()
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-')
@@ -36,7 +36,7 @@ function slugifyTopic(value) {
   return slug || 'article'
 }
 
-function buildArticleRequestContext({ issueTitle, issueBody }) {
+export function buildArticleRequestContext({ issueTitle, issueBody }) {
   const topic =
     getIssueFormField(issueBody, 'Topic') || normalizeFieldValue(issueTitle) || 'Article'
   const slug = slugifyTopic(topic)
@@ -48,10 +48,4 @@ function buildArticleRequestContext({ issueTitle, issueBody }) {
     commitTitle: `feat(article): add article — ${topic}`,
     prTitle: `feat(article): ${topic}`,
   }
-}
-
-module.exports = {
-  buildArticleRequestContext,
-  getIssueFormField,
-  slugifyTopic,
 }

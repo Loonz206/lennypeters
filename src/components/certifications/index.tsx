@@ -1,4 +1,3 @@
-import React from 'react'
 import { certifications } from '@/data/certifications'
 import styles from './certifications.module.scss'
 

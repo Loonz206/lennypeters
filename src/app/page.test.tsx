@@ -1,7 +1,6 @@
-import React from 'react'
 import { render, screen } from '@testing-library/react'
-import Home, { metadata } from './page'
 import { getAllArticleMetas } from '@/lib/articles'
+import Home, { metadata } from './page'
 
 jest.mock('../lib/articles', () => ({
   getAllArticleMetas: jest.fn().mockReturnValue([]),

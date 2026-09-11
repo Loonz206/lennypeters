@@ -1,7 +1,7 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import Profile from '@/components/profile'
 import styles from './hero-terminal.module.scss'
 
@@ -64,9 +64,9 @@ const HeroTerminal = () => {
               <span className={styles.terminalTitle}>~/portfolio</span>
             </div>
 
-            <div className={styles.terminalBody} aria-live="polite" aria-label="Terminal output">
-              {completedLines.map((line, i) => (
-                <div key={`${line.prompt}-${line.text}-${i}`} className={styles.terminalLine}>
+            <div className={styles.terminalBody} role="log" aria-label="Terminal output">
+              {completedLines.map(line => (
+                <div key={`${line.prompt}-${line.text}`} className={styles.terminalLine}>
                   <span className={line.prompt === '$' ? styles.promptCmd : styles.promptOut}>
                     {line.prompt}
                   </span>

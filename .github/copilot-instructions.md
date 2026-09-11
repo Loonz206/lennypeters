@@ -5,7 +5,7 @@
 ```bash
 npm run dev          # Start dev server at localhost:3000
 npm run build        # Production build
-npm run lint         # ESLint via next lint
+npm run lint         # Biome lint via biome check
 npm test             # Jest unit/component tests (watch: npm run test:watch)
 npm test -- -t "name" # Run a single test by name
 npm run test:e2e     # Playwright e2e tests (requires dev server or starts it automatically)

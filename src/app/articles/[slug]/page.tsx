@@ -1,9 +1,9 @@
-import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Image from 'next/image'
+import { notFound } from 'next/navigation'
+import Breadcrumbs from '@/components/breadcrumbs'
 import { getAllArticleMetas, getArticleBySlug } from '@/lib/articles'
 import { BASE_PATH } from '@/lib/seo'
-import Breadcrumbs from '@/components/breadcrumbs'
 import styles from './article.module.scss'
 
 interface Props {
@@ -89,6 +89,7 @@ const ArticlePage = async ({ params }: Props) => {
           ))}
         </ul>
       </header>
+      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: rendered HTML is produced from local Markdown via the rehype pipeline */}
       <div className={styles.body} dangerouslySetInnerHTML={{ __html: article.contentHtml }} />
     </article>
   )

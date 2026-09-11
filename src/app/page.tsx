@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
+import CodeThinking from '@/components/code-thinking'
+import ExpertiseList from '@/components/expertise-list'
 import HeroTerminal from '@/components/hero-terminal'
 import SelectedWork from '@/components/selected-work'
-import ExpertiseList from '@/components/expertise-list'
-import CodeThinking from '@/components/code-thinking'
 import { getAllArticleMetas } from '@/lib/articles'
 import { BASE_PATH } from '@/lib/seo'
 

@@ -1,7 +1,7 @@
 'use client'
 
-import React, { useEffect, useRef, useCallback } from 'react'
 import Link from 'next/link'
+import { useCallback, useEffect, useRef } from 'react'
 import styles from './not-found.module.scss'
 
 const MATRIX_CHARS =

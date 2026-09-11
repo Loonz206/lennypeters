@@ -1,5 +1,5 @@
-import React from 'react'
 import { render, screen } from '@testing-library/react'
+import type React from 'react'
 import Hero from '@/components/hero'
 
 jest.mock('next/link', () => ({

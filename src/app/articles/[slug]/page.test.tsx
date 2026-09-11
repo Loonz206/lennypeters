@@ -1,9 +1,8 @@
-import React from 'react'
 import { render, screen } from '@testing-library/react'
-import ArticlePage, { generateStaticParams, generateMetadata } from './page'
 import { notFound } from 'next/navigation'
+import type { Article, ArticleMeta } from '@/lib/articles'
 import { getAllArticleMetas, getArticleBySlug } from '@/lib/articles'
-import type { ArticleMeta, Article } from '@/lib/articles'
+import ArticlePage, { generateMetadata, generateStaticParams } from './page'
 
 jest.mock('next/navigation', () => ({
   notFound: jest.fn(() => {

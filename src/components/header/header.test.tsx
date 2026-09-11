@@ -1,5 +1,5 @@
-import React from 'react'
-import { render, screen, within, fireEvent } from '@testing-library/react'
+import { fireEvent, render, screen, within } from '@testing-library/react'
+import type React from 'react'
 import Header from './index'
 
 jest.mock('next/link', () => ({
@@ -34,6 +34,7 @@ jest.mock('next/navigation', () => ({
 }))
 
 import { usePathname } from 'next/navigation'
+
 const mockUsePathname = usePathname as jest.MockedFunction<typeof usePathname>
 
 describe('Header', () => {
@@ -100,8 +101,7 @@ describe('Header', () => {
     const hamburger = screen.getByRole('button', { name: 'Open navigation' })
     fireEvent.click(hamburger)
 
-    const overlay = document.getElementById('mobile-overlay')!
-    const closeBtn = overlay.querySelector<HTMLButtonElement>('[aria-label="Close navigation"]')!
+    const closeBtn = getCloseButton()
     fireEvent.click(closeBtn)
 
     expect(hamburger).toHaveAttribute('aria-expanded', 'false')
@@ -154,8 +154,7 @@ describe('Header', () => {
     const hamburger = screen.getByRole('button', { name: 'Open navigation' })
     fireEvent.click(hamburger)
 
-    const overlay = document.getElementById('mobile-overlay')!
-    const closeBtn = overlay.querySelector<HTMLButtonElement>('[aria-label="Close navigation"]')!
+    const closeBtn = getCloseButton()
     fireEvent.click(closeBtn)
 
     expect(document.body.style.overflow).toBe('')
@@ -164,9 +163,24 @@ describe('Header', () => {
 
 const FOCUSABLE_SELECTOR = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
 
+function getOverlay(): HTMLElement {
+  const overlay = document.getElementById('mobile-overlay')
+  if (!overlay) {
+    throw new Error('Expected #mobile-overlay to be rendered')
+  }
+  return overlay
+}
+
+function getCloseButton(): HTMLButtonElement {
+  const closeBtn = getOverlay().querySelector<HTMLButtonElement>('[aria-label="Close navigation"]')
+  if (!closeBtn) {
+    throw new Error('Expected close navigation button to be rendered')
+  }
+  return closeBtn
+}
+
 function getOverlayFocusable(): HTMLElement[] {
-  const overlay = document.getElementById('mobile-overlay')!
-  return Array.from(overlay.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR))
+  return Array.from(getOverlay().querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR))
 }
 
 describe('Header focus trap', () => {
@@ -229,10 +243,11 @@ describe('Header focus trap', () => {
     render(<Header />)
     fireEvent.click(screen.getByRole('button', { name: 'Open navigation' }))
 
-    document
-      .getElementById('mobile-overlay')!
+    getOverlay()
       .querySelectorAll('a[href], button, [tabindex]')
-      .forEach(el => el.remove())
+      .forEach(el => {
+        el.remove()
+      })
 
     expect(() => fireEvent.keyDown(document, { key: 'Tab' })).not.toThrow()
   })

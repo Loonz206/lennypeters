@@ -1,4 +1,3 @@
-import React from 'react'
 import styles from './expertise-list.module.scss'
 
 const FEATURED_SKILLS = ['TypeScript', 'Next.js', 'React', 'JavaScript']

@@ -19,6 +19,8 @@ const LINES = [
 const CHAR_DELAY = 45
 const LINE_DELAY = 520
 
+const APP_VERSION = process.env.NEXT_PUBLIC_APP_VERSION ?? '0.0.0-dev'
+
 const HeroTerminal = () => {
   const [completedLines, setCompletedLines] = useState<typeof LINES>([])
   const [currentLineIdx, setCurrentLineIdx] = useState(0)
@@ -123,7 +125,7 @@ const HeroTerminal = () => {
         <span className={styles.version}>
           <span className={styles.vKey}>V_CORE</span>
           <span className={styles.vSep}>:</span>
-          <span className={styles.vVal}>v4.2.1</span>
+          <span className={styles.vVal}>v{APP_VERSION}</span>
         </span>
         <span className={styles.statusBadge}>
           <span className={styles.statusDot} aria-hidden="true"></span> STATUS: STABLE

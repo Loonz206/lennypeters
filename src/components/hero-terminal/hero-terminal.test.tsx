@@ -101,6 +101,13 @@ describe('HeroTerminal', () => {
     expect(articlesLink).toHaveAttribute('href', '/articles')
   })
 
+  it('renders the version from NEXT_PUBLIC_APP_VERSION instead of a hardcoded string', () => {
+    render(<HeroTerminal />)
+
+    const expected = `v${process.env.NEXT_PUBLIC_APP_VERSION ?? '0.0.0-dev'}`
+    expect(screen.getByText(expected)).toBeInTheDocument()
+  })
+
   it('wraps the hero content in a section with aria-label="Introduction"', () => {
     render(<HeroTerminal />)
 

@@ -1,5 +1,6 @@
 import path from 'node:path'
 import type { NextConfig } from 'next'
+import { version as appVersion } from './package.json'
 
 function normalizeBasePath(value: string | undefined): string {
   if (!value) return ''
@@ -17,6 +18,9 @@ const nextConfig: NextConfig = {
   assetPrefix: basePath || undefined,
   env: {
     NEXT_PUBLIC_BASE_PATH: basePath,
+    // Single source of truth for the site version is package.json.
+    // Bumping it (pnpm version patch|minor|major) auto-updates the UI on next build.
+    NEXT_PUBLIC_APP_VERSION: appVersion,
   },
   images: {
     unoptimized: true,

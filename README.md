@@ -2,7 +2,7 @@
 
 [![Build Status](https://img.shields.io/github/actions/workflow/status/Loonz206/lennypeters/ci.yml?branch=main&style=flat-square&logo=github)](https://github.com/Loonz206/lennypeters/actions?query=workflow%3Aci)
 [![codecov](https://codecov.io/gh/Loonz206/lennypeters/branch/main/graph/badge.svg)](https://codecov.io/gh/Loonz206/lennypeters)
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=flat-square)](http://commitizen.github.io/cz-cli/)
+[![version](https://img.shields.io/github/package-json/v/Loonz206/lennypeters?style=flat-square)](https://github.com/Loonz206/lennypeters/blob/main/package.json)
 [![Next.js](https://img.shields.io/badge/Next.js-black?style=flat-square&logo=next.js)](https://nextjs.org/)
 [![Snyk](https://img.shields.io/badge/Snyk-monitored-brightgreen?style=flat-square&logo=snyk)](https://app.snyk.io/)
 [![code style: biome](https://img.shields.io/badge/code_style-biome-60a5fa?style=flat-square)](https://biomejs.dev)

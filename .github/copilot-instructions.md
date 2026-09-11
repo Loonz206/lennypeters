@@ -75,6 +75,7 @@ Specialized instruction files live in `.github/instructions/`. Each can be activ
 | `unit-testing.instructions.md`   | Runs `npm test`, auto-fixes failures, retries up to 3×                  |
 | `e2e-testing.instructions.md`    | Runs `npm run test:e2e`, auto-fixes failures, retries up to 3×          |
 | `pipeline.instructions.md`       | **Full pipeline**: research → coding → lint → unit test → e2e → summary |
+| `semver.instructions.md`         | Versioning: semver bumps via `pnpm version`, never hardcode versions    |
 
 ## Design Skills
 

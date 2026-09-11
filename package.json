@@ -6,6 +6,7 @@
   "engines": {
     "node": ">=22"
   },
+  "packageManager": "pnpm@10.34.5",
   "scripts": {
     "dev": "next dev",
     "dev:https": "next dev --experimental-https",
@@ -13,9 +14,10 @@
     "start": "next start",
     "lint": "biome check src",
     "test": "jest",
+    "test:ci": "jest --ci --coverage --maxWorkers=2 --silent",
     "test:coverage": "jest --coverage",
     "typecheck": "tsc --noEmit",
-    "check": "npm run lint && npm run typecheck && npm test -- --ci",
+    "check": "pnpm run lint && pnpm run typecheck && pnpm exec jest --ci --maxWorkers=2 --silent",
     "test:watch": "jest --watch",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
@@ -60,6 +62,14 @@
   "lint-staged": {
     "*.{ts,tsx,js,jsx,mjs,cjs,json,css,scss,md,yml,yaml}": [
       "biome check --write --unsafe"
+    ]
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "@swc/core",
+      "sharp",
+      "unrs-resolver"
     ]
   }
 }

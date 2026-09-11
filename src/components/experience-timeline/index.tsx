@@ -1,4 +1,3 @@
-import React from 'react'
 import { experience, formatDateRange } from '@/data/experience'
 import styles from './experience-timeline.module.scss'
 

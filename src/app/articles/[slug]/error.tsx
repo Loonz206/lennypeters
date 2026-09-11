@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect } from 'react'
 import { notFound } from 'next/navigation'
+import { useEffect } from 'react'
 
 interface ErrorProps {
   error: Error & { digest?: string }
@@ -26,6 +26,7 @@ export default function ArticleError({ error, reset }: ErrorProps) {
       <h1>Something went wrong</h1>
       <p style={{ color: '#666' }}>{error.message}</p>
       <button
+        type="button"
         onClick={() => reset()}
         style={{
           padding: '0.5rem 1rem',

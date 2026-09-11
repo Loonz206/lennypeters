@@ -1,5 +1,5 @@
-import { projects } from '@/data/projects'
 import type { Project } from '@/data/projects'
+import { projects } from '@/data/projects'
 
 describe('projects array', () => {
   it('contains exactly 3 projects', () => {

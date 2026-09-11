@@ -4,13 +4,14 @@
 
 ```bash
 npm run dev          # Start dev server (local E2E auto-starts this)
-npm run check        # Full CI: lint → jest --ci (no coverage)
-npm run lint         # ESLint only
+npm run check        # Full CI: lint → typecheck → jest --ci (no coverage)
+npm run lint         # Biome lint only
+npm run typecheck    # tsc --noEmit only
 npm test             # Jest watch mode
 npm test -- --ci     # Jest single run (CI, excludes src/app/layout.tsx and not-found.tsx)
 npm run build        # Production export build
-npm run format       # Prettier auto-format
-npm run format:check # Prettier check only
+npm run format       # Biome auto-format
+npm run format:check # Biome format check only
 ```
 
 ## E2E Testing
@@ -26,7 +27,7 @@ E2E_TEST_URL=<url> npm run test:e2e     # Any URL, no local server
 
 ## Git Hooks (Mandatory)
 
-- **pre-commit**: `npx lint-staged` → Prettier + ESLint on staged files
+- **pre-commit**: `npx lint-staged` → Biome check and format on staged files
 - **pre-push**: `npm run check` → Full CI with coverage required
 
 Pre-push failure blocks commits. Run locally before pushing.
@@ -57,13 +58,13 @@ e2e/               # Playwright specs per route
 
 1. **basePath auto-magic**: `next.config.ts` sets `/repo-name` on GitHub Pages, but local E2E uses `NEXT_PUBLIC_BASE_PATH=''`. CI E2E explicitly clears it via env override.
 
-2. **No typecheck command**: TypeScript runs implicitly via ESLint (`npm run lint`).
+2. **Typecheck**: Biome doesn't typecheck — run `npm run typecheck` (`tsc --noEmit`) for type errors. Pre-push runs it via `npm run check`.
 
-3. **CI pipeline order**: research → code → lint → unit tests → e2e → docs sync → summary
+3. **CI pipeline order**: research → code → lint → typecheck → unit tests → e2e → docs sync → summary
 
 4. **Images**: Unoptimized remotely (remotePatterns configured for unsplash).
 
-5. **Prettier**: 100 char width, 2-space indent, single quotes, no semicolons. EditorConfig enforces LF + final newline.
+5. **Biome**: 100 char width, 2-space indent, single quotes, no semicolons. EditorConfig enforces LF + final newline.
 
 6. **SCSS**: Global imports happen once in `layout.tsx`. Use `@include responsive(breakpoint)` for media queries.
 

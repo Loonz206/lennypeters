@@ -1,8 +1,8 @@
 'use client'
 
-import React, { useState } from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
+import { useState } from 'react'
 import type { ArticleMeta } from '@/lib/articles'
 import styles from './code-thinking.module.scss'
 
@@ -77,6 +77,7 @@ const CodeThinking = ({ articles }: CodeThinkingProps) => {
       {totalPages > 1 && (
         <div className={styles.pagination}>
           <button
+            type="button"
             className={styles.pageBtn}
             onClick={() => setPage(p => p - 1)}
             disabled={page === 0}
@@ -88,6 +89,7 @@ const CodeThinking = ({ articles }: CodeThinkingProps) => {
             {String(page + 1).padStart(2, '0')} / {String(totalPages).padStart(2, '0')}
           </span>
           <button
+            type="button"
             className={styles.pageBtn}
             onClick={() => setPage(p => p + 1)}
             disabled={page === totalPages - 1}

@@ -1,4 +1,3 @@
-import React from 'react'
 import styles from './example-component.module.scss'
 
 interface ExampleComponentProps {

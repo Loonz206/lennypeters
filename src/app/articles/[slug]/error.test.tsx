@@ -1,7 +1,6 @@
-import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
-import ArticleError from './error'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { notFound } from 'next/navigation'
+import ArticleError from './error'
 
 jest.mock('next/navigation', () => ({
   notFound: jest.fn(() => {

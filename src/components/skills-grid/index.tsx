@@ -1,4 +1,3 @@
-import React from 'react'
 import { skillGroups } from '@/data/skills'
 import styles from './skills-grid.module.scss'
 

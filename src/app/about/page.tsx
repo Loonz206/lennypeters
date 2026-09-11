@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
-import SkillsGrid from '@/components/skills-grid'
 import Certifications from '@/components/certifications'
-import ExperienceTimeline from '@/components/experience-timeline'
 import ContactSection from '@/components/contact-section'
+import ExperienceTimeline from '@/components/experience-timeline'
+import SkillsGrid from '@/components/skills-grid'
 import { BASE_PATH } from '@/lib/seo'
 import styles from './about.module.scss'
 

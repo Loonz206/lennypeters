@@ -1,4 +1,3 @@
-import React from 'react'
 import styles from './contact-section.module.scss'
 
 const ContactSection = () => {

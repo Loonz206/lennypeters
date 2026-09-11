@@ -1,9 +1,10 @@
 'use client'
 
-import React, { useState, useEffect, useRef, useCallback } from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import type React from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import styles from './header.module.scss'
 
 const NAV_LINKS = [
@@ -23,7 +24,7 @@ const Header = () => {
   // Close on route change
   useEffect(() => {
     close()
-  }, [pathname, close])
+  }, [close])
 
   // Lock body scroll when overlay is open
   useEffect(() => {
@@ -77,7 +78,7 @@ const Header = () => {
 
   return (
     <>
-      <header role="banner">
+      <header>
         <div className="navbar wrapper">
           <h2>
             <Link href="/" className={styles.brand}>
@@ -108,6 +109,7 @@ const Header = () => {
 
           {/* Hamburger (mobile only) */}
           <button
+            type="button"
             ref={hamburgerRef}
             className={`${styles.hamburger} ${isOpen ? styles.hamburgerHidden : ''}`}
             onClick={() => setIsOpen(o => !o)}
@@ -139,7 +141,12 @@ const Header = () => {
         <span className={`${styles.corner} ${styles.cornerBR}`} aria-hidden="true" />
 
         {/* Close button */}
-        <button className={styles.overlayClose} onClick={close} aria-label="Close navigation">
+        <button
+          type="button"
+          className={styles.overlayClose}
+          onClick={close}
+          aria-label="Close navigation"
+        >
           <span className={styles.closeX} aria-hidden="true" />
           <span className={styles.closeX} aria-hidden="true" />
         </button>
@@ -170,7 +177,7 @@ const Header = () => {
 
         {/* Footer label */}
         <p className={styles.overlayFooter} aria-hidden="true">
-          SYS.NAV // LENNY.PETERS
+          SYS.NAV {/* LENNY.PETERS */}
         </p>
       </dialog>
     </>

@@ -1,6 +1,5 @@
-import React from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
 import type { ArticleMeta } from '@/lib/articles'
 import styles from './article-card.module.scss'
 

@@ -1,7 +1,6 @@
-import React from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
-import { Project } from '@/data/projects'
+import Link from 'next/link'
+import type { Project } from '@/data/projects'
 import styles from './project-card.module.scss'
 
 interface ProjectCardProps {

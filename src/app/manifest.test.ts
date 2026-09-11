@@ -1,5 +1,5 @@
-import manifest from './manifest'
 import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE } from '@/lib/seo'
+import manifest from './manifest'
 
 describe('manifest', () => {
   it('returns the app manifest metadata', () => {

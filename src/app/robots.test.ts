@@ -1,5 +1,5 @@
-import robots from './robots'
 import { SITE_URL } from '@/lib/seo'
+import robots from './robots'
 
 describe('robots', () => {
   it('returns the robots.txt configuration', () => {

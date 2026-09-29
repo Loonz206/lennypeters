@@ -111,6 +111,7 @@ For security, use a least-privilege token. For fine-grained tokens, grant access
 ### Policy used in this repository
 
 - Base preset: `config:best-practices`
+- `minimumReleaseAge`: `3 days` to prioritize only versions that have been available for at least 72 hours before Renovate opens a PR
 - Dependency Dashboard enabled for triage and approvals
 - No automerge during initial stabilization
 - Major updates require dashboard approval

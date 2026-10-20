@@ -1,10 +1,10 @@
 ---
 name: write-article
 description: >
-  Researches a topic across multiple sources and writes a complete technical article
+  Researches a topic across multiple sources and writes a clear technical article
   as a markdown file in content/articles/. Uses the internet-research skill for
-  live documentation, then drafts in a Senior Engineer voice with citations.
-  Invoke inline with /write-article in any prompt.
+  live documentation, then drafts a learner-focused guide with steps, examples,
+  and citations. Invoke inline with /write-article in any prompt.
 ---
 
 # Write Article Skill
@@ -31,7 +31,7 @@ tags: ['Tag1', 'Tag2', 'Tag3']
 ```
 
 - **slug**: derived from the filename (kebab-case, no `.md` extension)
-- **title**: sentence-case, descriptive, 6–12 words
+- **title**: descriptive, 6–12 words
 - **date**: ISO date string, use today's date
 - **excerpt**: 1–2 sentences, under 200 characters
 - **tags**: 2–5 technology/topic tags
@@ -44,7 +44,7 @@ Extract from the user prompt or issue body:
 
 - **Topic**: the core subject
 - **Angle** (optional): specific perspective or subtopic
-- **Target audience** (default: Senior engineers)
+- **Target audience** (default: learners with basic technical knowledge)
 - **Tags** (optional): technology tags to apply
 
 ### 2. Research
@@ -100,19 +100,19 @@ Write the article following these rules:
 
 **Voice & Tone:**
 
-- Senior Engineer perspective: confident, opinionated but fair, practical over theoretical
-- First person singular: "I've found...", "In my experience...", "Here's what I recommend..."
-- Direct and concise — no filler, no hedging without reason
-- Assume the reader is a competent developer, not a beginner
+- Teach the reader in clear steps. Use plain words and short sentences.
+- Keep the focus on learning: explain the idea, show the example, and show the result.
+- Use direct instructions. Show what the reader should do and why it matters.
+- Assume the reader wants to learn and improve their skills. Do not use role-based status or expert-only language.
 
 **Content Rules:**
 
-- Every code example must be complete and runnable — never use pseudo-code or `// ...` elisions
+- Every code example must be complete and runnable. Do not use pseudo-code or `// ...` elisions.
 - Code blocks must specify the language: ` ```tsx `, ` ```scss `, ` ```bash `, etc.
 - Every major claim or recommendation cites a source: `[1]`, `[2]`, etc.
-- Include at least one "real-world" example showing the pattern in context
-- Address at least one common pitfall or misconception
-- Keep total length between 800–1500 words (excluding code blocks)
+- Include at least one practical example that shows the idea in context.
+- Address at least one common pitfall or misconception.
+- Keep total length between 800–1500 words (excluding code blocks).
 
 **Markdown Rules:**
 

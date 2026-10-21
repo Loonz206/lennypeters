@@ -47,6 +47,11 @@ describe('About page', () => {
     expect(screen.getByTestId('contact-section')).toBeInTheDocument()
   })
 
+  it('renders the profile photo beside the intro copy', () => {
+    render(<AboutPage />)
+    expect(screen.getByRole('img', { name: 'Lenny Peters' })).toBeInTheDocument()
+  })
+
   it('exports correct metadata title', () => {
     expect(metadata.title).toBe('About — Lenny Peters')
   })

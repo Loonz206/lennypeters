@@ -44,16 +44,104 @@
   position: relative;
 }
 
+.bioLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(220px, 380px);
+  gap: $space-5;
+  align-items: start;
+  max-width: 1040px;
+}
+
 .bioContent {
   max-width: 680px;
 
   p {
     color: $secondaryText;
     line-height: 1.75;
-    margin-bottom: $space-4; // 24px
+    margin-bottom: $space-4;
 
     &:last-child {
       margin-bottom: 0;
     }
+  }
+}
+
+.photoCard {
+  background: linear-gradient(180deg, rgba($darkest, 0.95) 0%, rgba($darker, 0.95) 100%);
+  border: 1px solid rgba($primaryColor, 0.22);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba($primaryColor, 0.08);
+}
+
+.photoHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-3 $space-4;
+  background-color: rgba($darkest, 0.55);
+  border-bottom: 1px solid rgba($primaryColor, 0.2);
+}
+
+.userId {
+  font-family: $monoSpaced;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: $primaryColor;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: $primaryColor;
+  opacity: 0.9;
+  box-shadow: 0 0 10px rgba($primaryColor, 0.45);
+}
+
+.photoWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-top: 1px solid rgba($primaryColor, 0.08);
+  border-left: 1px solid rgba($primaryColor, 0.16);
+  border-right: 1px solid rgba($primaryColor, 0.16);
+  background-color: $darkest;
+}
+
+.photoImg {
+  object-fit: cover;
+  object-position: center top;
+  filter: grayscale(92%) contrast(1.03);
+}
+
+.photoScanline {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba($primaryColor, 0.05) 0%, rgba($darkest, 0) 35%),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.08) 2px,
+      rgba(0, 0, 0, 0.08) 4px
+    );
+  pointer-events: none;
+}
+
+@media (max-width: 760px) {
+  .bioLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .photoCard {
+    max-width: 420px;
+    width: 100%;
+    margin: 0 auto;
   }
 }

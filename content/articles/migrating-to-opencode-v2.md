@@ -3,8 +3,8 @@ title: 'Migrating to OpenCode v2'
 date: '2026-10-20'
 excerpt: 'A practical migration guide from OpenCode v1 to v2, including MCP server setup, local model configuration, and the settings changes that make the upgrade feel smooth instead of disruptive.'
 tags: ['OpenCode', 'MCP', 'LLM', 'Developer Tools']
-image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80'
-imageAlt: 'Developer terminal with configuration files and command line interface'
+image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?fit=crop&w=1600&q=80'
+imageAlt: 'Developer reviewing code and migration changes across multiple screens'
 ---
 
 If you have been using OpenCode for a while, the v2 move is the kind of upgrade that looks small on paper but changes how your agent talks to tools, providers, and the local machine. The most important thing is not to treat it as a cosmetic version bump. It is a configuration migration.

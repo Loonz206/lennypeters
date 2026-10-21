@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Certifications from '@/components/certifications'
 import ContactSection from '@/components/contact-section'
 import ExperienceTimeline from '@/components/experience-timeline'
@@ -29,6 +30,9 @@ export const metadata: Metadata = {
 }
 
 const AboutPage = () => {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH?.trim() ?? ''
+  const profileImageUrl = `${basePath}/lenny.jpeg`
+
   return (
     <div className={styles.page}>
       <div className={styles.pageHeader}>
@@ -43,22 +47,43 @@ const AboutPage = () => {
       </div>
 
       <section className={styles.bio} aria-labelledby="about-heading">
-        <div className={styles.bioContent}>
-          <p>
-            As a seasoned senior software engineer, I have a proven track record of developing
-            engaging, user-centric, and responsive websites and applications. My ability to adapt to
-            various team dynamics, along with my broad skillset, ranging from coding to designing
-            graphical elements, allows me to make meaningful contributions to any project. I am
-            dedicated to promoting accessibility, utilizing automation, and upholding the principle
-            of equal access to the internet. My ultimate goal is to craft impactful and memorable
-            experiences for users on the web.
-          </p>
-          <p>
-            With over 15 years of experience, my journey spans the age of responsive design and
-            ecommerce implementation through to emerging technologies like module federation and
-            Next.js. I have seen the web evolve and have continuously adapted, bringing that breadth
-            of perspective to every project I contribute to.
-          </p>
+        <div className={styles.bioLayout}>
+          <div className={styles.bioContent}>
+            <p>
+              As a seasoned senior software engineer, I have a proven track record of developing
+              engaging, user-centric, and responsive websites and applications. My ability to adapt
+              to various team dynamics, along with my broad skillset, ranging from coding to
+              designing graphical elements, allows me to make meaningful contributions to any
+              project. I am dedicated to promoting accessibility, utilizing automation, and
+              upholding the principle of equal access to the internet. My ultimate goal is to craft
+              impactful and memorable experiences for users on the web.
+            </p>
+            <p>
+              With over 15 years of experience, my journey spans the age of responsive design and
+              ecommerce implementation through to emerging technologies like module federation and
+              Next.js. I have seen the web evolve and have continuously adapted, bringing that
+              breadth of perspective to every project I contribute to.
+            </p>
+          </div>
+
+          <aside className={styles.photoCard} aria-label="Profile photo">
+            <div className={styles.photoHeader}>
+              <span className={styles.userId}>LENNY.PETERS</span>
+              <span className={styles.dot} aria-hidden="true" />
+            </div>
+            <div className={styles.photoWrap}>
+              <Image
+                src={profileImageUrl}
+                alt="Lenny Peters"
+                fill
+                sizes="(max-width: 800px) 100vw, 38vw"
+                className={styles.photoImg}
+                fetchPriority="high"
+                priority
+              />
+              <div className={styles.photoScanline} aria-hidden="true" />
+            </div>
+          </aside>
         </div>
       </section>
 

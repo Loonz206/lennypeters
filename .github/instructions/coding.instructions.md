@@ -1,29 +1,24 @@
 ---
-applyTo: '**'
+description: "Use when implementing or modifying source code without running lint/tests in this phase. Mirrors the code agent contract."
 ---
 
-# Coding Agent
+# Coding Instruction
 
-> **Note:** This agent is a sub-component of the pipeline. For user-facing coding requests, the pipeline agent (`/agent pipeline`) should be used instead. This agent is invoked _by_ the pipeline — not directly for standalone coding requests.
+This instruction standardizes implementation-only work.
 
-You are a focused coding agent. Your sole responsibility is to implement the requested change cleanly and correctly. Do not run lint, tests, or any validation — that is handled by downstream agents.
+## Source of Truth
 
-## Before You Code — Research First
+Follow the workflow and constraints in [code.agent.md](/Users/lenny/Projects/lennypeters/.github/agents/code.agent.md).
 
-If the task involves any external library, framework, or API, use the `/internet-research` skill first to fetch current documentation via Context7. Do not rely solely on training data for library APIs. Only skip this step if the change is purely structural (e.g. moving files, renaming classes).
+## Required Behavior
 
-## Behaviour
+1. Understand the request and identify all impacted files.
+2. Implement complete, minimal, production-safe changes.
+3. Do not run lint or tests in this instruction phase.
+4. Preserve repository conventions in [copilot-instructions.md](/Users/lenny/Projects/lennypeters/.github/copilot-instructions.md).
 
-1. Understand the task from the user's description.
-2. Identify all files that need to be created or modified.
-3. Implement the change, following all conventions in `.github/copilot-instructions.md`.
-4. Do not run `npm run lint`, `npm test`, or `npm run test:e2e`.
-5. Do not summarize or present a diff — just make the changes.
+## Boundaries
 
-## Conventions to enforce
-
-- Components: one folder per component, `index.tsx` + `component-name.module.scss`
-- Styling: CSS Modules for component scope; global class names (e.g. `wrapper`) for layout
-- Use `"use client"` only when browser APIs or React hooks are required
-- Prop interfaces named `ComponentNameProps`, defined above the component
-- Imports use the `@/` path alias
+- No speculative abstractions.
+- No placeholder implementations.
+- No unrelated refactors.

@@ -1,9 +1,8 @@
 ---
 name: lint
 description: >
-  Focused linting agent that runs npm run lint and fixes reported lint issues.
-  Use after coding is complete, or when asked to lint and auto-fix issues.
-  Invoke with /agent lint or --agent lint.
+  Compatibility lint entrypoint. Runs lint-only workflow and fixes lint issues
+  with minimal safe changes.
 tools:
   [
     execute/runTask,
@@ -36,27 +35,6 @@ tools:
   ]
 ---
 
-# Lint Agent
+# Lint Agent (Compatibility Wrapper)
 
-You are a linting agent. Your responsibility is to run the linter and fix any errors it reports, retrying until the project is clean or the retry limit is reached. Once linting is complete the handoff is to the testing agent.
-
-## Load Context
-
-Before running the linter, read `.github/AGENT_LEARNINGS.md`. Filter the Active Rules table for categories matching `lint:*`. Apply any matching rules when fixing errors — these encode known safe fixes and must not be re-learned.
-
-## Behaviour
-
-1. Run `npm run lint`.
-2. If it exits cleanly -> done.
-3. If it reports errors:
-   a. Read each error carefully.
-   b. Fix all reported issues in the relevant files.
-   c. Re-run `npm run lint`.
-   d. Repeat up to **3 attempts** total.
-4. If errors persist after 3 attempts, record the outstanding issues and stop - do not block the pipeline.
-
-## Rules
-
-- Fix only what the linter reports. Do not refactor surrounding code.
-- Prefer the minimal change that resolves each error.
-- Do not introduce new logic while fixing lint errors.
+Use the `lint` playbook in [workflow-playbooks/SKILL.md](/Users/lenny/Projects/lennypeters/.github/skills/workflow-playbooks/SKILL.md).

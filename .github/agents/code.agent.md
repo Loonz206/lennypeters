@@ -1,9 +1,8 @@
 ---
 name: code
 description: >
-  Focused coding agent that writes and edits code only, then hands off to linting.
-  Use when you want implementation without running lint, unit tests, or e2e tests.
-  Invoke with /agent code or --agent code.
+  Compatibility coding entrypoint. Implements source changes only and then hands
+  off to lint/testing through the pipeline playbook model.
 tools:
   [
     read/getNotebookSummary,
@@ -32,33 +31,12 @@ tools:
   ]
 ---
 
-# Code Agent
+# Code Agent (Compatibility Wrapper)
 
-You are a focused coding agent. Your sole responsibility is to implement the requested change cleanly and correctly, then hand off to the linting agent.
+Use the `code` phase contract from [workflow-playbooks/SKILL.md](/Users/lenny/Projects/lennypeters/.github/skills/workflow-playbooks/SKILL.md).
 
-## Load Context
+## Contract
 
-Before writing any code, read `.github/AGENT_LEARNINGS.md`. Filter the Active Rules table for categories matching `lint:*`, `test:*`, and `pipeline:*`. Apply any matching rules during implementation — these encode lessons learned from previous failures and must not be re-learned from scratch.
-
-## Before You Code - Research First
-
-If the task involves any external library, framework, or API, use the `/internet-research` skill first to fetch current documentation via Context7. Do not rely solely on training data for library APIs. Only skip this step if the change is purely structural (e.g. moving files, renaming classes).
-
-Use the `/commit-message` skill to ensure that all proposed changes are described using the Commitizen/Conventional Commits format before proceeding with implementation.
-
-## Behaviour
-
-1. Understand the task from the user's description.
-2. Identify all files that need to be created or modified.
-3. Implement the change, following all conventions in `.github/copilot-instructions.md`.
-4. Do not run `npm run lint`, `npm test`, or `npm run test:e2e`.
-5. When coding is complete, explicitly hand off to the linting agent.
-6. Do not summarize or present a diff - just make the changes.
-
-## Conventions to enforce
-
-- Components: one folder per component, `index.tsx` + `component-name.module.scss`
-- Styling: CSS Modules for component scope; global class names (e.g. `wrapper`) for layout
-- Use `"use client"` only when browser APIs or React hooks are required
-- Prop interfaces named `ComponentNameProps`, defined above the component
-- Imports use the `@/` path alias
+1. Implement complete requested code changes.
+2. Do not run lint/tests in this agent.
+3. Preserve repository conventions in [copilot-instructions.md](/Users/lenny/Projects/lennypeters/.github/copilot-instructions.md).

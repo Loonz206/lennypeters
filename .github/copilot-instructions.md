@@ -14,9 +14,20 @@ npm run test:e2e:ui  # Playwright interactive UI mode
 
 ## Default Workflow for Coding Requests
 
-> **For any request that involves writing or modifying code, always use the pipeline agent.**
+> **For any request that involves writing or modifying code, use the pipeline agent as the single orchestrator.**
 
-The pipeline runs: **research → coding → lint → unit test → e2e → docs sync → summary**
+The pipeline uses standardized playbooks from [`workflow-playbooks`](/Users/lenny/Projects/lennypeters/.github/skills/workflow-playbooks/SKILL.md):
+
+- **full**: research → code → lint → unit → e2e → docs → reflect → summary
+- **code-lint**: research (if needed) → code → lint → summary
+- **lint / unit / e2e / docs / reflect** for phase-scoped requests
+
+Portable cross-provider standard:
+
+- [AI_CONTRIBUTING.md](/Users/lenny/Projects/lennypeters/.github/skills/workflow-playbooks/AI_CONTRIBUTING.md)
+- [OpenAI/Codex adapter](/Users/lenny/Projects/lennypeters/.github/skills/workflow-playbooks/adapters/openai-codex.md)
+- [GitHub Copilot adapter](/Users/lenny/Projects/lennypeters/.github/skills/workflow-playbooks/adapters/github-copilot.md)
+- [OpenCode adapter](/Users/lenny/Projects/lennypeters/.github/skills/workflow-playbooks/adapters/opencode.md)
 
 ```bash
 /agent pipeline
@@ -24,14 +35,14 @@ The pipeline runs: **research → coding → lint → unit test → e2e → docs
 copilot --agent pipeline --prompt "describe your task"
 ```
 
-**When to bypass the pipeline** (only when the user explicitly asks for a single phase):
+**Scoped requests** (pipeline selects the corresponding playbook):
 
 | User intent                              | Use instead          |
 | ---------------------------------------- | -------------------- |
-| "Just fix the lint errors"               | `/agent lint`        |
-| "Just fix the failing tests"             | `/agent testing`     |
-| "Just fix the failing e2e"               | `/agent e2e-testing` |
-| "Just implement, I'll run checks myself" | `/agent code`        |
+| "Just fix the lint errors"               | `/agent lint` (compatibility wrapper)        |
+| "Just fix the failing tests"             | `/agent testing` (compatibility wrapper)     |
+| "Just fix the failing e2e"               | `/agent e2e-testing` (compatibility wrapper) |
+| "Just implement, I'll run checks myself" | `/agent code` (compatibility wrapper)        |
 
 Do **not** implement code changes directly (outside an agent) unless the user has explicitly opted out of pipeline validation.
 
@@ -63,144 +74,49 @@ Use `render` + `screen` queries from `@testing-library/react`. Prefer queries by
 
 E2e tests live in `e2e/` and use the `.spec.ts` extension, one suite per route. The `playwright.config.ts` defaults to `http://localhost:3000` and auto-starts `npm run dev` if no server is already running. Set `E2E_TEST_URL` to point all tests at any external URL instead (no local server is started when this var is set). Only Chromium is configured by default.
 
-## Custom Agents
+## Agent Model (User-Facing)
 
-Specialized instruction files live in `.github/instructions/`. Each can be activated individually or used together as a full pipeline via `/instructions` in the CLI.
+Use one of these first:
 
-| Agent file                       | Purpose                                                                 |
-| -------------------------------- | ----------------------------------------------------------------------- |
-| `coding.instructions.md`         | Implements code changes only — no validation                            |
-| `code-then-lint.instructions.md` | Focused mini-pipeline: research → code → lint                           |
-| `linting.instructions.md`        | Runs `npm run lint`, auto-fixes, retries up to 3×                       |
-| `unit-testing.instructions.md`   | Runs `npm test`, auto-fixes failures, retries up to 3×                  |
-| `e2e-testing.instructions.md`    | Runs `npm run test:e2e`, auto-fixes failures, retries up to 3×          |
-| `pipeline.instructions.md`       | **Full pipeline**: research → coding → lint → unit test → e2e → summary |
-| `semver.instructions.md`         | Versioning: semver bumps via `pnpm version`, never hardcode versions    |
+1. **`/agent pipeline`** (default for coding work)
+2. **`/agent debug`** (runtime/browser debugging)
+3. **`/agent figma-design`** (design-to-code from Figma)
+4. **`/agent write-article`** (technical article generation)
 
-## Design Skills
+Everything else is compatibility-only and maps into pipeline playbooks.
 
-Specialized skills for frontend design and UI iteration live in `.github/skills/`:
+## Compatibility Wrappers (Internal/Legacy)
 
-| Skill name          | Location                                                                         | Purpose                                                                             | Example usage                                      |
-| ------------------- | -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | -------------------------------------------------- |
-| `impeccable`        | [`.github/skills/impeccable/SKILL.md`](.github/skills/impeccable/)               | Full-fidelity frontend design with production-grade SCSS, accessibility, and motion | `/impeccable craft hero section`                   |
-| `testing`           | [`.github/skills/testing/SKILL.md`](.github/skills/testing/)                     | Jest + React Testing Library for unit/component tests                               | `/testing add tests for login form`                |
-| `e2e-testing`       | [`.github/skills/e2e-testing/SKILL.md`](.github/skills/e2e-testing/)             | Playwright browser testing with MCP integration                                     | `/e2e-testing fix home page flow`                  |
-| `internet-research` | [`.github/skills/internet-research/SKILL.md`](.github/skills/internet-research/) | Live documentation lookup via Context7 MCP for frameworks/libs                      | `/internet-research Next.js App Router caching API |
+These remain available for stable existing workflows but are not the primary recommendation:
 
-**Research agent** (`.github/agents/research.agent.md`) can also be invoked standalone:
+- `/agent research`
+- `/agent code`
+- `/agent lint`
+- `/agent testing`
+- `/agent e2e-testing`
+- `/agent docs`
+- `/agent reflective`
+- `/agent unit-testing` (deprecated alias)
 
-```
-/agent research
-# or
-copilot --agent research --prompt "How does useOptimistic work in React 19?"
-```
+All wrappers route to contracts defined in [workflow-playbooks](/Users/lenny/Projects/lennypeters/.github/skills/workflow-playbooks/SKILL.md).
 
-**Code agent** (`.github/agents/code.agent.md`) implements changes only, then hands off to linting:
+## Skills
 
-```
-/agent code
-# or
-copilot --agent code --prompt "Implement feature X"
-```
+| Skill | Purpose | Example |
+|---|---|---|
+| `workflow-playbooks` | Canonical phase contracts used by pipeline and wrappers | `/workflow-playbooks full` |
+| `internet-research` | Context7-backed dependency/API research | `/internet-research Next.js caching` |
+| `testing` | Jest + RTL unit/component test support | `/testing add tests for header` |
+| `e2e-testing` | Playwright e2e authoring/repair | `/e2e-testing fix /about flow` |
+| `reflect` | Failure logging and rule extraction | `/reflect` |
+| `impeccable` | Frontend design critique/refinement | `/impeccable craft hero section` |
+| `figma-design` | Figma design implementation workflow | `/figma-design <url>` |
+| `write-article` | Research + article drafting workflow | `/write-article` |
+| `pr-publishing` | PR creation + description quality workflow | `/pr-publishing` |
 
-**Lint agent** (`.github/agents/lint.agent.md`) runs lint and auto-fixes reported issues:
+Agents and skills should both consume [AGENT_LEARNINGS.md](/Users/lenny/Projects/lennypeters/.github/AGENT_LEARNINGS.md) when applicable.
 
-```
-/agent lint
-# or
-copilot --agent lint --prompt "Lint and fix current changes"
-```
-
-**Testing agent** (`.github/agents/testing.agent.md`) writes or repairs Jest and React Testing Library coverage after linting. Replaces the former unit-testing agent:
-
-```
-/agent testing
-# or
-copilot --agent testing --prompt "Add unit tests for the selected-work component"
-```
-
-**E2E-testing agent** (`.github/agents/e2e-testing.agent.md`) runs Playwright after unit testing and repairs failing browser flows without skipping specs. Can use the Playwright MCP server for live browser diagnosis:
-
-```
-/agent e2e-testing
-# or
-copilot --agent e2e-testing --prompt "Fix the failing home page Playwright spec"
-```
-
-**Pipeline agent** (`.github/agents/pipeline.agent.md`) runs the full repo workflow from research through docs sync:
-
-```
-/agent pipeline
-# or
-copilot --agent pipeline --prompt "Implement feature X and carry it through verification"
-```
-
-**Docs agent** (`.github/agents/docs.agent.md`) updates `.github` documentation when orchestration files change:
-
-```bash
-/agent docs
-# or
-copilot --agent docs --prompt "Sync docs after updating pipeline and skills"
-```
-
-**Reflective agent** (`.github/agents/reflective.agent.md`) evaluates task outcomes, logs failure patterns, extracts rules when a failure category hits 3 occurrences, and purges resolved rules older than 30 days:
-
-```
-/agent reflective
-# or
-copilot --agent reflective --prompt "Evaluate this pipeline run and update learnings"
-```
-
-**Reflect skill** can be used inline at the end of any prompt to log failures and extract rules without invoking the full agent:
-
-```
-Use /reflect to evaluate this session and update AGENT_LEARNINGS.md.
-```
-
-Every agent reads `.github/AGENT_LEARNINGS.md` before starting — Active Rules in this file encode lessons from past failures and are applied automatically.
-
-**Write-article agent** (`.github/agents/write-article.agent.md`) researches a topic and writes a markdown article:
-
-```
-/agent write-article
-# or
-copilot --agent write-article --prompt "Write about React Server Components streaming patterns"
-```
-
-**Write-article skill** can be used inline in any prompt:
-
-```
-Use /write-article to write an article about TypeScript discriminated unions.
-```
-
-A GitHub Action (`.github/workflows/write-article.yml`) also auto-generates articles when an article request issue is opened from `.github/ISSUE_TEMPLATE/article-request.yml` or later labeled `article`.
-
-**Research skill** can be used inline in any prompt:
-
-```
-Use /internet-research to look up the Next.js 15 caching API, then implement server-side caching for the blog page.
-```
-
-**Testing skill** can be used inline in any prompt:
-
-```
-Use /testing to write or fix Jest and React Testing Library coverage for a component.
-```
-
-**E2E-testing skill** can be used inline in any prompt:
-
-```
-Use /e2e-testing to write or fix Playwright specs, or to diagnose a failing browser flow using the Playwright MCP server.
-```
-
-**Impeccable skill** can be used inline in any prompt:
-
-```
-Use /impeccable to design or iterate on a frontend interface component (e.g., "craft a hero section", "audit the homepage", "add animations to the contact form").
-```
-
-The skill covers design, critique, audit, polish, shape, craft, and enhancement commands for production-grade frontend UI. Use `/impeccable init` for new projects and `/impeccable [craft|shape|audit|critique|polish|animate|colorize] [target]` for existing code.
+For article generation, frontend design iteration, and Figma implementation, prefer the specialized user-facing agents listed above (`write-article`, `figma-design`) and their matching skills when you need inline execution.
 
 ### Setting up Context7 MCP (one-time, per machine)
 

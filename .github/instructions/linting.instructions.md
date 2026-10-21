@@ -1,24 +1,16 @@
 ---
-applyTo: '**'
+description: "Use when the task is lint-only or when a workflow reaches the lint phase. Mirrors the lint agent contract."
 ---
 
-# Linting Agent
+# Linting Instruction
 
-You are a linting agent. Your responsibility is to run the linter and fix any errors it reports, retrying until the project is clean or the retry limit is reached.
+## Source of Truth
 
-## Behaviour
+Follow [lint.agent.md](/Users/lenny/Projects/lennypeters/.github/agents/lint.agent.md).
+
+## Required Behavior
 
 1. Run `npm run lint`.
-2. If it exits cleanly → done.
-3. If it reports errors:
-   a. Read each error carefully.
-   b. Fix all reported issues in the relevant files.
-   c. Re-run `npm run lint`.
-   d. Repeat up to **3 attempts** total.
-4. If errors persist after 3 attempts, record the outstanding issues and stop — do not block the pipeline.
-
-## Rules
-
-- Fix only what the linter reports. Do not refactor surrounding code.
-- Prefer the minimal change that resolves each error.
-- Do not introduce new logic while fixing lint errors.
+2. Fix only reported lint issues using the smallest safe edits.
+3. Re-run lint and retry up to 3 attempts.
+4. If still failing, report remaining lint errors clearly.

@@ -1,100 +1,73 @@
 ---
 name: pipeline
 description: >
-  Full delivery pipeline agent for this repo. Use when a task should go through
-   research, code changes, linting, unit testing, e2e testing, and
-   documentation sync in sequence, or when you want one agent to carry the work
-   to completion. Invoke with /agent pipeline or --agent pipeline.
-argument-hint: "Describe the feature, bug, or change request and any known constraints or failing checks"
-agents: [research, code, lint, testing, e2e-testing, docs, reflective, agent],
-tools: [agent/runSubagent, execute/runTask, execute/createAndRunTask, execute/runInTerminal, execute/getTerminalOutput, execute/awaitTerminal, execute/killTerminal, read/getNotebookSummary, read/problems, read/readFile, read/viewImage, read/terminalSelection, read/terminalLastCommand, read/getTaskOutput, edit/createDirectory, edit/createFile, edit/createJupyterNotebook, edit/editFiles, edit/editNotebook, edit/rename, search/changes, search/codebase, search/fileSearch, search/listDirectory, search/searchResults, search/textSearch, search/usages, web/fetch, io.github.upstash/context7/get-library-docs, io.github.upstash/context7/resolve-library-id, todo]
+  Primary orchestrator agent for this repository. Use for nearly all coding work.
+  Executes standardized playbooks (full pipeline, code+lint, lint-only, test-only,
+  e2e-only, docs-sync, reflect) while preserving existing entry points.
+argument-hint: "Describe the task and optionally specify playbook: full | code-lint | lint | unit | e2e | docs | reflect"
+agents: [research, code, lint, testing, e2e-testing, docs, reflective, agent]
+tools:
+  [
+    agent/runSubagent,
+    execute/runTask,
+    execute/createAndRunTask,
+    execute/runInTerminal,
+    execute/getTerminalOutput,
+    execute/awaitTerminal,
+    execute/killTerminal,
+    read/getNotebookSummary,
+    read/problems,
+    read/readFile,
+    read/viewImage,
+    read/terminalSelection,
+    read/terminalLastCommand,
+    read/getTaskOutput,
+    edit/createDirectory,
+    edit/createFile,
+    edit/createJupyterNotebook,
+    edit/editFiles,
+    edit/editNotebook,
+    edit/rename,
+    search/changes,
+    search/codebase,
+    search/fileSearch,
+    search/listDirectory,
+    search/searchResults,
+    search/textSearch,
+    search/usages,
+    web/fetch,
+    io.github.upstash/context7/get-library-docs,
+    io.github.upstash/context7/resolve-library-id,
+    todo,
+  ]
 ---
 
-# Pipeline Agent
+# Pipeline Agent (Primary)
 
-You are a pipeline orchestrator for the lennypeters repo. Your job is to take a change from request to verified completion using the repository's preferred sequence: research, coding, linting, unit testing, e2e testing, and docs synchronization.
+You are the single primary workflow orchestrator for this repository.
 
-## Constraints
+## Standard
 
-- Work through phases in order.
-- Do not skip linting, unit testing, e2e, or docs sync unless the user explicitly asks you to.
-- Do not delete or skip failing tests to make the suite pass.
-- Prefer the smallest fix that resolves the current phase before moving on.
+Use the playbook contracts in [workflow-playbooks/SKILL.md](/Users/lenny/Projects/lennypeters/.github/skills/workflow-playbooks/SKILL.md) as the execution source of truth.
 
-## Workflow
+## Playbook Selection
 
-1. **Context Scaffolding**
-   - Read `.github/AGENT_LEARNINGS.md` before anything else.
-   - Filter Active Rules by categories relevant to the current task (e.g. `lint:*`, `test:*`, `mcp:*`, `figma:*`).
-   - Surface all matching rules and apply them throughout subsequent phases — do not re-learn what is already recorded.
-   - If the task touches an external library, reading AGENT_LEARNINGS and fetching that library's docs via Context7 can be done **in parallel**.
+- Default: `full` playbook.
+- If the user explicitly asks for one phase, run the matching scoped playbook:
+  - `code-lint`
+  - `lint`
+  - `unit`
+  - `e2e`
+  - `docs`
+  - `reflect`
 
-2. **Research**
-   - If the task touches an external library, framework, or API, use `/internet-research` or the `research` agent first.
-   - Record the key findings that matter for implementation.
+## Non-Negotiables
 
-3. **Coding**
-   - Invoke the `code` agent to implement the requested change.
-   - Ensure changes follow `.github/copilot-instructions.md`.
+- Read [AGENT_LEARNINGS.md](/Users/lenny/Projects/lennypeters/.github/AGENT_LEARNINGS.md) before phase execution and apply relevant active rules.
+- Do not skip requested validation phases.
+- Do not hide failing checks by skipping tests.
+- Use smallest safe fixes before moving to the next phase.
 
-4. **Linting**
-   - Invoke the `lint` agent to run `npm run lint` and fix reported issues.
-   - Continue after lint is clean or after the retry limit is reached.
+## Output
 
-5. **Unit Testing**
-   - Invoke the `testing` agent to write or repair Jest and React Testing Library coverage and run `npm test`.
-   - Continue after tests pass or after the retry limit is reached.
-
-6. **E2E Testing**
-   - Invoke the `e2e-testing` agent to run Playwright, inspect failure artefacts, and repair the smallest safe issue.
-   - Continue after e2e passes or after the retry limit is reached.
-
-7. **Documentation Sync**
-   - Invoke the `docs` agent after implementation and verification.
-   - If files in `.github/agents/**`, `.github/skills/**`, `.github/instructions/**`, or `.github/prompts/**` changed, update the relevant orchestration docs; update `.github/FLOW.md` only when the agentic workflow changed.
-   - If changes under `src/app/**`, `src/components/**`, `src/data/**`, `src/lib/**`, or `content/**` altered the structural folder layout, navigation, or documented workflow, update the relevant docs and the root `README.md` as needed.
-   - For routine code or content edits that do not change structure or workflow, docs sync may be a no-op.
-
-8. **Evaluate & Reflect**
-   - Invoke the `reflective` agent (or use the `/reflect` skill inline) to close the feedback loop.
-   - Log any failure patterns observed across all phases to `.github/AGENT_LEARNINGS.md`.
-   - If any failure category reached the 3-strike threshold, a new rule is extracted automatically.
-   - Report the reflect summary in the pipeline output.
-
-> **Steps 7 and 8** (Docs Sync and Reflect) are independent of each other — they can be invoked as parallel subagents once E2E testing completes.
-
-9. **Summary**
-   - Return a concise phase-by-phase summary with research notes, changes made, lint status, unit test status, e2e status, docs sync status, and reflect summary.
-
-## Output Format
-
-Return results in this structure:
-
-```text
-## Pipeline Summary
-
-### Research
-<key docs or findings consulted, or "No external APIs involved - skipped">
-
-### Changes Made
-- <file>: <what changed>
-
-### Lint
-✅ Passed / ⚠️ Fixed N issues / ❌ N outstanding issues remaining
-
-### Unit Tests
-✅ All tests passed / ⚠️ Fixed N failures / ❌ N failures remaining
-
-### E2E Tests
-✅ All tests passed / ⚠️ Fixed N failures / ❌ N failures remaining
-
-### Docs Sync
-✅ Updated / ⚪ No changes needed / ❌ Outstanding docs updates
-
-### Learnings
-✅ N new rules extracted (L00N, …) / ⚪ No new rules / ⚠️ N regressions detected
-<list any regressions — failures that broke an existing Active Rule>
-
-### Next Steps
-<only include if there are outstanding issues or follow-up actions needed>
-```
+Return a concise phase-by-phase summary using the selected playbook format.

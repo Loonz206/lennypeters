@@ -1,118 +1,119 @@
 # .github Agentic Workflow
 
-This folder contains agent definitions, skills, and instruction files used by Copilot in this repository.
+This repository uses a **playbook-first orchestration model**: one primary agent (`pipeline`) plus stable compatibility entry points (`code`, `lint`, `testing`, `e2e-testing`, `docs`, `reflective`, `research`).
 
-## Pipeline Flow
+## Workflow Flowchart
 
 ```mermaid
 flowchart TD
-    A([User Request]) --> R{Route}
+    U([User Request]) --> R{Routing}
 
-    R -->|Full pipeline| PL[Pipeline Agent]
-    R -->|/agent figma-design| FD[Figma Design Agent]
-    R -->|/agent write-article| WA[Write Article Agent]
-    R -->|/agent research| RA[Research Agent]
-    R -->|/agent reflective| RF[Reflective Agent]
+    R -->|Default coding work| P[/agent pipeline/]
+    R -->|Scoped phase request| C{Compatibility entrypoint}
+    R -->|Design from Figma| FD[/agent figma-design/]
+    R -->|Article generation| WA[/agent write-article/]
+    R -->|Runtime investigation| DB[/agent debug/]
 
-    subgraph pipeline [Pipeline — phases run in order]
-        PL --> CS[Phase -1: Context Scaffolding\nRead AGENT_LEARNINGS.md]
-        CS --> P0[Phase 0: Research]
-        P0 --> P1[Phase 1: Coding]
-        P1 --> P2[Phase 2: Lint]
-        P2 --> P3[Phase 3: Unit Tests]
-        P3 --> P4[Phase 4: E2E Tests]
-        P4 --> P5[Phase 5: Docs Sync]
-        P5 --> DC{.github, src/**, or\ncontent/** changed?}
-        DC -->|Workflow/agent\nchanges| DU[Update Docs + FLOW.md]
-        DC -->|Structural folder\nlayout changes| DR[Update README.md\nProject Structure]
-        DU --> P6[Phase 6: Evaluate & Reflect]
-        DR --> P6
-        DC -->|Routine code/\ncontent edits| P6
-        P6 --> P7[Phase 7: Summary]
+    C --> RC[/agent research/]
+    C --> CC[/agent code/]
+    C --> LC[/agent lint/]
+    C --> TC[/agent testing/]
+    C --> EC[/agent e2e-testing/]
+    C --> DC[/agent docs/]
+    C --> RFC[/agent reflective/]
+    RC --> P
+    CC --> P
+    LC --> P
+    TC --> P
+    EC --> P
+    DC --> P
+    RFC --> P
+
+    subgraph playbooks [Workflow Playbooks]
+      PB1[full]
+      PB2[code-lint]
+      PB3[lint]
+      PB4[unit]
+      PB5[e2e]
+      PB6[docs]
+      PB7[reflect]
     end
 
-    subgraph skills [Skills — usable inline in any prompt]
-        SK_IR[/internet-research/]
-        SK_FG[/figma-design/]
-        SK_TS[/testing/]
-        SK_WA[/write-article/]
-        SK_RF[/reflect/]
+    P --> PB1
+    P --> PB2
+    P --> PB3
+    P --> PB4
+    P --> PB5
+    P --> PB6
+    P --> PB7
+
+    subgraph full [full playbook phases]
+      S0[Research]
+      S1[Code]
+      S2[Lint]
+      S3[Unit Tests]
+      S4[E2E Tests]
+      S5[Docs Sync]
+      S6[Reflect]
+      S7[Summary]
+      S0 --> S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7
     end
 
-    subgraph mcp [MCP Servers]
-        MCP_C7[(Context7\nLibrary Docs)]
-        MCP_FG[(Figma\nDesign Context)]
+    PB1 --> S0
+
+    subgraph skills [Core Skills]
+      SKP[/workflow-playbooks/]
+      SKR[/internet-research/]
+      SKT[/testing/]
+      SKE[/e2e-testing/]
+      SKF[/figma-design/]
+      SKW[/write-article/]
+      SKRF[/reflect/]
+      SKI[/impeccable/]
     end
 
-    subgraph reflective [Reflective Loop]
-        AL[(AGENT_LEARNINGS.md)]
-        EV[Evaluator\nLog failure patterns]
-        SM[Skill Manager\n3-strikes → extract rule]
-        HK[Housekeeping\nPurge resolved >30 days]
-        AL -->|Active Rules| CS
-        P6 --> EV
-        EV --> SM
-        SM -->|Count ≥ 3| AL
-        SM --> HK
-        HK --> AL
+    P --> SKP
+    S0 --> SKR
+    S3 --> SKT
+    S4 --> SKE
+    FD --> SKF
+    WA --> SKW
+    S6 --> SKRF
+    DB --> SKI
+
+    subgraph mcp [MCP Integrations]
+      C7[(Context7)]
+      FG[(Figma MCP)]
+      PW[(Playwright MCP)]
     end
 
-    P0 -->|internet-research skill| SK_IR
-    SK_IR -->|resolve-library-id\nget-library-docs| MCP_C7
-
-    FD --> SK_FG
-    SK_FG -->|get_design_context\nget_screenshot| MCP_FG
-
-    SK_WA --> SK_IR
-    SK_RF --> EV
-
-    WA --> SK_WA
-    RA --> SK_IR
-    RF --> EV
+    SKR --> C7
+    SKF --> FG
+    SKE --> PW
+    DB --> PW
 ```
 
 ## Skills
 
-Skills provide specialized, reusable capabilities invokable inline (`/skill-name`) or called by agents.
+| Skill | Location | Purpose |
+|---|---|---|
+| `workflow-playbooks` | `skills/workflow-playbooks/SKILL.md` | Canonical phase contracts and playbook definitions |
+| `internet-research` | `skills/internet-research/SKILL.md` | Dependency and API research before coding |
+| `testing` | `skills/testing/SKILL.md` | Jest + RTL unit/component test authoring and repair |
+| `e2e-testing` | `skills/e2e-testing/SKILL.md` | Playwright e2e authoring and repair |
+| `figma-design` | `skills/figma-design/SKILL.md` | Figma-to-code implementation |
+| `write-article` | `skills/write-article/SKILL.md` | Research-backed technical article drafting |
+| `pr-publishing` | `skills/pr-publishing/SKILL.md` | PR creation and reviewer-ready description generation |
+| `reflect` | `skills/reflect/SKILL.md` | Failure logging and rule extraction |
+| `impeccable` | `skills/impeccable/SKILL.md` | Frontend design critique and refinement |
 
-| Skill               | File                                | MCP Dependency                   | Purpose                                            |
-| ------------------- | ----------------------------------- | -------------------------------- | -------------------------------------------------- |
-| `internet-research` | `skills/internet-research/SKILL.md` | Context7                         | Fetch live library docs before coding              |
-| `figma-design`      | `skills/figma-design/SKILL.md`      | Figma MCP                        | Translate Figma frames to React components         |
-| `testing`           | `skills/testing/SKILL.md`           | —                                | Write/fix Jest + RTL tests                         |
-| `write-article`     | `skills/write-article/SKILL.md`     | Context7 (via internet-research) | Research and draft technical articles              |
-| `reflect`           | `skills/reflect/SKILL.md`           | —                                | Log failures + extract rules to AGENT_LEARNINGS.md |
+## Compatibility Policy
 
-## MCP Servers
-
-| Server                                                       | Setup                                 | Used By                                                     |
-| ------------------------------------------------------------ | ------------------------------------- | ----------------------------------------------------------- |
-| **Context7** (`@upstash/context7-mcp`)                       | `npx -y @upstash/context7-mcp`        | `internet-research` skill, Research Agent, Pipeline Phase 0 |
-| **Figma MCP** (`mcp.figma.com/mcp` or `figma-developer-mcp`) | OAuth via `https://mcp.figma.com/mcp` | `figma-design` skill, Figma Design Agent                    |
-
-See [copilot-instructions.md](./copilot-instructions.md) for one-time MCP setup instructions.
-
-## Docs Sync Scope
-
-The docs phase (Phase 5) and Docs Agent update documentation when changes are detected in:
-
-- `.github/agents/**`
-- `.github/skills/**`
-- `.github/instructions/**`
-- `.github/prompts/**`
-- `src/app/**`
-- `src/components/**`
-- `src/data/**`
-- `src/lib/**`
-- `content/**`
-- `.github/AGENT_LEARNINGS.md` (when new rules are extracted by the Reflective Agent)
-
-**When new agents, skills, or MCP servers are added**, the docs phase must also:
-
-1. Add a row to the **Skills** or **MCP Servers** table above.
-2. Add a node and edge to the **Pipeline Flow** Mermaid diagram.
-3. Update the agent/skill inventory in `copilot-instructions.md` if the entry point or invocation pattern changed.
-
-**When structural source folders change**, the docs phase must also:
-
-1. Update the root `README.md` Project Structure section so it reflects the current directory layout.
+- Existing entry points remain stable (`/agent lint`, `/agent testing`, etc.).
+- Compatibility agents map scoped requests into the pipeline playbook model.
+- New orchestration behavior must be defined in `workflow-playbooks` first, then reflected in agents/instructions/docs.
+- Cross-provider standard and adapters live in:
+  - [AI_CONTRIBUTING.md](/Users/lenny/Projects/lennypeters/.github/skills/workflow-playbooks/AI_CONTRIBUTING.md)
+  - [openai-codex.md](/Users/lenny/Projects/lennypeters/.github/skills/workflow-playbooks/adapters/openai-codex.md)
+  - [github-copilot.md](/Users/lenny/Projects/lennypeters/.github/skills/workflow-playbooks/adapters/github-copilot.md)
+  - [opencode.md](/Users/lenny/Projects/lennypeters/.github/skills/workflow-playbooks/adapters/opencode.md)

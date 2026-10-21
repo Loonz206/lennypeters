@@ -1,12 +1,25 @@
 ---
 name: unit-testing
 description: >
-  Deprecated. Use the testing agent instead. Invoke with /agent testing or
-  --agent testing.
+  Deprecated compatibility alias for the testing agent. Use /agent testing for
+  unit/component test workflows.
+tools:
+  [
+    execute/runTask,
+    execute/createAndRunTask,
+    execute/runInTerminal,
+    execute/getTerminalOutput,
+    execute/awaitTerminal,
+    execute/killTerminal,
+    read/readFile,
+    search/textSearch,
+    edit/editFiles,
+    todo,
+  ]
 ---
 
-# Unit Testing Agent — Deprecated
+# Unit-Testing Agent (Deprecated Alias)
 
-This agent has been consolidated into the **testing** agent.
+This entrypoint exists for backward compatibility only.
 
-Use `/agent testing` or `--agent testing` for all Jest and React Testing Library work.
+Use [testing.agent.md](/Users/lenny/Projects/lennypeters/.github/agents/testing.agent.md) and the `unit` playbook in [workflow-playbooks/SKILL.md](/Users/lenny/Projects/lennypeters/.github/skills/workflow-playbooks/SKILL.md).

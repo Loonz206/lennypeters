@@ -22,6 +22,17 @@ jest.mock('../../components/contact-section', () => ({
 }))
 
 describe('About page', () => {
+  const previousBasePath = process.env.NEXT_PUBLIC_BASE_PATH
+
+  afterEach(() => {
+    if (previousBasePath === undefined) {
+      delete process.env.NEXT_PUBLIC_BASE_PATH
+      return
+    }
+
+    process.env.NEXT_PUBLIC_BASE_PATH = previousBasePath
+  })
+
   it('renders the "About Me" heading', () => {
     render(<AboutPage />)
     expect(screen.getByRole('heading', { name: 'About Me', level: 1 })).toBeInTheDocument()
@@ -50,6 +61,14 @@ describe('About page', () => {
   it('renders the profile photo beside the intro copy', () => {
     render(<AboutPage />)
     expect(screen.getByRole('img', { name: 'Lenny Peters' })).toBeInTheDocument()
+  })
+
+  it('prefixes the profile image src with NEXT_PUBLIC_BASE_PATH when set', () => {
+    process.env.NEXT_PUBLIC_BASE_PATH = '/lennypeters'
+    render(<AboutPage />)
+
+    const image = screen.getByRole('img', { name: 'Lenny Peters' })
+    expect(decodeURIComponent(image.getAttribute('src') ?? '')).toContain('/lennypeters/lenny.jpeg')
   })
 
   it('exports correct metadata title', () => {

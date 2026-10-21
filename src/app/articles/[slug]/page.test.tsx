@@ -143,6 +143,14 @@ describe('ArticlePage', () => {
       expect(meta.description).toBe('A test excerpt')
     })
 
+    it('includes hero image metadata for open graph and twitter cards', async () => {
+      mockGetArticleBySlug.mockResolvedValue(mockArticle)
+      const meta = await generateMetadata({ params: Promise.resolve({ slug: 'test-article' }) })
+
+      expect(meta.openGraph?.images).toEqual([mockArticle.meta.image])
+      expect(meta.twitter?.images).toEqual([mockArticle.meta.image])
+    })
+
     it('returns an empty object when the slug is not found', async () => {
       mockGetArticleBySlug.mockResolvedValue(null)
       const meta = await generateMetadata({ params: Promise.resolve({ slug: 'missing' }) })

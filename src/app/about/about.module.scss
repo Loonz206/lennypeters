@@ -46,15 +46,15 @@
 
 .bioLayout {
   display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(220px, 380px);
-  gap: $space-5;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 420px);
+  gap: $space-4;
   align-items: start;
+  width: 100%;
   max-width: 1040px;
+  margin: 0 auto;
 }
 
 .bioContent {
-  max-width: 680px;
-
   p {
     color: $secondaryText;
     line-height: 1.75;
@@ -71,7 +71,9 @@
   border: 1px solid rgba($primaryColor, 0.22);
   display: flex;
   flex-direction: column;
+  justify-self: end;
   width: 100%;
+  max-width: 420px;
   overflow: hidden;
   box-shadow: 0 0 0 1px rgba($primaryColor, 0.08);
 }
@@ -134,7 +136,7 @@
   pointer-events: none;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 960px) {
   .bioLayout {
     grid-template-columns: 1fr;
   }

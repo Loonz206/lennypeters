@@ -76,7 +76,7 @@ const AboutPage = () => {
                 src={profileImageUrl}
                 alt="Lenny Peters"
                 fill
-                sizes="(max-width: 800px) 100vw, 38vw"
+                sizes="(max-width: 960px) 100vw, 50vw"
                 className={styles.photoImg}
                 fetchPriority="high"
                 priority

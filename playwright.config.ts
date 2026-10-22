@@ -29,7 +29,7 @@ export default defineConfig({
     ? undefined
     : process.env.CI
       ? {
-          command: 'npx serve@latest out --listen 3000',
+          command: 'corepack pnpm exec serve out --listen 3000',
           url: 'http://localhost:3000',
           reuseExistingServer: false,
           timeout: 120 * 1000,

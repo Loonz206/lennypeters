@@ -20,6 +20,20 @@ const slug = 'keeping-ai-agents-honest-os-native-secrets-storage-no-plaintext-re
 const articlePath = path.join(process.cwd(), 'content', 'articles', `${slug}.md`)
 
 describe('article content files', () => {
+  it('includes the VS Code Copilot MCP article in the article index', () => {
+    const vscodeMcpSlug = 'setting-up-and-migrating-vscode-copilot-mcp-servers'
+    const article = getAllArticleMetas().find(meta => meta.slug === vscodeMcpSlug)
+
+    expect(article).toMatchObject({
+      slug: vscodeMcpSlug,
+      title: 'Setting Up and Migrating VS Code Copilot MCP Servers',
+      date: '2026-10-23',
+    })
+    expect(article?.tags).toEqual(
+      expect.arrayContaining(['GitHub Copilot', 'VS Code', 'MCP', 'Developer Tools'])
+    )
+  })
+
   it('includes the OS-native secrets article in the article index', () => {
     const article = getAllArticleMetas().find(meta => meta.slug === slug)
 

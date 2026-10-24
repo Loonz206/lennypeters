@@ -34,6 +34,26 @@ describe('article content files', () => {
     )
   })
 
+  it('includes the npm dependency pinning article in the article index', () => {
+    const npmPinningSlug = 'pinning-versions-of-npm-modules'
+    const article = getAllArticleMetas().find(meta => meta.slug === npmPinningSlug)
+
+    expect(article).toMatchObject({
+      slug: npmPinningSlug,
+      title: 'Pinning NPM Modules to Reduce Supply Chain Risk',
+      date: '2026-10-24',
+    })
+    expect(article?.tags).toEqual(
+      expect.arrayContaining([
+        'npm',
+        'Security',
+        'Supply Chain',
+        'Dependency Management',
+        'Node.js',
+      ])
+    )
+  })
+
   it('includes the OS-native secrets article in the article index', () => {
     const article = getAllArticleMetas().find(meta => meta.slug === slug)
 

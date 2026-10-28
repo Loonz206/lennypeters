@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
-import ArticleCard from '@/components/article-card'
 import { getAllArticleMetas } from '@/lib/articles'
 import { BASE_PATH } from '@/lib/seo'
 import styles from './articles.module.scss'
+import ArticlesList from './articles-list'
 
 export const metadata: Metadata = {
   title: 'Articles — Lenny Peters',
@@ -38,11 +38,7 @@ const ArticlesPage = () => {
           Thoughts on React, TypeScript, CSS, accessibility, and the craft of web engineering.
         </p>
       </div>
-      <div className={styles.grid}>
-        {articles.map(article => (
-          <ArticleCard key={article.slug} article={article} />
-        ))}
-      </div>
+      <ArticlesList articles={articles} />
     </div>
   )
 }

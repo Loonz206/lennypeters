@@ -23,7 +23,7 @@
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:prod": "E2E_TEST_URL=https://lennypeters.com playwright test",
     "test:e2e:url": "playwright test",
-    "lighthouse": "NEXT_PUBLIC_BASE_PATH='' npm run build && lhci autorun && npm run lighthouse:budget",
+    "lighthouse": "node -e \"require('node:fs').rmSync('.lighthouseci',{recursive:true,force:true})\" && NEXT_PUBLIC_BASE_PATH='' npm run build && lhci autorun && npm run lighthouse:budget",
     "lighthouse:budget": "node scripts/check-lighthouse-budget.mjs",
     "prepare": "husky",
     "format": "biome format --write --unsafe .",

@@ -23,6 +23,8 @@
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:prod": "E2E_TEST_URL=https://lennypeters.com playwright test",
     "test:e2e:url": "playwright test",
+    "lighthouse": "NEXT_PUBLIC_BASE_PATH='' npm run build && lhci autorun && npm run lighthouse:budget",
+    "lighthouse:budget": "node scripts/check-lighthouse-budget.mjs",
     "prepare": "husky",
     "format": "biome format --write --unsafe .",
     "format:check": "biome check ."
@@ -43,6 +45,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.13",
+    "@lhci/cli": "0.16.1",
     "@playwright/test": "1.58.2",
     "@swc/core": "1.16.2",
     "@swc/jest": "0.2.39",

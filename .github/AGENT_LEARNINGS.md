@@ -32,6 +32,8 @@ Failure categories use dot-notation at mid-level specificity:
 | ID   | Category                       | Error Signature                                                       | Count | Last Seen  | Status |
 | ---- | ------------------------------ | --------------------------------------------------------------------- | ----- | ---------- | ------ |
 | F001 | test:content-expectation-drift | "Unable to find an element with the text: Responsive Web Development" | 1     | 2026-04-10 | open   |
+| F002 | pipeline:test-command | "Extra `--` arguments were forwarded into Jest as a test pattern" | 1 | 2026-11-18 | open |
+| F003 | lighthouse:run-grouping | "LHCI report folders contain 3 runs per URL, not exactly 3 reports total" | 1 | 2026-11-18 | open |
 
 ---
 

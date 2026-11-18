@@ -93,6 +93,7 @@ npm run lighthouse      # Build, collect 3 runs, assert LHCI budgets, and verify
 The LHCI budget in `.lighthouserc.json` fails when the median of three runs exceeds:
 
 - Time to interactive: 3000 ms
+- DOM content loaded: 3000 ms
 - Cumulative layout shift: 0.1
 - Server response time / TTFB: 600 ms
 - Largest contentful paint: 2500 ms

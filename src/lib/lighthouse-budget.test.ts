@@ -20,4 +20,13 @@ describe('Lighthouse performance budget', () => {
       'dom-size-insight': ['error', { maxNumericValue: 1500, aggregationMethod: 'median' }],
     })
   })
+
+  test('the arithmetic-mean check includes the three-second DOM load budget', () => {
+    const scriptPath = path.resolve(process.cwd(), 'scripts/check-lighthouse-budget.mjs')
+    const script = fs.readFileSync(scriptPath, 'utf8')
+
+    expect(script).toContain("'dom-content-loaded'")
+    expect(script).toContain('observedDomContentLoaded')
+    expect(script).toContain('max: 3000')
+  })
 })

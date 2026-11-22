@@ -46,7 +46,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.5.13",
     "@lhci/cli": "0.16.1",
-    "@playwright/test": "1.58.2",
+    "@playwright/test": "1.61.1",
     "@swc/core": "1.16.2",
     "@swc/jest": "0.2.39",
     "@testing-library/jest-dom": "7.0.0",
@@ -65,7 +65,7 @@
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,mjs,cjs,json,css,scss,md,yml,yaml}": [
-      "biome check --write --unsafe"
+      "biome check --write --unsafe --no-errors-on-unmatched"
     ]
   },
   "pnpm": {

@@ -84,6 +84,30 @@ npm run build           # Production export build
 npm run start           # Serve the production build locally
 ```
 
+### Lighthouse performance budget
+
+```bash
+npm run lighthouse      # Build, collect 3 runs, assert LHCI budgets, and verify 3-run means
+```
+
+The LHCI budget in `.lighthouserc.json` fails when the median of three runs exceeds:
+
+- Time to interactive: 3000 ms
+- DOM content loaded: 3000 ms
+- Cumulative layout shift: 0.1
+- Server response time / TTFB: 600 ms
+- Largest contentful paint: 2500 ms
+- DOM size: 1500 elements
+- Performance score: 0.9
+- Best Practices score: 0.9
+
+`scripts/check-lighthouse-budget.mjs` additionally requires the arithmetic mean of the three runs
+for each audited URL to remain within the numeric thresholds.
+
+The CI entry point is `npm run lighthouse`; add it to the protected GitHub Actions workflow to
+make Lighthouse failures gate pull requests. `.github/workflows/**` is intentionally protected and
+cannot be edited by the repository automation in this environment.
+
 ## Notes
 
 The site is statically exported and deployed through GitHub Actions. After each successful deploy to `main`, a production E2E job runs automatically against `https://lennypeters.com`. A standalone on-demand job is also available in the Actions tab (`E2E Tests — Production`).

@@ -1,4 +1,6 @@
+import { spawnSync } from 'node:child_process'
 import fs from 'node:fs'
+import os from 'node:os'
 import path from 'node:path'
 
 describe('Lighthouse performance budget', () => {
@@ -28,5 +30,20 @@ describe('Lighthouse performance budget', () => {
     expect(script).toContain("'dom-content-loaded'")
     expect(script).toContain('observedDomContentLoaded')
     expect(script).toContain('max: 3000')
+  })
+
+  test('exits clearly when Lighthouse reports have not been generated', () => {
+    const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'lighthouse-budget-'))
+    const scriptPath = path.resolve(process.cwd(), 'scripts/check-lighthouse-budget.mjs')
+
+    try {
+      const result = spawnSync(process.execPath, [scriptPath], { cwd: tempDir, encoding: 'utf8' })
+
+      expect(result.status).not.toBe(0)
+      expect(result.stderr).toContain('.lighthouseci does not exist')
+      expect(result.stderr).toContain('Run npm run lighthouse first.')
+    } finally {
+      fs.rmSync(tempDir, { recursive: true, force: true })
+    }
   })
 })

@@ -2,6 +2,11 @@ import fs from 'node:fs'
 import path from 'node:path'
 
 const lighthouseDir = path.resolve('.lighthouseci')
+
+if (!fs.existsSync(lighthouseDir)) {
+  throw new Error('.lighthouseci does not exist. Run npm run lighthouse first.')
+}
+
 const runFiles = fs
   .readdirSync(lighthouseDir)
   .filter(file => /^lhr-.*\.json$/.test(file))

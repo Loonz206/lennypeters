@@ -11,6 +11,15 @@ describe('Lighthouse performance budget', () => {
     expect(config.ci.collect.numberOfRuns).toBe(3)
   })
 
+  test('runs and uploads the Lighthouse budget in CI', () => {
+    const workflowPath = path.resolve(process.cwd(), '.github/workflows/ci.yml')
+    const workflow = fs.readFileSync(workflowPath, 'utf8')
+
+    expect(workflow).toMatch(/^\s{2}performance:\s*$/m)
+    expect(workflow).toContain('run: pnpm run lighthouse')
+    expect(workflow).toContain('path: .lighthouseci/')
+  })
+
   test('enforces the requested performance and DOM thresholds', () => {
     expect(config.ci.assert.assertions).toMatchObject({
       'categories:performance': ['error', { minScore: 0.9, aggregationMethod: 'median' }],
